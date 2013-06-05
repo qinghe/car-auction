@@ -6,8 +6,8 @@
   <div class="span-6 last prepend-3 append-1">
     <% if @auction.allowed_to_offer?(@current_user) %>
       <div class="notice last offerField">
-        <h2>Złóż ofertę</h2>
-        <% form_for [:panel, @auction, @auction.offers.new] do |offer| %>
+        <h2>Make an Offer</h2>
+        <%= form_for [:panel, @auction, @auction.offers.new] do |offer| %>
           <table>
             <tr>
               <td><%= offer.label :price, 'Kwota' %>:</td>
@@ -30,11 +30,11 @@
   </div>
 </div>
 <div style="clear: both"> </div>
-<h2 class="box">Opis zlecenia</h2>
+<h2 class="box">job description</h2>
 <section class="prepend-1 append-1 auctionDescription"><%=raw @auction.description %></section>
 
 <% if @auction.communications.size > 0 %>
-  <h2 class="box">Komunikaty</h2>
+  <h2 class="box">messages</h2>
   <table class="communicationsTable">
     <tbody>
       <% @auction.communications.each do |msg| %>
@@ -47,13 +47,13 @@
   </table>
 <% end %>
 
-<% unless @offers.empty? %>
-  <h2 class="box top-1">Oferty</h2>
+<% if @auction.offers.count>0 %>
+  <h2 class="box top-1">Offers</h2>
   <div class="prepend-5 append-5">
     <table class="list">
       <thead>
         <tr>
-          <td colspan="2">wykonawca</td>
+          <td colspan="2">performer</td>
           <td>data</td>
         </tr>
       </thead>
@@ -68,7 +68,7 @@
             'winner'
           end
         %>
-
+<% logger.debug offer.inspect%>
           <tr<% unless html.nil? %> class="<%= html %>"<% end %>>
             <td style="text-align: right">
               <% unless nil %><img style="width:50px; height: 50px" src="/images/avatar.jpg" /><% end %>
@@ -86,12 +86,12 @@
 
 <% unless @auction.owner?(current_user) %>
   <div class="prepend-17 right">
-    <%= link_to "Zgłoś nieprawidłowość", '#', :onclick => '$("#alertDiv").toggle("fast"); return false' %>
+    <%= link_to "Report inappropriate", '#', :onclick => '$("#alertDiv").toggle("fast"); return false' %>
   </div>
 
   <div id="alertDiv" class="hide prepend-5 append-5 append-bottom">
-    <% alert_pre_text = 'Nieprawidłowość dotyczy aukcji o numerze '+@auction.id.to_s+' z następującym problemem' %>
-    <% form_for @alert do |f|%>
+    <% alert_pre_text = '拍卖号码 '+@auction.id.to_s+' 有以下的问题' %>
+    <%= form_for @alert do |f|%>
       <p style="color: red"><%= alert_pre_text %>, w skrócie opisz go:</p>
       <%= hidden_field_tag :pre_text, alert_pre_text+': ' %>
       <p><%= f.text_area :text, :class => "span-8 last" %></p>
@@ -100,7 +100,7 @@
         <%= render :partial => "shared/captcha", :locals => {:f => f} %>
       <% end %>
 
-      <p><%= f.submit 'Wyślij zgłoszenie' %></p>
+      <p><%= f.submit '提交' %></p>
     <% end %>
   </div>
 <% end %>

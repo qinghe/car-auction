@@ -1,18 +1,18 @@
 <div class="prepend-1">
 <nav id="project-nav" class="round" style="margin-bottom: 10px">
   <ul>
-      <li><%= link_to "O mnie", user_path(@user) %></li>
-      <li><%= link_to "Zaufani", watching_user_path(@user) %><font color=white>/</font><%= link_to "Zaufali mi", watchers_user_path(@user) %></li>
-      <li><%= link_to "Aktywne projekty", user_userprojects_path(@user) %></li>
-      <li><%= link_to "Portfolio", user_portfolios_path(@user) %></li>
-      <li><%= link_to "Blog", user_blogposts_path(@user) %></li>
+      <li><%= link_to "关于我", user_path(@user) %></li>
+      <li><%= link_to "我关注的", watching_user_path(@user) %><font color=white>/</font><%= link_to "关注我的", watchers_user_path(@user) %></li>
+      <li><%= link_to "活动项目", user_userprojects_path(@user) %></li>
+      <li><%= link_to "投资组合", user_portfolios_path(@user) %></li>
+      <li><%= link_to "文章", user_blogposts_path(@user) %></li>
       <% if signed_in? %>
       <% if current_user?(@user) && current_user.role != "administrator"%>
-      <li><%= link_to "Dezaktywuj konto", user_path(current_user, :status => 0), :method => "delete", :confirm => t('general.deactivate') %></li>
+      <li><%= link_to "停用帐户", user_path(current_user, :status => 0), :method => "delete", :confirm => t('general.deactivate') %></li>
       <% elsif !current_user?(@user) && current_user.role == "administrator" && @user.status != 0 && @user.status != 3 %>
-      <li><%= link_to "Zbanuj konto", user_path(@user, :status => 3), :method => "delete", :confirm => t('general.ban') %></li>
+      <li><%= link_to "Ban account", user_path(@user, :status => 3), :method => "delete", :confirm => t('general.ban') %></li>
       <% elsif !current_user?(@user) && current_user.role == "administrator" && @user.status != 2 && @user.status != 1 %>
-      <li><%= link_to "Aktywuj konto", user_path(@user, :status => 2), :method => "delete", :confirm => t('general.activate') %></li>
+      <li><%= link_to "激活帐户", user_path(@user, :status => 2), :method => "delete", :confirm => t('general.activate') %></li>
       <% end %>
       <% end %>
   </ul>

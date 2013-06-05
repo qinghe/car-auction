@@ -1,0 +1,225 @@
+---
+en:
+  Flash:
+    general:
+      error:
+        unknown: An unknown error occurred, all were withdrawn reduction
+        privileges: do not have sufficient privileges
+      project:
+        not_participating: do not take part in this project
+        dont_exists: The project does not exist
+        not_active: The project is completed, the editing is no longer possible
+      project_file:
+        dont_exists: File does not exist
+        not_included: File does not belong to this projeku
+        empty: Currently there are no files to display
+      user:
+        dont_exists: User does not exist
+      roles:
+        dont_exists: The role does not exist
+        invalid_role: Can not assign user to that role
+      membership:
+        dont_exists: Membership does not exist
+        leave: You left the project
+      topic:
+        dont_exists: Subject does not exist
+        not_included: Subject does not belong to this project
+        empty: Currently there are no topics to display
+      post:
+        dont_exists: Post does not exist
+        not_included: Post does not belong to this topic
+      invitation:
+        dont_exists: Call does not exist
+        not_included: Call does not belong to this project
+        empty: Currently there are no calls to display
+      ticket:
+        empty: Currently there are no jobs to display
+        dont_exists: Job does not exist
+        not_included: The job does not belong to this project
+    users:
+      create: Welcome new user
+      update: Updated profile
+    sessions:
+      destroy: Logged out successfully
+      new: You must sign in to view this page
+      login_error: Wrong username or password
+      deactivated: This account has been deactivated
+      Ban: This account has been disabled by an administrator
+      verified: This account is not yet verified
+      captcha: Bad rewritten code from the image
+    alerts:
+      create: The report has been adopted!
+    offers:
+      create: The offer has been submitted!
+    auction:
+      Show: You have no right of access to the auction
+    blogcomments:
+      create: Comment has been created
+      update: Comment has been updated
+    blogposts:
+      captcha: Bad rewritten code from the image
+      update: blogpost updated
+
+    panel:
+      auctions:
+        create: Auction has been recorded and published
+        update: Zwycięzka offer has been appointed
+        destroy: auction was canceled
+      comments:
+        update: Comment has been issued
+      communications:
+        create: Communication has been published
+      offers:
+        create: The offer has been made
+      messages:
+        destroy: Message has been deleted
+        create: Message has been sent
+      projects:
+        index: We do not participate in any projects
+
+    admin:
+      alerts:
+        destroy: The report has been removed
+      messages:
+        destroy: Message has been deleted
+        create: Message has been sent
+      auctions:
+        update: Auction has been updated
+        destroy: auction was canceled
+      communications:
+        destroy: Message has been deleted
+      comments:
+        update: Comment has been updated
+      offers:
+        Recovery: The offer has been restored
+        destroy: The offer has been canceled
+      tags:
+        create: Tag was created
+        update: Tag has been updated
+        destroy: tag has been removed
+      groups:
+        update: Group was updated
+        create: The group was established
+        destroy: The group was removed with tags
+      application:
+        not_admin: Access only for administrator
+    project:
+      info:
+        update: description has been updated
+        finishing_update: The project has been completed, exhibitions, now leader of the assessment team.
+      members:
+        destroy: User deleted from the project
+        update: The role has been updated
+        cant_change_role: You can not change the role of the memeber
+        cant_delete: You can not remove this memeber
+        member_exists: You are participating in the project
+      files:
+        update: description has been updated
+        create: File has been added
+        destroy: The file has been deleted
+      topics:
+        destroy: Post has been deleted
+        create: A new theme has been added
+        update: Post has been updated
+      posts:
+        create: Post has been added
+        update: Post has been updated
+        destroy: The post has been removed
+      invitations:
+        create: Invitation has been sent
+        destroy: Invitation has been removed
+        cancel: The call has been canceled
+        exists: Invitation has been sent
+        cancel_error: You can not cancel this invitation
+        destroy_error: You can not remove this invitation
+        accept: The invitation was accepted
+        reject: The call is rejected
+        canceled: The call has been canceled, you can not share
+      tickets:
+        create: The job has been added
+        destroy: The job is deleted
+        update: The job has been updated
+        also: The task has been accepted for processing
+        give: Task is returned
+        end: The task has been completed
+  title:
+    auctions:
+      index: Welcome!
+      show: "{@auction.title} ({@auction.id})"
+      search: Search for auction!
+      result: "Result of query {@query}"
+    blogcomments:
+      new: Write a comment 
+    panel:
+      auctions:
+        new: New auction
+        active: Your current ongoing auctions
+        canceled: Your canceled listings
+        finished: Your completed auctions
+        offers: Form a winner
+      communications:
+        new: "new message to {@auction.title} ({@auction.id})"
+      messages:
+        new: New Message
+        received: received messages
+        sent: Sent
+      comments:
+        show: Comment
+        received: Received comments
+        written: Listed comments
+        queue: Pending comments
+        edit: New Comment
+      offers:
+        active: Offers participating in the auction
+        Won: Tenders have won
+        rejected: Tenders which have been rejected
+      projects:
+        index: Projects
+    admin:
+      alerts:
+        index: List of requests
+        Show: "Application No {@alert.id}"
+      messages:
+        new: New Message
+        received: received messages
+        sent: Sent
+      comments:
+        edit: Edit Comment
+      auctions:
+        index: user Auctions
+        edit: "Edit listing number {@auction.id}"
+        show: "{@auction.title}"
+      groups:
+        new: New Group
+        index: Group
+        edit: "Edit the group with id {@group.id}"
+      tags:
+        new: New tag
+        index: Tags
+        edit: "Edit tag with id {@tag.id}"
+
+    project:
+      info:
+        show: "{@project.name}"
+      members:
+        index: " {@project.name} | Members"
+      files:
+        index: "{@project.name} | Files"
+        show: "{@project.name} | Files | {@file.name}"
+        new: "{@project.name} | Files | Add File"
+      topics:
+        index: "{@project.name} | Forum"
+        show: "{@project.name} | Forum | {@topic.title}"
+        new: "{@project.name} | Help | New Topic"
+        edit: "{@project.name} | Help | Edit Subject"
+      posts:
+        new: "{@project.name} | Forum | {@topic.title} | New Post"
+        edit: "{@project.name} | Forum | {@topic.title} | Edit Post"
+      invitations:
+        index: "{@project.name} | Invitations"
+        new: "{@project.name} | Invitations | New year"
+      tickets:
+        index: "{@project.name} | Tasks"
+        new: "{@project.name} | Tasks | New Task"
+        show: "{@project.name} | Tasks | {@ticket.title}"
+        edit: "{@project.name} | Tasks | {@ticket.title} | Editing"

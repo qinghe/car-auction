@@ -37,7 +37,7 @@
   </script>
 <% end -%>
 <div class="prepend-1 append-1">
-  <% form_for [:admin, @comment.author, @comment] do |f| -%>
+  <%= form_for [:admin, @comment.author, @comment] do |f| -%>
 
     <%= render "layouts/error_messages", :target => @comment %>
   <p>Od: <%= escape_user(@author) %></p>

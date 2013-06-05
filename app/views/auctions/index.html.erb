@@ -1,36 +1,36 @@
-<% content_for :title, "Witamy!" %>
+<% content_for :title, "欢迎回来！" %>
 <div class="span-24">
   <table class="center box" style="padding: 5px; margin: -20px auto 10px auto;">
     <tr>
       <td class="center">
-        Trwających aukcji: <span><%= Auction.count %></span>
+        ongoing auctions: <span><%= Auction.count %></span>
       </td>
       <td class="center">
-        Ofert: <span><%= Offer.count %></span>
+        Bids: <span><%= Offer.count %></span>
       </td>
       <td class="center">
-        Użytkowników w bazie: <span><%= @users %></span>
+        Users in database: <span><%= @users %></span>
       </td>
       <td class="center">
-        Aktywnych projektów: <span><%= @projects %></span>
+        active projects: <span><%= @projects %></span>
       </td>
     </tr>
   </table>
   <div class="span-24">
     <p class="box">
-      Jeśli szukasz specjalisty lub pracujesz w branży IT, to dobrze trafiłeś.
-      Pozwól iż wyjaśnimy Ci na czym polega fenomen tego portalu!
-      Otóż, za pośrednictwem tego portalu bedziesz w stanie znaleźć wykonawcę bądź zleceniodawcę,
-      wyróżnić swoje aukcje, zbudować portfolio, dołączyć do profesjonalnych zespołów.
-      To nie wszystko. Jak tylko zostanie wybrana zwycięska oferta,
-      zostanie udostępniony moduł projektu umożliwiający pracę przy pomocy różnych metod rozwojowych projektów.
-      Tak więc ten serwis to nie tylko raj dla zleceniodawców, ale i dla wykonawców.
-      Bo wiemy iż efektywność to podstawa.
+      如果你正在寻找专家或在IT行业工作，是正确的地方。
+      让我给你解释，什么是这个网站的现象！
+      现在，通过这个网站，你将能够找到一个承包商或本金，
+      突出自己的物品，构建投资组合，加入专业队伍。
+      这还不是全部。只要你选择中标，
+      模块将会使项目工作的各种方法的发展项目。
+      因此，这种服务不仅是客户，也为表演者的天堂。
+      因为我们知道，效率是关键。
     </p>
   </div>
 </div>
 <div class="prepend-1 span-22 last">
-  <h2>Najnowsze aukcje</h2>
+  <h2>近期拍卖</h2>
   <% unless @auctions.empty? %>
     <div class="span-11"><div class="box">
         <% @auctions.shift(@auctions.length/2).each do |auction| %>
@@ -52,12 +52,12 @@
         <% end %>
       </div></div>
   <% else %>
-    <div class="notice">Narazie nie ma żadnych opublikowanych aukcji.</div>
+    <div class="notice">现在有没有公布的拍卖。</div>
   <% end %>
 </div>
 
 <div class="prepend-1 span-22 last">
-  <h2>Najnowsze wpisy z blogów</h2>
+  <h2>最近的博客条目</h2>
   <% unless @blogs.empty? %>
     <div class="span-11"><div class="box">
         <% @blogs.shift(@blogs.length/2).each do |blog| %>
@@ -78,6 +78,6 @@
         <% end %>
       </div></div>
   <% else %>
-    <div class="notice">Narazie nie ma żadnych opublikowanych aukcji.</div>
+    <div class="notice">现在有没有公布的清单</div>
   <% end %>
 </div>

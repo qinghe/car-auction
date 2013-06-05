@@ -41,7 +41,7 @@ def make_users #zmieniony format emailu dla latwiejszego logowania
   	description = Faker::Lorem.sentence(12)
     firstname = Faker::Name.first_name
     lastname = Faker::Name.last_name
-    country = Carmen.default_country
+    country =  Carmen::Country.named('United States')
     user = User.create!(
       :login => login,
       :password => 'password',
@@ -49,7 +49,7 @@ def make_users #zmieniony format emailu dla latwiejszego logowania
       :lastname => lastname,
       :role => 'user',
       :status => 2,
-      :country => country,
+      :country => country.alpha_2_code,
       :email => "#{i+1+n}@example.com",
       :description => description
     )
@@ -64,7 +64,7 @@ def make_users #zmieniony format emailu dla latwiejszego logowania
   	description = Faker::Lorem.sentence(12)
     firstname = Faker::Name.first_name
     lastname = Faker::Name.last_name
-    country = Carmen.default_country
+    country = Carmen::Country.named('United States')
     user = User.create!(
       :login => login,
       :password => 'password',
@@ -72,7 +72,7 @@ def make_users #zmieniony format emailu dla latwiejszego logowania
       :lastname => lastname,
       :role => 'user',
       :status => 1,
-      :country => country,
+      :country => country.alpha_2_code,
       :email => "#{i+1+n}@example.com",
       :description => description
     )
@@ -164,7 +164,7 @@ def make_projects
     #auction offers
     offerers = avible_users
     5.times do
-      offerer = offerers.rand
+      offerer = offerers.sample
       break if offerer.nil?
 
       offerers -= [offerer]
@@ -173,7 +173,7 @@ def make_projects
         :offerer_id => offerer)
     end
 
-    won_offer = a.offers.rand
+    won_offer = a.offers.sample
     a.set_won_offer!(won_offer)
     a.finish!
     avible_users -= [won_offer.offerer_id]
@@ -190,14 +190,14 @@ def make_projects
     
     #project members
     4.times do
-      new_user = avible_users.rand
+      new_user = avible_users.sample
       break if new_user.nil?
       avible_users -= [new_user]
       project_users += [new_user]
       
       i = Invitation.new(:project_id => p.id,
         :user_id => new_user,
-        :role_id => roles.rand,
+        :role_id => roles.sample,
         :status => Invitation::STATUSES[:accepted])
       i.save!
                          
@@ -217,7 +217,7 @@ def make_projects
       taken = 50 < rand(100) ? true : false
       finished = 50 < rand(100) ? true : false
       Ticket.create!(:project_id => p.id,
-        :user_id => taken ? ticket_users.rand : nil,
+        :user_id => taken ? ticket_users.sample : nil,
         :title => title,
         :description => description,
         :duration => rand(40)+1,
@@ -229,7 +229,7 @@ def make_projects
       title = Faker::Lorem.words(3).join(' ').capitalize
       content = Faker::Lorem.sentences(12).join(' ')
       t = Topic.new(:project_id => p.id,
-        :user_id => project_users.rand,
+        :user_id => project_users.sample,
         :title => title,
         :content => content)
       t.save!
@@ -237,7 +237,7 @@ def make_projects
       5.times do
         content = Faker::Lorem.sentences(12).join(' ')
         Post.create!(:topic_id => t.id,
-          :user_id => project_users.rand,
+          :user_id => project_users.sample,
           :content => content)
       end
     end 
@@ -272,7 +272,7 @@ end
 
 def make_auctions
   50.times do
-    name = "Aukcja " + Faker::Company.name
+    name = "Aution " + Faker::Company.name
     description = Faker::Lorem.sentence(12)
     a = Auction.new(
       :title => name, :budget_id => 1+rand(Budget.count-1),

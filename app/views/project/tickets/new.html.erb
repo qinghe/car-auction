@@ -2,7 +2,7 @@
 <% include_wysiwyg %>
 <div class="span-20 prepend-1">
   <div class="span-11">
-    <% form_for @ticket, :url => project_tickets_path(@project, @ticket) do |f| -%>
+    <%= form_for @ticket, :url => project_tickets_path(@project, @ticket) do |f| -%>
       <%= render "layouts/error_messages", :target => @ticket %>
       <div class="field">
         <%= f.label :title %>

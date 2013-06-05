@@ -1,0 +1,62 @@
+Car info
+--------
+model_id  :integer, 
+model_name :string
+serial_no :string, 
+registered_at :date
+is_at:bool,
+plate_number :string,
+engine_number :string
+frame_number :string
+
+#accident info
+--------------
+sunshi_leixing :integer
+chuxian_riqi :date
+tingche_didian ??
+chejiaohao_sousun :boolean
+zeren_rending: integer
+duifang_baoxian :string
+renshang_qingkuang
+pengzhuang_buwei :integer
+chuxian_jingguo :string
+chengbao_jine :integer
+gusun_jine :integer
+chuli_fangshi :ingerger 
+#委托拍卖，询问底价
+
+#手续清单
+----------
+# 登记证书， 车牌， 行车证， 钥匙， 购置税
+dengji_zhengshu: boolean
+chepai: integer
+xingchezheng: boolean
+yaoshi: integer
+gouzhishui: boolean
+
+#委托协议
+---------
+ 委托协议， 有无抵押， 有无其他费用
+weituo_xieyi: boolean
+youwu_diya: boolean
+youwu_qitafeiyong: boolean
+
+#auction info
+-------------
+ 
+
+#Car images info
+----------------
+Driving_licence
+frame_number
+accident
+
+#拍卖完毕车辆
+===========
+#价值信息
+  承保金额， 预估损失， 实际价值， 残值价值， 二手车价值， 中标金额， 最终赔付金额
+  
+#附件查看？
+#费用信息？
+
+Car model

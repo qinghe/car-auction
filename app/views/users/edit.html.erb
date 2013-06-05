@@ -4,12 +4,12 @@
 <table class>
 <tr>
 <td colspan="2" id="table_title">
-Edycja danych użytkownika
+编辑用户信息
 </td>
 </tr>
 <tr>
 <td style="text-align: center;">      
-<% form_for @user, :html => { :multipart => true } do |f| -%>
+<%= form_for @user, :html => { :multipart => true } do |f| -%>
 <%= render "layouts/error_messages", :target => @user %>
 <div class="field">
   <%= f.label :name %><br />
@@ -25,7 +25,7 @@ Edycja danych użytkownika
 </div>
 <div class="field">
 <%= f.label :country %><br />
-<%= f.select :country, $countries, {:selected => @user.country} %>
+<%= f.country_select :country, {:selected => @user.country} %>
 </div>
 <div class="field">
 <%= f.label :avatar %><br />
@@ -35,7 +35,7 @@ Edycja danych użytkownika
   <%= f.label :opis %><br />
   <%= f.text_area :description, :value => @user.description.force_encoding("UTF-8"), :class => "mceEditor span-10" %>
 </div>
-<%= f.submit "Edytuj" %>
+<%= f.submit "提交" %>
 <% end %>
 </td>
 </tr>
@@ -47,12 +47,12 @@ Edycja danych użytkownika
 <table>
 <tr>
 <td colspan="2" id="table_title">
-Ustal nowe hasło
+设置一个新的密码
 </td>
 </tr>
 <tr>
 <td style="text-align: center;">
-	<% form_for @user do |f| -%>
+	<%= form_for @user do |f| -%>
 	<%= render "layouts/error_messages", :target => @user %>
 	<div class="field">
   		<%= f.label :password %><br />

@@ -26,7 +26,7 @@ class Auction < ActiveRecord::Base
   has_one :project
   belongs_to :budget
   
-  define_index do
+  ThinkingSphinx::Index.define :auction, :with => :active_record do
     indexes :title
     indexes :description
     indexes :budget_id
@@ -242,8 +242,11 @@ class Auction < ActiveRecord::Base
     self.tags.delete_all
   end
 
-  def calculate_rating(v1)
-    self.update_attribute(:rating, self.rating_values.sum(:value) / self.rating_values.count)
+  def calculate_rating(v1)    
+    if self.rating_values.count>0
+      # self.rating_values may contain new_record, value is nil.
+      self.update_attribute(:rating, self.rating_values.sum(:value).to_i / self.rating_values.count)
+    end
   end
 
   def use_points

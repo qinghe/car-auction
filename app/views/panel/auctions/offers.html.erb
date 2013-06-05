@@ -1,4 +1,4 @@
-<% form_for [:panel, @auction] do |f| %>
+<%= form_for [:panel, @auction] do |f| %>
   <%= f.hidden_field :won_offer_id, :value => "" %>
 
   <%= render "layouts/error_messages", :target => @auction %>

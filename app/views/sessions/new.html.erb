@@ -4,16 +4,16 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :password, "Hasło" %><br />
+    <%= f.label :password, "密码" %><br />
     <%= f.password_field :password %>
   </div>
   <div class="field">
-    <%= f.label :recaptcha, "Przepisz kod z obrazka" %><br />
+    <%= f.label :recaptcha, "请输入的验证码" %><br />
     <%= raw(get_captcha(:options => {:theme => 'white', :tabindex => 10})) %>
   </div>
   <div class="actions">
-    <%= f.submit "Loguj" %>
+    <%= f.submit "登录" %>
   </div>
 <% end %>
 
-<p>Nie masz konta? <%= link_to "Zarejestruj się !", signup_path %></p>
+<p>没有一个帐户？<%= link_to "注册！", signup_path %></p>

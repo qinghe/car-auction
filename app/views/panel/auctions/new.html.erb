@@ -1,6 +1,6 @@
 <% include_wysiwyg %>
 <div class="prepend-1 append-1">
-  <% form_for [:panel, @auction] do |f| -%>
+  <%= form_for [:panel, @auction] do |f| -%>
 
     <%= render "layouts/error_messages", :target => @auction %>
 

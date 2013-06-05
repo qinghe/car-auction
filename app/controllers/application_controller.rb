@@ -1,5 +1,6 @@
 # encoding: utf-8
 class ApplicationController < ActionController::Base
+require 'will_paginate/array'
   include ApplicationHelper
   include SessionsHelper
   include ReCaptcha::AppHelper
@@ -57,9 +58,9 @@ class ApplicationController < ActionController::Base
     
     controller["/"] = "." if controller.include?("/")
     title = t("title.#{controller}.#{action}")
-
+Rails.logger.debug "title=#{title}"
     title.scan(/{[^}]+}/).each do |var|
-      title[var] = eval("->"+var+".call").to_s
+      title[var] = eval(var.delete("{}")).to_s #eval("->"+var+".call").to_s
     end
 
     @title = title

@@ -1,5 +1,5 @@
 <div class="prepend-1 append-1">
-  <% form_for [:panel, @auction, @communication] do |f| %>
+  <%= form_for [:panel, @auction, @communication] do |f| %>
 
     <%= render "layouts/error_messages", :target => @communication %>
     <p>

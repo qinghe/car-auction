@@ -1,10 +1,9 @@
-#require 'mail'
 #encoding: utf-8
+#require 'mail'
 class UsersController < ApplicationController
 	before_filter :correct_user, :only => [:edit, :update]
 	
-	$countries = Carmen.countries
-	
+
 	def new
 		@title = "Rejestracja"
 		@user = User.new
@@ -20,10 +19,10 @@ class UsersController < ApplicationController
 	
 	def show
     @user = User.find(params[:id])
-    @statuses = ["Dezaktywowane", "Niezweryfikowane", "Zweryfikowane", "Zbanowane"]
-    @title = "Panel uzytkownika #{@user.name} #{@user.lastname}"
+    @statuses = ["未激活","未验证","验证","禁止"]
+    @title = "用户面板 #{@user.name} #{@user.lastname}"
     @projects = Project.find(@user.project_ids).paginate :per_page => 15, :page => params[:page]
-    @country_name = Carmen::country_name(@user.country)
+    @country_name = Carmen::Country.coded(@user.country).name
     @country_flag = "flags/#{@user.country.downcase}.gif"
     @points = Bonuspoint.find_all_by_user_id(@user, :select => "points")
     sum_points

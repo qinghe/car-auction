@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <td>ID</td>
-        <td>Nazwisko i imie</td>
+        <td>姓名</td>
         <td>Login</td>
         <td>Email</td>
         <td>Status</td>
@@ -17,19 +17,19 @@
           <td><%= user.lastname %> <%= user.name %></td>
           <td><%= user.login %></td>
           <td><%= user.email %></td>
-          <td><% if user.status == 0 %>Dezaktywowane<% elsif user.status == 1 %>Niezweryfikowane<% elsif user.status == 2 %>Zweryfikowane<% else %>Zbanowane<% end %></td>
+          <td><% if user.status == 0 %>停用<% elsif user.status == 1 %>未验证<% elsif user.status == 2 %>已验证<% else %>禁止<% end %></td>
           <td>
-          	<%= link_to "Edytuj profil", edit_admin_user_path(user) %><br />
+          	<%= link_to "编辑个人资料", edit_admin_user_path(user) %><br />
           	<%= link_to "Edytuj punkty", :action => "points", :id => user.id %><br />
           	<% if user.status == 2 %>
-          		<%= link_to "Zbanuj", admin_user_path(user, :status => 3), :method => "delete", :confirm => t('general.confirm') %>
+          		<%= link_to "禁止", admin_user_path(user, :status => 3), :method => "delete", :confirm => t('general.confirm') %>
           	<% elsif user.status == 1  %>
-          		<%= link_to "Zbanuj", admin_user_path(user, :status => 3), :method => "delete", :confirm => t('general.confirm') %><br />
-          		<%= link_to "Weryfikuj", admin_user_path(user, :status => 2), :method => "delete", :confirm => t('general.confirm') %>
+          		<%= link_to "禁止", admin_user_path(user, :status => 3), :method => "delete", :confirm => t('general.confirm') %><br />
+          		<%= link_to "验证", admin_user_path(user, :status => 2), :method => "delete", :confirm => t('general.confirm') %>
           	<% elsif user.status == 0 %>
-          		<%= link_to "Aktywuj", admin_user_path(user, :status => 2), :method => "delete", :confirm => t('general.confirm') %>
+          		<%= link_to "激活", admin_user_path(user, :status => 2), :method => "delete", :confirm => t('general.confirm') %>
           	<% else %>
-          		<%= link_to "Odbanuj", admin_user_path(user, :status => 2), :method => "delete", :confirm => t('general.confirm') %>	
+          		<%= link_to "解除禁止", admin_user_path(user, :status => 2), :method => "delete", :confirm => t('general.confirm') %>	
           	<% end %>
           </td>
         </tr>

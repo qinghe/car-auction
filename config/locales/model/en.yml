@@ -1,0 +1,200 @@
+---
+en:
+  activerecord:
+    models:
+      auction: auction
+      message: message
+      project: project
+      topic: topic
+      post: post
+      project_file: project_file
+      role: role
+      user: user
+      membership: membership
+      invitation: invitation
+    attributes:
+      alert:
+        text: Content of the application
+      user:
+        login: Login
+        name: name
+        lastname: lastname
+        password: password
+        password_confirmation: password_confirmation
+        country: country
+      auction:
+        title: title
+        description: description
+        budget_id: budget_id
+        expired_after: "The duration of the auction"
+        expired_at: "End of auction"
+        created_at: Started
+        won_offer_id: "Which bid wins?"
+        highlight: "Highlight auction"
+      communication:
+        body: The message body
+      group:
+        name: Name
+        tag_ids: Relationship with tags
+      tag:
+        name: Name
+        group_id: Group
+      message:
+        Topic: Topic
+        body: Content
+        receiver_login: Login recipient
+      project:
+        auction_id: Auction
+        name: Name
+        owner_id: Owner
+        leader_id: Leader
+        duration: The duration of
+        Status: Status
+        description: role_idescription
+      roles:
+        name: Name
+      comment:
+        values: Attribute comment
+      comment_value:
+        extra: Field description
+        rating: Field evaluation
+      project_file:
+        description: Description
+        file: File
+        project_file_file_name: File Name
+        project_file_file_size: File Size
+        name: Name
+        size: Size
+      topic:
+        title: Title
+        content: First post
+        user_id: Author
+      membership:
+        user_id: User
+        project_id: project
+        role_id: Role
+      post:
+        content: Content
+      invitation:
+        Status: Status
+        user_id: User Login
+        role_id: Role
+      ticket:
+        user_id: The Contractor
+        title: Title
+        Description: Description
+        Duration: Running
+        Status: Status
+      blogcomment:
+        content: Content
+      offer:
+        days: Time of service
+        price: Amount
+    errors:
+      models:
+        auction:
+          attributes:
+            title:
+              blank: it can not be empty
+            budget_id:
+              Inclusion: must be specified
+            expired_after:
+              inclusion: it must be given in the range of 1 to 14
+            highlight:
+              not_enought_points: it can not be selected. Do you have enough points.
+        communication:
+          attributes:
+            body:
+              too_short: too short (at least% {count} characters)
+        offer:
+          attributes:
+            price:
+              greater_than: must be greater than% {count} .00 dLN
+            days:
+              greater_than: must be greater than% {count}
+        message:
+          attributes:
+            body:
+              too_short: too short (at least% {count} characters)
+        project:
+          attributes:
+            description:
+              blank: can not be empty
+              too_short: it is too short (at least% {count} characters)
+        post:
+          attributes:
+            content:
+              too_short: too short (at least% {count} characters)
+              too_long: it is too long (max% {count} characters)
+        ticket:
+          attributes:
+            Duration:
+              not_a_number: "not a number"
+              not_an_integer: "must be an integer"
+              greater_than: "must be greater than% {count}"
+        user:
+          attributes:
+            email:
+              taken: This e-mail address is already registered on the site
+# MOdELS
+  alert:
+    statuses:
+      read: Read
+      unread: unread
+  tag:
+    statuses:
+      active: active
+      hidden: hidden
+  group:
+    statuses:
+      active: active
+      hidden: hidden
+  message:
+    statuses:
+      unread: unread
+      read: read
+      replied: Answered
+  comment:
+    statuses:
+      pending: waiting for the issue of
+      active: active
+      deleted: deleted - inactive
+  offer:
+    statuses:
+      active: active
+      Won: winning
+
+  auction:
+    statuses:
+      active: Active
+      finished: Closed
+      canceled: Cancelled
+      waiting_for_offer: Waiting for selecting bid
+
+  project:
+    statuses:
+      active: Active
+      finished: Completed
+    deadline: The deadline for
+
+  roles:
+    name:
+      guest: Guest
+      owner: Owner
+      Leader: Leader
+      info_mod: Moderator of information
+      ticket_mod: Moderator tasks
+      file_mod: Moderator files
+      forum_mod: Forum Moderator
+      member_mod: Moderator Users
+  invitation:
+    statuses:
+      accepted: Accepted
+      pending: pending
+      rejected: Rejected
+      canceled: Cancelled
+  ticket:
+    statuses:
+      Free: Free
+      Implementation: The implementation of the
+      finished: Completed

@@ -3,7 +3,7 @@
     <table class>
       <tr>
       	<td colspan="2" id="table_title">
-      		Dane osobowe 
+      		个人信息 
       	</td>
       </tr>
       <tr>
@@ -19,11 +19,11 @@
         <td><%= @user.lastname %></td>
       </tr>
       <tr>
-        <td>Utworzony</td>
+        <td>注册日期</td>
         <td><%= escape_date(@user.created_at) %></td>
       </tr>
       <tr>
-        <td>Kraj</td>
+        <td>国籍</td>
         <td><%= image_tag(@country_flag) %> <%= @country_name %></td>
       </tr>
       <tr>
@@ -31,12 +31,12 @@
         <td><%= @user.email %></td>
       </tr>
       <tr>
-        <td>Status konta</td>
+        <td>帐户状态</td>
         <td><%= @statuses[@user.status] %></td>
       </tr>
     </table>
     <% if current_user?(@user) %>
-  		<%= link_to 'Edytuj dane', edit_user_path(params[:id]) %>
+  		<%= link_to '编辑', edit_user_path(params[:id]) %>
   	<% end %>
   	<%= render 'watch_form' if signed_in? %>
     </div>
@@ -45,7 +45,7 @@
     <tr>
     	<tr>
       	<td colspan="2" id="table_title">
-      		O sobie
+      		个人描述
       	</td>
       </tr>
         <td style="vertical-align: top; border-right: 1px solid black;"><%= image_tag @user.avatar.url(:thumb) %></td><td><%= simple_format(@user.description) -%></td>
@@ -57,20 +57,20 @@
     <tr>
     	<tr>
       	<td colspan="2" id="table_title">
-      		Statystyki
+      		统计
       	</td>
       </tr>
         <td>
         	<%= render 'shared/zaufani' %>
-        	Projektów: <%= link_to @projects.count, user_userprojects_path(@user) %><br />
-        	Punktów bonusowych: <%= link_to @pts, user_bonuspoints_path(@user) %><hr>
-        	Zakończonych aukcji: <%= @reputation.finished_auctions %><br />
-        	Suma ocen za wystawione aukcje: <%= @reputation.auctions_overall_ratings %><hr>
-        	Liczba ocen otrzymanych za projekty: <%= @reputation.rated_projects %><br />
-        	Suma ocen za projekty: <%= @reputation.projects_overall_ratings %><br />
-        	Średnia suma ocen za kontakt: <%= @reputation.average_contact %><br />
-        	Średnia suma ocen za realizacje: <%= @reputation.average_realization %><br />
-        	Średnia suma ocen za stosunek do pracy: <%= @reputation.average_attitude %><br />
+        	项目: <%= link_to @projects.count, user_userprojects_path(@user) %><br />
+        	积分: <%= link_to @pts, user_bonuspoints_path(@user) %><hr>
+        	已完成拍卖: <%= @reputation.finished_auctions %><br />
+        	Total assessments for auctions listed: <%= @reputation.auctions_overall_ratings %><hr>
+        	收到评级项目数量: <%= @reputation.rated_projects %><br />
+        	项目总评分: <%= @reputation.projects_overall_ratings %><br />
+        	Average total for contact: <%= @reputation.average_contact %><br />
+        	Average total for projects: <%= @reputation.average_realization %><br />
+        	Average total for the relationship to work: <%= @reputation.average_attitude %><br />
         	<div class="center bold"><font size="6">Reputacja:</font><br />
         		<font size="7" color="red"><%= @reputation.reputation %>%</font>
         	</div>

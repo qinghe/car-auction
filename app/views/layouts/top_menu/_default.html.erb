@@ -1,69 +1,69 @@
 <ul id="mega-menu-1" class="mega-menu">
   <% if !signed_in? %>
-    <li><%= link_to 'Szukaj', search_auctions_path %></li>
-    <li><%= link_to 'Logowanie', signin_path, :method => :new %></li>
-    <li><%= link_to 'Rejestracja', signup_path, :method => :new %></li>
+    <li><%= link_to 'search', search_auctions_path %></li>
+    <li><%= link_to 'signin', signin_path, :method => :new %></li>
+    <li><%= link_to 'signup', signup_path, :method => :new %></li>
   <% end %>
   <% if signed_in? %>
-    <li><%= link_to 'Szukaj', search_auctions_path %></li>
-    <li><%= link_to 'Panel', user_path(current_user) %></li>
-    <li><%= link_to 'Nowa aukcja', new_panel_auction_path %></li>
-    <li><%= link_to 'Aukcje', panel_auctions_path %>
+    <li><%= link_to '搜索', search_auctions_path %></li>
+    <li><%= link_to '我的面板', user_path(current_user) %></li>
+    <li><%= link_to '新拍卖', new_panel_auction_path %></li>
+    <li><%= link_to '拍卖会', panel_auctions_path %>
       <ul>
-        <li><p>przeglądaj</p>
+        <li><p>浏览</p>
           <ul>
-            <li><%= link_to 'aktualnie trwające', panel_auctions_path %></li>
-            <li><%= raw link_to 'anulowane', panel_auctions_path(:status => :canceled) %></li>
-            <li><%= raw link_to 'zakończone', panel_auctions_path(:status => :finished) %></li>
+            <li><%= link_to '正在进行', panel_auctions_path %></li>
+            <li><%= raw link_to '取消', panel_auctions_path(:status => :canceled) %></li>
+            <li><%= raw link_to '完成', panel_auctions_path(:status => :finished) %></li>
           </ul>
         </li>
-        <li><p>opcje</p>
+        <li><p>选项</p>
           <ul>
-            <li><%= link_to 'wyszukaj aukcję', search_auctions_path %></li>
-            <li><%= link_to 'nowa aukcja', new_panel_auction_path %></li>
+            <li><%= link_to '拍卖搜索', search_auctions_path %></li>
+            <li><%= link_to '创建拍卖', new_panel_auction_path %></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><%= link_to 'Prywatne wiadomości', panel_messages_path %>
+    <li><%= link_to '私人消息', panel_messages_path %>
       <ul>
         <li><p>foldery</p>
           <ul>
-            <li><%= link_to 'odebrane', panel_messages_path %></li>
-            <li><%= link_to 'wysłane', sent_panel_messages_path %></li>
+            <li><%= link_to '收件箱', panel_messages_path %></li>
+            <li><%= link_to '发件箱', sent_panel_messages_path %></li>
           </ul>
         </li>
-        <li><p>opcje</p>
+        <li><p>选项</p>
           <ul>
-            <li><%= link_to 'nowa wiadomość', new_panel_message_path %></li>
+            <li><%= link_to '新的消息', new_panel_message_path %></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><%= link_to 'Oferty', panel_offers_path %>
+    <li><%= link_to 'Offers', panel_offers_path %>
       <ul>
-        <li><p>przeglądaj</p>
+        <li><p>浏览</p>
           <ul>
-            <li><%= raw link_to 'biorące udział', panel_offers_path(:status => :active) %></li>
-            <li><%= raw link_to 'wygrane', panel_offers_path(:status => :won) %></li>
+            <li><%= raw link_to 'featured', panel_offers_path(:status => :active) %></li>
+            <li><%= raw link_to 'won', panel_offers_path(:status => :won) %></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><%= link_to 'Komentarze', panel_comments_path %>
+    <li><%= link_to '评论', panel_comments_path %>
       <ul>
-        <li><p>przeglądaj</p>
+        <li><p>浏览</p>
           <ul>
-            <li><%= raw link_to 'oczekujące', queue_panel_comments_path %></li>
-            <li><%= raw link_to 'wystawione', panel_comments_path(:status => :written) %></li>
-            <li><%= raw link_to 'otrzymane', panel_comments_path(:status => :received) %></li>
+            <li><%= raw link_to 'waiting', queue_panel_comments_path %></li>
+            <li><%= raw link_to 'Listed', panel_comments_path(:status => :written) %></li>
+            <li><%= raw link_to 'received', panel_comments_path(:status => :received) %></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><%= link_to 'Projekty', panel_projects_path %>
+    <li><%= link_to '项目', panel_projects_path %>
     </li>
-    <li><%= link_to 'Wyloguj się(' + current_user.to_s + ')', signout_path, :method => :delete %></li>
+    <li><%= link_to '退出(' + current_user.to_s + ')', signout_path, :method => :delete %></li>
   <% end %>
 </ul>
 <%= javascript_tag do %>

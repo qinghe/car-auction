@@ -1,5 +1,5 @@
 <div class="prepend-1">
-<% form_for [@user] do |f| -%>
+<%= form_for [@user] do |f| -%>
 <%= render "layouts/error_messages", :target => @user %>
 <div class="field">
   <%= f.label :login %><br />
@@ -19,7 +19,7 @@
   <%= hidden_field_tag(:ref, @referer) %>
 </div>
 <%= f.label :country %><br />
-<%= f.select :country, $countries, {:selected => 'PL'} %>
+<%= f.country_select :country, {:selected => 'PL'} %>
 <div class="field">
   <%= f.label :password %><br />
   <%= f.password_field :password, :value => "", :class=>"span-6" %>
@@ -33,7 +33,7 @@
   <%= raw(get_captcha(:options => {:theme => 'white', :tabindex => 10})) %>
 </div>
 <div class="actions">
-    <%= f.submit "Rejestruj" %>
+    <%= f.submit "注册" %>
   </div>
 <% end %>
 </div>

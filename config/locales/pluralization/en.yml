@@ -1,0 +1,11 @@
+en:
+  day:
+    zero: 'dni'
+    one: 'dzień'
+    few: 'dni'
+    other: 'dni'
+  error:
+    zero: błędów
+    one: błąd
+    few: błędy
+    other: błędów

@@ -37,7 +37,7 @@
   </script>
 <% end -%>
 <div class="prepend-1 append-1">
-  <% form_for [:panel, @comment] do |f| -%>
+  <%= form_for [:panel, @comment] do |f| -%>
 
     <%= render "layouts/error_messages", :target => @comment %>
     <p>Proszę ocenić użytkownika <%= escape_user(@receiver) %> za

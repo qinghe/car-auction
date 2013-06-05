@@ -5,7 +5,7 @@ development:
   database: app_dev
   pool: 5
   username: root
-  password: Rot192
+  password: 
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -18,7 +18,7 @@ test:
   database: app_test
   pool: 5
   username: root
-  password: Rot192
+  password: 
   host: localhost
 
 production:
@@ -28,5 +28,5 @@ production:
   database: app_prod
   pool: 5
   username: root
-  password: Rot192
+  password: 
   host: localhost

@@ -1,5 +1,251 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
+---
 en:
-  hello: "Hello world"
+  general:
+    logo: Auction Portal
+    left: left
+    created_at: created_at
+    users: users
+    actions: actions
+    save: save
+    send: send
+    delete: delete
+    edit: edit
+    cancel: cancel
+    download: download
+    none: none
+    pm: pm
+    contact: contact
+    confirm: confirm ?
+    invite: invite
+    ban: Are you sure you want to ban this account?
+    activate: Are you sure you want to activate this account?
+    deactivate: Are you sure you want to deactivate this account? Remember, only the portal administrator will be able to restore them back
+
+    project:
+      exceeded: exceeded
+      ended: project completed
+      end: Finish the project
+      menu:
+        info: Info
+        invitations: invitations
+        members: members
+        tickets: Tasks
+        files: files
+        forum: Forum
+      file:
+        add: Upload file
+      topic:
+        last_post: last_post
+      post:
+        add: New Post
+      members:
+        message: "You deleted from the project {@project.name}"
+        message_topic: You deleted from the project
+        leave: Lower project
+      invitation:
+        add: Invite
+        topic: Receive an invitation to the project
+        accept: accept
+        reject: reject
+        body: "Invited you to the project {@auction_link} the role of {@role}. [{@accept_link} | {@reject_link}]"
+      ticket:
+        add: Add task
+        take: take
+        give: Pay
+        end: end
+      project_file:
+        must_be_set: can not be empty
+      
+  date:
+    formats:
+      default: "%d-%m-%Y"
+      short: "%d %b"
+      long: "%B %d, %Y"
+
+    day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+    abbr_day_names: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
+
+    month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
+    abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+    order:
+      - :day
+      - :month
+      - :year
+
+  time:
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      short: "%d %b %H:%M"
+      long: "%B %d, %Y %H:%M"
+    am: "am"
+    pm: "pm"
+
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " i "
+      last_word_connector: " and "
+
+    select:
+      prompt: "Please choose"
+
+  number:
+    format:
+      separator: ","
+      delimiter: " "
+      precision: 3
+      significant: false
+      strip_insignificant_zeros: false
+
+    currency:
+      format:
+        format: "%u %n"
+        unit: "PLN"
+        separator: ","
+        delimiter: " "
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: true
+
+    percentage:
+      format:
+        delimiter: ""
+
+    precision:
+      format:
+        delimiter: ""
+
+    human:
+      format:
+        delimiter: ""
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "one"
+            few: "few" 
+            other: "other"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+      decimal_units:
+        format: "%n %u"
+        units:
+          unit: ""
+          thousand: thousand
+          million: million
+          billion: billion
+          trillion: trillion
+          quadrillion: quadrillion
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "half a minute"
+      less_than_x_seconds:
+        one:   "less than a second"
+        few:   "less than %{count} seconds"
+        other: "less than %{count} seconds"
+      x_seconds:
+        one:   "1 seconds"
+        few:   "%{count} seconds"
+        other: "%{count} seconds"
+      less_than_x_minutes:
+        one:   "less than a minute"
+        few:   "less than %{count} minuty"
+        other: "less than %{count} minut"
+      x_minutes:
+        one:   "1 minutes"
+        few:   "%{count} minutes"
+        other: "%{count} minutes"
+      about_x_hours:
+        one:   "about hours"
+        few:   "about %{count} hours"
+        other: "about %{count} hours"
+      x_days:
+        one:   "1 day"
+        few:   "%{count} days"
+        other: "%{count} days"
+      about_x_months:
+        one:   "about month"
+        few:   "about %{count} months"
+        other: "about %{count} months"
+      x_months:
+        one:   "1 month"
+        few:   "%{count} month"
+        other: "%{count} months"
+      about_x_years:
+        one:   "about year"
+        few:   "about %{count} years"
+        other: "about %{count} years"
+      over_x_years:
+        one:   "over year"
+        few:   "over %{count} years"
+        other: "over %{count} years"
+      almost_x_years:
+        one:   "almost year"
+        few:   "almost %{count} years"
+        other: "almost %{count} years"
+    prompts:
+      year:   "year"
+      month:  "month"
+      day:    "day"
+      hour:   "hour"
+      minute: "minute"
+      second: "second"
+
+  helpers:
+    select:
+      prompt: "Please choose"
+
+    submit:
+      create: 'Create %{model}'
+      update: 'update %{model}'
+      submit: 'submit %{model}'
+
+  errors:
+    format: "%{attribute} %{message}"
+
+    messages: &errors_messages
+      inclusion: "is not on the list of acceptable values"
+      exclusion: "is reserved"
+      invalid: "is incorrect"
+      confirmation: "does not match the confirmation"
+      accepted: "must be accepted"
+      empty: "can not be blank"
+      blank: "can not be empty"
+      too_long: "is too long (max %{count} characters)"
+      too_short:
+        one: "is too short (at least %{count} characters)"
+        few: "is too short (at least %{count} characters)"
+        other: "is too short (at least %{count} characters)"
+      wrong_length: "has the wrong length (should be %{count} characters)"
+      not_a_number: "is a number"
+      not_an_integer: "must be an integer"
+      greater_than: "must be greater than %{count}"
+      greater_than_or_equal_to: "must be greater than or equal to %{count}"
+      equal_to: "must be equal to %{count}"
+      less_than: "must be less than %{count}"
+      less_than_or_equal_to: "must be less than or equal to %{count}"
+      odd: "must be odd"
+      even: "must be even"
+      
+  activerecord:
+    errors:
+      template:
+        header:
+          one:    "The form has not been saved because of one error"
+          few:    "The form has not been saved because of %{count} errors"
+          other:  "The form has not been saved because of %{count} errors"
+        body: "The boxes Errors:"
+
+      messages:
+        taken: "has already been taken"
+        record_invalid: "Negative validation: %{errors}"
+        <<: *errors_messages
+
+      full_messages:
+        format: "%{attribute}%{message}"
