@@ -4,7 +4,10 @@ class CreateUsers < ActiveRecord::Migration
       t.string :login, :null => false, :length => 40
       t.string :name, :null => false, :length => 40
       t.string :lastname, :null => false, :length => 40
-      t.string :country, :null => false, :length => 30
+      t.string :country, :null => false, :length => 30, :default=>'cn'
+      t.integer :province_id,  :null => false, :default => 0
+      t.integer :city_id,  :null => false, :default => 0
+      t.integer :region_id,  :null => false, :default => 0
       t.string :email, :null => false, :length => 50
       t.string :password, :null => false
       t.integer :status,  :null => false, :default => 1

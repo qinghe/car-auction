@@ -24,8 +24,8 @@
   <%= f.text_field :email, :value => @user.email.force_encoding("UTF-8"), :class=>"span-6" %>
 </div>
 <div class="field">
-<%= f.label :country %><br />
-<%= f.country_select :country, {:selected => @user.country} %>
+<% f.label :provice_id %><br />
+<% f.region_select [:province, :city, :district] %>
 </div>
 <div class="field">
 <%= f.label :avatar %><br />

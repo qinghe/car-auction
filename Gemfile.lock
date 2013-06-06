@@ -30,11 +30,6 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     builder (3.0.4)
-    carmen (1.0.0)
-      unicode_utils (~> 1.4.0)
-    carmen-rails (1.0.0)
-      carmen (~> 1.0.0.beta2)
-      rails
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -107,14 +102,12 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.37)
-    unicode_utils (1.4.0)
     will_paginate (3.0.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  carmen-rails
   faker
   jquery-rails
   mail

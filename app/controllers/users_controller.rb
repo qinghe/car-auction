@@ -22,8 +22,6 @@ class UsersController < ApplicationController
     @statuses = ["未激活","未验证","验证","禁止"]
     @title = "用户面板 #{@user.name} #{@user.lastname}"
     @projects = Project.find(@user.project_ids).paginate :per_page => 15, :page => params[:page]
-    @country_name = Carmen::Country.coded(@user.country).name
-    @country_flag = "flags/#{@user.country.downcase}.gif"
     @points = Bonuspoint.find_all_by_user_id(@user, :select => "points")
     sum_points
     @reputation = Reputation.find_by_user_id(@user.id)

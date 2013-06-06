@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.7'
 gem 'mysql2'
-gem 'carmen-rails'
+#gem 'carmen-rails'
 gem 'ruby-recaptcha'
 gem 'mail'
 gem "paperclip", "~> 2.3"

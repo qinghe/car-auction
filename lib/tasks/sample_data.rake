@@ -41,7 +41,6 @@ def make_users #zmieniony format emailu dla latwiejszego logowania
   	description = Faker::Lorem.sentence(12)
     firstname = Faker::Name.first_name
     lastname = Faker::Name.last_name
-    country =  Carmen::Country.named('United States')
     user = User.create!(
       :login => login,
       :password => 'password',
@@ -49,7 +48,6 @@ def make_users #zmieniony format emailu dla latwiejszego logowania
       :lastname => lastname,
       :role => 'user',
       :status => 2,
-      :country => country.alpha_2_code,
       :email => "#{i+1+n}@example.com",
       :description => description
     )
@@ -64,7 +62,6 @@ def make_users #zmieniony format emailu dla latwiejszego logowania
   	description = Faker::Lorem.sentence(12)
     firstname = Faker::Name.first_name
     lastname = Faker::Name.last_name
-    country = Carmen::Country.named('United States')
     user = User.create!(
       :login => login,
       :password => 'password',
@@ -72,7 +69,6 @@ def make_users #zmieniony format emailu dla latwiejszego logowania
       :lastname => lastname,
       :role => 'user',
       :status => 1,
-      :country => country.alpha_2_code,
       :email => "#{i+1+n}@example.com",
       :description => description
     )

@@ -11,9 +11,9 @@
 admin =  User.create!(
   :login => "admin",
   :password => 'password',
-  :name => "Jan",
-  :lastname => "Kowalski",
-  :country => "pl",
+  :name => "zhang",
+  :lastname => "yunqi",
+  :country => "cn",
   :email => "admin@example.com",
   :description => "Witam. Jestem administratorem w naszym portalu. Z wszelkimi problemami zgłaszaj się do mnie :)"
 )
