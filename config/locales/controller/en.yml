@@ -103,6 +103,11 @@ en:
         destroy: The group was removed with tags
       application:
         not_admin: Access only for administrator
+    case:
+      car:
+        update: description has been updated
+        create: 车辆添加成功。
+        destroy: The file has been deleted
     project:
       info:
         update: description has been updated

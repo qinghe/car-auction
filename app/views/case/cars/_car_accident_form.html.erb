@@ -1,0 +1,93 @@
+<%
+  @car.accidents.build
+%>
+<%= form_for(@car, :url => case_cars_path() ) do |car_form| %>
+  <% if @car.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
+
+      <ul>
+      <% @car.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <table>
+  <tr>   <td> 车辆信息</td>  </tr>
+
+  <tr>
+    <th><%= car_form.label :model_id,'选择车型' %> </th>
+    <td><%= car_form.text_field :model_id %></td>
+    <th><%= car_form.label :model_name,'特殊车型' %> </th>
+    <td><%= car_form.text_field :model_name %> </td>
+  </tr>>
+  <tr>
+    <th><%= car_form.label :serial_no,'流水单号' %> </th>
+    <td><%= car_form.text_field :serial_no %></td>
+    <th><%= car_form.label :is_at,'手/排' %> </th>
+    <td><%= car_form.text_field :is_at %> </td>
+    <th><%= car_form.label :registered_at,'初次登记日期' %> </th>
+    <td><%= car_form.text_field :registered_at %> </td>
+  </tr>>
+  <tr>
+    <th><%= car_form.label :plate_number,'车牌号' %> </th>
+    <td><%= car_form.text_field :plate_number %></td>
+    <th><%= car_form.label :engine_number,'发动机号' %> </th>
+    <td><%= car_form.text_field :engine_number %> </td>
+    <th><%= car_form.label :frame_number,'车架钢印号' %> </th>
+    <td><%= car_form.text_field :frame_number %> </td>
+  </tr>>
+  <%= car_form.fields_for :accidents do |f| %>
+  <tr>   <td> 车辆出险信息</td>  </tr>
+  <tr>
+    <th><%= f.label :sunshi_leixing,'损失类型' %> </th>
+    <td><%= f.text_field :sunshi_leixing %></td>
+    <th><%= f.label :chuxian_riqi,'出险日期' %> </th>
+    <td><%= f.text_field :chuxian_riqi %> </td>
+    <th><%= f.label :shifou_caijian,'是否拆检' %> </th>
+    <td><%= f.text_field :chuxian_riqi %> </td>
+  </tr>>
+  <tr>
+    <th><%= f.label :tingche_address,'停车地点' %> </th>
+    <td><%= f.label :tingche_provice_id %> <%= f.label :tingche_city_id %> <br/>
+       <%= f.text_field :tingche_more %>
+    </td>
+    <th><%= f.label :chejiaohao_sousun,'车架号是否受损' %> </th>
+    <td><%= f.text_field :chejiaohao_sousun %> </td>
+  </tr>>
+  <tr>
+    <th><%= f.label :zeren_rending,'责任认定' %> </th>
+    <td><%= f.text_field :zeren_rending %> </td>
+    
+    <th><%= f.label :duifang_baoxian,'对方保险公司' %> </th>
+    <td><%= f.text_field :duifang_baoxian %> </td>
+    <th><%= f.label :renshang_qingkuang,'人伤情况' %> </th>
+    <td><%= f.text_field :renshang_qingkuang %> </td>
+  </tr>>
+  <tr>
+    <th><%= f.label :pengzhuang_buwei,'碰撞部位' %> </th>
+    <td><%= f.text_field :pengzhuang_buwei %> </td>
+  </tr>  
+  <tr>
+    <th><%= f.label :chuxian_jingguo,'出险经过' %> </th>
+    <td><%= f.text_field :chuxian_jingguo %> </td>
+  </tr> 
+  <tr>
+    <th><%= f.label :chengbao_jine,'车保金额' %> </th>
+    <td><%= f.text_field :chengbao_jine %> </td>
+    <th><%= f.label :gusun_jine,'估损金额' %> </th>
+    <td><%= f.text_field :gusun_jine %> </td>
+  </tr> 
+  <% end %>  
+  <tr>
+    <th> </th>
+    <td> <%= car_form.submit %> </td>
+  </tr> 
+   
+</table>
+
+  
+<% end %>
+
+ 

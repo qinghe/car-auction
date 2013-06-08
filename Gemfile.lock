@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/rails/jquery-rails.git
+  revision: a3d3dec2da4a4c94e595eef5b55da0091ebf3e22
+  tag: v3.0.1
+  specs:
+    jquery-rails (3.0.1)
+      railties (>= 3.0, < 5.0)
+      thor (>= 0.14, < 2.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -41,9 +50,9 @@ GEM
     i18n (0.6.4)
     innertube (1.0.2)
     journey (1.0.4)
-    jquery-rails (3.0.0)
-      railties (>= 3.0, < 5.0)
-      thor (>= 0.14, < 2.0)
+    jquery-ui-rails (4.0.3)
+      jquery-rails
+      railties (>= 3.1.0)
     json (1.8.0)
     mail (2.4.4)
       i18n (>= 0.4.0)
@@ -109,7 +118,8 @@ PLATFORMS
 
 DEPENDENCIES
   faker
-  jquery-rails
+  jquery-rails!
+  jquery-ui-rails
   mail
   mysql2
   paperclip (~> 2.3)

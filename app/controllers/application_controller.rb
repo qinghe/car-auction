@@ -12,7 +12,7 @@ require 'will_paginate/array'
 
   private
   def init
-    @global_title = '- inz v0.1'
+    @global_title = '- HuaChenCar'
   end 
    
 =begin

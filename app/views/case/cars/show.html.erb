@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Model:</b>
+  <%= @car.model_id %>
+</p>
+
+<p>
+  <b>Model name:</b>
+  <%= @car.model_name %>
+</p>
+
+<p>
+  <b>Serial no:</b>
+  <%= @car.serial_no %>
+</p>
+
+<p>
+  <b>Registered at:</b>
+  <%= @car.registered_at %>
+</p>
+
+<p>
+  <b>Is at:</b>
+  <%= @car.is_at %>
+</p>
+
+<p>
+  <b>Plate number:</b>
+  <%= @car.plate_number %>
+</p>
+
+<p>
+  <b>Engine number:</b>
+  <%= @car.engine_number %>
+</p>
+
+<p>
+  <b>Frame number:</b>
+  <%= @car.frame_number %>
+</p>
+
+
+<%= link_to 'Edit', edit_case_car_path(@car) %> |
+<%= link_to 'Back', case_cars_path %>

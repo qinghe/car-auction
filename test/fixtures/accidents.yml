@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  sunshi_leixing: 
+  chuxian_riqi: 
+  tingche_provice_id: 
+  tingche_city_id: 
+  tingche_more: 
+  chejiaohao_sousun: 
+  zeren_rending: 
+  duifang_baoxian: 
+  renshang_qingkuang: 
+  pengzhuang_buwei: 
+  chuxian_jingguo: 
+  chengbao_jine: 
+  gusun_jine: 
+  chuli_fangshi: 
+
+two:
+  sunshi_leixing: 
+  chuxian_riqi: 
+  tingche_provice_id: 
+  tingche_city_id: 
+  tingche_more: 
+  chejiaohao_sousun: 
+  zeren_rending: 
+  duifang_baoxian: 
+  renshang_qingkuang: 
+  pengzhuang_buwei: 
+  chuxian_jingguo: 
+  chengbao_jine: 
+  gusun_jine: 
+  chuli_fangshi: 

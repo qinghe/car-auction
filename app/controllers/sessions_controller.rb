@@ -1,10 +1,11 @@
+# encoding: utf-8
 class SessionsController < ApplicationController
   def new
-  	@title = "Logowanie"
+  	@title = "登录"
   end
   
   def create
-  	@title = "Logowanie"
+  	@title = "登录"
   	user = User.authenticate(params[:session][:email],
                              params[:session][:password])
     if user.nil?

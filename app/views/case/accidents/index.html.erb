@@ -1,0 +1,49 @@
+<h1>Listing accidents</h1>
+
+<table>
+  <tr>
+    <th>Sunshi leixing</th>
+    <th>Chuxian riqi</th>
+    <th>Tingche provice</th>
+    <th>Tingche city</th>
+    <th>Tingche more</th>
+    <th>Chejiaohao sousun</th>
+    <th>Zeren rending</th>
+    <th>Duifang baoxian</th>
+    <th>Renshang qingkuang</th>
+    <th>Pengzhuang buwei</th>
+    <th>Chuxian jingguo</th>
+    <th>Chengbao jine</th>
+    <th>Gusun jine</th>
+    <th>Chuli fangshi</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @accidents.each do |accident| %>
+  <tr>
+    <td><%= accident.sunshi_leixing %></td>
+    <td><%= accident.chuxian_riqi %></td>
+    <td><%= accident.tingche_provice_id %></td>
+    <td><%= accident.tingche_city_id %></td>
+    <td><%= accident.tingche_more %></td>
+    <td><%= accident.chejiaohao_sousun %></td>
+    <td><%= accident.zeren_rending %></td>
+    <td><%= accident.duifang_baoxian %></td>
+    <td><%= accident.renshang_qingkuang %></td>
+    <td><%= accident.pengzhuang_buwei %></td>
+    <td><%= accident.chuxian_jingguo %></td>
+    <td><%= accident.chengbao_jine %></td>
+    <td><%= accident.gusun_jine %></td>
+    <td><%= accident.chuli_fangshi %></td>
+    <td><%= link_to 'Show', accident %></td>
+    <td><%= link_to 'Edit', edit_case_accident_path(accident) %></td>
+    <td><%= link_to 'Destroy', accident, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Accident', new_case_accident_path %>
