@@ -16,107 +16,124 @@
       </ul>
     </div>
   <% end %>
-  <table>
-  <tr>   <td> 车辆信息</td>  </tr>
+  <table class='car_accident'>
+  <tr>   <td colspan="6"> 车辆信息</td>  
+  </tr>
 
   <tr>
-    <th><%= car_form.label :model_id,'选择车型' %> </th>
-    <td><%= car_form.text_field :model_id %></td>
+    <th width="100px">选择车型 </th>
+    <td colspan="3"><%= car_form.text_field :model_id %></td>
     <th><%= car_form.label :model_name,'特殊车型' %> </th>
-    <td><%= car_form.text_field :model_name %> </td>
-  </tr>>
-  <tr>
-    <th><%= car_form.label :serial_no,'流水单号' %> </th>
-    <td><%= car_form.text_field :serial_no %></td>
-    <th><%= car_form.label :is_at,'手/排' %> </th>
-    <td><%= car_form.text_field :is_at %> </td>
-    <th><%= car_form.label :registered_at,'初次登记日期' %> </th>
-    <td><%= car_form.text_field :registered_at %> </td>
-  </tr>>
-  <tr>
-    <th><%= car_form.label :plate_number,'车牌号' %> </th>
-    <td><%= car_form.text_field :plate_number %></td>
-    <th><%= car_form.label :engine_number,'发动机号' %> </th>
-    <td><%= car_form.text_field :engine_number %> </td>
-    <th><%= car_form.label :frame_number,'车架钢印号' %> </th>
-    <td><%= car_form.text_field :frame_number %> </td>
-  </tr>>
-  <%= car_form.fields_for :accidents do |f| %>
-  <tr>   <td> 车辆出险信息</td>  
+    <td><%= car_form.text_field :model_name,:class=>'span-3' %> </td>
   </tr>
   <tr>
+    <th><%= car_form.label :serial_no,'流水单号' %> </th>
+    <td><%= car_form.text_field :serial_no,:class=>'span-3' %></td>
+    <th><%= car_form.label :is_at,'手/排' %> </th>
+    <td><%= car_form.select :is_at,[['MT',0],['AT',1]] %> </td>
+    <th><%= car_form.label :registered_at,'初次登记日期' %> </th>
+    <td><%= car_form.date_select :registered_at %> </td>
+  </tr>
+  <tr>
+    <th><%= car_form.label :plate_number,'车牌号' %> </th>
+    <td><%= car_form.text_field :plate_number,:class=>'span-3' %>*</td>
+    <th><%= car_form.label :engine_number,'发动机号' %> </th>
+    <td><%= car_form.text_field :engine_number,:class=>'span-3' %>* </td>
+    <th><%= car_form.label :frame_number,'车架钢印号' %> </th>
+    <td><%= car_form.text_field :frame_number,:class=>'span-3' %>* </td>
+  </tr>
+  <%= car_form.fields_for :accidents do |f| %>
+  <tr>   <td colspan="6"> 车辆出险信息</td>   </tr>
+  <tr>
     <th><%= f.label :sunshi_leixing,'损失类型' %> </th>
-    <td><%= f.text_field :sunshi_leixing %></td>
+    <td><%= f.select :sunshi_leixing,[['A损失类型',0],['b损失类型',1],['c损失类型',2]]  %></td>
     <th><%= f.label :chuxian_riqi,'出险日期' %> </th>
-    <td><%= f.text_field :chuxian_riqi %> </td>
+    <td><%= f.date_select :chuxian_riqi %> </td>
     <th><%= f.label :shifou_caijian,'是否拆检' %> </th>
-    <td><%= f.text_field :chuxian_riqi %> </td>
-  </tr>>
+    <td><%= f.select :chuxian_riqi,[['完全拆检',0],['未拆检',1]]  %> </td>
+  </tr>
   <tr>
     <th><%= f.label :tingche_address,'停车地点' %> </th>
-    <td><%= f.label :tingche_provice_id %> <%= f.label :tingche_city_id %> <br/>
+    <td colspan="3"><%= f.region_select [:province, :city] %> <br/>
        <%= f.text_field :tingche_more %>
     </td>
     <th><%= f.label :chejiaohao_sousun,'车架号是否受损' %> </th>
-    <td><%= f.text_field :chejiaohao_sousun %> </td>
-  </tr>>
+    <td><%= f.select :chejiaohao_sousun,[['是',1],['否',1]] %> </td>
+  </tr>
   <tr>
     <th><%= f.label :zeren_rending,'责任认定' %> </th>
-    <td><%= f.text_field :zeren_rending %> </td>
+    <td><%= f.select :zeren_rending,[['多方事故',1],['对方事故',2]] %> </td>
     
     <th><%= f.label :duifang_baoxian,'对方保险公司' %> </th>
-    <td><%= f.text_field :duifang_baoxian %> </td>
+    <td><%= f.text_field :duifang_baoxian,:class=>'span-3' %><br/>(适用双方事故) </td>
     <th><%= f.label :renshang_qingkuang,'人伤情况' %> </th>
-    <td><%= f.text_field :renshang_qingkuang %> </td>
-  </tr>>
+    <td><%= f.select :renshang_qingkuang,[['无伤亡',0],['车主死亡',1],['车主轻伤',2]] %> </td>
+  </tr>
   <tr>
     <th><%= f.label :pengzhuang_buwei,'碰撞部位' %> </th>
-    <td><%= f.text_field :pengzhuang_buwei %> </td>
+    <td colspan="5">
+      <table>
+          <% Accident::POSITIONS.to_a.each{|key_val| %>
+            <% if key_val[1]%6==1 %> <tr> <% end %>
+            <td>             
+    <%= f.check_box :pengzhuang_buwei, {:name=>"car[accidents_attributes][0][pengzhuang_buwei][]"}, key_val[1].to_s %>
+    <%= key_val[0] %>
+            </td>
+            <% if key_val[1]==6 or key_val[1]==12 or key_val[1]==14%> </tr> <% end %>
+          <% } %>  
+      </table>
+      
+      </td>
   </tr>  
   <tr>
     <th><%= f.label :chuxian_jingguo,'出险经过' %> </th>
-    <td><%= f.text_field :chuxian_jingguo %> </td>
+    <td colspan="5"><%= f.text_area :chuxian_jingguo, :size => "90x3",:style=>"width:auto;height:auto;" %> </td>
   </tr> 
   <tr>
     <th><%= f.label :chengbao_jine,'车保金额' %> </th>
-    <td><%= f.text_field :chengbao_jine %> </td>
+    <td><%= f.text_field :chengbao_jine,:class=>'span-3' %>元* </td>
     <th><%= f.label :gusun_jine,'估损金额' %> </th>
-    <td><%= f.text_field :gusun_jine %> </td>
+    <td><%= f.text_field :gusun_jine,:class=>'span-3' %>元* </td>
   </tr> 
   <% end %>  
-  <tr><th>车辆图片信息</th></tr>
+  <tr><td colspan="6">车辆图片信息</td></tr>
   <tr>
     <th>  行驶证  </th>
-    <td>      
+    <td colspan="5">      
     </td>
-    <th>   车架号  </th>
-    <td>   
-      </td>
   </tr> 
   <tr>
-    <th></th>
-    <td>        
+    <th>上传图片</th>
+    <td colspan="5">        
     <%= car_form.fields_for :license_files do |file_form| %>
       <%= file_form.label :car_file, '添加文件' %>
       <%= file_form.file_field :car_file %>
     <%end%>
     </td>
-    <th></th>
-    <td>      
+  </tr>
+  <tr>
+    <th>   车架号  </th>
+    <td colspan="5">   
+    </td>
+  </tr>
+  <tr>
+    <th>上传图片</th>
+    <td colspan="5">
     <%= car_form.fields_for :frame_files do |file_form| %>
       <%= file_form.label :car_file, '添加文件' %>
       <%= file_form.file_field :car_file %>
     <%end%>
-    </td>
-  </tr>  
+    </td>    
+  </tr>
+    
   <tr>  
     <th>   车辆损失图片展示  </th>
-      <td>      
+      <td  colspan="5">      
       </td>
   </tr>
   <tr>
-      <th></th>
-      <td>      
+      <th>上传图片</th>
+      <td colspan="5">      
         <%= car_form.fields_for :accident_files do |file_form| %>
             <%= file_form.label :car_file, '添加文件' %>
             <%= file_form.file_field :car_file %>
@@ -125,7 +142,7 @@
   </tr> 
   <tr>
     <th> </th>
-    <td> <%= car_form.submit %> </td>
+    <td colspan="5"> <%= car_form.submit '确认提交' %> </td>
   </tr> 
    
   </table>

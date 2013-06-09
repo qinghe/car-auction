@@ -10,7 +10,7 @@
   bottom:12px;
   left:0;
   right:0;
-  width: 960px;
+  width: 970px;
   min-height:300px;
   margin:auto;
 }
@@ -49,5 +49,13 @@
   position:absolute;
   bottom:0;
   height:100px;
+  
+}
+table.car_accident td
+{
+  border: solid 1px black;
+}
+table.car_accident th{
+  width: 58px; 
   
 }

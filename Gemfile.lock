@@ -96,6 +96,9 @@ GEM
     remotipart (1.0.5)
     riddle (1.5.6)
     ruby-recaptcha (1.0.5)
+    simple_form (2.1.0)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     sprockets (2.1.3)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -128,5 +131,6 @@ DEPENDENCIES
   remotipart (~> 1.0)
   riddle
   ruby-recaptcha
+  simple_form
   thinking-sphinx (~> 3.0.2)
   will_paginate

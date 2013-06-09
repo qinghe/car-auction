@@ -32,7 +32,8 @@ module Inz
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'model', '*.yml').to_s]
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'controller', '*.yml').to_s]
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'cities', '*.yml').to_s]
-    config.i18n.default_locale = :en
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'rails', '*.yml').to_s]
+    config.i18n.default_locale = 'zh-CN'
 
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)

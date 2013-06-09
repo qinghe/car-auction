@@ -12,6 +12,7 @@ gem "jquery-rails", :github => "rails/jquery-rails", :tag => "v3.0.1"
 gem 'jquery-ui-rails'
 gem "riddle"
 gem "remotipart", "~> 1.0"
+gem 'simple_form'
 
 group :development do
   gem 'faker'

@@ -61,7 +61,11 @@ module ChineseCities
       def set_region_html_options(object, method, html_options, next_region)
         html_options[:data] ? (html_options[:data][:region_klass] = "#{method.to_s}") : (html_options[:data] = { region_klass: "#{method.to_s}" })
         if next_region
-          html_options[:data].merge!(region_target: "#{object}_#{next_region.to_s}_id", region_target_klass: next_region.to_s)
+          # object may be car[accidents_attributes][0]_city_id
+          #aciton_views/form_helper#sanitized_object_name
+          object_name = object.dup.gsub(/\]\[|[^-a-zA-Z0-9:.]/, "_").sub(/_$/, "") 
+          
+          html_options[:data].merge!(region_target: "#{object_name}_#{next_region.to_s}_id", region_target_klass: next_region.to_s)
         else
           html_options[:data].delete(:region_target)
           html_options[:data].delete(:region_target_klass)
@@ -84,7 +88,7 @@ module ChineseCities
               targetDom = $('#' + self.data('region-target'));
               if (targetDom.size() > 0) {
                 var data = []
-                if (self.data('region-target')=='user_city_id')
+                if (self.data('region-target').match('city_id'))
                 {
                   $.each(cities, function(index, value) {
                     if (value.province_id==selected_id)
