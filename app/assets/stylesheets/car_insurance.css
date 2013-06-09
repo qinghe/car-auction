@@ -1,0 +1,53 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+#page
+{
+  position:absolute;
+  top:0;
+  bottom:12px;
+  left:0;
+  right:0;
+  width: 960px;
+  min-height:300px;
+  margin:auto;
+}
+
+#header
+{
+  height:100px;
+}
+#center
+{
+  position:absolute;
+  left:0;
+  right:0;
+  top:100px;
+  bottom:100px;
+}
+#lftnav
+{ position:absolute;
+  top:0;
+  left:0;
+  width: 180px;
+  min-height:100px;
+}
+
+#content
+{
+  position:absolute;
+  top:0;
+  left:180px;
+  bottom: 0;
+  right:0;
+  overflow:auto;
+}
+#footer
+{
+  position:absolute;
+  bottom:0;
+  height:100px;
+  
+}

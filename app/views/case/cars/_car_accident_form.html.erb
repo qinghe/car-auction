@@ -1,5 +1,8 @@
 <%
   @car.accidents.build
+  @car.license_files.build
+  @car.accident_files.build
+  @car.frame_files.build
 %>
 <%= form_for(@car, :url => case_cars_path() ) do |car_form| %>
   <% if @car.errors.any? %>
@@ -39,7 +42,8 @@
     <td><%= car_form.text_field :frame_number %> </td>
   </tr>>
   <%= car_form.fields_for :accidents do |f| %>
-  <tr>   <td> 车辆出险信息</td>  </tr>
+  <tr>   <td> 车辆出险信息</td>  
+  </tr>
   <tr>
     <th><%= f.label :sunshi_leixing,'损失类型' %> </th>
     <td><%= f.text_field :sunshi_leixing %></td>
@@ -80,12 +84,51 @@
     <td><%= f.text_field :gusun_jine %> </td>
   </tr> 
   <% end %>  
+  <tr><th>车辆图片信息</th></tr>
+  <tr>
+    <th>  行驶证  </th>
+    <td>      
+    </td>
+    <th>   车架号  </th>
+    <td>   
+      </td>
+  </tr> 
+  <tr>
+    <th></th>
+    <td>        
+    <%= car_form.fields_for :license_files do |file_form| %>
+      <%= file_form.label :car_file, '添加文件' %>
+      <%= file_form.file_field :car_file %>
+    <%end%>
+    </td>
+    <th></th>
+    <td>      
+    <%= car_form.fields_for :frame_files do |file_form| %>
+      <%= file_form.label :car_file, '添加文件' %>
+      <%= file_form.file_field :car_file %>
+    <%end%>
+    </td>
+  </tr>  
+  <tr>  
+    <th>   车辆损失图片展示  </th>
+      <td>      
+      </td>
+  </tr>
+  <tr>
+      <th></th>
+      <td>      
+        <%= car_form.fields_for :accident_files do |file_form| %>
+            <%= file_form.label :car_file, '添加文件' %>
+            <%= file_form.file_field :car_file %>
+        <%end%>
+      </td>
+  </tr> 
   <tr>
     <th> </th>
     <td> <%= car_form.submit %> </td>
   </tr> 
    
-</table>
+  </table>
 
   
 <% end %>

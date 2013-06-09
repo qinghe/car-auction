@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
 	validates :email, :presence => true, :format => {:with => email_regex}, :uniqueness => { :case_sensitive => false }, :length => {:within => 6..50}
 	validates :password, :presence => true, :confirmation => true, :length => { :within => 5..100 }
 	validates_numericality_of :status, :presence => true
-	validates_inclusion_of :role, :in => ["administrator", "user"]
+	validates_inclusion_of :role, :in => ["administrator", "user", "insurance_commpany"]
 	
 	validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png', 'image/gif']
 

@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
+//= require jquery.remotipart
 function clickableLabel(){
     $("input[data-clickable=true]").each(function(){
         var label = $("label[for="+$(this).attr("id")+"]").addClass("clickable").click(function(){ $(this).toggleClass("checked")});

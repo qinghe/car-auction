@@ -1,5 +1,6 @@
 # encoding: utf-8
 class Case::ApplicationController < ApplicationController
+  layout 'car_insurance'
   #before_filter :get_project
   #before_filter :check_membership, :except =>[:accept, :reject]
   #before_filter :project_active, :except => [:show, :index]

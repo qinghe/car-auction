@@ -128,6 +128,7 @@ Inz::Application.routes.draw do
   namespace "case" do
     resources :cars do
       get :new_car_accident, :on => :collection
+      get :welcome, :on => :collection
       resources :accidents
     end
   end

@@ -28,6 +28,8 @@ class SessionsController < ApplicationController
       reputation
       if current_user.role == "administrator"
         redirect_to admin_users_path
+      elsif current_user.role == "insurance_company"
+        redirect_to welcome_case_cars_path
       else
         redirect_back_from_login session
       end

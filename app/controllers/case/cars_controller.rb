@@ -1,4 +1,8 @@
 class Case::CarsController < Case::ApplicationController
+  def welcome
+    
+  end
+  
   # GET /cars
   # GET /cars.json
   def index
@@ -38,6 +42,10 @@ class Case::CarsController < Case::ApplicationController
     respond_to do |format|
       format.html # new.html.erb      
     end
+  end
+
+  def upload_car_files
+    
   end
 
   # GET /cars/1/edit
