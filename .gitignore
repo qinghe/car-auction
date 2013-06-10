@@ -7,7 +7,6 @@ nbproject/
 log/*.log
 *.log
 /tmp/
-doc/
 *.swp
 *~
 .DS_Storeconfig/database.yml
