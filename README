@@ -1,8 +1,24 @@
-Projekt serwisu aukcyjnego na pracę inżynierską pod kierownictwem dra Pawła Kasprowskiego.
+Welcome Car auction
+====================
+this is car auction website
 
-Całośc pisana w Ruby on Rails + HTML + CSS + Ajax
 
-Autorzy:
+Development
+===========
+rake db:create
+rake db:reload #create table, load seed, load sample
+
+after load sample, more task detail in lib/tasks/sample_data.rake
+login as system_administrator
+  email: admin@example.com
+  passowrd: password
+login as insurance_company_administrator
+  email: 2@example.com
+  passowrd: password
+  
+
+Thanks
+==============
 Raphael Sobik
 Jakub Kapuścik
 Mariusz Franke

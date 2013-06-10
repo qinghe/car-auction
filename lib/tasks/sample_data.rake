@@ -46,7 +46,7 @@ def make_users #zmieniony format emailu dla latwiejszego logowania
       :password => 'password',
       :name => firstname,
       :lastname => lastname,
-      :role => 'user',
+      :role => (i==0 ? 'insurance_company':'user'),
       :status => 2,
       :email => "#{i+1+n}@example.com",
       :description => description
