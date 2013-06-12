@@ -13,7 +13,9 @@ module ChineseCities
             
         if Array === methods
           methods.each_with_index do |method, index|
-            if region_klass = ('chinese_cities/'+method.to_s).classify.safe_constantize
+            klass_name = [ 'province','city','region' ].select{|n| method=~/#{n}/}.first
+            region_klass = ('chinese_cities/'+klass_name.to_s).classify.safe_constantize
+            if region_klass.present?
               choices = (index == 0 ? region_klass.all.collect {|p| [ p.name, p.id ] } : [])
               next_method = methods.at(index + 1)
               

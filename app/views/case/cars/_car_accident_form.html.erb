@@ -56,8 +56,8 @@
   </tr>
   <tr>
     <th><%= f.label :tingche_address,'停车地点' %> </th>
-    <td colspan="3"><%= f.region_select [:province, :city] %> <br/>
-       <%= f.text_field :tingche_more %>
+    <td colspan="3"><%= f.region_select [:tingche_province, :tingche_city] %> <br/>
+       <%= f.text_field :tingche_more %> 街道
     </td>
     <th><%= f.label :chejiaohao_sousun,'车架号是否受损' %> </th>
     <td><%= f.select :chejiaohao_sousun,[['是',1],['否',1]] %> </td>
@@ -91,6 +91,7 @@
     <th><%= f.label :chuxian_jingguo,'出险经过' %> </th>
     <td colspan="5"><%= f.text_area :chuxian_jingguo, :size => "90x3",:style=>"width:auto;height:auto;" %> </td>
   </tr> 
+  <tr><td colspan="6">价值信息</td></tr>
   <tr>
     <th><%= f.label :chengbao_jine,'车保金额' %> </th>
     <td><%= f.text_field :chengbao_jine,:class=>'span-3' %>元* </td>
@@ -142,6 +143,14 @@
         <%end%>
       </td>
   </tr> 
+  <tr>  
+    <th>  选择车辆处理方式  </th>
+      <td  colspan="5">     
+         <%= car_form.radio_button :status,'2' %><%=car_form.label :status,"委托拍卖"%> &nbsp;
+         <%= car_form.radio_button :status,'1' %><%=car_form.label :status,"询问底价"%> 
+      </td>
+  </tr>
+  
   <tr>
     <th> </th>
     <td colspan="5"> <%= car_form.submit '确认提交' %> </td>
