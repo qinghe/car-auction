@@ -22,7 +22,9 @@
 
   <tr>
     <th width="100px">选择车型 </th>
-    <td colspan="3"><%= car_form.text_field :model_id %></td>
+    <% car_models = CarModel.roots.collect{|root| root.children}.flatten
+    %>
+    <td colspan="3"><%= car_form.grouped_collection_select :model_id,car_models, 'children','group_name','id','name' %></td>
     <th><%= car_form.label :model_name,'特殊车型' %> </th>
     <td><%= car_form.text_field :model_name,:class=>'span-3' %> </td>
   </tr>

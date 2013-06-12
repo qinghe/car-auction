@@ -13,6 +13,7 @@ gem 'jquery-ui-rails'
 gem "riddle"
 gem "remotipart", "~> 1.0"
 gem 'simple_form'
+gem "awesome_nested_set"
 
 group :development do
   gem 'faker'

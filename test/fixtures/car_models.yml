@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: 
+  initial: 
+  parent_id: 
+  lft_id: 
+  rgt_id: 1
+
+two:
+  name: 
+  initial: 
+  parent_id: 
+  lft_id: 
+  rgt_id: 1
