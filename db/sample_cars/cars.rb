@@ -10,7 +10,7 @@
 
 [{ :model_id=>1084,
    :registered_at=>'2013-06-12',
-   
+   :accidents_attributes
   
  }
 ]

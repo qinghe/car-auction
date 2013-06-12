@@ -22,7 +22,7 @@
 
   <tr>
     <th width="100px">选择车型 </th>
-    <% car_models = CarModel.roots.collect{|root| root.children}.flatten
+    <% car_models = CarModel.roots.all(:include=>{:children=>:children}).collect{|root| root.children(:include=>:children)}.flatten
     %>
     <td colspan="3"><%= car_form.grouped_collection_select :model_id,car_models, 'children','group_name','id','name' %></td>
     <th><%= car_form.label :model_name,'特殊车型' %> </th>
