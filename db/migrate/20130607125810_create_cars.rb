@@ -9,7 +9,7 @@ class CreateCars < ActiveRecord::Migration
       t.string :plate_number
       t.string :engine_number
       t.string :frame_number
-
+      t.integer :status
       t.timestamps
     end
   end

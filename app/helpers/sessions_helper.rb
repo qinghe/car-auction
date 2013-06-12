@@ -1,3 +1,4 @@
+#encoding: utf-8
 module SessionsHelper
 
   def sign_in(user)
@@ -43,7 +44,7 @@ module SessionsHelper
   end
 
   def redirect_back_from_login(default)
-    redirect_to session[:return_to] || root_path, :notice => "Witaj #{current_user.name}!"
+    redirect_to session[:return_to] || root_path, :notice => "你好 #{current_user.name}!"
     clear_return_to
   end
 

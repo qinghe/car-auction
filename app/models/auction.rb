@@ -12,7 +12,7 @@ class Auction < ActiveRecord::Base
     ["po OCENIE rosnaco", "rating ASC", 5]
   ]
 
-  belongs_to :owner, :class_name => 'User'
+  belongs_to :owner, :class_name => 'User'      #insurance company
   belongs_to :won_offer, :class_name => 'Offer', :include => [:offerer]
   has_many :offers, :dependent => :destroy
   has_many :communications, :dependent => :delete_all, :order => 'id DESC'
@@ -25,6 +25,9 @@ class Auction < ActiveRecord::Base
     :after_remove => :calculate_rating
   has_one :project
   belongs_to :budget
+  
+  belongs_to :auctioneer, :class_name => 'User' #huachen company
+  has_one :car
   
   ThinkingSphinx::Index.define :auction, :with => :active_record do
     indexes :title

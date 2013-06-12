@@ -2,7 +2,7 @@
 namespace :car do
 
   desc "initial car model with cartype.js  "
-  task :initial_model => :environment do
+  task :initial_models => :environment do
     CarModel.connection.execute "TRUNCATE TABLE `car_models"
     pin_pais = []
     che_xings = []

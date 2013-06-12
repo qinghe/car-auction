@@ -1,6 +1,6 @@
 ---
 zh-CN:
-  Flash:
+  flash:
     general:
       error:
         unknown: An unknown error occurred, all were withdrawn reduction
@@ -104,7 +104,7 @@ zh-CN:
       application:
         not_admin: Access only for administrator
     case:
-      car:
+      cars:
         update: description has been updated
         create: 车辆添加成功。
         destroy: The file has been deleted

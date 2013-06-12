@@ -15,16 +15,16 @@ admin =  User.create!(
   :lastname => "yunqi",
   :country => "cn",
   :email => "admin@example.com",
-  :description => "Witam. Jestem administratorem w naszym portalu. Z wszelkimi problemami zgłaszaj się do mnie :)"
+  :description => "欢迎。我是网站上的一名管理员。如果您有任何问题，联系我 :)"
 )
 admin.status = 2
 admin.role = "administrator"
 admin.save
 
 CommentKeyword.create!(
-  [{ :name => "Kontakt" },
-    { :name => "Realizacja" },
-    { :name => "Stosunek do użytkownika" }
+  [{ :name => "联系" },
+    { :name => "实现" },
+    { :name => "与成员的关系" }
   ])
 
 Budget.create([
@@ -47,3 +47,5 @@ Role.create!(:name => 'member_mod', :member => true)
 Role.create!(:name => 'ticket_mod', :ticket => true)
 Role.create!(:name => 'file_mod', :file => true)
 Role.create!(:name => 'forum_mod', :forum => true)
+
+`rake car:initial_models RAILS_ENV=#{Rails.env}`

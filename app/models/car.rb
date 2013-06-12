@@ -7,6 +7,7 @@ class Car < ActiveRecord::Base
   has_many :frame_files, :conditions=>{:type=>1}, :class_name =>'CarFile'
   has_many :accident_files, :conditions=>{:type=>2}, :class_name =>'CarFile'
   
+  has_one :auction, :dependent => :destroy
   attr_accessible :accidents_attributes, :license_files_attributes, :frame_files_attributes, :accident_files_attributes  
   accepts_nested_attributes_for :accidents, :license_files,:frame_files,:accident_files
   
