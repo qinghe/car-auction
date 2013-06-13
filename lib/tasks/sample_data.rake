@@ -153,7 +153,7 @@ def make_projects
     description = Faker::Lorem.sentence(12)
     a = Auction.new(:title => name.capitalize,
       :budget_id => 1+rand(Budget.count-1),
-      :expired_after => 1+rand(13),
+      :start_at => Time.now,
       :description => description)
     a.owner_id = u
     a.save!
@@ -272,8 +272,9 @@ def make_auctions
     name = "Aution " + Faker::Company.name
     description = Faker::Lorem.sentence(12)
     a = Auction.new(
+      :start_at=>Time.now,
       :title => name, :budget_id => 1+rand(Budget.count-1),
-      :expired_after => 1+rand(13), :description => description
+      :description => description
     )
     a.owner_id = 1+rand(USERS-1)
     a.save!

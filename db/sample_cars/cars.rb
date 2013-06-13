@@ -41,9 +41,7 @@ cars.each_index{|idx|
   car = Car.new(cars[idx])
   car.save!  
   #车辆图片
-  puts File.join(File.dirname(__FILE__),'files', idx.to_s, "a_*.jpg")
   for file in Dir[File.join(File.dirname(__FILE__),'files', idx.to_s, "a_*.{jpg,gif,png}")]
-    puts "file=#{file}"
     open(file) do|f|
       accident_file = car.accident_files.build
       accident_file.car_file = f
