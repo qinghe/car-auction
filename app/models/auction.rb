@@ -1,5 +1,5 @@
 class Auction < ActiveRecord::Base
-  attr_protected :status, :expired_at, :owner_id, :hightlight
+  attr_protected :status, :owner_id, :hightlight
   
   STATUSES = {:active => 0, :finished => 1, :canceled => 2, :waiting_for_offer => 3}
   MAX_EXPIRED_AFTER = 14
@@ -32,7 +32,7 @@ class Auction < ActiveRecord::Base
   ThinkingSphinx::Index.define :auction, :with => :active_record do
     indexes :title
     indexes :description
-    indexes :budget_id
+    #indexes :budget_id
     indexes tags(:id), :as => :tags_ids
     has :expired_at
     where 'auctions.private = 0 AND auctions.expired_at > NOW()'
@@ -42,7 +42,7 @@ class Auction < ActiveRecord::Base
   validates :title, :presence => true, :length => { :within => 8..50}
   validates :description, :presence => true
   validates_inclusion_of :status, :in => STATUSES.values
-  validates_inclusion_of :budget_id, :in => Budget.ids
+  #validates_inclusion_of :budget_id, :in => Budget.ids
 
   scope :has_tags, lambda { |tags| {:conditions => ['id in (SELECT auction_id FROM auctions_tags WHERE tag_id in (?))', tags.join(',')]}}
   scope :with_status, lambda { |status| where(:status => STATUSES[status.to_sym])}
@@ -57,7 +57,7 @@ class Auction < ActiveRecord::Base
 
   #create form
   attr_accessor :expired_after
-  validates_inclusion_of :expired_after, :in => (1..MAX_EXPIRED_AFTER).to_a.collect{|d| d}, :on => :create
+  #validates_inclusion_of :expired_after, :in => (1..MAX_EXPIRED_AFTER).to_a.collect{|d| d}, :on => :create
 
   #ustawia status aukcji na anulowano
   def cancel!
@@ -220,9 +220,9 @@ class Auction < ActiveRecord::Base
   end
   
   def init_auction_row
-    self.expired_after = self.expired_after.to_i
-    self.expired_at = DateTime.now + self.expired_after.days
-    self.status = STATUSES[:active]
+    #self.expired_after = self.expired_after.to_i
+    #self.expired_at = DateTime.now + self.expired_after.days
+    #self.status = STATUSES[:active]
   end
 
   def tag_counter_up tag

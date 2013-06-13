@@ -29,9 +29,10 @@ cars = [{ :model_id=>1084,
      "chuxian_riqi(1i)"=>"2013", "chuxian_riqi(2i)"=>"6", "chuxian_riqi(3i)"=>"13", "chuxian_riqi"=>"0", 
      "chuxian_jingguo"=>"", "chengbao_jine"=>"", "gusun_jine"=>""}
    },   
-   :auction_attributes=>{:hall=>0,:system=>0,
+   :auction_attributes=>{:title=>"上海大众-POLO劲情-POLO劲情 1.4 MT", :description=>"some description",
+     :hall=>0,:system=>0, :owner_id => 2,
      :start_at=>"2013-06-14 10:00:00",:expired_at=>"2013-06-14 10:13:00", 
-     :price=>13000, :increase=>1000, :reserved_price=>14000     
+     :starting_price=>13000, :price_increment=>1000, :reserve_price=>14000     
    }  
  }
 ]
@@ -40,8 +41,8 @@ cars.each_index{|idx|
   car = Car.new(cars[idx])
   car.save!  
   #车辆图片
-  puts File.join(File.dirname(__FILE__), idx.to_s, "a_*.(jpg)")
-  for file in Dir[File.join(File.dirname(__FILE__), idx.to_s, "a_*.{jpg,gif,png}")]
+  puts File.join(File.dirname(__FILE__),'files', idx.to_s, "a_*.jpg")
+  for file in Dir[File.join(File.dirname(__FILE__),'files', idx.to_s, "a_*.{jpg,gif,png}")]
     puts "file=#{file}"
     open(file) do|f|
       accident_file = car.accident_files.build

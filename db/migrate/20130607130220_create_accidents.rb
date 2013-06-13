@@ -30,7 +30,7 @@ class CreateAccidents < ActiveRecord::Migration
       t.boolean :youwu_diya   # 有无抵押
       t.boolean :youwu_qita   #有无其他费用
       t.string  :weizhang   #违章
-      t.string :chelian_beizhu, :length=>1024 #车辆备注
+      t.string :cheliang_beizhu, :length=>1024 #车辆备注
       t.timestamps
     end
   end

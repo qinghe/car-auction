@@ -4,8 +4,8 @@ class CreateAuctions < ActiveRecord::Migration
       t.boolean :private, :default => 0, :null => false
       t.boolean :delta, :default => false
       t.integer :status, :default => 0, :null => false
-      t.integer :budget_id, :null => false
-      t.references :owner, :null => false
+      t.integer :budget_id,:default => 0, :null => false
+      t.references :owner,:default => 0, :null => false
       t.references :won_offer
       t.string :title, :length => 50, :null => false
       t.text :description, :length => 2000, :null => false
