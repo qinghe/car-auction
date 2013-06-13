@@ -36,7 +36,10 @@ cars = [{ :model_id=>1084,
  }
 ]
 
-for attrs in cars
-  car = Car.new(arrts)
-  car.save!
+cars.each_index{|idx|
+  car = Car.new(cars[idx])
+  car.save!  
+  #车辆图片
+  car
+  
 end  
