@@ -221,7 +221,9 @@ class Auction < ActiveRecord::Base
   
   def init_auction_row
     #self.expired_after = self.expired_after.to_i
-    #self.expired_at = DateTime.now + self.expired_after.days
+    if self.expired_at.blank? 
+      self.expired_at = self.start_at + MAX_EXPIRED_AFTER.days
+    end
     #self.status = STATUSES[:active]
   end
 

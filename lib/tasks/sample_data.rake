@@ -31,6 +31,7 @@ namespace :db do
     make_auctions
     make_offers
     make_projects
+    make_cars
   end
 end
 
@@ -289,4 +290,8 @@ def make_offers
     )
 
   end
+end
+
+def make_cars
+  load File.join(Rails.root,'db','sample_cars','cars.rb')
 end
