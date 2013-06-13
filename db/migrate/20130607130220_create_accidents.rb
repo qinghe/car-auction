@@ -8,7 +8,7 @@ class CreateAccidents < ActiveRecord::Migration
       t.integer :tingche_province_id #停车地点
       t.integer :tingche_city_id
       t.string :tingche_more
-      t.integer :huji_provice_id    #车辆户籍地点
+      t.integer :huji_province_id    #车辆户籍地点
       t.integer :huji_city_id
       t.string :huji_more
       t.boolean :chejiaohao_sousun
