@@ -36,7 +36,7 @@ module SessionsHelper
   
   def deny_access
   	store_location
-    redirect_to signin_path, :notice => "Zaloguj sie, aby przegladac te strone"
+    redirect_to signin_path, :notice => "请登录浏览此页面"
   end
   
   def current_user?(user)

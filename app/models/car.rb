@@ -11,5 +11,6 @@ class Car < ActiveRecord::Base
   attr_accessible :accidents_attributes, :license_files_attributes, :frame_files_attributes, :accident_files_attributes  
   accepts_nested_attributes_for :accidents, :license_files,:frame_files,:accident_files
   
-  
+  #DISPLACEMENTS={'','1.2'=>12,'1.5'=>15,'1.6'=>16,'2.4'=>24} #排量
+
 end

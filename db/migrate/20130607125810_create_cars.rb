@@ -6,6 +6,7 @@ class CreateCars < ActiveRecord::Migration
       t.string :serial_no
       t.date :registered_at
       t.boolean :is_at
+      t.string :displacement, :length=>24 #排量
       t.string :plate_number
       t.string :engine_number
       t.string :frame_number

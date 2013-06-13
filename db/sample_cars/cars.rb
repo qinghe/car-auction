@@ -9,8 +9,15 @@
 
 
 [{ :model_id=>1084,
+   :is_at=>false, :displacement =>'1.6', 
    :registered_at=>'2013-06-12',
-   :accidents_attributes
+   
+   :accidents_attributes={'0'=>{
+     "sunshi_leixing"=>"损失类型1",
+     "guohu_shixiao"=>45, 
+     "chuxian_riqi(1i)"=>"2013", "chuxian_riqi(2i)"=>"6", "chuxian_riqi(3i)"=>"13", "chuxian_riqi"=>"0", "tingche_province_id"=>"", "tingche_city_id"=>"", "tingche_more"=>"", "chejiaohao_sousun"=>"1", "zeren_rending"=>"1", "duifang_baoxian"=>"", "renshang_qingkuang"=>"0", "pengzhuang_buwei"=>["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], "chuxian_jingguo"=>"", "chengbao_jine"=>"", "gusun_jine"=>""}
+     
+   }}
   
  }
 ]
