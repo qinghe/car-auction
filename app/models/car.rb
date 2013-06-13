@@ -1,5 +1,5 @@
 class Car < ActiveRecord::Base
-  attr_accessible :engine_number, :frame_number, :is_at, :model_id, :model_name, :plate_number, :registered_at, :serial_no
+  attr_accessible :engine_number, :frame_number, :is_at, :model_id, :model_name, :plate_number, :registered_at, :serial_no, :displacement
   has_many :accidents, :dependent => :destroy
   has_many :car_files, :dependent => :destroy
   
@@ -8,8 +8,8 @@ class Car < ActiveRecord::Base
   has_many :accident_files, :conditions=>{:type=>2}, :class_name =>'CarFile'
   
   has_one :auction, :dependent => :destroy
-  attr_accessible :accidents_attributes, :license_files_attributes, :frame_files_attributes, :accident_files_attributes  
-  accepts_nested_attributes_for :accidents, :license_files,:frame_files,:accident_files
+  attr_accessible :accidents_attributes, :license_files_attributes, :frame_files_attributes, :accident_files_attributes, :auction_attributes
+  accepts_nested_attributes_for :accidents, :license_files,:frame_files,:accident_files, :auction
   
   #DISPLACEMENTS={'','1.2'=>12,'1.5'=>15,'1.6'=>16,'2.4'=>24} #排量
 

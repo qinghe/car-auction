@@ -1,3 +1,4 @@
+# encoding: utf-8
 class CreateCars < ActiveRecord::Migration
   def self.up
     create_table :cars do |t|

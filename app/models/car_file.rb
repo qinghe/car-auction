@@ -8,8 +8,12 @@ class CarFile < ActiveRecord::Base
   validates_attachment_size :car_file,
                             :less_than => FILE_MAX_SIZE,
                             :message => "moze maksymalnie wynosic #{(FILE_MAX_SIZE/1.megabyte).round(2)} MB"
-  has_attached_file :car_file
+  has_attached_file :car_file, :styles => { :medium => "480x640", :thumb => "30x40" }
+  before_post_process :skip_file_other_than_image # file other than images
 
+  def skip_file_other_than_image
+    ! %w(video/ogg application/ogg).include?(car_file_content_type)
+  end
 
   scope :for_license, lambda { where(:type => TYPES[:license])}
   scope :for_frame_number, lambda { where(:type => TYPES[:frame_number])}

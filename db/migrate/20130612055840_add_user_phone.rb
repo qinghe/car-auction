@@ -1,3 +1,4 @@
+# encoding: utf-8
 class AddUserPhone < ActiveRecord::Migration
   def up
     add_column :auctions, :auctioneer_id, :integer, :default=>1
@@ -5,7 +6,7 @@ class AddUserPhone < ActiveRecord::Migration
     #add_column :auctions, :remarks, :string, :length=>500    
     add_column :auctions, :start_at, :datetime
     add_column :auctions, :starting_price, :float, :default=>0          #起拍价
-    add_column :auctions, :increment, :float, :default=>0 
+    add_column :auctions, :price_increment, :float, :default=>0 
     add_column :auctions, :reserve_price, :float, :default=>0 #保留价 
     add_column :auctions, :deposit, :float, :default=>0       #拍卖保证金    
     add_column :auctions, :system, :integer, :default=>0 #拍卖规则 0：倒计时出价， 1：一口价，  
@@ -16,7 +17,7 @@ class AddUserPhone < ActiveRecord::Migration
   end
 
   def down
-    remove_column :auctions,:car_id, :auctioneer_id, :start_at,:starting_price, :increment, :reserve_price，:deposit
+    remove_column :auctions,:car_id, :auctioneer_id, :start_at,:starting_price, :price_increment, :reserve_price, :deposit
     remove_column :users, :business_phones, :cellphone
   end
 end
