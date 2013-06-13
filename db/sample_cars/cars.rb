@@ -7,17 +7,36 @@
 #车辆备注  已经完全拆检；钥匙一把；无抵押；有1000服务费和5000的费用需由中标方承担；国四排放标准；其他信息以照片为准；请客户谨慎出价。
 
 
+#拍卖厅：  倒计时出价大厅 开始：2013-06-14 10:00:00
+#距开始：  0天13小时42分36秒  结束：2013-06-14 10:13:00
+#拍卖权限  您没有参与拍卖权限   >>点击申请参与拍卖
+#起拍价： ￥13000元  加价幅度：￥1000元 保留价：有
+#拍卖保证金：￥5000元  车辆承保金：￥90000元 过户保证金：中标价的10%(最低5000元，最高30000元)
 
-[{ :model_id=>1084,
+cars = [{ :model_id=>1084,
    :is_at=>false, :displacement =>'1.6', 
    :registered_at=>'2013-06-12',
    
-   :accidents_attributes={'0'=>{
+   :accidents_attributes=>{'0'=>{
      "sunshi_leixing"=>"损失类型1",
      "guohu_shixiao"=>45, 
-     "chuxian_riqi(1i)"=>"2013", "chuxian_riqi(2i)"=>"6", "chuxian_riqi(3i)"=>"13", "chuxian_riqi"=>"0", "tingche_province_id"=>"", "tingche_city_id"=>"", "tingche_more"=>"", "chejiaohao_sousun"=>"1", "zeren_rending"=>"1", "duifang_baoxian"=>"", "renshang_qingkuang"=>"0", "pengzhuang_buwei"=>["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], "chuxian_jingguo"=>"", "chengbao_jine"=>"", "gusun_jine"=>""}
-     
-   }}
-  
+     :tingche_province_id=>"", :tingche_city_id=>"", :tingche_more=>"",
+     :huji_province_id=>"", :huji_city_id=>"", :huji_more=>"",
+     :gouzhi_shui=>true, 
+     :chepai=>true, :yaoshi=>true, :weizhang=>'',
+     :cheliang_beizhu=>"已经完全拆检；钥匙一把；无抵押；有1000服务费和5000的费用需由中标方承担；国四排放标准；其他信息以照片为准；请客户谨慎出价。",
+     "chejiaohao_sousun"=>"1", "zeren_rending"=>"1", "duifang_baoxian"=>"", "renshang_qingkuang"=>"0", "pengzhuang_buwei"=>["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
+     "chuxian_riqi(1i)"=>"2013", "chuxian_riqi(2i)"=>"6", "chuxian_riqi(3i)"=>"13", "chuxian_riqi"=>"0", 
+     "chuxian_jingguo"=>"", "chengbao_jine"=>"", "gusun_jine"=>""}
+   },   
+   :auction_attributes={:hall=>0,:system=>0,
+     :start_at=>"2013-06-14 10:00:00",:expired_at=>"2013-06-14 10:13:00", 
+     :price=>13000, :increase=>1000, :reserved_price=>14000     
+   }  
  }
 ]
+
+for attrs in cars
+  car = Car.new(arrts)
+  car.save!
+end  

@@ -17,8 +17,8 @@ class CreateAccidents < ActiveRecord::Migration
       t.integer :renshang_qingkuang
       t.string :pengzhuang_buwei, :default=>''
       t.string :chuxian_jingguo
-      t.integer :chengbao_jine
-      t.integer :gusun_jine
+      t.integer :chengbao_jine #车辆承保金额
+      t.integer :gusun_jine    #车辆估损金额
       t.integer :chuli_fangshi # 处理方式(委托拍卖，询问底价)
       t.integer :guohu_shixiao # n天 过户时效 
       t.integer :dengji_zhengshu #登记证书
@@ -29,6 +29,8 @@ class CreateAccidents < ActiveRecord::Migration
       t.boolean :weituo_xieyi #委托协议
       t.boolean :youwu_diya   # 有无抵押
       t.boolean :youwu_qita   #有无其他费用
+      t.string  :weizhang   #违章
+      t.string :chelian_beizhu, :length=>1024 #车辆备注
       t.timestamps
     end
   end
