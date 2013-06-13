@@ -18,7 +18,7 @@ class AccidentsControllerTest < ActionController::TestCase
 
   test "should create accident" do
     assert_difference('Accident.count') do
-      post :create, accident: { chejiaohao_sousun: @accident.chejiaohao_sousun, chengbao_jine: @accident.chengbao_jine, chuli_fangshi: @accident.chuli_fangshi, chuxian_jingguo: @accident.chuxian_jingguo, chuxian_riqi: @accident.chuxian_riqi, duifang_baoxian: @accident.duifang_baoxian, gusun_jine: @accident.gusun_jine, pengzhuang_buwei: @accident.pengzhuang_buwei, renshang_qingkuang: @accident.renshang_qingkuang, sunshi_leixing: @accident.sunshi_leixing, tingche_city_id: @accident.tingche_city_id, tingche_more: @accident.tingche_more, tingche_provice_id: @accident.tingche_provice_id, zeren_rending: @accident.zeren_rending }
+      post :create, accident: { chejiaohao_sousun: @accident.chejiaohao_sousun, chengbao_jine: @accident.chengbao_jine, chuli_fangshi: @accident.chuli_fangshi, chuxian_jingguo: @accident.chuxian_jingguo, chuxian_riqi: @accident.chuxian_riqi, duifang_baoxian: @accident.duifang_baoxian, gusun_jine: @accident.gusun_jine, pengzhuang_buwei: @accident.pengzhuang_buwei, renshang_qingkuang: @accident.renshang_qingkuang, sunshi_leixing: @accident.sunshi_leixing, tingche_city_id: @accident.tingche_city_id, tingche_more: @accident.tingche_more, tingche_province_id: @accident.tingche_province_id, zeren_rending: @accident.zeren_rending }
     end
 
     assert_redirected_to case_accident_path(assigns(:accident))
@@ -35,7 +35,7 @@ class AccidentsControllerTest < ActionController::TestCase
   end
 
   test "should update accident" do
-    put :update, id: @accident, accident: { chejiaohao_sousun: @accident.chejiaohao_sousun, chengbao_jine: @accident.chengbao_jine, chuli_fangshi: @accident.chuli_fangshi, chuxian_jingguo: @accident.chuxian_jingguo, chuxian_riqi: @accident.chuxian_riqi, duifang_baoxian: @accident.duifang_baoxian, gusun_jine: @accident.gusun_jine, pengzhuang_buwei: @accident.pengzhuang_buwei, renshang_qingkuang: @accident.renshang_qingkuang, sunshi_leixing: @accident.sunshi_leixing, tingche_city_id: @accident.tingche_city_id, tingche_more: @accident.tingche_more, tingche_provice_id: @accident.tingche_provice_id, zeren_rending: @accident.zeren_rending }
+    put :update, id: @accident, accident: { chejiaohao_sousun: @accident.chejiaohao_sousun, chengbao_jine: @accident.chengbao_jine, chuli_fangshi: @accident.chuli_fangshi, chuxian_jingguo: @accident.chuxian_jingguo, chuxian_riqi: @accident.chuxian_riqi, duifang_baoxian: @accident.duifang_baoxian, gusun_jine: @accident.gusun_jine, pengzhuang_buwei: @accident.pengzhuang_buwei, renshang_qingkuang: @accident.renshang_qingkuang, sunshi_leixing: @accident.sunshi_leixing, tingche_city_id: @accident.tingche_city_id, tingche_more: @accident.tingche_more, tingche_province_id: @accident.tingche_province_id, zeren_rending: @accident.zeren_rending }
     assert_redirected_to case_accident_path(assigns(:accident))
   end
 
