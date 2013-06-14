@@ -5,11 +5,11 @@
   <li>
     <%= link_to '车辆发布',  new_car_accident_case_cars_path %>
   </li>
-  <li><%= link_to '待评估车辆',  new_car_accident_case_cars_path %>  </li>
-  <li><%= link_to '待处理车辆',  new_car_accident_case_cars_path %>  </li>
-  <li><%= link_to '委托车辆',  new_car_accident_case_cars_path %>  </li>
-  <li><%= link_to '待提车辆',  new_car_accident_case_cars_path %>  </li>
-  <li><%= link_to '过户车辆',  new_car_accident_case_cars_path %>  </li>
+  <li><%= link_to '待评估车辆',  :controller => "cars", :action => "car_list", :process_method => "0"%>  </li>
+  <li><%= link_to '待处理车辆', :controller => "cars", :action => "car_list", :process_method => "1" %>  </li>
+  <li><%= link_to '委托车辆',  :controller => "cars", :action => "car_list", :process_method => "2" %>  </li>
+  <li><%= link_to '待提车辆',  :controller => "cars", :action => "car_list", :process_method => "3" %>  </li>
+  <li><%= link_to '过户车辆',  :controller => "cars", :action => "car_list", :process_method => "4" %>  </li>
 </ul>    
   </div>
 </div>

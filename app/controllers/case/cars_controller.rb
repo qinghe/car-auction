@@ -48,6 +48,11 @@ class Case::CarsController < Case::ApplicationController
     
   end
 
+  def car_list
+    process_method = params[:process_method]
+    @cars = Car.list_by(process_method.to_i)
+  end
+
   # GET /cars/1/edit
   def edit
     @car = Car.find(params[:id])
