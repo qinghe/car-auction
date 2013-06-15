@@ -5,6 +5,7 @@ class CreateAccidents < ActiveRecord::Migration
       t.integer :car_id
       t.integer :sunshi_leixing
       t.date :chuxian_riqi
+      t.integer :shifou_caijian
       t.integer :tingche_province_id,:default=>0 #停车地点
       t.integer :tingche_city_id,:default=>0
       t.string :tingche_more

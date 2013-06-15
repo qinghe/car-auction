@@ -52,7 +52,7 @@
     <th><%= f.label :chuxian_riqi,'出险日期' %> </th>
     <td><%= f.date_select :chuxian_riqi %> </td>
     <th><%= f.label :shifou_caijian,'是否拆检' %> </th>
-    <td><%= f.select :chuxian_riqi,[['完全拆检',0],['未拆检',1]]  %> </td>
+    <td><%= f.select :shifou_caijian,[['完全拆检',0],['未拆检',1]]  %> </td>
   </tr>
   <tr>
     <th><%= f.label :tingche_address,'停车地点' %> </th>
@@ -60,11 +60,11 @@
        <%= f.text_field :tingche_more %> 街道
     </td>
     <th><%= f.label :chejiaohao_sousun,'车架号是否受损' %> </th>
-    <td><%= f.select :chejiaohao_sousun,[['是',1],['否',1]] %> </td>
+    <td><%= f.select :chejiaohao_sousun,[['是',0],['否',1]] %> </td>
   </tr>
   <tr>
     <th><%= f.label :zeren_rending,'责任认定' %> </th>
-    <td><%= f.select :zeren_rending,[['多方事故',1],['对方事故',2]] %> </td>
+    <td><%= f.select :zeren_rending,[['多方事故',0],['对方事故',1]] %> </td>
     
     <th><%= f.label :duifang_baoxian,'对方保险公司' %> </th>
     <td><%= f.text_field :duifang_baoxian,:class=>'span-3' %><br/>(适用双方事故) </td>

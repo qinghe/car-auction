@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :province_id,  :null => false, :default => 0
       t.integer :city_id,  :null => false, :default => 0
       t.integer :region_id,  :null => false, :default => 0
+      t.integer :company_id,  :null => false, :default => 0
       t.string :email, :null => false, :length => 50
       t.string :password, :null => false
       t.integer :status,  :null => false, :default => 1

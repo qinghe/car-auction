@@ -1,44 +1,131 @@
-<p id="notice"><%= notice %></p>
+<h4>事故车-车辆详细信息</h4>
+<% car = @car %>
+<table class='car_accident'>
+  <tr>   <td colspan="6"> 车辆信息</td>
+  </tr>
 
-<p>
-  <b>Model:</b>
-  <%= @car.model_id %>
-</p>
+  <tr>
+    <th width="100px">车型 </th>
+    <td><%= car.model_name %> </td>
+  </tr>
+  <tr>
+    <th>流水单号 </th>
+    <td><%= car.serial_no %></td>
+    <th>手/排 </th>
+    <td><%= car.variator %> </td>
+    <th>初次登记日期 </th>
+    <td><%= car.registered_at %> </td>
+  </tr>
+  <tr>
+    <th>车牌号 </th>
+    <td><%= car.plate_number %></td>
+    <th>发动机号 </th>
+    <td><%= car.engine_number %> </td>
+    <th>车架钢印号 </th>
+    <td><%= car.frame_number %> </td>
+  </tr>
+  <% accident = car.accidents[0] %>
+      <tr>   <td colspan="6"> 车辆出险信息</td>   </tr>
+      <tr>
+        <th>损失类型 </th>
+        <td><%= accident.lost_type %></td>
+        <th>出险日期 </th>
+        <td><%= accident.chuxian_riqi %> </td>
+        <th>是否拆检 </th>
+        <td><%= accident.inspection %> </td>
+      </tr>
+      <tr>
+        <th>停车地点 </th>
+        <td colspan="3"><%= accident.stop_location %></td>
+        <th>车架号是否受损 </th>
+        <td><%= accident.frame_number_lost %> </td>
+      </tr>
+      <tr>
+        <th>责任认定 </th>
+        <td><%= accident.responsibility_cognizance %> </td>
 
-<p>
-  <b>Model name:</b>
-  <%= @car.model_name %>
-</p>
+        <th>对方保险公司 </th>
+        <td><%= accident.duifang_baoxian %><br/>(适用双方事故) </td>
+        <th>人伤情况 </th>
+        <td><%= accident.injure_condition %> </td>
+      </tr>
+      <tr>
+        <th>碰撞部位 </th>
+        <td colspan="5"><%= accident.hit_position %></td>
+      </tr>
+      <tr>
+        <th>出险经过 </th>
+        <td colspan="5"><%= accident.chuxian_jingguo %> </td>
+      </tr>
+      <tr><td colspan="6">价值信息</td></tr>
+      <tr>
+        <th>车保金额 </th>
+        <td><%= accident.chengbao_jine %>元 </td>
+        <th>估损金额 </th>
+        <td><%= accident.gusun_jine %>元 </td>
+      </tr>
 
-<p>
-  <b>Serial no:</b>
-  <%= @car.serial_no %>
-</p>
+  <tr><td colspan="6">车辆图片信息</td></tr>
+  <tr>
+    <th colspan="6">  行驶证  </th>
+  </tr>
+  <tr>
+    <td colspan="6">
+      <% car.license_files.each do |license_file| %>
+          <%= image_tag license_file.path,:alt=>license_file.name %>
+      <%end%>
+    </td>
+  </tr>
+  <tr>
+    <th colspan="6">   车架号  </th>
+  </tr>
+  <tr>
+    <td colspan="6">
+      <% car.frame_files.each do |frame_file|  %>
+          <%= image_tag frame_file.path,:alt=>frame_file.name %>
+      <%end%>
+    </td>
+  </tr>
 
-<p>
-  <b>Registered at:</b>
-  <%= @car.registered_at %>
-</p>
+  <tr>
+    <th colspan="6">   车辆损失图片展示  </th>
+  </tr>
+  <tr>
+    <td colspan="6">
+      <% car.accident_files.each do |accident_file| %>
+          <%= image_tag accident_file.path,:alt=>accident_file.name %>
+      <%end%>
+    </td>
+  </tr>
+  <tr>
+    <th>  操作按钮  </th>
+  </tr>
 
-<p>
-  <b>Variator:</b>
-  <%= @car.variator %>
-</p>
+  <tr>
+    <td>
+      <%=link_to "点击沟通" %>
+    </td>
+    <td>
+      <%=link_to "返回" %>
+    </td>
+    <td>
+      <%=link_to "转移负责人" %>
+    </td>
+    <td>
+      <%=link_to "催促回复" %>
+    </td>
+    <td>
+      <%=link_to "委托拍卖" %>
+    </td>
+    <td>
+      <%=link_to "不委托拍卖" %>
+    </td>
+    <td>
+      <%=link_to "上传附件" %>
+    </td>
+  </tr>
 
-<p>
-  <b>Plate number:</b>
-  <%= @car.plate_number %>
-</p>
-
-<p>
-  <b>Engine number:</b>
-  <%= @car.engine_number %>
-</p>
-
-<p>
-  <b>Frame number:</b>
-  <%= @car.frame_number %>
-</p>
+</table>
 
 
 <%= link_to 'Edit', edit_case_car_path(@car) %> |
