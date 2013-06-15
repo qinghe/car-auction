@@ -4,14 +4,7 @@
   <h2>近期拍卖</h2>
   <% unless @auctions.empty? %>
     <div ><div class="box">
-        <% @auctions.each do |auction| %>
-        <% highlight = (auction.highlight)? :highlight : nil %>
-          <%= link_to escape_auction(auction), auction_path(auction), :class => highlight %>
-          <span style="float: right;font-size: 90%">
-            <%= auction.budget %>
-          </span>
-          <br />
-        <% end %>
+<%= render :partial=>"shared/auction/auction_cars" %>
       </div></div>
       <%= will_paginate @auctions %>
   <% else %>

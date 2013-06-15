@@ -5,7 +5,7 @@ one:
   model_name: 
   serial_no: 
   registered_at: 
-  is_at: 
+  variator: 
   plate_number: 
   engine_number: 
   frame_number: MyString
@@ -15,7 +15,7 @@ two:
   model_name: 
   serial_no: 
   registered_at: 
-  is_at: 
+  variator: 
   plate_number: 
   engine_number: 
   frame_number: MyString

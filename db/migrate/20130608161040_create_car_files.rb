@@ -6,7 +6,9 @@ class CreateCarFiles < ActiveRecord::Migration
       t.string :car_file_file_name
       t.integer :car_file_file_size
       t.string :car_file_content_type
-      t.integer :type
+      t.integer :file_type
+      # 'type' would trigger Rails STI 
+      #0:license_files, 1:frame_files, 2:accident_files
 
       t.timestamps
     end

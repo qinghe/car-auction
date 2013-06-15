@@ -45,5 +45,9 @@ namespace :car do
 
     car_model1.children =native_brands
     car_model2.children =foreign_brands
+    
+    #CarModel.leaves.each{|leaf|
+    #  leaf.update_attibute( :full_name, ( leaf.parent.name + leaf.name )
+    #}
   end
 end

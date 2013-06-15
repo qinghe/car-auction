@@ -6,4 +6,6 @@ class CarModel < ActiveRecord::Base
   def group_name
     "#{self.parent.name}-#{self.initial}-#{self.name}"
   end
+  
+  
 end

@@ -18,7 +18,7 @@ class CarsControllerTest < ActionController::TestCase
 
   test "should create car" do
     assert_difference('Car.count') do
-      post :create, car: { engine_number: @car.engine_number, frame_number: @car.frame_number, is_at: @car.is_at, model_id: @car.model_id, model_name: @car.model_name, plate_number: @car.plate_number, registered_at: @car.registered_at, serial_no: @car.serial_no }
+      post :create, car: { engine_number: @car.engine_number, frame_number: @car.frame_number, variator: @car.variator, model_id: @car.model_id, model_name: @car.model_name, plate_number: @car.plate_number, registered_at: @car.registered_at, serial_no: @car.serial_no }
     end
 
     assert_redirected_to car_path(assigns(:car))
@@ -35,7 +35,7 @@ class CarsControllerTest < ActionController::TestCase
   end
 
   test "should update car" do
-    put :update, id: @car, car: { engine_number: @car.engine_number, frame_number: @car.frame_number, is_at: @car.is_at, model_id: @car.model_id, model_name: @car.model_name, plate_number: @car.plate_number, registered_at: @car.registered_at, serial_no: @car.serial_no }
+    put :update, id: @car, car: { engine_number: @car.engine_number, frame_number: @car.frame_number, variator: @car.variator, model_id: @car.model_id, model_name: @car.model_name, plate_number: @car.plate_number, registered_at: @car.registered_at, serial_no: @car.serial_no }
     assert_redirected_to car_path(assigns(:car))
   end
 
