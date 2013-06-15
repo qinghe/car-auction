@@ -14,7 +14,7 @@
 #拍卖保证金：￥5000元  车辆承保金：￥90000元 过户保证金：中标价的10%(最低5000元，最高30000元)
 
 cars = [{ :model_id=>1084,
-   :is_at=>false, :displacement =>'1.6', 
+   :variator=>0, :displacement =>'1.6', 
    :registered_at=>'2013-06-12',
    
    :accidents_attributes=>{'0'=>{
