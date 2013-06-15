@@ -18,6 +18,7 @@
     <td> 保险公司负责人</td>
     <td> 华晨负责人</td>
     <td> 处理方</td>
+    <% if @process_method == "2" %><td> 处理状态</td><%end%>
     <td> 发生时效</td>
     <td> </td>
   </tr>
@@ -31,6 +32,7 @@
             <td> <%= car.insurance_company_responsible_person %></td>
             <td> <%= car.evaluating_company_responsible_person %></td>
             <td> 保险公司处理</td>
+            <% if @process_method == "2" %><td> <%= car.status %></td><%end%>
             <td> <%= car.limitation %></td>
             <td> <%=link_to '查看详情', case_car_url(car) %></td>
           </tr>

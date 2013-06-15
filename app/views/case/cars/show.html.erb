@@ -115,10 +115,18 @@
       <%=link_to "催促回复" %>
     </td>
     <td>
-      <%=link_to "委托拍卖" %>
+      <% if car.process_method == 2 %>
+          <%=link_to "提车确认" %>
+      <%else%>
+        <%=link_to "委托拍卖" %>
+      <%end%>
     </td>
     <td>
-      <%=link_to "不委托拍卖" %>
+      <% if car.process_method == 2 %>
+          <%=link_to "不能提车" %>
+      <%else%>
+          <%=link_to "不委托拍卖" %>
+      <%end%>
     </td>
     <td>
       <%=link_to "上传附件" %>

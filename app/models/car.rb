@@ -26,6 +26,10 @@ class Car < ActiveRecord::Base
     self.includes("accidents").where("accidents.chuli_fangshi =#{process_method}").all
   end
 
+  def process_method
+    self.accidents[0].chuli_fangshi
+  end
+
   def limitation
     seconds = Time.now.utc - created_at.utc
     '%d 天 %d 小时 %d 分钟 %d 秒' %
