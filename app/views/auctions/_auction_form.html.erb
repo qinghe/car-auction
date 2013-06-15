@@ -1,0 +1,109 @@
+<%
+#当前价：  拍卖尚未开始
+#拍卖厅：  倒计时出价大厅 开始：2013-06-17 10:00:00
+#距开始：  正在拍卖  结束：2013-06-17 10:13:00
+#拍卖权限  您没有参与拍卖权限   >>点击申请参与拍卖
+#起拍价： ￥1000元 加价幅度：￥500元  保留价：有
+#拍卖保证金：￥5000元  车辆承保金：￥44100元 过户保证金：中标价的10%(最低5000元，最高30000元)
+#拍卖时间  价格  用户ID
+car = @auction.car
+accident = @auction.car.accidents.last
+%>
+<table class="auctionInfo">
+  <tr>
+    <td>当前价</td> <td colspan="2"><%= @auction.started? ? @auction.current_price : (@auction.start_at.future? ? "还没开始":"已经结束")  %></td>    
+  </tr>
+  
+  
+  <tr>
+    <td>开始时间</td> <td colspan="2"><%= escape_time(@auction.start_at)%></td>
+  </tr>
+  <tr>
+    <td>结束时间</td> <td colspan="2"><%= escape_time(@auction.expired_at)%></td>
+  </tr>
+  <tr>
+    <td>距开始</td> 
+    <td colspan="2"><% if @auction.started? %> 正在拍卖 
+        <% else %>
+          <% if @auction.start_at.future? %>
+          <% left_time = Time.at(@auction.start_at - Time.now) %>
+          <%= "#{left_time.yday}天#{left_time.hour}小时#{left_time.min}分#{left_time.sec}秒" %> 
+          <% end %>
+        <% end %>
+    </td>     
+  </tr>
+  <tr>
+    <td>拍卖权限</td>
+    <td colspan="2">
+      <% if @auction.started? %>
+      
+        <% if @auction.allowed_to_offer?(@current_user) %>
+          <%= form_for [@auction, @auction.offers.new] do |offer| %>
+            <table>
+              <tr>
+                <td><%= offer.label :price, '竞标价格' %>:</td>
+                <td><%= offer.text_field :price, :value=>(@auction.current_price+@auction.price_increment), :class => "title" %> PLN</td>
+              </tr>
+            </table>
+            <div class="prepend-2">
+              <%= offer.submit '出价', :confirm => "确认您的出价" %>
+            </div>
+          <% end %>
+        
+        <% end %>
+      <% elsif @auction.start_at.future? %>
+        <% if @auction.allowed_to_offer?(@current_user) %>
+          "您可以投标，请耐心等待"
+        <% else %>
+          您没有参与拍卖权限   >> <%= link_to "点击申请参与拍卖", apply_auction_path(@auction) %>
+        <% end %>  
+      <% else %>
+        <%=  "无" %>
+      <% end %>
+      
+    </td>
+  </tr>
+</table>
+<table>  
+  <tr>
+    <td>
+      起拍价 
+    </td>
+    <td><%= @auction.starting_price %> </td>
+    <td>
+      加价幅度
+    </td>
+    <td><%= @auction.price_increment %></td>
+    <td>
+      保留价
+    </td>
+    <td><%= @auction.reserve_price>0 ? "有":"没有"  %></td>    
+  </tr>
+  <tr>
+    <td>
+      拍卖保证金
+    </td>
+    <td><%= @auction.deposit %></td>
+    <td>
+      车辆承保金
+    </td>
+    <td><%= accident.chengbao_jine %></td>
+    <td>
+      过户保证金
+    </td>
+    <td><%= raw "中标价的10%</br>(最低5000元，最高30000元)"  %></td>    
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>拍卖时间</th>
+    <th>价格</th>
+    <th>用户ID</th>
+  </tr>
+  <% @auction.offers.each do |offer| %>
+  <tr>
+    <td><%= offer.created_at%> </td><td><%= offer.price%> </td><td><%= offer.offerer.login%> </td>
+  </tr>  
+  <% end %>
+</table>

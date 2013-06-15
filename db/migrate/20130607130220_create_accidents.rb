@@ -5,11 +5,11 @@ class CreateAccidents < ActiveRecord::Migration
       t.integer :car_id
       t.integer :sunshi_leixing
       t.date :chuxian_riqi
-      t.integer :tingche_province_id #停车地点
-      t.integer :tingche_city_id
+      t.integer :tingche_province_id,:default=>0 #停车地点
+      t.integer :tingche_city_id,:default=>0
       t.string :tingche_more
-      t.integer :huji_province_id    #车辆户籍地点
-      t.integer :huji_city_id
+      t.integer :huji_province_id,:default=>0    #车辆户籍地点
+      t.integer :huji_city_id,:default=>0
       t.string :huji_more
       t.boolean :chejiaohao_sousun
       t.integer :zeren_rending
@@ -17,18 +17,18 @@ class CreateAccidents < ActiveRecord::Migration
       t.integer :renshang_qingkuang
       t.string :pengzhuang_buwei, :default=>''
       t.string :chuxian_jingguo
-      t.integer :chengbao_jine #车辆承保金额
-      t.integer :gusun_jine    #车辆估损金额
-      t.integer :chuli_fangshi # 处理方式(委托拍卖，询问底价)
-      t.integer :guohu_shixiao # n天 过户时效 
-      t.integer :dengji_zhengshu #登记证书
-      t.integer :xingche_zheng   #行车证
-      t.integer :gouzhi_shui     #购置税
-      t.integer :chepai          #车牌
-      t.integer :yaoshi          #钥匙
-      t.boolean :weituo_xieyi #委托协议
-      t.boolean :youwu_diya   # 有无抵押
-      t.boolean :youwu_qita   #有无其他费用
+      t.float :chengbao_jine,:default=>0 #车辆承保金额
+      t.float :gusun_jine,:default=>0  #车辆估损金额
+      t.integer :chuli_fangshi,:default=>0 # 处理方式(委托拍卖，询问底价)
+      t.integer :guohu_shixiao,:default=>0 # n天 过户时效 
+      t.integer :dengji_zhengshu,:default=>0 #登记证书
+      t.integer :xingche_zheng,:default=>0   #行车证
+      t.integer :gouzhi_shui,:default=>0   #购置税
+      t.integer :chepai,:default=>0       #车牌
+      t.integer :yaoshi,:default=>0       #钥匙
+      t.boolean :weituo_xieyi,:default=>false #委托协议
+      t.boolean :youwu_diya,:default=>false   # 有无抵押
+      t.boolean :youwu_qita,:default=>false  #有无其他费用
       t.string  :weizhang   #违章
       t.string :cheliang_beizhu, :length=>1024 #车辆备注
       t.timestamps

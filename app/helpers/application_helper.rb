@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 include ReCaptcha::ViewHelper #wazne dla recaptcha
@@ -34,6 +35,12 @@ include ReCaptcha::ViewHelper #wazne dla recaptcha
     return translation unless attribute.nil?
   end
   
+  def attribute_value_t(model, column_name, column_type)
+    if column_type == :boolean
+      model.try(column_name).present? ? "有":"没有"
+    end
+  end
+    
   #konwetuje rozmiar pliku w bajtach
   def escape_file_size(size = 1)
   	case size
@@ -90,5 +97,6 @@ include ReCaptcha::ViewHelper #wazne dla recaptcha
     end
     content_for :head, javascript_include_tag("tiny_mce/tiny_mce")+tinymce_init
   end
+
 
 end

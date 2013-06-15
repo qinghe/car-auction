@@ -1,0 +1,28 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+ul, li {
+    list-style: none outside none;
+}
+ul.main_menu li {
+    float: left;
+    position: relative;
+    text-align: center;
+    width: 151px;
+}
+
+.left-section {
+    float: left;
+    overflow: hidden;
+    width: 49%;
+}
+.right-section {
+    float: right;
+    overflow: hidden;
+    width: 49%;
+}
+/* auction detail */
+table.car-detail th{
+  
+}

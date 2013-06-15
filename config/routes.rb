@@ -5,6 +5,8 @@ Inz::Application.routes.draw do
     resources :ratings, :only => [:index, :create]
     get :result, :on => :collection
     get :search, :on => :collection
+    get :apply, :on => :member
+    get :bid, :on => :member
   end
   
   #Users and sessions

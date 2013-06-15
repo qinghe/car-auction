@@ -11,4 +11,17 @@ class Accident < ActiveRecord::Base
     :weizhang, :cheliang_beizhu
   belongs_to :car  
   serialize :pengzhuang_buwei, Array
+  
+  
+  def huji_address
+    if huji_province_id>0 and huji_city_id>0
+      "#{ChineseCities::Province.find(huji_province_id).name}#{ChineseCities::City.find(huji_city_id).name}"
+    end
+  end
+  def tingche_address
+    if tingche_province_id>0 and tingche_city_id>0
+      "#{ChineseCities::Province.find(tingche_province_id).name}#{ChineseCities::City.find(tingche_city_id).name}"
+    end    
+  end
+  
 end
