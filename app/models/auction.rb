@@ -14,7 +14,7 @@ class Auction < ActiveRecord::Base
 
   belongs_to :owner, :class_name => 'User'      #insurance company
   belongs_to :won_offer, :class_name => 'Offer', :include => [:offerer]
-  has_many :offers, :dependent => :destroy
+  has_many :offers, :dependent => :destroy #bid
   has_many :communications, :dependent => :delete_all, :order => 'id DESC'
   has_and_belongs_to_many :tags, 
     :after_add => :tag_counter_up,
@@ -59,7 +59,18 @@ class Auction < ActiveRecord::Base
   attr_accessor :expired_after
   #validates_inclusion_of :expired_after, :in => (1..MAX_EXPIRED_AFTER).to_a.collect{|d| d}, :on => :create
 
-  #ustawia status aukcji na anulowano
+  def started?    
+    (status? :active) and ( DateTime.now > self.start_at ) and  ( DateTime.now < self.expired_at )      
+  end
+  
+  def current_price
+    if self.offers.present? 
+      self.offers.collect(&:price).max
+    else
+      self.starting_price
+    end
+  end
+  #设置取消拍卖状态
   def cancel!
     self.expired_at = DateTime.now
     self.status = STATUSES[:canceled]
@@ -87,7 +98,7 @@ class Auction < ActiveRecord::Base
   def allowed_to_offer? user
     return false if user.nil? || self.owner?(user) || self.made_offer?(user)
 
-    #niepotrzebne ale w wiekszosci przypadkow zakonczy sprawdzanie przed czasem
+    #unnecessary but in most cases will end before its time
     return true if self.public?
 
     #jesli zaproszony do aukcji
@@ -107,15 +118,15 @@ class Auction < ActiveRecord::Base
     not self.rated_by?(user)
   end
 
-  def status? status
-    self.status == STATUSES[status.to_sym]
+  def status? status_symbol
+    self.status == STATUSES[status_symbol]
   end
 
   def won_offer_exists?
     self.won_offer_id != nil
   end
 
-  #czy uzytkownik jest wlascicielem aukcji
+  #用户是否是拍卖的所有者
   def owner? user
     return false if user.nil?
     self.owner_id == user.id
@@ -125,17 +136,16 @@ class Auction < ActiveRecord::Base
     self.invited_users.exists?(:id => user.id)
   end
 
-  #czy aukcja jest publiczna
+  #是否公开拍卖
   def public?
     private == false
   end
   
-  #czy uzytkownik jest uprawniony do ogladania aukcji
+  #该用户是否有权观看拍卖
   def allowed_to_see? user
     return true if public? || self.owner?(user)
     return false if (not public?) && user.eql?(nil)
-
-    #sprawdzanie czy uzytkownik jest zaproszony do udzialu w aukcji
+    #检查用户是否被邀请参加拍卖
     self.invited?(user)
   end
 

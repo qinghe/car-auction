@@ -13,11 +13,12 @@ class AddUserPhone < ActiveRecord::Migration
     add_column :auctions, :hall, :integer, :default=>0   #拍卖厅， 0:倒计时出价大厅   1:vip,  
     add_column :users, :business_phones, :string
     add_column :users, :cellphone, :string
+    add_column :users, :deposit, :float, :default=>0  #拍卖保证金
     
   end
 
   def down
     remove_column :auctions,:car_id, :auctioneer_id, :start_at,:starting_price, :price_increment, :reserve_price, :deposit
-    remove_column :users, :business_phones, :cellphone
+    remove_column :users, :business_phones, :cellphone, :deposit
   end
 end

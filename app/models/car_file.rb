@@ -15,9 +15,9 @@ class CarFile < ActiveRecord::Base
     ! %w(video/ogg application/ogg).include?(car_file_content_type)
   end
 
-  scope :for_license, lambda { where(:type => TYPES[:license])}
-  scope :for_frame_number, lambda { where(:type => TYPES[:frame_number])}
-  scope :for_accident, lambda { where(:type => TYPES[:accident])}
+  scope :for_license, lambda { where(:file_type => TYPES[:license])}
+  scope :for_frame_number, lambda { where(:file_type => TYPES[:frame_number])}
+  scope :for_accident, lambda { where(:file_type => TYPES[:accident])}
   
   def name
     self.car_file_file_name

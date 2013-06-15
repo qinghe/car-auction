@@ -1,8 +1,5 @@
-<div class="span-22 last">
-  <div class="span-11 prepend-1">
-    <%= render :partial => "/shared/auction/info_table" %>
-  </div>
-
+<div class="last">
+<%= render :partial=>"info" %>
   <div class="span-6 last prepend-3 append-1">
     <% if @auction.allowed_to_offer?(@current_user) %>
       <div class="notice last offerField">

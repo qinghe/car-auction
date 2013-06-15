@@ -11,3 +11,4 @@ log/*.log
 *~
 .DS_Storeconfig/database.yml
 public/system/*
+.settings/*

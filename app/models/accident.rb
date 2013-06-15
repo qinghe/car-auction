@@ -8,6 +8,7 @@ class Accident < ActiveRecord::Base
   belongs_to :car  
   serialize :pengzhuang_buwei, Array
 
+    
   #损失类型
   SUNSHILEIXING = {'A损失类型'=>0,'b损失类型'=>1,'c损失类型'=>2 }
   #是否拆检
@@ -24,6 +25,16 @@ class Accident < ActiveRecord::Base
       '正上方'=>7, '底盘'=>8, '右侧中部'=>9, '右侧中部靠前'=>10, '右侧中部靠后'=>11, '左侧中部'=>12,
       '左侧中部靠前'=>13, '左侧中部靠后'=>14 }
 
+  def huji_address
+    if huji_province_id>0 and huji_city_id>0
+      "#{ChineseCities::Province.find(huji_province_id).name}#{ChineseCities::City.find(huji_city_id).name}"
+    end
+  end
+  def tingche_address
+    if tingche_province_id>0 and tingche_city_id>0
+      "#{ChineseCities::Province.find(tingche_province_id).name}#{ChineseCities::City.find(tingche_city_id).name}"
+    end    
+  end
 
   def stop_location
     ""

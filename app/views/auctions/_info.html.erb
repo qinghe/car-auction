@@ -1,0 +1,51 @@
+  <div class="clearfix">
+    <div class="left-section">
+     <%=  image_tag(@auction.car.accident_files.first.car_file.url(:medium)) %>
+
+    </div>
+    <div class="right-section">
+      <%= render :partial => "auction_form" %>
+    </div>
+    
+  </div>
+  
+  <div>
+    <%
+     car = @auction.car
+     accident = @auction.car.accidents.last
+    %>
+    <table class="car-detail">
+      <tr>
+        <th>车辆型号</th><td> <%=car.model.name%></td>  
+        <th>初次登记日期</th> <td> <%=car.registered_at%> </td>  
+        <th>过户时效</th> <td><%=accident.guohu_shixiao %></td>
+      </tr>
+      <tr>
+        <th>户籍所在地</th> <td><%=accident.huji_address %></td>  
+        <th>车辆所在地</th> <td><%=accident.tingche_address %></td>  
+        <th>登记证书</th> <td></td>
+      </tr>
+      <tr>
+        <th>排量</th> <td></td>    
+        <th>档位</th> <td></td>  
+        <th>购置税</th> <td><%= attribute_value_t(accident, :gouzhi_shui, :boolean) %></td>
+      </tr>
+      <tr>
+        <td>车牌</td> <td><%= attribute_value_t(accident, :chepai, :boolean) %></td>    
+        <td>钥匙</td> <td><%= attribute_value_t(accident, :yaoshi, :boolean) %></td>
+        <td>违章</td> <td><%= accident.weizhang.present? ? accident.weizhang : "未确定"%></td>
+      </tr>
+      <tr>
+        <td>咨询电话</td> <td colspan="5"></td>
+      </tr>
+      <tr>
+        <td>车辆备注</td> <td colspan="5"> <%= accident.cheliang_beizhu %></td>
+      </tr>
+    </table>
+  </div>
+  
+  <div>
+    <% @auction.car.accident_files.each{|file| %>
+     <%=  image_tag file.car_file.url  %>      
+    <% } %>
+  </div>
