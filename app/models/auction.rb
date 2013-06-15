@@ -1,5 +1,5 @@
 class Auction < ActiveRecord::Base
-  attr_protected :status, :owner_id, :hightlight
+  attr_protected :status, :hightlight
   
   STATUSES = {:active => 0, :finished => 1, :canceled => 2, :waiting_for_offer => 3}
   MAX_EXPIRED_AFTER = 14

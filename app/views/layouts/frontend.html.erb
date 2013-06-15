@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+    <title><%= @title || yield(:title) %> <%= @global_title %></title>
+    <%= render 'layouts/stylesheets' %>
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag "jquery.hoverIntent.minified", "jquery.dcmegamenu" %>
+    <%= csrf_meta_tag %>
+    <%= yield :head %>
+  </head>
+  <body>
+    <div class="container" style="width:970px;">
+      <header>
+        <%= link_to "华晨事故车拍卖平台", "/", :id => "logo" %>
+        <nav>
+          <% top_menu = case params[:controller].include?("admin")
+          when true
+            "layouts/top_menu/admin"
+          else
+            "layouts/top_menu/default"
+          end
+        %>
+          <%= render :partial => top_menu %>
+        </nav>
+        <%= render :partial => "layouts/top_menu/main_menu" %>
+      </header>
+
+      <% flash.keys.each do |key| %>
+      <section class="prepend-1 append-1"><div class="<%= key.to_s %>"><%= flash[key].force_encoding("UTF-8") %></div></section>
+      <% end %>
+
+      <div>
+        <h1 class=""><%= @title || yield(:title) %></h1>
+        <%= yield %>
+        <div class="clear"> </div>
+      </div>
+
+      <footer class="prepend-1 append-1">
+        <%= debug(params) if Rails.env.development? %>
+      </footer>
+    </div>
+  </body>
+</html>

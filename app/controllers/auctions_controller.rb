@@ -1,13 +1,16 @@
 #encoding: utf-8
 class AuctionsController < ApplicationController
+  layout 'frontend'
   before_filter :to_search_event, :only => [:search, :result]
   skip_before_filter :authenticate
 
   def index
-    @auctions = Auction.public_auctions.includes(:budget).with_status(:active).order("id DESC").limit(18)
-    @users = User.count
+    #per page = 20
+    page = params[:page].to_i>0 ? params[:page] : 1
+    @auctions = Auction.public_auctions.includes(:budget).with_status(:active).order("id DESC").paginate(:page => page, :per_page => 18)
+    #@users = User.count
     @blogs = Blogpost.order("id DESC").limit(18).includes(:user)
-    @projects = Project.where(:status => Project::STATUSES[:active]).count
+    #@projects = Project.where(:status => Project::STATUSES[:active]).count
     title_t
   end
 

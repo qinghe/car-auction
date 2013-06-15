@@ -1,39 +1,10 @@
 <% content_for :title, "欢迎回来！" %>
-<div class="span-24">
-  <table class="center box" style="padding: 5px; margin: -20px auto 10px auto;">
-    <tr>
-      <td class="center">
-        ongoing auctions: <span><%= Auction.count %></span>
-      </td>
-      <td class="center">
-        Bids: <span><%= Offer.count %></span>
-      </td>
-      <td class="center">
-        Users in database: <span><%= @users %></span>
-      </td>
-      <td class="center">
-        active projects: <span><%= @projects %></span>
-      </td>
-    </tr>
-  </table>
-  <div class="span-24">
-    <p class="box">
-      如果你正在寻找专家或在IT行业工作，是正确的地方。
-      让我给你解释，什么是这个网站的现象！
-      现在，通过这个网站，你将能够找到一个承包商或本金，
-      突出自己的物品，构建投资组合，加入专业队伍。
-      这还不是全部。只要你选择中标，
-      模块将会使项目工作的各种方法的发展项目。
-      因此，这种服务不仅是客户，也为表演者的天堂。
-      因为我们知道，效率是关键。
-    </p>
-  </div>
-</div>
-<div class="prepend-1 span-22 last">
+
+<div class="prepend-1 span-18 last">
   <h2>近期拍卖</h2>
   <% unless @auctions.empty? %>
-    <div class="span-11"><div class="box">
-        <% @auctions.shift(@auctions.length/2).each do |auction| %>
+    <div ><div class="box">
+        <% @auctions.each do |auction| %>
         <% highlight = (auction.highlight)? :highlight : nil %>
           <%= link_to escape_auction(auction), auction_path(auction), :class => highlight %>
           <span style="float: right;font-size: 90%">
@@ -42,24 +13,16 @@
           <br />
         <% end %>
       </div></div>
-    <div class="span-11 last"><div class="box">
-        <% @auctions.each do |auction| %>
-          <%= link_to escape_auction(auction), auction_path(auction) %>
-          <span style="float: right;font-size: 90%">
-            <%= auction.budget %>
-          </span>
-          <br />
-        <% end %>
-      </div></div>
+      <%= will_paginate @auctions %>
   <% else %>
-    <div class="notice">现在有没有公布的拍卖。</div>
+    <div class="notice">现在没有公布的拍卖。</div>
   <% end %>
 </div>
 
-<div class="prepend-1 span-22 last">
+<div class="prepend-1 span-18 last">
   <h2>最近的博客条目</h2>
   <% unless @blogs.empty? %>
-    <div class="span-11"><div class="box">
+    <div class="span-8"><div class="box">
         <% @blogs.shift(@blogs.length/2).each do |blog| %>
           <%= link_to blog.title, user_blogpost_path(blog.user, blog) %>
           <span style="float: right;">
@@ -68,7 +31,7 @@
           <br />
         <% end %>
       </div></div>
-    <div class="span-11 last"><div class="box">
+    <div class="span-8 last"><div class="box">
         <% @blogs.each do |blog| %>
           <%= link_to blog.title, user_blogpost_path(blog.user, blog) %>
           <span style="float: right;">
@@ -78,6 +41,6 @@
         <% end %>
       </div></div>
   <% else %>
-    <div class="notice">现在有没有公布的清单</div>
+    <div class="notice">现在没有公布的博客</div>
   <% end %>
 </div>
