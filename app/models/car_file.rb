@@ -8,7 +8,7 @@ class CarFile < ActiveRecord::Base
   validates_attachment_size :car_file,
                             :less_than => FILE_MAX_SIZE,
                             :message => "moze maksymalnie wynosic #{(FILE_MAX_SIZE/1.megabyte).round(2)} MB"
-  has_attached_file :car_file, :styles => { :medium => "480x640", :thumb => "30x40" }
+  has_attached_file :car_file, :styles => { :medium => "480x640", :thumb => "90x120" }
   before_post_process :skip_file_other_than_image # file other than images
 
   def skip_file_other_than_image

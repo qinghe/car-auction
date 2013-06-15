@@ -27,7 +27,7 @@ class Auction < ActiveRecord::Base
   belongs_to :budget
   
   belongs_to :auctioneer, :class_name => 'User' #huachen company
-  has_one :car
+  belongs_to :car
   
   ThinkingSphinx::Index.define :auction, :with => :active_record do
     indexes :title

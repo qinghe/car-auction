@@ -3,6 +3,7 @@ class CreateCarModels < ActiveRecord::Migration
     create_table :car_models do |t|
       t.string :name
       t.string :initial
+      t.string :full_name # self.parent.name + self.name, car.model.full_name
       t.boolean :is_foreign, :default=>false
       t.integer :parent_id
       t.integer :lft

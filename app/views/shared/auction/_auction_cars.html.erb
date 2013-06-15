@@ -1,5 +1,5 @@
 <%
-#车辆展示图片  车辆型号  基本信息  拍卖开始时间  起拍价格
+# @auctions
 %>
 <table>
 <tr>
@@ -10,8 +10,25 @@
   <th>起拍价格</th>
   <th>操作</th>  
 </tr>
-<tr>
-  <td>  
-  </td>
-</tr>
+<% if @auctions.present? %>
+  <% for auction in @auctions%>
+  <tr>
+    <td>
+       <% highlight = (auction.highlight)? :highlight : nil %>
+       <%= link_to image_tag(auction.car.accident_files.first.car_file.url(:thumb)), auction_path(auction), :class => highlight %>
+
+    </td>
+    <td> <%= auction.car.model.name %></td>
+    <td>
+      拍卖厅： <%="倒计时出价大厅"%><br />
+      低价： <%=auction.starting_price%><br />
+      保证金： <%=auction.deposit%><br />
+      
+    </td>
+    <td><%= auction.start_at%></td>
+    <td><%= auction.starting_price%></td>
+    <td><%= link_to "参加拍卖",'abc'%></td>
+  </tr>
+  <% end %>
+<% end %>
 </table>
