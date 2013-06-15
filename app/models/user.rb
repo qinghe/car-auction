@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   attr_accessible :login, :name, :lastname, :email, :country, :status, :role, :password, :password_confirmation, :description, :avatar
   
 	has_attached_file :avatar, :styles => { :thumb => "100x100>" }, :default_url => "/images/avatars/missing.png"
-	
+	belongs_to :company
   has_many :sent_alerts, :class_name => 'Alert',:foreign_key => :author_id
   has_many :received_alerts, :class_name => 'Alert',:foreign_key => :reader_id
   has_many :auctions, :foreign_key => :owner_id, :include => [:won_offer]

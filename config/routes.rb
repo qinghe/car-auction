@@ -126,7 +126,8 @@ Inz::Application.routes.draw do
     end
   end
 
-  match 'cars/car_list/:process_method', :to => 'case/cars#car_list'
+  match 'case/cars/car_list/:process_method', :to => 'case/cars#car_list'
+  match 'case/cars/search', :to => 'case/cars#search'
 
   namespace "case" do
     resources :cars do

@@ -1,7 +1,15 @@
-<%= form_tag( :url => case_cars_path() ) do  %>
-  流水号：
-  车型：
+事故车-<%= Car::CARPROCESS[@process_method] %>列表
+<%= form_tag( "/case/cars/search", :method => "get" ) do  %>
+    <% insurance_companies_array = Company.all.map { |company| [company.name, company.id] } #Company.insurance_companies.map { |company| [company.name, company.id] } %>
+    <%= select_tag(:insurance_company_id, options_for_select(insurance_companies_array)) %>
+    <%= label_tag(:serial_no, "流水号：") %>
+    <%= text_field_tag(:serial_no) %>
+    <%= label_tag(:model_name, "车型：") %>
+    <%= text_field_tag(:model_name) %>
+    <%= hidden_field_tag(:process_method, @process_method) %>
+    <%= submit_tag("搜索") %>
 <%end%>
+
 <table class='car_accident'>
   <tr>
     <td> 流水号</td>
@@ -11,6 +19,7 @@
     <td> 华晨负责人</td>
     <td> 处理方</td>
     <td> 发生时效</td>
+    <td> </td>
   </tr>
 
   <% if @cars.size > 0%>
@@ -18,14 +27,15 @@
           <tr>
             <td> <%= car.serial_no %></td>
             <td> <%= car.model_name %></td>
-            <td> 保险公司</td>
-            <td> 保险公司</td>
-            <td> 华晨</td>
+            <td> <%= car.publish_agency %></td>
+            <td> <%= car.insurance_company_responsible_person %></td>
+            <td> <%= car.evaluating_company_responsible_person %></td>
             <td> 保险公司处理</td>
-            <td> <%= Time.now - car.created_at %></td>
+            <td> <%= car.limitation %></td>
+            <td> <%=link_to '查看详情', case_car_url(car) %></td>
           </tr>
     <%}%>
 <%else%>
-   <tr><td colspan="7"> 没有符合条件的车辆</td></tr>
+   <tr><td colspan="8"> 没有符合条件的车辆</td></tr>
 <%end%>
 </table>

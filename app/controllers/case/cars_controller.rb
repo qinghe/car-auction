@@ -48,9 +48,18 @@ class Case::CarsController < Case::ApplicationController
     
   end
 
-  def car_list
+  def search
     process_method = params[:process_method]
-    @cars = Car.list_by(process_method.to_i)
+    insurance_company_id = params[:insurance_company_id]
+    serial_no = params[:serial_no]
+    model_name = params[:model_name]
+    @cars = Car.includes(:publisher,:accidents).where('cars.serial_no'=>serial_no, 'cars.model_name'=>model_name,'users.company_id'=>insurance_company_id,'accidents.chuli_fangshi' =>process_method).all
+    render 'case/cars/car_list'
+  end
+
+  def car_list
+    @process_method = params[:process_method]
+    @cars = Car.list_by(@process_method.to_i)
   end
 
   # GET /cars/1/edit
