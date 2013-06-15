@@ -26,5 +26,9 @@ class CarFile < ActiveRecord::Base
   def size
     self.car_file_file_size
   end
+
+  def path(mot_size='thumb')
+    "/system/car_files/#{id}/#{mot_size}/#{name}"
+  end
 end
 

@@ -1,4 +1,4 @@
-事故车-<%= Car::CARPROCESS[@process_method] %>列表
+<h4>事故车-<%= Car::CARPROCESS[@process_method] %>列表</h4>
 <%= form_tag( "/case/cars/search", :method => "get" ) do  %>
     <% insurance_companies_array = Company.all.map { |company| [company.name, company.id] } #Company.insurance_companies.map { |company| [company.name, company.id] } %>
     <%= select_tag(:insurance_company_id, options_for_select(insurance_companies_array)) %>

@@ -47,4 +47,9 @@ class Car < ActiveRecord::Base
   def evaluating_company_responsible_person
     self.evaluator ? self.evaluator.name : "华晨"
   end
+
+  def variator_name
+    VARIATORS.key(variator)
+  end
+
 end
