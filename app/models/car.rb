@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Car < ActiveRecord::Base
-  attr_accessible :engine_number, :frame_number, :variator, :model_id, :model_name, :plate_number, :registered_at, :serial_no, :displacement
+  attr_accessible :engine_number, :frame_number, :variator, :model_id, :model_name, :plate_number, :registered_at, :serial_no, :displacement, :status
 
   belongs_to :publisher, :class_name => 'User'
   belongs_to :evaluator, :class_name => 'User'
@@ -23,11 +23,7 @@ class Car < ActiveRecord::Base
   CARPROCESS = {'0'=>"待评估车辆",'1'=>"待处理车辆",'2'=>"委托车辆",'3'=>"待提车辆",'4'=>"过户车辆"}
 
   def self.list_by(process_method)
-    self.includes("accidents").where("accidents.chuli_fangshi =#{process_method}").all
-  end
-
-  def process_method
-    self.accidents[0].chuli_fangshi
+    self.where("status =#{process_method}").all
   end
 
   def limitation

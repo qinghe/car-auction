@@ -1,7 +1,6 @@
-<div id="auction_part">
   <table class='car_accident'>
 
-    <%= car_form.fields_for :accidents do |accident_form| %>
+    <%= car_form.fields_for :accidents, nil, :child_index=>0 do |accident_form| %>
     <tr class="aution_info">
       <td colspan="6">手续清单</td>
     </tr>
@@ -74,6 +73,8 @@
     <%end%>
 
     <%= car_form.fields_for :auction do |auction_form| %>
+        <%= auction_form.hidden_field :title,:value=>"拍卖事故车XXX" %>
+        <%= auction_form.hidden_field :description,:value=>"拍卖详情" %>
       <tr class="aution_info">
         <td colspan="6">费用信息</td>
       </tr>
@@ -96,4 +97,3 @@
       </tr>
     <%end%>
   </table>
-</div>

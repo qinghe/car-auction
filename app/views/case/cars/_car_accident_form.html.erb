@@ -1,5 +1,5 @@
 <%
-   accident = @car.accidents.build
+   @car.accidents.build
    @car.build_auction
   @car.license_files.build
   @car.accident_files.build
@@ -46,7 +46,7 @@
     <td><%= car_form.text_field :frame_number,:class=>'span-3' %>* </td>
   </tr>
 
-  <%= car_form.fields_for :accidents do |accident_form| %>
+  <%= car_form.fields_for :accidents, nil, :child_index=>0 do |accident_form| %>
   <tr>   <td colspan="6"> 车辆出险信息</td>   </tr>
   <tr>
     <th><%= accident_form.label :sunshi_leixing,'损失类型' %> </th>
@@ -149,11 +149,15 @@
     <th>  选择车辆处理方式  </th>
       <td  colspan="5">     
          <%= car_form.radio_button :status,'2',:onclick=>"$('#auction_part').show()" %><%=car_form.label :status,"委托拍卖"%> &nbsp;
-         <%= car_form.radio_button :status,'1',:onclick=>"$('#auction_part').hide()" %><%=car_form.label :status,"询问底价"%>
+         <%= car_form.radio_button :status,'0',:onclick=>"$('#auction_part').hide()" %><%=car_form.label :status,"询问底价"%>
       </td>
   </tr>
 </table>
-<%= render :partial=>"auction_form", :locals => { :car_form => car_form, :accident=>accident} %>
+
+<div id="auction_part" style="display:none;">
+  <%= render :partial=>"auction_form", :locals => { :car_form => car_form} %>
+</div>
+
 <table>
   <tr>
     <th> </th>
