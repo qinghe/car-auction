@@ -1,0 +1,6 @@
+<% @car.build_auction %>
+<%= form_for(@car, :url => case_car_path(@car) ) do |car_form| %>
+    <%= car_form.hidden_field :status,:value=>'2' %>
+    <%= render :partial=>"auction_form", :locals => { :car_form => car_form} %>
+    <%= car_form.submit '确认提交' %>
+<%end%>

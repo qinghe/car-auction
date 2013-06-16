@@ -25,6 +25,13 @@ class Case::CarsController < Case::ApplicationController
     end
   end
 
+  def show_auction
+    @car = Car.find(params[:car_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # GET /cars/new
   # GET /cars/new.json
   def new
@@ -49,11 +56,11 @@ class Case::CarsController < Case::ApplicationController
   end
 
   def search
-    process_method = params[:process_method]
+    process_method = params[:process_method].to_i
     insurance_company_id = params[:insurance_company_id]
     serial_no = params[:serial_no]
     model_name = params[:model_name]
-    @cars = Car.includes(:publisher,:accidents).where('cars.serial_no'=>serial_no, 'cars.model_name'=>model_name,'users.company_id'=>insurance_company_id,'accidents.chuli_fangshi' =>process_method).all
+    @cars = Car.includes(:publisher).where('cars.serial_no'=>serial_no, 'cars.model_name'=>model_name,'users.company_id'=>insurance_company_id,'cars.status' =>process_method).all
     render 'case/cars/car_list'
   end
 
@@ -87,7 +94,7 @@ class Case::CarsController < Case::ApplicationController
 
     respond_to do |format|
       if @car.update_attributes(params[:car])
-        format.html { redirect_to @car, notice: 'Car was successfully updated.' }
+        format.html { redirect_to case_car_url, notice: 'Car was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
