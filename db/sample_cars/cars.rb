@@ -16,7 +16,8 @@
 cars = [{ :model_id=>1084,
    :variator=>0, :displacement =>'1.6', 
    :registered_at=>'2013-06-12',
-   
+   :auctioneer=>1,
+   :owner_id=>2,
    :accidents_attributes=>{'0'=>{
      "sunshi_leixing"=>"损失类型1",
      "guohu_shixiao"=>45, 

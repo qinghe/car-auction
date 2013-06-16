@@ -1,30 +1,5 @@
 <div class="last">
 <%= render :partial=>"info" %>
-  <div class="span-6 last prepend-3 append-1">
-    <% if @auction.allowed_to_offer?(@current_user) %>
-      <div class="notice last offerField">
-        <h2>Make an Offer</h2>
-        <%= form_for [:panel, @auction, @auction.offers.new] do |offer| %>
-          <table>
-            <tr>
-              <td><%= offer.label :price, 'Kwota' %>:</td>
-              <td><%= offer.text_field :price, :class => "title" %> PLN</td>
-            </tr>
-            <tr>
-              <td style="padding-top: 10px"><%= offer.label :days, 'Czas' %>:</td>
-              <td style="padding-top: 10px"><%= offer.text_field :days, :class => "title" %> dni</td>
-            </tr>
-          </table>
-          <div class="prepend-2">
-            <%= offer.submit 'Licytuj!', :confirm => "Potwierdź swoją licytację" %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-    <% if @made_offer %>
-      <div class="notice last offerField center">Twoja oferta została już przyjęta.</div>
-    <% end %>
-  </div>
 </div>
 <div style="clear: both"> </div>
 <h2 class="box">job description</h2>

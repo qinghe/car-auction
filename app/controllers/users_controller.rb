@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 	
 
 	def new
-		@title = "Rejestracja"
+		@title = "注册"
 		@user = User.new
 		if User.exists?(:id => params[:ref_id])
 			@referer = User.find(params[:ref_id])

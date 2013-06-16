@@ -1,12 +1,12 @@
 class Offer < ActiveRecord::Base
   STATUSES = {:won => 2, :active => 1}
-
+  attr_accessible :price
   has_many :alerts
   belongs_to :auction, :counter_cache => true
   belongs_to :offerer, :class_name => "User"
 
   validates :price, :numericality => {:greater_than => 0}
-  validates :days, :numericality => {:only_integer => true, :greater_than => 0}
+  #validates :days, :numericality => {:only_integer => true, :greater_than => 0}
 
   scope :normal, lambda { where(:status => STATUSES[:active]) }
   scope :won, lambda { where(:status => STATUSES[:won]) }

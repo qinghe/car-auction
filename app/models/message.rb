@@ -2,22 +2,24 @@ class Message < ActiveRecord::Base
   STATUSES = {:unread => 2, :replied => 1, :read => 0, :deleted => -1}
 
   attr_accessor :receiver_login
-  attr_accessible :receiver_id, :topic, :body, :receiver_login
+  attr_accessible :receiver_id, :topic, :body, :receiver_login, :auction_id
 
   validates :receiver_login, :presence => true, :if => ->{self.receiver.nil?}
   before_validation :check_receiver_login, :if => ->{self.receiver.nil?}
 
   belongs_to :owner, :class_name => "User"
   belongs_to :author, :class_name => "User", :include => true
-  belongs_to :receiver, :class_name => "User", :include => true
+  belongs_to :receiver, :class_name => "User" #, :include => true
+  belongs_to :auction
 
-  validates_length_of :topic, :maximum => 128, :minimum => 10, :allow_blank => false
-  validates_length_of :body, :maximum => 500, :minimum => 10, :allow_blank => false  
+  validates_length_of :topic, :maximum => 128, :minimum => 8, :allow_blank => false
+  validates_length_of :body, :maximum => 500, :minimum => 8, :allow_blank => false  
 
   default_scope where('status>='+STATUSES[:read].to_s)
   scope :sent, lambda { where('author_id=owner_id')}
   scope :received, lambda { where('receiver_id=owner_id')}
   scope :with_status, lambda {|sts| where(:status => sts)}
+  scope :with_auction, lambda {|sts| where(:auction_id => sts.id)}
 
   def check_receiver_login
     return unless self.receiver.nil?

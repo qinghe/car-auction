@@ -1,0 +1,5 @@
+<% if @offer.new_record?%>
+alert("竞价失败，其他会员先提交价格<%=@offer.price%>！")
+<%else%>
+alert("成功竞价！")
+<%end%>

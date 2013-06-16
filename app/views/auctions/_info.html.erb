@@ -5,6 +5,11 @@
     </div>
     <div class="right-section">
       <%= render :partial => "auction_form" %>
+      <% if @auction.open? %>      
+        <% if @auction.allowed_to_offer?(@current_user) %>
+        <%= render :partial=>'time_to_end_countdown'%>
+        <% end %>
+      <% end %>
     </div>
     
   </div>

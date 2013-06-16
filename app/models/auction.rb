@@ -59,7 +59,7 @@ class Auction < ActiveRecord::Base
   attr_accessor :expired_after
   #validates_inclusion_of :expired_after, :in => (1..MAX_EXPIRED_AFTER).to_a.collect{|d| d}, :on => :create
 
-  def started?    
+  def open?    
     (status? :active) and ( DateTime.now > self.start_at ) and  ( DateTime.now < self.expired_at )      
   end
   
@@ -96,10 +96,11 @@ class Auction < ActiveRecord::Base
 
   #czy uzytkownik moze zlozyc oferte
   def allowed_to_offer? user
-    return false if user.nil? || self.owner?(user) || self.made_offer?(user)
+    return false if user.nil? || self.owner?(user) #|| self.made_offer?(user)
 
+    return true if user.deposit >= self.deposit
     #unnecessary but in most cases will end before its time
-    return true if self.public?
+    #return true if self.public?
 
     #jesli zaproszony do aukcji
     self.invited?(user)

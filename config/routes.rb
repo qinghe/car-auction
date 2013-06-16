@@ -2,11 +2,18 @@ Inz::Application.routes.draw do
 
   #DEFAULT
   resources :auctions, :only => [:index, :show] do
+    resources :offers, :only => [:new, :create] do
+      #get :to_reject, :on => :member
+    end
     resources :ratings, :only => [:index, :create]
     get :result, :on => :collection
     get :search, :on => :collection
     get :apply, :on => :member
-    get :bid, :on => :member
+    post :apply, :on => :member
+    get :applied, :on => :member
+    post :bid, :on => :member    
+    get :start, :on => :member
+    post :close, :on => :member
   end
   
   #Users and sessions

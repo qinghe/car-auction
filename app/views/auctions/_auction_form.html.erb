@@ -9,9 +9,13 @@
 car = @auction.car
 accident = @auction.car.accidents.last
 %>
+<script type="text/javascript" charset="utf-8">
+  g_auction_closed = <%= !@auction.open?%>
+</script>
+<div id="auction_info">
 <table class="auctionInfo">
   <tr>
-    <td>当前价</td> <td colspan="2"><%= @auction.started? ? @auction.current_price : (@auction.start_at.future? ? "还没开始":"已经结束")  %></td>    
+    <td>当前价</td> <td colspan="2"><%= @auction.open? ? @auction.current_price : (@auction.start_at.future? ? "还没开始":"已经结束")  %></td>    
   </tr>
   
   
@@ -23,31 +27,36 @@ accident = @auction.car.accidents.last
   </tr>
   <tr>
     <td>距开始</td> 
-    <td colspan="2"><% if @auction.started? %> 正在拍卖 
-        <% else %>
+    <td colspan="2">
+      <% if @auction.open? %> 正在拍卖
+       
+      <% else %>
           <% if @auction.start_at.future? %>
-          <% left_time = Time.at(@auction.start_at - Time.now) %>
-          <%= "#{left_time.yday}天#{left_time.hour}小时#{left_time.min}分#{left_time.sec}秒" %> 
+            <% if @auction.start_at.today? %>
+              <%= render :partial=>"time_to_start_countdown"%>
+            <%else %>
+              <%= distance_of_time_in_words_to_now(@auction.start_at) %>            
+              <% # "#{left_time.yday}天#{left_time.hour}小时#{left_time.min}分#{left_time.sec}秒" %>
+            <%end %>           
           <% end %>
-        <% end %>
+      <% end %>
     </td>     
   </tr>
   <tr>
     <td>拍卖权限</td>
     <td colspan="2">
-      <% if @auction.started? %>
+      <% if @auction.open? %>
       
         <% if @auction.allowed_to_offer?(@current_user) %>
-          <%= form_for [@auction, @auction.offers.new] do |offer| %>
+          <%= form_for Offer.new,:url=>bid_auction_path, :remote=>true do |offer| %>
             <table>
               <tr>
                 <td><%= offer.label :price, '竞标价格' %>:</td>
-                <td><%= offer.text_field :price, :value=>(@auction.current_price+@auction.price_increment), :class => "title" %> PLN</td>
+                <td><%= offer.text_field :price, :value=>(@auction.current_price+@auction.price_increment), :class => "span-2" %> 
+                  <%= offer.submit '出价', :confirm => "确认您的出价" %> 
+                </td>
               </tr>
             </table>
-            <div class="prepend-2">
-              <%= offer.submit '出价', :confirm => "确认您的出价" %>
-            </div>
           <% end %>
         
         <% end %>
@@ -55,7 +64,11 @@ accident = @auction.car.accidents.last
         <% if @auction.allowed_to_offer?(@current_user) %>
           "您可以投标，请耐心等待"
         <% else %>
+          <% if signed_in? and current_user.messages.sent.with_auction(@auction).present? %>
+          您已申请参与拍卖,等待管理员审核
+          <% else%>
           您没有参与拍卖权限   >> <%= link_to "点击申请参与拍卖", apply_auction_path(@auction) %>
+          <% end %>
         <% end %>  
       <% else %>
         <%=  "无" %>
@@ -64,7 +77,7 @@ accident = @auction.car.accidents.last
     </td>
   </tr>
 </table>
-<table>  
+<table class="auctionInfo">  
   <tr>
     <td>
       起拍价 
@@ -95,7 +108,7 @@ accident = @auction.car.accidents.last
   </tr>
 </table>
 
-<table>
+<table class="offerInfo">
   <tr>
     <th>拍卖时间</th>
     <th>价格</th>
@@ -107,3 +120,4 @@ accident = @auction.car.accidents.last
   </tr>  
   <% end %>
 </table>
+</div>

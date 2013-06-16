@@ -2,7 +2,9 @@
 class AuctionsController < ApplicationController
   layout 'frontend'
   before_filter :to_search_event, :only => [:search, :result]
-  skip_before_filter :authenticate
+  skip_before_filter :authenticate, :except=>[:apply, :start, :bid]
+  before_filter :load_auction, :except=>[:index, :search, :result]
+  before_filter :to_bidding, :only=> [:start, :bid, :close ]
 
   def index
     #per page = 20
@@ -14,9 +16,30 @@ class AuctionsController < ApplicationController
     title_t
   end
 
+  # ajax for enable bidding, update auction form  
+  def start 
+    render :partial=>"start.js.erb"
+  end
+  
+  def close
+    render :partial=>"close", :handlers=>[:erb]    
+  end
+  
+  # ajax post only
+  def bid
+    #"offer"=>{"price"=>"14000.0"}
+    @offer = Offer.new(params[:offer])
+    @offer.auction_id = @auction.id
+    @offer.offerer_id = current_user.id
+logger.debug "@offer.price=#{@offer.price}, @auction.current_price=#{@auction.current_price}"    
+    if @offer.price > @auction.current_price
+      @offer.save!
+    end 
+    render :partial=>"bid.js.erb"
+    
+  end
+
   def show
-    options = {:include => [:owner, {:offers => :offerer}, :communications]}
-    @auction = Auction.find(params[:id], options)
 
     @made_offer = @auction.made_offer?(current_user)
     
@@ -41,6 +64,30 @@ class AuctionsController < ApplicationController
     title_t
   end
 
+  # apply for bid
+  def apply
+
+    data = params[:message] || {:topic => "apply to bid #{@auction.id}"}
+    @message = current_user.new_message(data)
+    if request.post?
+      @message.auction_id = @auction.id
+      @message.receiver_id = @auction.auctioneer_id
+      @message.author_id = current_user.id
+      if @message.send_to_receiver
+        #Sender.user_received_message(@message).deliver
+        redirect_to applied_auction_path(@auction)
+      else
+        render  "apply_to_bid"
+      end
+      return
+    end
+    render 'apply_to_bid'    
+  end
+  
+  def applied
+
+  end
+
   def search
     title_t
   end
@@ -62,5 +109,14 @@ class AuctionsController < ApplicationController
     @selected_tag_ids = (params[:tag_ids] || Hash.new).values.collect{|tag| tag.to_i}
     @groups = Group.all
     @budgets_ids = (params[:budgets_ids] || Hash.new).values
+  end
+  
+  def to_bidding
+    @auction.allowed_to_offer?(@current_user)
+  end
+  
+  def load_auction
+    options = {:include => [:owner, {:offers => :offerer}, :communications]}
+    @auction = Auction.find(params[:id], options)
   end
 end

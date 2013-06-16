@@ -9,6 +9,7 @@ require 'will_paginate/array'
   before_filter :authenticate
   before_filter :init
   #before_filter :check_alerts
+  layout 'frontend'
 
   private
   def init
