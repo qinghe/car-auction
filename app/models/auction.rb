@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Auction < ActiveRecord::Base
   attr_protected :status, :hightlight
   
@@ -62,7 +63,15 @@ class Auction < ActiveRecord::Base
   def open?    
     (status? :active) and ( DateTime.now > self.start_at ) and  ( DateTime.now < self.expired_at )      
   end
-  
+
+  def bidding_price
+    self.won_offer ? self.won_offer.price : 0
+  end
+
+  def bidding_result
+    bidding_price - reserve_price > 0 ? "中标价超过保留价" : "中标价等于或低于保留价"
+  end
+
   def current_price
     if self.offers.present? 
       self.offers.collect(&:price).max

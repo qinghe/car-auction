@@ -1,0 +1,11 @@
+<% @car.build_auction %>
+<% status = @confirm == 1 ? '3' : '6' %>
+<%= form_for(@car, :url => case_car_path(@car) ) do |car_form| %>
+    <%= car_form.hidden_field :status,:value => status %>
+    <%if @confirm == 1%>
+      <%= render :partial=>"pickup_car_form", :locals => { :car_form => car_form } %>
+    <%else%>
+      <%= car_form.label :giveup_pickupcar_reason, '放弃原因' %><%= car_form.text_area :giveup_pickupcar_reason %>
+    <%end%>
+    <%= car_form.submit '确认提交' %>
+<%end%>

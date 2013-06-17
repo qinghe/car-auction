@@ -1,5 +1,5 @@
 class CarFile < ActiveRecord::Base
-  TYPES = {:license => 0, :frame_number => 1, :accident => 2}
+  TYPES = {:license => 0, :frame_number => 1, :accident => 2, :attachment => 3}
   FILE_MAX_SIZE = 10.megabytes
   belongs_to :car
   
@@ -18,7 +18,8 @@ class CarFile < ActiveRecord::Base
   scope :for_license, lambda { where(:file_type => TYPES[:license])}
   scope :for_frame_number, lambda { where(:file_type => TYPES[:frame_number])}
   scope :for_accident, lambda { where(:file_type => TYPES[:accident])}
-  
+  scope :for_attachment, lambda { where(:file_type => TYPES[:attachment])}
+
   def name
     self.car_file_file_name
   end
@@ -27,8 +28,13 @@ class CarFile < ActiveRecord::Base
     self.car_file_file_size
   end
 
-  def path(mot_size='thumb')
+  def image_path(mot_size='thumb')
     "/system/car_files/#{id}/#{mot_size}/#{name}"
+  end
+
+  #for other type of file
+  def file_path
+    "/system/car_files/#{id}/#{name}"
   end
 end
 

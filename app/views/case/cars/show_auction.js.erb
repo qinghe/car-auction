@@ -1,1 +1,2 @@
+$('#show_auction').empty();
 $('<%= escape_javascript(render :partial => 'show_auction', :locals=>{:car=>@car}) %>').appendTo($('#show_auction'))

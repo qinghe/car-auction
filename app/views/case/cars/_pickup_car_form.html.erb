@@ -1,0 +1,99 @@
+<table class='car_accident'>
+
+  <%= car_form.fields_for :accidents do |accident_form| %>
+      <tr class="aution_info">
+        <td colspan="6">手续清单</td>
+      </tr>
+      <tr class="aution_info">
+        <th><%= accident_form.label :dengji_zhengshu, '登记证书' %></th>
+        <td>
+          <%= accident_form.radio_button(:dengji_zhengshu, 1) %>
+          <%= accident_form.label(:dengji_zhengshu, "有") %>
+          <%= accident_form.radio_button(:dengji_zhengshu, 0) %>
+          <%= accident_form.label(:dengji_zhengshu, "无") %>
+        </td>
+        <th><%= accident_form.label :xingche_zheng, '行车证' %></th>
+        <td>
+          <%= accident_form.radio_button(:xingche_zheng, 1) %>
+          <%= accident_form.label(:xingche_zheng, "有") %>
+          <%= accident_form.radio_button(:xingche_zheng, 0) %>
+          <%= accident_form.label(:xingche_zheng, "无") %>
+        </td>
+        <th><%= accident_form.label :gouzhi_shui, '购置税' %></th>
+        <td>
+          <%= accident_form.radio_button(:gouzhi_shui, 1) %>
+          <%= accident_form.label(:gouzhi_shui, "有") %>
+          <%= accident_form.radio_button(:gouzhi_shui, 0) %>
+          <%= accident_form.label(:gouzhi_shui, "无") %>
+        </td>
+      </tr>
+      <tr class="aution_info">
+        <th><%= accident_form.label :chepai, '车牌' %></th>
+        <td>
+          <%= accident_form.radio_button(:chepai, 1) %>
+          <%= accident_form.label(:chepai, "一块") %>
+          <%= accident_form.radio_button(:chepai, 2) %>
+          <%= accident_form.label(:chepai, "二块") %>
+        </td>
+        <th><%= accident_form.label :yaoshi, '钥匙' %></th>
+        <td>
+          <%= accident_form.radio_button(:yaoshi, 1) %>
+          <%= accident_form.label(:yaoshi, "一把") %>
+          <%= accident_form.radio_button(:yaoshi, 2) %>
+          <%= accident_form.label(:yaoshi, "二把") %>  </td>
+        <th></th>
+        <td></td>
+      </tr>
+  <%end%>
+      <tr class="aution_info">
+        <td colspan="6">费用信息</td>
+      </tr>
+      <tr class="aution_info">
+        <th><%= car_form.label :bidding_price, '中标价格' %></th>
+        <td><%=car_form.text_field :bidding_price  %></td>
+        <th><%= car_form.label :final_compensate_price, '最终赔付金额' %></th>
+        <td><%=car_form.text_field :final_compensate_price %></td>
+      </tr>
+      <tr class="aution_info">
+        <td colspan="6">车主联系方式</td>
+      </tr>
+      <tr class="aution_info">
+        <th><%= car_form.label :owner_name, '车主姓名' %></th>
+        <td><%= car_form.text_field :owner_name %></td>
+        <th><%= car_form.label :owner_phone, '车主联系电话' %></th>
+        <td><%= car_form.text_field :owner_phone %></td>
+        <th></th>
+        <td></td>
+      </tr>
+      <tr class="aution_info">
+        <th><%= car_form.label :pickup_contact_person, '提车联系人' %></th>
+        <td><%= car_form.text_field :pickup_contact_person %></td>
+        <th><%= car_form.label :pickup_contact_phone, '提车联系电话' %></th>
+        <td><%= car_form.text_field :pickup_contact_phone %></td>
+        <th></th>
+        <td></td>
+      </tr>
+      <tr class="aution_info">
+        <th><%= car_form.label :pay_method, '车款支付方式' %></th>
+        <td colspan="3">
+          <%= car_form.radio_button(:pay_method, 0) %>
+          <%= car_form.label(:pay_method, "保险公司") %>
+          <%= car_form.radio_button(:pay_method, 1) %>
+          <%= car_form.label(:pay_method, "车主") %>
+        </td>
+        <th></th>
+        <td></td>
+      </tr>
+      <tr class="aution_info">
+        <th><%= car_form.label :weituo_xieyi, '车主提车时间' %></th>
+        <td colspan="3"><%= car_form.date_select(:pickup_start_at) %>-<%= car_form.date_select(:pickup_expired_at) %>之间</td>
+        <th></th>
+        <td></td>
+      </tr>
+      <tr class="aution_info">
+        <th><%= car_form.label :pickup_address, '提车地点' %></th>
+        <td colspan="5"><%= car_form.text_area :pickup_address %></td>
+      </tr>
+
+
+</table>

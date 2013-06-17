@@ -3,7 +3,8 @@ class Accident < ActiveRecord::Base
   attr_accessible :chejiaohao_sousun, :chengbao_jine, :chuli_fangshi,:shifou_caijian, :chuxian_jingguo, :chuxian_riqi, :duifang_baoxian, :gusun_jine, :pengzhuang_buwei, :renshang_qingkuang, :sunshi_leixing, :zeren_rending,
     :tingche_province_id, :tingche_city_id, :tingche_more, 
     :guohu_shixiao, :huji_province_id, :huji_city_id, :huji_more,
-    :gouzhi_shui, :chepai, :yaoshi, 
+    :gouzhi_shui, :chepai, :yaoshi,
+    :dengji_zhengshu, :xingche_zheng,
     :weizhang, :cheliang_beizhu
   belongs_to :car  
   serialize :pengzhuang_buwei, Array
