@@ -24,8 +24,8 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 (function($) {
-  
-  $.fn.countdown = function(toDate, callback) {
+  //fromDate, only accept rubyTime.to_i
+  $.fn.countdown = function(fromDate, toDate, callback) {
     var handlers = ['seconds', 'minutes', 'hours', 'days', 'weeks', 'daysLeft'];
     
     function delegate(scope, method) {
@@ -54,7 +54,7 @@
           values = {},
           lasting = {},
           interval = $this.data('countdownInterval'),
-          currentDate = new Date(),
+          currentDate = new Date(fromDate),
           secondsLeft = Math.floor((toDate.valueOf() - currentDate.valueOf()) / 1000);
       
       function triggerEvents() {

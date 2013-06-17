@@ -1,11 +1,11 @@
+<span id="time_to_end"></span>
 <script type="text/javascript" charset="utf-8">
 // Javascript
-var g_auction_closed = false
+var g_auction_closed = false;
 $(function() {
   var end = new Date(<%= @auction.expired_at.end_of_day.to_i*1000 %>);  
-  g_auction_expired_time = end
   var d, h, m, s;
-  $('body').countdown(end, function(event) {
+  $('#time_to_end').countdown(<%=Time.now.to_i*1000%>, end, function(event) {
     var timeFormat = "%d day(s) %h小时%m分%s秒"
         $this = $(this);
     switch(event.type) {
@@ -24,8 +24,8 @@ $(function() {
         {
           if ( g_auction_closed )
           {
-            interval = $this.data('countdownInterval');
-            ajax_get('<%=close_auction_path(@auction)%>')            
+            ajax_get('<%=close_auction_path(@auction)%>')
+            $this.detach();            
           }else{
             ajax_get('<%=start_auction_path(@auction)%>')
           }
@@ -34,7 +34,6 @@ $(function() {
       case "finished":
         break;
     }
-
   });
 });
 </script>

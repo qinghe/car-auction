@@ -176,8 +176,8 @@ zh-CN:
         edit: New Comment
       offers:
         active: Offers participating in the auction
-        Won: Tenders have won
-        rejected: Tenders which have been rejected
+        won: 成功竞标
+        rejected: Tenders which have been rejected\
       projects:
         index: Projects
     admin:

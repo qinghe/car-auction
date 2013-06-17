@@ -13,7 +13,7 @@ Inz::Application.routes.draw do
     get :applied, :on => :member
     post :bid, :on => :member    
     get :start, :on => :member
-    post :close, :on => :member
+    get :close, :on => :member
   end
   
   #Users and sessions

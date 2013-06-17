@@ -3,7 +3,7 @@
 $(function() {
   var end = new Date(<%= @auction.start_at.to_i*1000 %>);  
   var d, h, m, s;
-  $('div#countdown').countdown(end, function(event) {
+  $('#time_to_start').countdown(<%=Time.now.to_i%>,end, function(event) {
     var timeFormat = "%d day(s) %h小时%m分%s秒"
         $this = $(this);
     switch(event.type) {
@@ -38,4 +38,4 @@ $(function() {
   });
 });
 </script>
-<div id="countdown"></div>
+<div id="time_to_start"></div>

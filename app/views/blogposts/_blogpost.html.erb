@@ -7,10 +7,10 @@
     <%= simple_format(blogpost.content) %>
     <div class="right">
       <% if current_user?(@user) %>
-      <%= link_to "Usuń", blogpost, :method => :delete, :confirm => "Jesteś pewien, że chcesz usunąć ten wpis?",:title => "Skasuj post o tytule #{blogpost.title}" %>
-       || <%= link_to "Edytuj wpis", edit_user_blogpost_path(@user, blogpost.id) %> || 
+      <%= link_to "删除", blogpost, :method => :delete, :confirm => "你确定要删除这篇文章吗？",:title => "删除文章 #{blogpost.title}" %>
+       || <%= link_to "编辑", edit_user_blogpost_path(@user, blogpost.id) %> || 
       <% end %>
-      Utworzony <%= time_ago_in_words(blogpost.created_at) %> temu.
+      创建于 <%= time_ago_in_words(blogpost.created_at) %> 前.
     </div>
   </td>
 </tr>

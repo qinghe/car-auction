@@ -4,7 +4,7 @@
       <li><%= link_to "关于我", user_path(@user) %></li>
       <li><%= link_to "我关注的", watching_user_path(@user) %><font color=white>/</font><%= link_to "关注我的", watchers_user_path(@user) %></li>
       <li><%= link_to "活动项目", user_userprojects_path(@user) %></li>
-      <li><%= link_to "投资组合", user_portfolios_path(@user) %></li>
+      <li><%= link_to "完成项目", user_portfolios_path(@user) %></li>
       <li><%= link_to "文章", user_blogposts_path(@user) %></li>
       <% if signed_in? %>
       <% if current_user?(@user) && current_user.role != "administrator"%>

@@ -12,7 +12,6 @@
   <body>
     <div class="container" style="width:970px;">
       <header>
-        <%= link_to "华晨事故车拍卖平台", "/", :id => "logo" %>
         <nav>
           <% top_menu = case params[:controller].include?("admin")
           when true
@@ -23,6 +22,9 @@
         %>
           <%= render :partial => top_menu %>
         </nav>
+        <div class="clear">
+        <%= link_to "华晨事故车拍卖平台", "/", :id => "logo" %>
+        </div>
         <%= render :partial => "layouts/top_menu/main_menu" %>
       </header>
 

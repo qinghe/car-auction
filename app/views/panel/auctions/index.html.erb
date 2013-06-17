@@ -2,14 +2,14 @@
   <table class="list">
     <thead>
       <tr>
-        <td>nazwa</td>
-        <td>wyświetleń</td>
-        <td>ilość ofert</td>
-        <td>typ</td>
-        <td>rozpoczęta</td>
-        <td>status</td>
-        <td>koniec</td>
-        <td>opcje</td>
+        <td>拍卖名称</td>
+        <td>访问数量</td>
+        <td>报价数量</td>
+        <td>类型</td>
+        <td>开始时间</td>
+        <td>状态</td>
+        <td>结束时间</td>
+        <td>选项</td>
       </tr>
     </thead>
     <tbody>
@@ -34,15 +34,15 @@
           </td>
           <td>
             <% if auction.status?(:active) %>
-              <%= link_to 'Anuluj aukcję', panel_auction_path(auction), :method => :delete, :confirm => "Czy napewno chcesz anulować aukcję #{auction.title}?" %><br />
-              <%= link_to 'Nadaj komunikat', new_panel_auction_communication_path(auction) %><br />
+              <%= link_to '取消拍卖', panel_auction_path(auction), :method => :delete, :confirm => "Czy napewno chcesz anulować aukcję #{auction.title}?" %><br />
+              <%= link_to '留言', new_panel_auction_communication_path(auction) %><br />
             <% end %>
 
             <% unless auction.status?(:canceled) || auction.offers.empty? || auction.won_offer_exists? %>
-              <%= link_to 'Wybierz zwycięzcę', offers_panel_auction_path(auction) %><br />
+              <%= link_to '挑选一个投标赢家', offers_panel_auction_path(auction) %><br />
             <% end %>
             <% if auction.status?(:canceled) || auction.status?(:finished) %>
-              <%= link_to 'Wystaw ponownie', new_panel_auction_path(:from_id => auction.id) %><br />
+              <%= link_to '新建', new_panel_auction_path(:from_id => auction.id) %><br />
             <% end %>
           </td>
         </tr>

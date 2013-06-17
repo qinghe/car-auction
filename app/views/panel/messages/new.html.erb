@@ -1,5 +1,5 @@
 <% include_wysiwyg %>
-<% content_for :title, "Nowa wiadomość" %>
+<% content_for :title, "新讯息" %>
 <div class="prepend-1 append-1">
   <%= form_for [@module, @message] do |f| %>
 
@@ -13,16 +13,16 @@
 
     <p>
       <%= f.label :topic %><br />
-      <%= f.text_field :topic, :class => "title span-22" %>
+      <%= f.text_field :topic, :class => "title span-18" %>
     </p>
     
     <p>
       <%= f.label :body %><br />
-      <%= f.text_area :body, :class => "mceEditor span-22" %>
+      <%= f.text_area :body, :class => "mceEditor span-18" %>
     </p>
 
     <p>
-      <%= f.submit "Wyślij" %>
+      <%= f.submit "发送" %>
     </p>
     <br />
   <% end %>

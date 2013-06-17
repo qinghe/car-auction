@@ -1,5 +1,5 @@
 class Project::ApplicationController < ApplicationController
-  before_filter :get_project
+  prepend_before_filter :get_project
   before_filter :check_membership, :except =>[:accept, :reject]
   before_filter :project_active, :except => [:show, :index]
   
