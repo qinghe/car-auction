@@ -26,6 +26,15 @@ class Case::CarsController < Case::ApplicationController
   end
 
   def show_auction
+    @confirm = params[:confirm].to_i
+    @car = Car.find(params[:car_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def show_pickup_car
+    @confirm = params[:confirm].to_i
     @car = Car.find(params[:car_id])
     respond_to do |format|
       format.js

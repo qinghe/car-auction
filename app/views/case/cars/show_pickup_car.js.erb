@@ -1,0 +1,2 @@
+$('#show_pickup_car').empty();
+$('<%= escape_javascript(render :partial => 'show_pickup_car', :locals=>{:car=>@car}) %>').appendTo($('#show_pickup_car'))
