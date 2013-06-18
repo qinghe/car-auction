@@ -1,3 +1,11 @@
 1.fix car_form.grouped_collection_select, it cause too much sql query.
 
 2. add car samples
+
+3. each blog could have a slide image, add column heading?
+
+4. blog act_as_list scope blog_category
+
+5. jquery.KinSlideshow
+
+6. uploaded image.
