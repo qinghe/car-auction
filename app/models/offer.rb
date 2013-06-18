@@ -1,6 +1,6 @@
 class Offer < ActiveRecord::Base
   STATUSES = {:won => 2, :active => 1}
-  attr_accessible :price
+  #attr_accessible :price,:auction_id,:day
   has_many :alerts
   belongs_to :auction, :counter_cache => true
   belongs_to :offerer, :class_name => "User"

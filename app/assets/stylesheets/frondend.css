@@ -26,3 +26,40 @@ ul.main_menu li {
 table.car-detail th{
   
 }
+.foot {
+    /*background-image: url("/resource/images/footbg.gif");*/
+    background-repeat: repeat-x;
+    border: 1px solid #CCCCCC;
+    height: 110px;
+    margin: 2px auto 0;
+    padding: 10px 0;
+    width: 968px;
+}
+.foot .inf {
+    border-right: 1px dotted #C3D5E3;
+    height: 110px;
+    list-style-type: none;
+    padding-left: 30px;
+}
+.inf h3, .inf1 h3 {
+    /*background-image: url("/resource/images/ico.gif");*/
+    background-position: 1px 50%;
+    background-repeat: no-repeat;
+    color: #444444;
+    font-family: "微软雅黑";
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 30px;
+    padding-left: 10px;
+}
+.inf li, .inf1 li {
+    line-height: 22px;
+    padding-left: 10px;
+    width: 100px;
+}
+
+.foot li {
+    float: left;
+    list-style-type: none;
+    width: 185px;
+}
