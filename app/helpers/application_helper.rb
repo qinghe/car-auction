@@ -93,9 +93,10 @@ include ReCaptcha::ViewHelper #wazne dla recaptcha
 
   def include_wysiwyg
     tinymce_init = javascript_tag do
-      "tinyMCE.init({theme: 'advanced', mode: 'textareas'});"
+      "tinyMCE.init({theme: 'modern', mode: 'textareas',plugins:['image paste']});"
+      #"tinyMCE.init({theme: 'advanced', mode: 'textareas'});"
     end
-    content_for :head, javascript_include_tag("tiny_mce/tiny_mce")+tinymce_init
+    content_for :head, javascript_include_tag("tinymce4/tinymce.min")+tinymce_init
   end
 
 

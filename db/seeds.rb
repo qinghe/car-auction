@@ -48,4 +48,10 @@ Role.create!(:name => 'ticket_mod', :ticket => true)
 Role.create!(:name => 'file_mod', :file => true)
 Role.create!(:name => 'forum_mod', :forum => true)
 
+
+BlogCategory.create!(:name => 'member')      #会员中心
+BlogCategory.create!(:name => 'auction_help')#竞价
+BlogCategory.create!(:name => 'aboutus')
+
+
 `rake car:initial_models RAILS_ENV=#{Rails.env}`

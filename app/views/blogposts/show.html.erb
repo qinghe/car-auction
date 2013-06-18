@@ -10,31 +10,31 @@
     <div class="right">
       <% if signed_in? %>
       <% if current_user?(@user) %>
-      <%= link_to "Usuń", @blogpost, :method => :delete, :confirm => "Jesteś pewien, że chcesz usunąć ten wpis?",:title => "Skasuj post o tytule #{@blogpost.title}" %>
-       || <%= link_to "Edytuj wpis", edit_user_blogpost_path(current_user) %> ||
+      <%= link_to "删除", @blogpost, :method => :delete, :confirm => "你确定要删除这篇文章吗？",:title => "删除文章 #{@blogpost.title}" %>
+       || <%= link_to "编辑", edit_user_blogpost_path(current_user) %> ||
        <% else %>
        <% if @useful.nil? %>
-       		<%= link_to "Przydatne", :controller => "bonuspoints", :action => "addfromblog", :user_id => params[:user_id]%> || 
+       		<%= link_to "有用", :controller => "bonuspoints", :action => "addfromblog", :user_id => params[:user_id]%> || 
        <% end %>
        <% if @blogpost.admin != 1%>
-       		<%= link_to "Zgłoś administratorowi", :action => "admin", :id => @blogpost%> || 
+       		<%= link_to "报告管理员", :action => "admin", :id => @blogpost%> || 
        <% end %>
        <% end %>
       <% end %>
-		Utworzony <%= time_ago_in_words(@blogpost.created_at) %> temu.
+		发布于<%= time_ago_in_words(@blogpost.created_at) %>前.
     </div>
   </td>
 </tr>
 </table>
 <br />
 <% if signed_in? %>
-<div class="left"><%= link_to "Dodaj komentarz", :controller => 'blogcomments', :action => 'new', :blogpost_id => @blogpost.id %></div>
+<div class="left"><%= link_to "发表评论", :controller => 'blogcomments', :action => 'new', :blogpost_id => @blogpost.id %></div>
 <% end %>
 <br />
 <table>
 <tr>
 <td id="table_title">
-Komentarze
+评论
 </td>
 </tr>
 <% @comments.each do |comment| %>
@@ -42,14 +42,14 @@ Komentarze
 <td>
 	<div class="left"><b><%= User.find(comment.user_id) %> napisal:</b> <%= simple_format(comment.content) %></div>
 	<% if current_user.id == comment.user_id %>
-	<div class="right"><%= link_to "Edytuj komentarz", edit_blogcomment_path(comment.id) %> || 
+	<div class="right"><%= link_to "编辑", edit_blogcomment_path(comment.id) %> || 
 	<% else %>
 	<div class="right">
 	<% if comment.admin != 1%>	
-		<%= link_to "Zgłoś administratorowi", :controller => "blogcomments", :action => "admin", :id => comment.id%> || 
+		<%= link_to "报告管理员", :controller => "blogcomments", :action => "admin", :id => comment.id%> || 
 	<% end %>
 	<% end %>
-	Utworzony <%= time_ago_in_words(comment.created_at) %> temu.
+	发布于 <%= time_ago_in_words(comment.created_at) %> 前.
 	</div>
 	</td>
 </tr>
