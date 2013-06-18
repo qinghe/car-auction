@@ -120,5 +120,17 @@ class User < ActiveRecord::Base
     def secure_hash(string)
       Digest::SHA2.hexdigest(string)
     end
-  
+
+    def administrator?
+      role == "administrator"
+    end
+
+    def insurance_person?
+      role == "insurance_person"
+    end
+
+    def evaluator?
+      role == "evaluator"
+    end
+
 end

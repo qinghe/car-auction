@@ -1,6 +1,6 @@
   <table class='car_accident'>
 
-    <%= car_form.fields_for :accidents, nil, :child_index=>0 do |accident_form| %>
+    <%= car_form.fields_for :accidents, @accident, :child_index=>0 do |accident_form| %>
     <tr class="aution_info">
       <td colspan="6">手续清单</td>
     </tr>
@@ -50,31 +50,31 @@
     <tr class="aution_info">
       <th><%= accident_form.label :weituo_xieyi, '委托协议' %></th>
       <td>
-        <%= accident_form.radio_button(:weituo_xieyi, 1) %>
+        <%= accident_form.radio_button(:weituo_xieyi, true) %>
         <%= accident_form.label(:weituo_xieyi, "已签订") %>
-        <%= accident_form.radio_button(:weituo_xieyi, 0) %>
+        <%= accident_form.radio_button(:weituo_xieyi, false) %>
         <%= accident_form.label(:weituo_xieyi, "未签订") %>
       </td>
       <th><%= accident_form.label :youwu_diya, '有无抵押' %></th>
       <td>
-        <%= accident_form.radio_button(:youwu_diya, 1) %>
+        <%= accident_form.radio_button(:youwu_diya, true) %>
         <%= accident_form.label(:youwu_diya, "有") %>
-        <%= accident_form.radio_button(:youwu_diya, 0) %>
+        <%= accident_form.radio_button(:youwu_diya, false) %>
         <%= accident_form.label(:youwu_diya, "无") %>
       </td>
       <th><%= accident_form.label :youwu_qita, '有无其他费用' %></th>
       <td>
-        <%= accident_form.radio_button(:youwu_qita, 1) %>
+        <%= accident_form.radio_button(:youwu_qita, true) %>
         <%= accident_form.label(:youwu_qita, "有") %>
-        <%= accident_form.radio_button(:youwu_qita, 0) %>
+        <%= accident_form.radio_button(:youwu_qita, false) %>
         <%= accident_form.label(:youwu_qita, "无") %>
       </td>
     </tr>
     <%end%>
 
-    <%= car_form.fields_for :auction do |auction_form| %>
-        <%= auction_form.hidden_field :title,:value=>"拍卖事故车XXX" %>
-        <%= auction_form.hidden_field :description,:value=>"拍卖详情" %>
+    <%= car_form.fields_for :auction, @auction do |auction_form| %>
+      <%= auction_form.hidden_field :title,:value=>"" %>
+      <%= auction_form.hidden_field :description,:value=>"" %>
       <tr class="aution_info">
         <td colspan="6">费用信息</td>
       </tr>

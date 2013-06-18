@@ -1,11 +1,11 @@
 <%
-   @car.accidents.build
-   @car.build_auction
-  @car.license_files.build
-  @car.accident_files.build
-  @car.frame_files.build
+   @accident = @car.new_record? ? @car.accidents.build : @car.accidents[0]
+   @auction = @car.new_record? ? @car.build_auction : (@car.auction ?  @car.auction : @car.build_auction)
+   @car.license_files.build
+   @car.accident_files.build
+   @car.frame_files.build
 %>
-<%= form_for(@car, :url => case_cars_path() ) do |car_form| %>
+<%= form_for(@car, :url => case_car_path(@car) ) do |car_form| %>
   <% if @car.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
@@ -46,7 +46,7 @@
     <td><%= car_form.text_field :frame_number,:class=>'span-3' %>* </td>
   </tr>
 
-  <%= car_form.fields_for :accidents, nil, :child_index=>0 do |accident_form| %>
+  <%= car_form.fields_for :accidents, @accident, :child_index=>0 do |accident_form| %>
   <tr>   <td colspan="6"> 车辆出险信息</td>   </tr>
   <tr>
     <th><%= accident_form.label :sunshi_leixing,'损失类型' %> </th>
@@ -110,7 +110,7 @@
   <tr>
     <th>上传图片</th>
     <td colspan="5">        
-    <%= car_form.fields_for :license_files do |file_form| %>
+    <%= car_form.fields_for :license_files, @license_files do |file_form| %>
       <%= file_form.label :car_file, '添加文件' %>
       <%= file_form.file_field :car_file %>
     <%end%>
@@ -124,7 +124,7 @@
   <tr>
     <th>上传图片</th>
     <td colspan="5">
-    <%= car_form.fields_for :frame_files do |file_form| %>
+    <%= car_form.fields_for :frame_files, @frame_files do |file_form| %>
       <%= file_form.label :car_file, '添加文件' %>
       <%= file_form.file_field :car_file %>
     <%end%>
@@ -139,7 +139,7 @@
   <tr>
       <th>上传图片</th>
       <td colspan="5">      
-        <%= car_form.fields_for :accident_files do |file_form| %>
+        <%= car_form.fields_for :accident_files, @accident_files do |file_form| %>
             <%= file_form.label :car_file, '添加文件' %>
             <%= file_form.file_field :car_file %>
         <%end%>
@@ -154,7 +154,7 @@
   </tr>
 </table>
 
-<div id="auction_part" style="display:none;">
+<div id="auction_part" <%if @car.status.to_i == 2 %><%else%>style="display:none;"<%end%>>
   <%= render :partial=>"auction_form", :locals => { :car_form => car_form} %>
 </div>
 

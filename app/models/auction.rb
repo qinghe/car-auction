@@ -40,8 +40,8 @@ class Auction < ActiveRecord::Base
     #set_property :delta => true
   end
 
-  validates :title, :presence => true, :length => { :within => 8..50}
-  validates :description, :presence => true
+  #validates :title, :presence => true, :length => { :within => 8..50}
+  #validates :description, :presence => true
   validates_inclusion_of :status, :in => STATUSES.values
   #validates_inclusion_of :budget_id, :in => Budget.ids
 

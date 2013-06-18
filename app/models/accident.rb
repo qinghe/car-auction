@@ -4,6 +4,7 @@ class Accident < ActiveRecord::Base
     :tingche_province_id, :tingche_city_id, :tingche_more, 
     :guohu_shixiao, :huji_province_id, :huji_city_id, :huji_more,
     :gouzhi_shui, :chepai, :yaoshi,
+    :weituo_xieyi, :youwu_diya, :youwu_qita,
     :dengji_zhengshu, :xingche_zheng,
     :weizhang, :cheliang_beizhu
   belongs_to :car  
@@ -62,6 +63,7 @@ class Accident < ActiveRecord::Base
   end
 
   def hit_position
-    POSITIONS.key(pengzhuang_buwei)
+    positions = pengzhuang_buwei.select{|p|p.to_i > 0}
+    positions.inject(""){|hp,p| hp + POSITIONS.key(p.to_i)+", " }
   end
 end

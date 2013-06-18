@@ -7,8 +7,8 @@ class CreateAuctions < ActiveRecord::Migration
       t.integer :budget_id,:default => 0, :null => false
       t.references :owner,:default => 0, :null => false
       t.references :won_offer
-      t.string :title, :length => 50, :null => false
-      t.text :description, :length => 2000, :null => false
+      t.string :title, :length => 50, :null => false,:default => ''
+      t.text :description, :length => 2000, :null => false,:default => ''
       t.boolean :highlight, :default => 0
 
       t.timestamp :expired_at, :null => false

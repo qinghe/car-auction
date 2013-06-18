@@ -103,7 +103,7 @@ class Case::CarsController < Case::ApplicationController
 
     respond_to do |format|
       if @car.update_attributes(params[:car])
-        format.html { redirect_to case_car_url, notice: 'Car was successfully updated.' }
+        format.html { redirect_to case_car_url, notice=> 'ok!' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

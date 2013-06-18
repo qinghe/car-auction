@@ -1,7 +1,7 @@
 <h4>事故车-<%= Car::CARPROCESS[@process_method] %>列表</h4>
 <%= form_tag( "/case/cars/search", :method => "get" ) do  %>
     <% insurance_companies_array = Company.all.map { |company| [company.name, company.id] } #Company.insurance_companies.map { |company| [company.name, company.id] } %>
-    <%= select_tag(:insurance_company_id, options_for_select(insurance_companies_array)) %>
+    <%= #select_tag(:insurance_company_id, options_for_select(insurance_companies_array)) %>
     <%= label_tag(:serial_no, "流水号：") %>
     <%= text_field_tag(:serial_no) %>
     <%= label_tag(:model_name, "车型：") %>
@@ -21,6 +21,7 @@
     <% if @process_method == "2" %><td> 处理状态</td><%end%>
     <td> 发生时效</td>
     <td> </td>
+    <td> </td>
   </tr>
 
   <% if @cars.size > 0%>
@@ -35,6 +36,7 @@
             <% if @process_method == "2" %><td> <%= car.status %></td><%end%>
             <td> <%= car.limitation %></td>
             <td> <%=link_to '查看详情', case_car_url(car) %></td>
+            <td> <%=link_to '编辑', edit_case_car_url(car) %></td>
           </tr>
     <%}%>
 <%else%>
