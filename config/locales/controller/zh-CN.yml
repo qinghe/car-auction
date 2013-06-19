@@ -46,7 +46,7 @@ zh-CN:
       deactivated: This account has been deactivated
       Ban: This account has been disabled by an administrator
       verified: This account is not yet verified
-      captcha: Bad rewritten code from the image
+      captcha: 验证码输入错误
     alerts:
       create: The report has been adopted!
     offers:
@@ -57,7 +57,7 @@ zh-CN:
       create: Comment has been created
       update: Comment has been updated
     blogposts:
-      captcha: Bad rewritten code from the image
+      captcha: 验证码输入错误
       update: blogpost updated
 
     panel:

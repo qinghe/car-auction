@@ -1,12 +1,13 @@
+<h3><%= link_to "新文章", :action=>:blogpostnew %></h3>
 <% unless @blogposts.empty? %>
   <table class="list">
     <thead>
       <tr>
         <td>ID</td>
-        <td>Tytuł</td>
-        <td>Właściciel</td>
-        <td>Ostatnio zmieniany</td>
-        <td>Akcje</td>
+        <td>标题</td>
+        <td>作者</td>
+        <td>最后修改时间</td>
+        <td>选项</td>
       </tr>
     </thead>
     <tbody>
@@ -17,9 +18,9 @@
           <td><%= link_to blog.title, :action => "blogpostedit", :id => blog.id %></td>
           <td><%= User.find(blog.user_id) %></td>
           <td><%= blog.updated_at %></td>
-          <td><%= link_to "Usuń", :action => "deleteblogpost", :blogpost => blog %><br />
-          	<%= link_to "Poprawny", :action => "blogpostok", :id => blog.id %><br />
-          	<%= link_to "Edytuj", :action => "blogpostedit", :id => blog.id %>
+          <td><%= link_to "删除", :action => "deleteblogpost", :blogpost => blog %><br />
+          	<%= link_to "审核", :action => "blogpostok", :id => blog.id %><br />
+          	<%= link_to "编辑", :action => "blogpostedit", :id => blog.id %>
           </td>
         </tr>
       <% end %>
@@ -27,5 +28,5 @@
   </table>
   <%= will_paginate @blogposts %>
 <% else %>
-  <div class="clear notice">Nie znaleziono żadnych postów do moderacji.</div>
+  <div class="clear notice">There are no posts to moderation.</div>
 <% end %>

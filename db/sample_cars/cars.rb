@@ -13,29 +13,100 @@
 #起拍价： ￥13000元  加价幅度：￥1000元 保留价：有
 #拍卖保证金：￥5000元  车辆承保金：￥90000元 过户保证金：中标价的10%(最低5000元，最高30000元)
 
-cars = [{ :model_id=>1084,
-   :variator=>0, :displacement =>'1.6', 
-   :registered_at=>'2013-06-12',
-   :auctioneer=>1,
-   :owner_id=>2,
-   :accidents_attributes=>{'0'=>{
-     "sunshi_leixing"=>"损失类型1",
-     "guohu_shixiao"=>45, 
-     :tingche_province_id=>6, :tingche_city_id=>38, :tingche_more=>"",
-     :huji_province_id=>1, :huji_city_id=>1, :huji_more=>"",
-     :gouzhi_shui=>true, 
-     :chepai=>true, :yaoshi=>true, :weizhang=>'',
-     :cheliang_beizhu=>"已经完全拆检；钥匙一把；无抵押；有1000服务费和5000的费用需由中标方承担；国四排放标准；其他信息以照片为准；请客户谨慎出价。",
-     "chejiaohao_sousun"=>"1", "zeren_rending"=>"1", "duifang_baoxian"=>"", "renshang_qingkuang"=>"0", "pengzhuang_buwei"=>["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
-     "chuxian_riqi(1i)"=>"2013", "chuxian_riqi(2i)"=>"6", "chuxian_riqi(3i)"=>"13", "chuxian_riqi"=>"0", 
-     "chuxian_jingguo"=>"", "chengbao_jine"=>"", "gusun_jine"=>""}
-   },   
-   :auction_attributes=>{:title=>"上海大众-POLO劲情-POLO劲情 1.4 MT", :description=>"some description",
+cars = [
+  { :model_id=>1084,
+    :variator=>0, :displacement =>'1.6', 
+    :registered_at=>'2013-06-12',
+    :auctioneer=>1,
+    :owner_id=>2,
+    :accidents_attributes=>{'0'=>{
+      "sunshi_leixing"=>"损失类型1",
+      "guohu_shixiao"=>45, 
+      :tingche_province_id=>6, :tingche_city_id=>38, :tingche_more=>"",
+      :huji_province_id=>1, :huji_city_id=>1, :huji_more=>"",
+      :gouzhi_shui=>true, 
+      :chepai=>true, :yaoshi=>true, :weizhang=>'',
+      :cheliang_beizhu=>"已经完全拆检；钥匙一把；无抵押；有1000服务费和5000的费用需由中标方承担；国四排放标准；其他信息以照片为准；请客户谨慎出价。",
+      "chejiaohao_sousun"=>"1", "zeren_rending"=>"1", "duifang_baoxian"=>"", "renshang_qingkuang"=>"0", "pengzhuang_buwei"=>["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
+      "chuxian_riqi(1i)"=>"2013", "chuxian_riqi(2i)"=>"6", "chuxian_riqi(3i)"=>"13", "chuxian_riqi"=>"0", 
+      "chuxian_jingguo"=>"", "chengbao_jine"=>"", "gusun_jine"=>""}
+    },   
+    :auction_attributes=>{:title=>"上海大众-POLO劲情-POLO劲情 1.4 MT", :description=>"some description",
      :hall=>0,:system=>0, :owner_id => 2,
-     :start_at=>"2013-06-14 10:00:00",:expired_at=>"2013-06-14 10:13:00", 
+     :start_at=>(Time.now-1.hour).to_s(:db),:expired_at=>(Time.now-40.minute).to_s(:db),
      :starting_price=>13000, :price_increment=>1000, :reserve_price=>14000     
-   }  
- }
+    }  
+  },
+  { :model_id=>1084,#opened
+    :variator=>0, :displacement =>'1.6', 
+    :registered_at=>'2013-06-12',
+    :auctioneer=>1,
+    :owner_id=>2,
+    :accidents_attributes=>{'0'=>{
+      "sunshi_leixing"=>"损失类型1",
+      "guohu_shixiao"=>45, 
+      :tingche_province_id=>6, :tingche_city_id=>38, :tingche_more=>"",
+      :huji_province_id=>1, :huji_city_id=>1, :huji_more=>"",
+      :gouzhi_shui=>true, 
+      :chepai=>true, :yaoshi=>true, :weizhang=>'',
+      :cheliang_beizhu=>"已经完全拆检；钥匙一把；无抵押；有1000服务费和5000的费用需由中标方承担；国四排放标准；其他信息以照片为准；请客户谨慎出价。",
+      "chejiaohao_sousun"=>"1", "zeren_rending"=>"1", "duifang_baoxian"=>"", "renshang_qingkuang"=>"0", "pengzhuang_buwei"=>["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
+      "chuxian_riqi(1i)"=>"2013", "chuxian_riqi(2i)"=>"6", "chuxian_riqi(3i)"=>"13", "chuxian_riqi"=>"0", 
+      "chuxian_jingguo"=>"", "chengbao_jine"=>"", "gusun_jine"=>""}
+    },   
+    :auction_attributes=>{:title=>"上海大众-POLO劲情-POLO劲情 1.4 MT", :description=>"some description",
+     :hall=>0,:system=>0, :owner_id => 2,
+     :start_at=>(Time.now).to_s(:db),:expired_at=>(Time.now+1.hour).to_s(:db),
+     :starting_price=>13000, :price_increment=>1000, :reserve_price=>14000     
+    }  
+  },
+  { :model_id=>1084,#open
+    :variator=>0, :displacement =>'1.6', 
+    :registered_at=>'2013-06-12',
+    :auctioneer=>1,
+    :owner_id=>2,
+    :accidents_attributes=>{'0'=>{
+      "sunshi_leixing"=>"损失类型1",
+      "guohu_shixiao"=>45, 
+      :tingche_province_id=>6, :tingche_city_id=>38, :tingche_more=>"",
+      :huji_province_id=>1, :huji_city_id=>1, :huji_more=>"",
+      :gouzhi_shui=>true, 
+      :chepai=>true, :yaoshi=>true, :weizhang=>'',
+      :cheliang_beizhu=>"已经完全拆检；钥匙一把；无抵押；有1000服务费和5000的费用需由中标方承担；国四排放标准；其他信息以照片为准；请客户谨慎出价。",
+      "chejiaohao_sousun"=>"1", "zeren_rending"=>"1", "duifang_baoxian"=>"", "renshang_qingkuang"=>"0", "pengzhuang_buwei"=>["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
+      "chuxian_riqi(1i)"=>"2013", "chuxian_riqi(2i)"=>"6", "chuxian_riqi(3i)"=>"13", "chuxian_riqi"=>"0", 
+      "chuxian_jingguo"=>"", "chengbao_jine"=>"", "gusun_jine"=>""}
+    },   
+    :auction_attributes=>{:title=>"上海大众-POLO劲情-POLO劲情 1.4 MT", :description=>"some description",
+     :hall=>0,:system=>0, :owner_id => 2,
+     :start_at=>(Time.now+3.hour).to_s(:db),:expired_at=>(Time.now+3.hour+20.minute).to_s(:db),
+     :starting_price=>13000, :price_increment=>1000, :reserve_price=>14000     
+    }  
+  },
+  { :model_id=>1084, #open
+    :variator=>0, :displacement =>'1.6', 
+    :registered_at=>'2013-06-12',
+    :auctioneer=>1,
+    :owner_id=>2,
+    :accidents_attributes=>{'0'=>{
+      "sunshi_leixing"=>"损失类型1",
+      "guohu_shixiao"=>45, 
+      :tingche_province_id=>6, :tingche_city_id=>38, :tingche_more=>"",
+      :huji_province_id=>1, :huji_city_id=>1, :huji_more=>"",
+      :gouzhi_shui=>true, 
+      :chepai=>true, :yaoshi=>true, :weizhang=>'',
+      :cheliang_beizhu=>"已经完全拆检；钥匙一把；无抵押；有1000服务费和5000的费用需由中标方承担；国四排放标准；其他信息以照片为准；请客户谨慎出价。",
+      "chejiaohao_sousun"=>"1", "zeren_rending"=>"1", "duifang_baoxian"=>"", "renshang_qingkuang"=>"0", "pengzhuang_buwei"=>["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
+      "chuxian_riqi(1i)"=>"2013", "chuxian_riqi(2i)"=>"6", "chuxian_riqi(3i)"=>"13", "chuxian_riqi"=>"0", 
+      "chuxian_jingguo"=>"", "chengbao_jine"=>"", "gusun_jine"=>""}
+    },   
+    :auction_attributes=>{:title=>"上海大众-POLO劲情-POLO劲情 1.4 MT", :description=>"some description",
+     :hall=>0,:system=>0, :owner_id => 2,
+     :start_at=>(Time.now+1.hour).to_s(:db),:expired_at=>(Time.now+1.hour+20.minute).to_s(:db), 
+     :starting_price=>13000, :price_increment=>1000, :reserve_price=>14000     
+    }  
+  }
+  
 ]
 
 cars.each_index{|idx|

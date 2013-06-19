@@ -49,6 +49,10 @@ class Auction < ActiveRecord::Base
   scope :with_status, lambda { |status| where(:status => STATUSES[status.to_sym])}
   scope :online, lambda { where(:status => STATUSES[:active])}
   scope :public_auctions, lambda { where(:private => false)}
+  scope :closed, lambda { where(["closed_at < ?",Time.now])}
+  scope :opened, lambda { where(["(start_at < ?) and (expired_at > ?)", Time.now, Time.now])}
+  scope :open, lambda { where(["start_at > ?",Time.now]) }
+  
   
   before_validation :init_auction_row, :on => :create
   before_update :won_offer_choosed, :if => :won_offer_id_changed?

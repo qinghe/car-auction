@@ -35,7 +35,7 @@
   <%= f.label :opis %><br />
   <%= f.text_area :description, :value => @user.description.force_encoding("UTF-8"), :class => "mceEditor span-10" %>
 </div>
-<%= f.submit "提交" %>
+<%= f.submit "保存" %>
 <% end %>
 </td>
 </tr>
@@ -62,7 +62,7 @@
   		<%= f.label :password_confirmation %><br />
   		<%= f.password_field :password_confirmation, :class=>"span-6" %>
 	</div>
-	<%= f.submit "Edytuj" %>
+	<%= f.submit "保存" %>
 	<% end %>
 </td>
 </tr>

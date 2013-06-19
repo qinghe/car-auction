@@ -1,31 +1,30 @@
 <ul id="mega-menu-1" class="mega-menu">
   <li><%= link_to '用户', admin_users_path %></li>
-  <li><%= link_to '帖子', admin_blogposts_path %></li>
-  <li><%= link_to '评论', admin_blogcomments_path %></li>
-  <li><%= link_to '拍卖', admin_auctions_path %></li>
-  <li><%= link_to 'Applications auction', admin_alerts_path %></li>
-  <li><%= link_to 'Group with', admin_groups_path %>
+  <li><%= link_to '文章', admin_blogposts_path %>
     <ul>
-      <li><p>标签</p>
+      <li><p>分组</p>
         <ul>
-          <li><%= link_to 'Nowy tag', new_admin_tag_path %></li>
-          <li><%= link_to 'Lista tagów', admin_tags_path %></li>
+          <li><%= link_to '审核', admin_blogposts_path(:is_admin=>0) %></li>
+          <li><%= link_to '未审核', admin_blogposts_path(:is_admin=>1) %></li>
         </ul>
       </li>
-      <li><p>组</p>
+      <li><p>选项</p>
         <ul>
-          <li><%= link_to 'Nowa grupa', new_admin_group_path %></li>
-          <li><%= link_to 'Lista grup', admin_groups_path %></li>
+          <li><%= link_to '新建', admin_blogposts_new_path %></li>
         </ul>
       </li>
     </ul>
   </li>
+  <li><%= link_to '评论', admin_blogcomments_path %></li>
+  <li><%= link_to '拍卖', admin_auctions_path %></li>
+  <li><%= link_to '建议', admin_alerts_path %></li>
+
   <li><%= link_to '私人消息', admin_messages_path %>
     <ul>
       <li><p>文件夹</p>
         <ul>
-          <li><%= link_to 'Received', admin_messages_path %></li>
-          <li><%= link_to 'wysłane', sent_admin_messages_path %></li>
+          <li><%= link_to '收件箱', admin_messages_path %></li>
+          <li><%= link_to '发件箱', sent_admin_messages_path %></li>
         </ul>
       </li>
       <li><p>选项</p>

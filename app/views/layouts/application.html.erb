@@ -10,7 +10,7 @@
     <%= yield :head %>
   </head>
   <body>
-    <div class="container">
+    <div class="container" style="width:970px;">
       <header>
         <%= link_to "华晨事故车拍卖平台", "/", :id => "logo" %>
         <nav>
@@ -29,7 +29,7 @@
       <section class="prepend-1 append-1"><div class="<%= key.to_s %>"><%= flash[key].force_encoding("UTF-8") %></div></section>
       <% end %>
 
-      <article class="span-24">
+      <article class="">
         <h1 class="box bottom"><%= @title || yield(:title) %></h1>
         <%= yield %>
         <div class="clear"> </div>

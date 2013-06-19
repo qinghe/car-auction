@@ -19,7 +19,7 @@
           <td><%= link_auction(c.auction) unless c.auction.nil? %></td>
           <td><%= c.project.name unless c.project.nil? %></td>
           <td>
-            <%= link_to "edytuj komentarz", edit_admin_user_comment_path(c.author, c) %>
+            <%= link_to "保存 komentarz", edit_admin_user_comment_path(c.author, c) %>
           </td>
         </tr>
       <% end %>

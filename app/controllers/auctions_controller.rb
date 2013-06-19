@@ -9,7 +9,7 @@ class AuctionsController < ApplicationController
   def index
     #per page = 20
     page = params[:page].to_i>0 ? params[:page] : 1
-    @auctions = Auction.where("car_id>0").public_auctions.includes(:budget).with_status(:active).order("id DESC").paginate(:page => page, :per_page => 18)
+    @auctions = Auction.where("car_id>0").public_auctions.with_status(:active).order("id DESC").paginate(:page => page, :per_page => 18)
     #@users = User.count
     @blogs = Blogpost.order("id DESC").limit(18).includes(:user)
     #@projects = Project.where(:status => Project::STATUSES[:active]).count

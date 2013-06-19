@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 	
 	def create
-    @title = "Rejestracja"
+    @title = "创建"
     @user = User.new(params[:user])
     @referential = User.find_by_login(params[:ref])
     	
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
   end
   	
   def edit
-  	@title = "Edycja danych"
+  	@title = "修改个人信息"
     @user = User.find(params[:id])
   end
   	
@@ -61,7 +61,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if params[:user][:password] == ''
       @title = "Edit user"
-      flash[:error] = "Haslo nie moze byc puste"
+      flash[:error] = "密码不能为空"
       render :action => :edit
     elsif @user.update_attributes(params[:user])
       redirect_to @user
@@ -77,23 +77,23 @@ class UsersController < ApplicationController
 	if @user.update_attribute(:status, params[:status]) && current_user.role != "administrator"
       sign_out
       redirect_to root_path
-      flash[:success] = "Usunieto uzytkownika"
+      flash[:success] = "删除用户"
     else
     redirect_to :back
     end
   end
     
-  #sprawdzamy hasha ktorego dostal na skrzynke user
+  #check the hash whose got the Box user
   def mail_ver
     @hash = Emailver.find_by_hash(params[:hash])
     if @hash.nil?
-      flash[:error] = "Nie ma takiego uzytkownika!"
+      flash[:error] = "用户不存在!"
       redirect_to root_path
     else
       @user = User.find(@hash.user_id)
       @user.update_attribute(:status, 2)
       redirect_to root_path
-      flash[:success] = "Zweryfikowano!"
+      flash[:success] = "验证！"
     end
   end
     
@@ -112,7 +112,7 @@ class UsersController < ApplicationController
   end
     
   def find
-    @title = "Szukaj"
+    @title = "查找"
     @fraza = params[:find][:text]
     @value = params[:szukaj][:user]
     if @value == "id"
@@ -140,7 +140,7 @@ class UsersController < ApplicationController
       format.html do
         if @findusers.empty?
           redirect_to :back
-          flash[:error] = "Nie ma takiego uzytkownika"
+          flash[:error] = "用户不存在"
         else
         render '_user'
         end

@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     	flash_t :error, 'deactivated'
       render 'new'
       elsif user.status == 1
-    	flash_t :error, 'niezweryfikowany'
+    	flash_t :error, 'unverified'
       render 'new'
     elsif user.status == 3
     	flash_t :error, 'ban'

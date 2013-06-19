@@ -104,7 +104,9 @@ Inz::Application.routes.draw do
   match 'admin/users/:id/points', :to => 'admin/users#points'
   match 'admin/users/:id/editpoints', :to => 'admin/users#editpoints'
   match 'admin/users/:id/status/:status/delete', :to => 'admin/users#delete'
-  match 'admin/blogposts', :to => 'admin/users#blogposts'
+  match 'admin/blogposts', :to => 'admin/users#blogposts', :via => :get
+  match 'admin/blogposts/new', :to => 'admin/users#blogpostnew'
+  match 'admin/blogposts', :to => 'admin/users#blogpostnew2', :via => :post
   match 'admin/blogposts/:id', :to => 'admin/users#blogpostok'
   match 'admin/blogpost/:id', :to => 'admin/users#blogpostedit'
   match 'admin/blogpost/:id/edit', :to => 'admin/users#blogpostedit2'

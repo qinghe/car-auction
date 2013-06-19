@@ -49,11 +49,12 @@ Role.create!(:name => 'file_mod', :file => true)
 Role.create!(:name => 'forum_mod', :forum => true)
 
 
-BlogCategory.create!(:name => 'member')      #会员中心
-BlogCategory.create!(:name => 'auction_help')#竞价
-BlogCategory.create!(:name => 'aboutus')
+category = BlogCategory.create!(:name => 'helps')
 
-#关于腾信
+category.children.create({:name => '常见问题'},{:name => '业务指南'}, {:name => '关于华晨'}, {:name => '新手指南'}, {:name=>"售后服务"})
+  
+
+#关于华晨
 #  公司简介,  发展历程,  合作单位,  机构分布,  联系我们,  公司账户,  招贤纳士
 #业务指南
 #  竞价指南,  拍卖前需做什么准备,  拍卖佣金,  中标后如何提车,  提车时效
