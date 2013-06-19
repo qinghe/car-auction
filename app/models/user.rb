@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
 	validates :email, :presence => true, :format => {:with => email_regex}, :uniqueness => { :case_sensitive => false }, :length => {:within => 6..50}
 	validates :password, :presence => true, :confirmation => true, :length => { :within => 5..100 }
 	validates_numericality_of :status, :presence => true
-	validates_inclusion_of :role, :in => ["administrator", "user", "insurance_company"]
+	validates_inclusion_of :role, :in => ["administrator", "user", "insurance_company","evaluating_company"]
 	
 	validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png', 'image/gif']
 
@@ -101,7 +101,20 @@ class User < ActiveRecord::Base
 	    user = find_by_id(id)
 	    (user && user.salt == cookie_salt) ? user : nil
     end
-  
+
+  def administrator?
+    role == "administrator"
+  end
+
+  def insurance_person?
+    role == "insurance_company"
+  end
+
+  def evaluator?
+    role == "evaluating_company"
+  end
+
+
   private
 
     def encrypt_password
@@ -119,18 +132,6 @@ class User < ActiveRecord::Base
 
     def secure_hash(string)
       Digest::SHA2.hexdigest(string)
-    end
-
-    def administrator?
-      role == "administrator"
-    end
-
-    def insurance_person?
-      role == "insurance_person"
-    end
-
-    def evaluator?
-      role == "evaluator"
     end
 
 end

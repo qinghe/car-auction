@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Case::CarsController < Case::ApplicationController
   def welcome
     
@@ -103,7 +104,7 @@ class Case::CarsController < Case::ApplicationController
 
     respond_to do |format|
       if @car.update_attributes(params[:car])
-        format.html { redirect_to case_car_url, notice=> 'ok!' }
+        format.html { redirect_to case_car_url, notice=> '更新车辆信息成功！' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
