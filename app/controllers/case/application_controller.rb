@@ -1,6 +1,8 @@
 # encoding: utf-8
 class Case::ApplicationController < ApplicationController
   layout 'car_insurance'
+  before_filter :insurance_user
+  before_filter :evaluating_user
   #before_filter :get_project
   #before_filter :check_membership, :except =>[:accept, :reject]
   #before_filter :project_active, :except => [:show, :index]
@@ -38,6 +40,22 @@ class Case::ApplicationController < ApplicationController
     unless @project.active?
       flash_t_general :notice, 'project.not_active'
 	  	redirect_to project_info_path(@project)
+    end
+  end
+
+  def insurance_user
+    unless current_user.administrator?
+      unless current_user.insurance_person?
+        redirect_to root_path
+      end
+    end
+  end
+
+  def evaluating_user
+    unless current_user.administrator?
+      unless current_user.evaluator?
+        redirect_to root_path
+      end
     end
   end
 end
