@@ -1,8 +1,8 @@
 Inz::Application.routes.draw do
-
   #DEFAULT
   resources :blog_categories, :only => [:show]
   match 'blogposts/:id', :to => 'blog_categories#blogpostshow', :as=>:blogpost
+  match 'static/:page', :to => 'blogposts#static', :as=>:static
 
   
   resources :cars, :only => [:index, :show]

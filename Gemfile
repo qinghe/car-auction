@@ -11,9 +11,12 @@ gem 'thinking-sphinx', "~> 3.0.2"
 gem "jquery-rails", :github => "rails/jquery-rails", :tag => "v3.0.1"
 gem 'jquery-ui-rails'
 gem "riddle"
-gem "remotipart", "~> 1.0"
+#gem "remotipart", "~> 1.0"
 gem 'simple_form'
 gem "awesome_nested_set"
+gem "acts_as_list"
+#gem 'tinymce-rails'
+gem 'tinymce-rails-imageupload', '~> 3.5.6.3'
 
 group :development do
   gem 'faker'

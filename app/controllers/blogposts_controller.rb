@@ -1,6 +1,11 @@
 class BlogpostsController < ApplicationController
+  skip_before_filter :authenticate, :only=> :static
   before_filter :authorized_user, :only => :destroy
   before_filter :right_user, :only => :new
+  
+  def static
+    @page = params[:page]
+  end
   
   def index
   	@user = User.find(params[:user_id])

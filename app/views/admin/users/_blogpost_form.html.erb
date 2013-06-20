@@ -1,4 +1,5 @@
 <% include_wysiwyg %>
+
 <div class="left prepend-1">
 <%= form_for @blogpost, :url=>{:action=>:blogpostnew2 } do |f| -%>
   <%= render "layouts/error_messages", :target => @blogpost %>
@@ -12,7 +13,7 @@
   </div>
   <div class="field">
     <%= f.label "内容" %><br />
-    <%= f.text_area :content, :class => 'span-10' %>
+    <%= f.text_area :content, :class => 'span-10 tinymce' %>
   </div>
   <div class="field">
   <%= f.label :recaptcha, "验证码" %><br />

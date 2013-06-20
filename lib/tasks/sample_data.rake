@@ -23,14 +23,14 @@ namespace :db do
     Rake::Task['db:reset'].invoke
     make_users
     make_reputations
-    make_relationships
-    make_points
-    make_blogposts
-    make_blogcomments
-    make_groups_and_tags
-    make_auctions
-    make_offers
-    make_projects
+    #make_relationships
+    #make_points
+    #make_blogposts
+    #make_blogcomments
+    #make_groups_and_tags
+    #make_auctions
+    #make_offers
+    #make_projects
     make_cars
   end
 end

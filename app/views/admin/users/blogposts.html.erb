@@ -19,7 +19,6 @@
           <td><%= User.find(blog.user_id) %></td>
           <td><%= blog.updated_at %></td>
           <td><%= link_to "删除", :action => "deleteblogpost", :blogpost => blog %><br />
-          	<%= link_to "审核", :action => "blogpostok", :id => blog.id %><br />
           	<%= link_to "编辑", :action => "blogpostedit", :id => blog.id %>
           </td>
         </tr>

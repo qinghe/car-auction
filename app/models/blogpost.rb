@@ -1,4 +1,5 @@
 class Blogpost < ActiveRecord::Base
+  acts_as_list :scope=>[:user_id, :category_id]
 	attr_accessible :content, :title, :admin, :category_id
 
   belongs_to :user

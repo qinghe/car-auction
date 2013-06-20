@@ -2,10 +2,12 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
-# Examples:
-#
-#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Mayor.create(:name => 'Daley', :city => cities.first)
+# how to load seed 
+# rake db:migrate:reset
+# mysql -uroot < car_models.sql
+# rake db:seed
+
+
 
 # Users
 admin =  User.create!(
@@ -49,13 +51,25 @@ Role.create!(:name => 'file_mod', :file => true)
 Role.create!(:name => 'forum_mod', :forum => true)
 
 
-category = BlogCategory.create!(:name => 'helps')
+category = BlogCategory.create!(:name => '帮助', :short_name => 'helps')
 
-category.children.create({:name => '新手必读'})
-category.children.create({:name => '业务指南'})
-category.children.create({:name => '售后服务'})
-category.children.create({:name => '常见问题'})
-
+category.children.create({:name => '新手必读', :short_name => 'newer'})
+category.children.create({:name => '业务指南', :short_name => 'bid'})
+category.children.create({:name => '售后服务', :short_name => 'guarentee'})
+category.children.create({:name => '常见问题', :short_name => 'faqs'})
+#load blogs
+for node in category.reload.leaves
+#  puts File.join(File.dirname(__FILE__),'seeds',node.short_name,"*")
+  for file_path in Dir[File.join(File.dirname(__FILE__),'seeds',node.short_name,"*")].sort
+    open(file_path) do |file|      
+      blogpost = node.blogposts.build
+      blogpost.user_id = 1
+      blogpost.title = file.gets
+      blogpost.content = file.read
+      blogpost.save!
+    end
+  end
+end
   
 
 #业务指南
@@ -81,4 +95,7 @@ category.children.create({:name => '常见问题'})
 #  保证金缴纳
 #VIP专享
 #  VIP专享
-`rake car:initial_models RAILS_ENV=#{Rails.env}`
+
+#source car_models.sql instead, it is too slow running rake.
+#`rake car:initial_models RAILS_ENV=#{Rails.env}`
+load File.join(Rails.root,'db','sample_cars','cars.rb')
