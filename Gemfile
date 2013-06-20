@@ -16,7 +16,7 @@ gem 'simple_form'
 gem "awesome_nested_set"
 gem "acts_as_list"
 #gem 'tinymce-rails'
-gem 'tinymce-rails-imageupload', '~> 3.5.6.3'
+#gem 'tinymce-rails-imageupload', '~> 3.5.6.3'
 
 group :development do
   gem 'faker'
