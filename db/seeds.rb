@@ -51,7 +51,12 @@ Role.create!(:name => 'forum_mod', :forum => true)
 
 category = BlogCategory.create!(:name => 'helps')
 
-category.children.create({:name => '常见问题'},{:name => '业务指南'}, {:name => '关于华晨'}, {:name => '新手指南'}, {:name=>"售后服务"})
+category.children.create({:name => '常见问题'})
+category.children.create({:name => '业务指南'})
+category.children.create({:name => '关于华晨'})
+category.children.create({:name => '新手指南'})
+category.children.create({:name => '售后服务'})
+
   
 
 #关于华晨
