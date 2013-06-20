@@ -13,8 +13,10 @@
         </dl>
     </div>
     
-    <div  style="float:right;width:80%">    
+    <div  style="float:right;width:80%">   
+      <% if @current_blogpost.present? %> 
       <%=render :partial=>"blog_categories/blogpost", :locals=>{:blogpost=>@current_blogpost } %>
+      <% end %>
     </div>
 
 </div>

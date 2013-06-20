@@ -6,7 +6,7 @@ class Blogpost < ActiveRecord::Base
 	has_many :blogcomments, :dependent => :destroy
 	has_many :usefuls, :dependent => :destroy
 	
-	validates :title, :presence => true, :length => {:within => 5..100}
+	validates :title, :presence => true, :length => {:within => 2..100}
 	validates :content, :presence => true, :length => {:within => 10..5000}
   	validates :user_id, :presence => true
 	

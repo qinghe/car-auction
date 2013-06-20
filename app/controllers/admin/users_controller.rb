@@ -80,7 +80,8 @@ class Admin::UsersController < Admin::ApplicationController
     def blogpostnew2
       @blogpost  = current_user.blogposts.build(params[:blogpost])
       @blogpost.admin = true
-      if validate_recap(params, @blogpost.errors) && @blogpost.save
+      #validate_recap(params, @blogpost.errors)
+      if @blogpost.save
         flash[:success] = "Blogpost created!"
         redirect_to :action => :blogposts
       else
