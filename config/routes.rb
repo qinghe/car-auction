@@ -1,6 +1,7 @@
 Inz::Application.routes.draw do
 
   #DEFAULT
+  resources :cars, :only => [:index, :show]
   resources :auctions, :only => [:index, :show] do
     resources :offers, :only => [:new, :create] do
       #get :to_reject, :on => :member

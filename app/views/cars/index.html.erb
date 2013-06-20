@@ -1,0 +1,19 @@
+
+<div >
+<table>
+	<tr style="background-color: cyan;">
+		<td class="bold">车辆简介</td><td class="bold">来源</td><td class="bold">竞价时间</td><td class="bold">当前价</td>
+	</tr>
+  	<% @cars.each do |car| %>
+	        <tr>
+	          <td><%= render :partial=>"brief", :locals=>{:car=>car} %></td>
+	          <td>publish_agency</td>
+	          <td>
+	             <%= car.auction.start_at%>
+	          </td>
+	          <td><%= car.auction.starting_price%></td>
+	        </tr>
+	 <% end %>
+</table>
+</div>
+	 <%= will_paginate @cars %>
