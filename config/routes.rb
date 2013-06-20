@@ -1,6 +1,10 @@
 Inz::Application.routes.draw do
 
   #DEFAULT
+  resources :blog_categories, :only => [:show]
+  match 'blogposts/:id', :to => 'blog_categories#blogpostshow', :as=>:blogpost
+
+  
   resources :cars, :only => [:index, :show]
   resources :auctions, :only => [:index, :show] do
     resources :offers, :only => [:new, :create] do
@@ -37,7 +41,7 @@ Inz::Application.routes.draw do
   end
   resources :sessions, :only => [:new, :create, :destroy]
   resources :relationships, :only => [:create, :destroy]
-  resources :blogposts
+  #resources :blogposts
   resources :blogcomments do
   	member do
   		get :admin

@@ -100,9 +100,10 @@ def make_relationships
 end
 
 def make_blogposts
+  categories = BlogCategory.leaves
 	User.all(:limit => 11).each do |user|
     50.times do
-      user.blogposts.create!(:title => Faker::Lorem.sentence(2), :content => Faker::Lorem.sentence(5))
+      user.blogposts.create!(:title => Faker::Lorem.sentence(2), :content => Faker::Lorem.sentence(5), :category_id=>categories.sample.id )
     end
   end
 end

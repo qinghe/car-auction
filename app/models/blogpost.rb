@@ -1,7 +1,8 @@
 class Blogpost < ActiveRecord::Base
-	attr_accessible :content, :title, :admin
+	attr_accessible :content, :title, :admin, :category_id
 
-	belongs_to :user
+  belongs_to :user
+  belongs_to :category, :class_name => "BlogCategory"
 	has_many :blogcomments, :dependent => :destroy
 	has_many :usefuls, :dependent => :destroy
 	

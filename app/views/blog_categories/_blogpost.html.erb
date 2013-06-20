@@ -1,0 +1,13 @@
+<table style="border: 1px solid cyan;">
+<tr>
+  <td>
+  	<h1><%=  blogpost.title %></h1></td>
+  	<tr>
+  	<td>
+    <%= simple_format(blogpost.content) %>
+    <div class="right">
+      创建于 <%= time_ago_in_words(blogpost.created_at) %> 前.
+    </div>
+  </td>
+</tr>
+</table>

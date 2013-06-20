@@ -7,9 +7,11 @@ class CreateCategories < ActiveRecord::Migration
       t.integer :rgt
       t.timestamps
     end
+    add_column :blogposts, :category_id, :integer, :default=>0 #  
   end
   
   def down
     drop_table :blog_categories
+    drop_column :blogposts, :category_id  
   end
 end
