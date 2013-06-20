@@ -51,36 +51,34 @@ Role.create!(:name => 'forum_mod', :forum => true)
 
 category = BlogCategory.create!(:name => 'helps')
 
-category.children.create({:name => '常见问题'})
+category.children.create({:name => '新手必读'})
 category.children.create({:name => '业务指南'})
-category.children.create({:name => '关于华晨'})
-category.children.create({:name => '新手指南'})
 category.children.create({:name => '售后服务'})
+category.children.create({:name => '常见问题'})
 
   
 
-#关于华晨
-#  公司简介,  发展历程,  合作单位,  机构分布,  联系我们,  公司账户,  招贤纳士
 #业务指南
 #  竞价指南,  拍卖前需做什么准备,  拍卖佣金,  中标后如何提车,  提车时效
-#免责声明
-#  免责声明
-#法律声明
-#  法律声明
+#新手指南
+#  注册流程,  参拍流程,  提车流程,  vip大厅付款规则,  社会车辆拍卖厅规则,  企业会员,  微信公众平台如何加入
+#售后服务
+#  出现拆检, 出现丢件, 过户费率
 #常见问题
 #  什么是二次事故
 #  关于违约
 #  过户维修时效保证金
 #  什么是保留价
 #  现场拍卖会
+
+#关于华晨
+#  公司简介,  发展历程,  合作单位,  机构分布,  联系我们,  公司账户,  招贤纳士
+#免责声明
+#  免责声明
+#法律声明
+#  法律声明
 #保证金缴纳
 #  保证金缴纳
 #VIP专享
 #  VIP专享
-#新手指南
-#  注册流程,  参拍流程,  提车流程,  vip大厅付款规则,  社会车辆拍卖厅规则,  企业会员,  微信公众平台如何加入
-#售后服务
-#  出现拆检
-#  出现丢件
-#  过户费率
 `rake car:initial_models RAILS_ENV=#{Rails.env}`
