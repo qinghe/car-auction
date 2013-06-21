@@ -1,0 +1,282 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+body
+{
+   background: #FFF url(<%= asset_path 'v1/bg.png' %>) no-repeat top center; 
+}
+ul, li {
+    list-style: none outside none;
+}
+
+#topBar {
+    background: #363636;
+    height: 41px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+#topNav ul{
+    height: 41px;
+    margin: 0;
+    padding: 0;
+    float:left;
+}
+#topNav ul li {
+    border-right: 1px solid #545454;
+    float: left;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    list-style-type:none;
+    display:inline;
+}
+
+#topNav ul li a {
+    color: #FFF;
+    line-height: 41px; 
+    float:left;
+    display:inline-block; /* non-editable */
+    padding-top:0; /* non-editable */
+    padding-bottom:0; /* non-editable */
+    margin:0; /* non-editable */
+    padding-left:10px;
+    padding-right:10px;
+}
+#topNav ul li a.index {
+  color: #BF1F30;
+}
+#topNav ul li.selected {
+    background: #FFF;
+}
+  #topNav a:hover, #topNav a:focus, #topNav a:active
+  { background:#eeeeee;
+    color:#014c2e;
+  } 
+
+#login a.signup 
+{
+    color: #fff;
+}
+header {
+    background: url(<%= asset_path('v1/topshadow.png')%>) no-repeat center 0;
+    
+} 
+
+/* main nav */
+
+#mainNav {
+    position: relative;
+    z-index: 2;
+}
+
+#mainNav ul {
+    background: #FFF;
+    border-top: 1px solid #CBCBC6;
+    border-right: 1px solid #CBCBC6;
+    height: 40px;
+    margin: 0;
+}
+
+#mainNav ul li {
+    float: left;
+    height: 40px;
+}
+
+#mainNav ul li a {
+    background: #FFF;
+    border-left: 1px solid #CBCBC6;
+    color: #464646;
+    display: block;
+    height: 40px;
+    font-weight: 700;
+    line-height: 43px;
+    padding: 0 61px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#mainNav ul li a:hover {
+    background: #CBCBC6;
+    color: #000;
+}
+
+#mainNav ul li.selected a {
+    background: #363636 url(<%=asset_path('v1/nav-selected.png')%>) no-repeat top center;
+    color: #FFF;
+}
+
+#mainNav ul li.find a,
+#mainNav ul li.find a:hover,
+#mainNav ul li.find.selected a {
+    background: #BF1F30;
+    border-left: 1px solid #BF1F30;
+    color: #FFF;
+    min-width: 77px;
+}
+
+.basic-search-options {
+    background: #BF1F30;
+    /*box-shadow: 0 2px 3px rgba(0,0,0,0.5);*/
+    -moz-box-shadow: 0 2px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 2px 3px rgba(0,0,0,0.5);
+    min-height: 97px;
+    padding: 10px 20px 0;
+}
+
+.advanced-search-options {
+    background: #EAEAE7;
+    border-bottom: 1px solid #D9D9D9;
+    padding: 10px 20px;
+}
+.basic-search-options fieldset, .advanced-search-options fieldset {
+    float: left;
+    margin-right: 20px;
+    padding-bottom: 10px;
+    border: 0;
+}
+
+.basic-search-options fieldset.type select,
+.basic-search-options fieldset.make select,
+.basic-search-options fieldset.year select,
+.basic-search-options fieldset.model select,
+.basic-search-options fieldset.price select,
+.basic-search-options fieldset.industry select,
+.basic-search-options fieldset.categories select { width: 120px; }
+.basic-search-options fieldset.search-for input { width: 134px; }
+
+#mainNav .basic-search-options fieldset.search-for { 
+    border-right: 1px solid #FFF;
+    margin-right: 30px;
+    padding-right: 30px;
+}
+#mainNav fieldset input[type="text"],
+fieldset.main input[type="text"] {
+    background: #FFF;
+    border: 0;
+    height: 21px;
+    padding: 5px;
+}
+
+fieldset.main textarea {
+    background: #FFF;
+    border: 0;
+    padding: 5px;
+}
+
+.ie #mainNav fieldset input[type="text"] {
+    height: auto;
+}
+
+.ie #mainNav fieldset input[type="text"] {
+    padding: 10px 5px 8px;
+}
+
+/* CB - Updated the Reset button to be of type reset */
+.content-section input[type="reset"] 
+{
+    background: #8F1724;
+    border: 2px solid #851521;
+    color: #FFF;
+    float: right;
+    padding: 8px 23px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    margin-left: 10px;
+}
+
+.basic-search-options  input[type="submit"],
+.advanced-search-options  input[type="submit"] {
+    background: #8F1724;
+    border: 2px solid #851521;
+    color: #FFF;
+    float: right;
+    margin-top: 20px;
+    padding: 3px 15px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* CB - Updated the Reset button to be of type reset */
+.ie .content-section input[type="reset"] {
+    padding: 11px 15px;
+}
+
+.ie .basic-search-options input[type="submit"],
+.ie .advanced-search-options input[type="submit"] {
+    padding: 8px 15px;
+}
+
+/* CB - Where is this used? It was brought from the Marker CSS */
+.basic-search-options  input[type="reset"] {
+    background: transparent;
+    border: 0;
+    color: #FFF;
+    float: left;
+    margin-top: 20px;
+    padding: 3px 25px;
+    text-align: center;
+}
+
+
+#slider{
+    
+}
+#slider ul{
+    margin:0;
+}
+
+.left-section {
+    float: left;
+    overflow: hidden;
+    width: 49%;
+}
+.right-section {
+    float: right;
+    overflow: hidden;
+    width: 49%;
+}
+/* auction detail */
+table.car-detail th{
+  
+}
+.foot {
+    /*background-image: url("/resource/images/footbg.gif");*/
+    background-repeat: repeat-x;
+    border: 1px solid #CCCCCC;
+    height: 110px;
+    margin: 2px auto 0;
+    padding: 10px 0;
+    width: 968px;
+}
+.foot .inf {
+    border-right: 1px dotted #C3D5E3;
+    height: 110px;
+    list-style-type: none;
+    padding-left: 30px;
+}
+.inf h3, .inf1 h3 {
+    /*background-image: url("/resource/images/ico.gif");*/
+    background-position: 1px 50%;
+    background-repeat: no-repeat;
+    color: #444444;
+    font-family: "微软雅黑";
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 30px;
+    padding-left: 10px;
+}
+.inf li, .inf1 li {
+    line-height: 22px;
+    padding-left: 10px;
+    width: 100px;
+}
+
+.foot li {
+    float: left;
+    list-style-type: none;
+    width: 185px;
+}

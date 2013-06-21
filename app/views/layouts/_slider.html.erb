@@ -1,5 +1,21 @@
-<ul>
+<div id="slider" class="flexslider" style="overflow: hidden">
+<ul class="slides">
   <li>
     <%=image_tag("11.jpg")%>
   </li>
+  <li>
+    <%=image_tag("12.jpg")%>
+  </li>
 </ul>
+</div>
+
+<script type="text/javascript">
+$(window).load(function() {
+ $('.flexslider').removeClass('flexDelay').flexslider({
+            slideshow: true,
+            animation: "slide",
+            slideshowSpeed: "10000",
+            controlNav: false
+ });
+});
+</script>

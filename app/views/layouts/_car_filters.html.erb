@@ -1,0 +1,68 @@
+<%
+car_models =  CarModel
+%>
+
+<div class="basic-search-options clearfix">
+    
+    <fieldset class="search-for">
+        <label for="findakeyword">Search for</label>  <br /> 
+        <input name="ctl00$FullFormPlaceHolder$ctl04$findakeyword" type="text" value="Keywords or Ref ID" id="findakeyword" class="filter-input" onblur="if(this.value=='')this.value='Keywords or Ref ID';" onfocus="if(this.value=='Keywords or Ref ID')this.value='';">
+    </fieldset>
+
+    <fieldset class="make">
+        <label for="findamake">Make</label>    <br /> 
+        <select name="ctl00$FullFormPlaceHolder$ctl04$findamake" id="findamake" class="filter-input">
+        <option value="">All Makes</option>
+        <option value="Alfa Romeo">Alfa Romeo (3)</option>
+        <option value="Audi">Audi (22)</option>
+        <option value="BMW">BMW (73)</option>
+        <option value="Chevrolet">Chevrolet (5)</option>
+        <option value="Chrysler">Chrysler (8)</option>
+        <option value="Citroen">Citroen (5)</option>
+        <option value="Daewoo">Daewoo (2)</option>
+        <option value="Daihatsu">Daihatsu (7)</option>
+        <option value="Fiat">Fiat (1)</option>
+        <option value="Ford">Ford (221)</option>
+        <option value="Geely">Geely (2)</option>
+        <option value="Holden">Holden (156)</option>
+        <option value="Holden Special Vehicles">Holden Special Vehicles (1)</option>
+        <option value="Honda">Honda (138)</option>
+        <option value="Hyundai">Hyundai (135)</option>
+        <option value="Isuzu">Isuzu (13)</option>
+        <option value="Jaguar">Jaguar (7)</option>
+        <option value="Jeep">Jeep (5)</option>
+        <option value="Kia">Kia (8)</option>
+        <option value="Land Rover">Land Rover (3)</option>
+        <option value="Lexus">Lexus (2)</option>
+        <option value="Mazda">Mazda (155)</option>
+        <option value="Mercedes-Benz">Mercedes-Benz (37)</option>
+        <option value="Mini">Mini (8)</option>
+        <option value="Mitsubishi">Mitsubishi (161)</option>
+        <option value="Nissan">Nissan (315)</option>
+        <option value="Opel">Opel (7)</option>
+        <option value="Peugeot">Peugeot (30)</option>
+        <option value="Porsche">Porsche (1)</option>
+        <option value="REFLEX">REFLEX (1)</option>
+        <option value="Renault">Renault (8)</option>
+        <option value="Rover">Rover (6)</option>
+        <option value="Saab">Saab (2)</option>
+        <option value="Skoda">Skoda (2)</option>
+        <option value="Subaru">Subaru (97)</option>
+        <option value="Suzuki">Suzuki (47)</option>
+        <option value="Toyota">Toyota (407)</option>
+        <option value="Vauxhall">Vauxhall (1)</option>
+        <option value="Volkswagen">Volkswagen (67)</option>
+        <option value="Volvo">Volvo (11)</option>
+
+    </select>
+    </fieldset>
+
+    <div class="nav-break"></div>
+    <div class="row">
+
+       <input type="submit" name="ctl00$FullFormPlaceHolder$ctl04$findabtn" value="Search" id="findabtn">
+    
+    </div>
+    <div class="clear"></div>
+    
+</div>

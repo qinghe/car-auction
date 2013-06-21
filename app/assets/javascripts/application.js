@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require jquery.countdown
+//= require jquery.flexslider
 //= require ajax
 function clickableLabel(){
     $("input[data-clickable=true]").each(function(){

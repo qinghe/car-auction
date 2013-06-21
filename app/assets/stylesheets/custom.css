@@ -1,13 +1,14 @@
-.container {
-    background: #f2f2f2;
+.page_width{
+    width:970px;
+}
+.container {    
     border-right: 2px solid silver;
     border-left: 2px solid silver;
-    border-bottom: 2px solid silver;
-    padding: 0 10px 10px 10px;
+    
 }
 
 body {
-    background: #c3e1a8;/*#289a06;/* <- w komentarzu nasz oryginalny zielony ustawiony na naszym spotkaniu*/
+    background: #c3e1a8;#289a06;/* <- w komentarzu nasz oryginalny zielony ustawiony na naszym spotkaniu*/
 }
 
 section, article, footer, header{
@@ -28,8 +29,6 @@ header img {
 }
 
 header {
-    padding-top: 0;
-    padding-bottom: 20px;
 }
 nav {
     float: right;
@@ -43,6 +42,13 @@ article h1 {
 
 article h2 {
     font-size: 130%;
+}
+li.signin {
+    background: #BF1F30;
+}
+
+#logo{
+    height:80px;
 }
 
 article h3 {
@@ -63,11 +69,12 @@ a:hover {
     text-decoration: underline;
 }
 
+/*
 #mega-menu-1 li a, .round {
     -moz-border-radius:    5px;
     -webkit-border-radius: 5px;
     border-radius:         5px;
-}
+}*/
 /* Project Menu */
 
 #project-nav {

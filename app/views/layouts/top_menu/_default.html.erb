@@ -1,8 +1,7 @@
 <ul id="mega-menu-1" class="mega-menu">
   <% if !signed_in? %>
-    <li><%= link_to 'search', search_auctions_path %></li>
-    <li><%= link_to 'signin', signin_path, :method => :new %></li>
     <li><%= link_to 'signup', signup_path, :method => :new %></li>
+    <li class="signin"><%= link_to 'signin', signin_path, :method => :new %></li>
   <% end %>
   <% if signed_in? %>
     <li><%= link_to '我的面板', user_path(current_user) %></li>
