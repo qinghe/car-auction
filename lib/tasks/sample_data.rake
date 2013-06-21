@@ -15,22 +15,35 @@ namespace :db do
     Rake::Task['db:drop'].invoke
     Rake::Task['db:create'].invoke
     Rake::Task['db:migrate'].invoke
-    Rake::Task['db:populate'].invoke
+    puts "start seed load"
+    Rake::Task['db:seed'].invoke
+    puts "after seed loaded"
+    `mysql -uroot < #{File.join(Rails.root,'db','car_models.sql')}`
+    puts "start load sample"
+    load File.join(Rails.root,'db',"samples.rb")
+
   end
+  #task :reload => :environment do
+  #  File.delete("db/schema.rb") if File.exist?("db/schema.rb")
+  #  Rake::Task['db:drop'].invoke
+  #  Rake::Task['db:create'].invoke
+  #  Rake::Task['db:migrate'].invoke
+  #  Rake::Task['db:populate'].invoke
+  #end
 
   desc "Fill database with sample data"
   task :populate => :environment do
     Rake::Task['db:reset'].invoke
     make_users
     make_reputations
-    #make_relationships
-    #make_points
-    #make_blogposts
-    #make_blogcomments
-    #make_groups_and_tags
-    #make_auctions
-    #make_offers
-    #make_projects
+    make_relationships
+    make_points
+    make_blogposts
+    make_blogcomments
+    make_groups_and_tags
+    make_auctions
+    make_offers
+    make_projects
     make_cars
   end
 end

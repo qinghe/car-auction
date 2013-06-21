@@ -4,9 +4,8 @@
 #
 # how to load seed 
 # rake db:migrate:reset
-# mysql -uroot < car_models.sql
+# mysql -uroot < db/car_models.sql
 # rake db:seed
-
 
 
 # Users
@@ -98,4 +97,4 @@ end
 
 #source car_models.sql instead, it is too slow running rake.
 #`rake car:initial_models RAILS_ENV=#{Rails.env}`
-load File.join(Rails.root,'db','sample_cars','cars.rb')
+#load File.join(File.dirname(__FILE__),"samples.rb")
