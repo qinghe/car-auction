@@ -33,11 +33,12 @@ class UsersController < ApplicationController
     @referential = User.find_by_login(params[:ref])
     	
     @hash_mail = make_hash
-    if validate_recap(params, @user.errors) && @user.save
-      @emailver = Emailver.new(:hash => @hash_mail, :user_id => @user.id)
+    @user.status = 2 # fix email verify when needed.
+    if  @user.save
+      @emailver = Emailver.new(:hash_mail => @hash_mail, :user_id => @user.id)
       if @emailver.save
         Reputation.create!(:user_id => @user.id, :finished_auctions => 0, :auctions_overall_ratings => 0, :rated_projects => 0, :projects_overall_ratings => 0, :average_contact => 0, :average_realization => 0, :average_attitude => 0, :reputation => 0)
-        Sender.ver_mail(@hash_mail).deliver
+        #Sender.ver_mail(@hash_mail).deliver
       end
       if @referetnial == "" || @referential == nil
         redirect_to root_path

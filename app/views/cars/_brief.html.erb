@@ -5,18 +5,17 @@ model = car.model
 accident = car.accidents.first
 %>
 
-<table>
-  <tr>
-    <td>  
-      <%= link_to image_tag(car.accident_files.first.car_file.url(:thumb)), auction_path(auction) %>
-    </td>
-    <td>
-      <div>
-      <%= link_to model.name, auction_path(auction) %> <br />
-      车原地: <%= accident.huji_address%><br />
-      停放地: <%= accident.tingche_address%><br />
-      初次登记: <%= car.registered_at%>  <br />     
-      </div>
-    </td>
-  </tr>
-</table>
+<ul>
+  <li>
+      <%= link_to model.name, auction_path(auction) %>
+  </li>
+  <li>
+    车原地: <%= accident.huji_address%>
+  </li>
+  <li>
+    停放地: <%= accident.tingche_address%>
+  </li>
+  <li>
+    初次登记: <%= car.registered_at%> 
+  </li>
+</ul>

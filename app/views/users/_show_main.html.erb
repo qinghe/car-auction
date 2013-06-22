@@ -11,12 +11,8 @@
         <td><b><%= @user.login %></b></td>
       </tr>
       <tr>
-        <td>Imie</td>
+        <td>真实姓名</td>
         <td><%= @user.name %></td>
-      </tr>
-      <tr>
-        <td>Nazwisko</td>
-        <td><%= @user.lastname %></td>
       </tr>
       <tr>
         <td>注册日期</td>
@@ -49,32 +45,6 @@
       	</td>
       </tr>
         <td style="vertical-align: top; border-right: 1px solid black;"><%= image_tag @user.avatar.url(:thumb) %></td><td><%= simple_format(@user.description) -%></td>
-      </tr>
-    </table>
-    </div>
-    <div class="prepend-0 span-6">
-    <table class>
-    <tr>
-    	<tr>
-      	<td colspan="2" id="table_title">
-      		统计
-      	</td>
-      </tr>
-        <td>
-        	<%= render 'shared/zaufani' %>
-        	项目: <%= link_to @projects.count, user_userprojects_path(@user) %><br />
-        	积分: <%= link_to @pts, user_bonuspoints_path(@user) %><hr>
-        	已完成拍卖: <%= @reputation.finished_auctions %><br />
-        	Total assessments for auctions listed: <%= @reputation.auctions_overall_ratings %><hr>
-        	收到评级项目数量: <%= @reputation.rated_projects %><br />
-        	项目总评分: <%= @reputation.projects_overall_ratings %><br />
-        	Average total for contact: <%= @reputation.average_contact %><br />
-        	Average total for projects: <%= @reputation.average_realization %><br />
-        	Average total for the relationship to work: <%= @reputation.average_attitude %><br />
-        	<div class="center bold"><font size="6">Reputacja:</font><br />
-        		<font size="7" color="red"><%= @reputation.reputation %>%</font>
-        	</div>
-        </td>
       </tr>
     </table>
     </div>

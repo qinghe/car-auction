@@ -4,10 +4,10 @@
 <table class="list">
   <thead>
     <tr>
-      <td>temat</td>
-      <td>do</td>
-      <td>wysłano</td>
-      <td>opcje</td>
+      <td>标题</td>
+      <td>收件人</td>
+      <td>发送时间</td>
+      <td>选项</td>
     </tr>
   </thead>
     <tbody>
@@ -17,7 +17,7 @@
       <td><%= msg.receiver %></td>
       <td><%= raw escape_time(msg.created_at) %></td>
       <td>
-        <%= link_to 'usuń', get_message_path("message_path", msg), :method => :delete, :remote => true %>
+        <%= link_to '删除', get_message_path("message_path", msg), :method => :delete, :remote => true %>
       </td>
     </tr>
     <% end %>
@@ -25,5 +25,5 @@
 </table>
 <%= will_paginate %>
 <% else %>
-<section class="notice">Nie znaleziono żadnych wiadomości.</section>
+<section class="notice">没有符合条件的数据.</section>
 <% end %>

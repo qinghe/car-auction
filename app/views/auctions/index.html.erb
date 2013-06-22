@@ -12,28 +12,3 @@
   <% end %>
 </div>
 
-<div class="last">
-  <h2>最近的博客条目</h2>
-  <% unless @blogs.empty? %>
-    <div class="span-8"><div class="box">
-        <% @blogs.shift(@blogs.length/2).each do |blog| %>
-          <%= link_to blog.title, user_blogpost_path(blog.user, blog) %>
-          <span style="float: right;">
-            <%= link_to blog.user.login, user_path(blog.user) %>
-          </span>
-          <br />
-        <% end %>
-      </div></div>
-    <div class="span-8 last"><div class="box">
-        <% @blogs.each do |blog| %>
-          <%= link_to blog.title, user_blogpost_path(blog.user, blog) %>
-          <span style="float: right;">
-             <%= link_to blog.user.login, user_path(blog.user) %>
-          </span>
-          <br />
-        <% end %>
-      </div></div>
-  <% else %>
-    <div class="notice">现在没有公布的博客</div>
-  <% end %>
-</div>

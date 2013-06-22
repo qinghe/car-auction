@@ -27,7 +27,7 @@
     </td>
     <td><%= auction.start_at%></td>
     <td><%= auction.starting_price%></td>
-    <td><%= link_to "参加拍卖",'abc'%></td>
+    <td><%= link_to "参加拍卖",auction_path(auction)%></td>
   </tr>
   <% end %>
 <% end %>

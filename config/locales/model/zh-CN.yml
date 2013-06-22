@@ -115,7 +115,7 @@ zh-CN:
         message:
           attributes:
             body:
-              too_short: too short (at least% {count} characters)
+              too_short: 至少8个字符。)
         project:
           attributes:
             description:

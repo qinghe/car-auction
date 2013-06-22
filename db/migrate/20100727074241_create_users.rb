@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string :login, :null => false, :length => 40
       t.string :name, :null => false, :length => 40
-      t.string :lastname, :null => false, :length => 40
+      t.string :lastname, :null => false, :length => 40, :default=>''
       t.string :country, :null => false, :length => 30, :default=>'cn'
       t.integer :province_id,  :null => false, :default => 0
       t.integer :city_id,  :null => false, :default => 0

@@ -3,10 +3,11 @@
   <h2>事故车</h2>
 <table class="car-list">
 	<tr >
-		<th class="bold">车辆简介</th><th class="bold">来源</th><th class="bold">竞价时间</th><th class="bold">当前价</th>
+		<th class="bold">车辆图片</th><th class="bold">车辆简介</th><th class="bold">来源</th><th class="bold">竞价时间</th><th class="bold">当前价</th>
 	</tr>
   	<% @cars.each do |car| %>
 	        <tr>
+	          <td><%= link_to image_tag(car.accident_files.first.car_file.url(:thumb)), auction_path(car.auction) %></td>
 	          <td><%= render :partial=>"brief", :locals=>{:car=>car} %></td>
 	          <td>publish_agency</td>
 	          <td>

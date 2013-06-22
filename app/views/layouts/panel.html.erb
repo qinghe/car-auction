@@ -60,7 +60,14 @@
       <div class="content" style="background-color: white;">
         <div class="page_width">
           <h1 class="page-title"><%= @title || yield(:title) %></h1>
-          <%= yield %>
+            <div class="clearfix wrapper">
+              <div class="fl" style="width:20%">
+                <%= render 'layouts/top_menu/user_menu' %>        
+              </div>
+              <div class="fr" style="width:80%">
+                <%= yield %>    
+              </div>
+            </div>
           <div class="clear"> </div>
         </div>
       </div>
