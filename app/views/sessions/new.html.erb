@@ -1,3 +1,5 @@
+<h2> 会员登录 </h2>
+<div class="prepend-1 wrapper">
 <%= form_for(:session, :url => sessions_path) do |f| %>
   <%= f.hidden_field :title, :value=>@title %>
   <div class="field">
@@ -18,3 +20,4 @@
 <% end %>
 
 <p>没有一个帐户？<%= link_to "注册！", signup_path %></p>
+</div>

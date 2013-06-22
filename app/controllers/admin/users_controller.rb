@@ -17,11 +17,11 @@ class Admin::UsersController < Admin::ApplicationController
     @useradmin = User.find(params[:id])
     if params[:user][:password] == ''
       @title = "Edit user"
-      flash[:error] = "Haslo nie moze byc puste"
+      flash[:error] = "密码不能为空"
       render :action => :edit
     elsif @useradmin.update_attributes(params[:user])
       redirect_to :action => :index
-      flash[:success] = "Edytowano profil"
+      flash[:success] = "您的信息修改成功"
     else
       @title = "Edit user"
       render :action => :edit
@@ -32,7 +32,7 @@ class Admin::UsersController < Admin::ApplicationController
 		@user = User.find(params[:id])
 		@pointssum = Bonuspoint.find_all_by_user_id(params[:id])
 		@points = Bonuspoint.find_all_by_user_id(params[:id]).paginate :per_page => 15, :page => params[:page]
-		@title = "管理平台 :  punkty uzytkownika #{@user}"
+		@title = "管理平台 :  用户点 #{@user}"
 		
 		@suma = 0
       	@pointssum.each do |sum|
