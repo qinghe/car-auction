@@ -114,7 +114,9 @@ class User < ActiveRecord::Base
     role == "evaluating_company"
   end
 
-
+  def company_name
+    company ? company.name : "无"
+  end
   private
 
     def encrypt_password

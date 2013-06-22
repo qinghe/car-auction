@@ -26,8 +26,13 @@ class Car < ActiveRecord::Base
   CARPROCESS = {'0'=>"待评估车辆",'1'=>"待处理车辆",'2'=>"委托车辆",'3'=>"待提车辆",'4'=>"过户车辆",'5'=>"放弃委托拍卖",'6'=>"放弃提车"}
   PAYMETHOD = {'0'=>"保险公司",'1'=>"车主"}
 
-  def self.list_by(process_method)
-    self.where("status =#{process_method}").all
+  def self.list_by(process_method,current_user)
+    if current_user.role == "insurance_company"
+      user_ids = current_user.company.members.collect{|m|m.id}
+      return self.where("status =#{process_method} and publisher_id in (#{user_ids.join(',')})").all
+    else
+      return self.where("status =#{process_method}").all
+    end
   end
 
   def limitation
@@ -54,6 +59,10 @@ class Car < ActiveRecord::Base
 
   def evaluating_company_responsible_person
     self.evaluator ? self.evaluator.name : "华晨"
+  end
+
+  def name
+    self.model ? self.model.name : model_name
   end
 
   def variator_name

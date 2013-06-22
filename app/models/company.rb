@@ -1,4 +1,5 @@
 class Company < ActiveRecord::Base
   attr_accessible :name ,:description, :type , :is_approval, :approval, :approved_at
-  scope :insurance_companies, where(:type=>'insurance')
+  has_many :members, :class_name => "User"
+  scope :insurance_companies, where(:company_type=>'insurance')
 end

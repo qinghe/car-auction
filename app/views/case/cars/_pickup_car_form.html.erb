@@ -2,7 +2,7 @@
 
   <%= car_form.fields_for :accidents do |accident_form| %>
       <tr class="aution_info">
-        <td colspan="6">手续清单</td>
+        <td colspan="6" class="table_title">手续清单</td>
       </tr>
       <tr class="aution_info">
         <th><%= accident_form.label :dengji_zhengshu, '登记证书' %></th>
@@ -46,7 +46,7 @@
       </tr>
   <%end%>
       <tr class="aution_info">
-        <td colspan="6">费用信息</td>
+        <td colspan="6" class="table_title">费用信息</td>
       </tr>
       <tr class="aution_info">
         <th><%= car_form.label :bidding_price, '中标价格' %></th>
@@ -55,7 +55,7 @@
         <td><%=car_form.text_field :final_compensate_price %></td>
       </tr>
       <tr class="aution_info">
-        <td colspan="6">车主联系方式</td>
+        <td colspan="6" class="table_title">车主联系方式</td>
       </tr>
       <tr class="aution_info">
         <th><%= car_form.label :owner_name, '车主姓名' %></th>
@@ -92,7 +92,7 @@
       </tr>
       <tr class="aution_info">
         <th><%= car_form.label :pickup_address, '提车地点' %></th>
-        <td colspan="5"><%= car_form.text_area :pickup_address %></td>
+        <td colspan="5"><%= car_form.text_area :pickup_address, :size => "70x2" %></td>
       </tr>
 
 

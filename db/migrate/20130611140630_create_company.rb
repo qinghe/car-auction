@@ -3,7 +3,7 @@ class CreateCompany < ActiveRecord::Migration
     create_table :companies do |t|
       t.string :name, :null => false
       t.string :description, :null => false, :length => 500
-      t.string :type, :null => false #"insurance"=>保险公司,"evaluating"=>评估公司
+      t.string :company_type, :null => false #"insurance"=>保险公司,"evaluating"=>评估公司
       t.boolean :is_approval, :null=>false, :default=>false
       t.string :approval  #审核描述
       t.date :approved_at #审核日期

@@ -2,7 +2,7 @@
 
     <%= car_form.fields_for :accidents, @accident, :child_index=>0 do |accident_form| %>
     <tr class="aution_info">
-      <td colspan="6">手续清单</td>
+      <td colspan="6" class="table_title">手续清单</td>
     </tr>
     <tr class="aution_info">
       <th><%= accident_form.label :dengji_zhengshu, '登记证书' %></th>
@@ -45,7 +45,7 @@
       <td></td>
     </tr>
     <tr class="aution_info">
-      <td colspan="6">委托协议</td>
+      <td colspan="6" class="table_title">委托协议</td>
     </tr>
     <tr class="aution_info">
       <th><%= accident_form.label :weituo_xieyi, '委托协议' %></th>
@@ -76,7 +76,7 @@
       <%= auction_form.hidden_field :title,:value=>"" %>
       <%= auction_form.hidden_field :description,:value=>"" %>
       <tr class="aution_info">
-        <td colspan="6">费用信息</td>
+        <td colspan="6" class="table_title">费用信息</td>
       </tr>
       <tr class="aution_info">
         <th><%= auction_form.label :starting_price, '拍卖底价' %></th>

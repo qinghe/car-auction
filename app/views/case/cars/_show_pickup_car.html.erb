@@ -1,11 +1,18 @@
-<% @car.build_auction %>
 <% status = @confirm == 1 ? '3' : '6' %>
+<% title_word1 = @confirm == 1 ? "确认车辆" : "车辆" %>
+<% title_word2 = @confirm == 1 ? "提车" : "不能提车" %>
+<div class="popup_title">
+  <%=title_word1  %> <%=@car.name  %> <%=title_word2  %>
+  <%= link_to 'X', '#', :style=>"position:absolute;right:0px;", :onclick=>"$('#show_pickup_car').hide();" %>
+</div>
+<% word = @confirm == 1 ? "提车确认" : "放弃中标" %>
+<div class="center_title">事故车-<%=word  %></div>
 <%= form_for(@car, :url => case_car_path(@car) ) do |car_form| %>
     <%= car_form.hidden_field :status,:value => status %>
     <%if @confirm == 1%>
       <%= render :partial=>"pickup_car_form", :locals => { :car_form => car_form } %>
     <%else%>
-      <%= car_form.label :giveup_pickupcar_reason, '放弃原因' %><%= car_form.text_area :giveup_pickupcar_reason %>
+      <%= car_form.label :giveup_pickupcar_reason, '放弃原因' %><%= car_form.text_area :giveup_pickupcar_reason, :size => "70x3" %>
     <%end%>
     <%= car_form.submit '确认提交' %>
 <%end%>
