@@ -1,4 +1,6 @@
-  <div class="clearfix">
+  <div class="clearfix auction-detail">
+    <h2 class=""><%= @auction.title %></h2>
+
     <div class="left-section">
      <%=  image_tag(@auction.car.accident_files.first.car_file.url(:medium)) %>
 
@@ -49,7 +51,7 @@
     </table>
   </div>
   
-  <div>
+  <div class="carimage-list">
     <% @auction.car.accident_files.each{|file| %>
      <%=  image_tag file.car_file.url  %>      
     <% } %>

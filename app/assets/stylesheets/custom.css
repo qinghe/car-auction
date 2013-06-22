@@ -1,14 +1,14 @@
 .page_width{
     width:970px;
+    margin: auto;
 }
 .container {    
-    border-right: 2px solid silver;
-    border-left: 2px solid silver;
     
 }
 
 body {
-    background: #c3e1a8;#289a06;/* <- w komentarzu nasz oryginalny zielony ustawiony na naszym spotkaniu*/
+   background: #c3e1a8;#289a06;/* <- w komentarzu nasz oryginalny zielony ustawiony na naszym spotkaniu*/
+   font-family: Microsoft Yahei,Arial,Helvetica,sans-serif;
 }
 
 section, article, footer, header{
@@ -30,7 +30,11 @@ header img {
 
 header {
 }
-
+footer{
+  background: none repeat scroll 0 0 #333333;
+  color: #FFFFFF;
+  padding: 5px;
+}
 article h1 {
     font-size: 170%;
     /*    color: #289a06;*/

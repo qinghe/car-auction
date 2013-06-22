@@ -1,9 +1,7 @@
-<div class="last">
+<div class="last ">
 <%= render :partial=>"info" %>
 </div>
 <div style="clear: both"> </div>
-<h2 class="box">job description</h2>
-<section class="prepend-1 append-1 auctionDescription"><%=raw @auction.description %></section>
 
 <% if @auction.communications.size > 0 %>
   <h2 class="box">messages</h2>
@@ -40,7 +38,6 @@
             'winner'
           end
         %>
-<% logger.debug offer.inspect%>
           <tr<% unless html.nil? %> class="<%= html %>"<% end %>>
             <td style="text-align: right">
               <% unless nil %><img style="width:50px; height: 50px" src="/images/avatar.jpg" /><% end %>
@@ -56,23 +53,3 @@
   </div>
 <% end %>
 
-<% unless @auction.owner?(current_user) %>
-  <div class="prepend-17 right">
-    <%= link_to "Report inappropriate", '#', :onclick => '$("#alertDiv").toggle("fast"); return false' %>
-  </div>
-
-  <div id="alertDiv" class="hide prepend-5 append-5 append-bottom">
-    <% alert_pre_text = '拍卖号码 '+@auction.id.to_s+' 有以下的问题' %>
-    <%= form_for @alert do |f|%>
-      <p style="color: red"><%= alert_pre_text %>, w skrócie opisz go:</p>
-      <%= hidden_field_tag :pre_text, alert_pre_text+': ' %>
-      <p><%= f.text_area :text, :class => "span-8 last" %></p>
-
-      <% unless signed_in? %>
-        <%= render :partial => "shared/captcha", :locals => {:f => f} %>
-      <% end %>
-
-      <p><%= f.submit '提交' %></p>
-    <% end %>
-  </div>
-<% end %>

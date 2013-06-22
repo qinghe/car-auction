@@ -1,18 +1,18 @@
 <% content_for :title, "欢迎回来！" %>
 
-<div class="prepend-1 last">
+<div class="last">
   <h2>近期拍卖</h2>
   <% unless @auctions.empty? %>
-    <div ><div class="box">
+    <div >
 <%= render :partial=>"shared/auction/auction_cars" %>
-      </div></div>
+    </div>
       <%= will_paginate @auctions %>
   <% else %>
     <div class="notice">现在没有公布的拍卖。</div>
   <% end %>
 </div>
 
-<div class="prepend-1 span-18 last">
+<div class="last">
   <h2>最近的博客条目</h2>
   <% unless @blogs.empty? %>
     <div class="span-8"><div class="box">

@@ -13,7 +13,7 @@ require 'will_paginate/array'
 
   private
   def init
-    @global_title = '- 辽宁华晨'
+    @global_title = '- 大连华晨'
   end 
    
 =begin

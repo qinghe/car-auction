@@ -31,41 +31,52 @@
           </div>
        </div>
       </div>
-    <div class="container page_width" style="">
+    <div class="container" style="width: auto;">
+      <div class="page_width">
+        <header id="mainNav">
+  
+          <div id="logo" class="">
+          <%= link_to "华晨事故车拍卖平台", "/", :id => "logo" %>
+          </div>
+          <div class="">
+          <%= render :partial => "layouts/top_menu/main_menu" %>
+          </div>
+        </header>
+        <%= render :partial => "layouts/car_filters" %>
+  
+        <% flash.keys.each do |key| %>
+        <section class="prepend-1 append-1"><div class="<%= key.to_s %>"><%= flash[key].force_encoding("UTF-8") %></div></section>
+        <% end %>
+        <% if current_page?(root_path) %>
+        <div class="page_width" style="position:relative;overflow: hidden">
+          <%= render :partial=>"layouts/slider" %>
+        </div>
+        <% end %>
+        <div>
+          <%= render :partial=>"layouts/banner" %>
+        </div>
+      </div>
       
-      <header id="mainNav">
-
-        <div id="logo" class="clear">
-        <%= link_to "华晨事故车拍卖平台", "/", :id => "logo" %>
+      <div class="content" style="background-color: white;">
+        <div class="page_width">
+          <h1 class="page-title"><%= @title || yield(:title) %></h1>
+          <%= yield %>
+          <div class="clear"> </div>
         </div>
-        <div  class="clear">
-        <%= render :partial => "layouts/top_menu/main_menu" %>
-        </div>
-      </header>
-      <%= render :partial => "layouts/car_filters" %>
-
-      <% flash.keys.each do |key| %>
-      <section class="prepend-1 append-1"><div class="<%= key.to_s %>"><%= flash[key].force_encoding("UTF-8") %></div></section>
-      <% end %>
-      <% if current_page?(root_path) %>
-      <div class="page_width" style="position:relative;overflow: hidden">
-        <%= render :partial=>"layouts/slider" %>
-      </div>
-      <% end %>
-      <div>
-        <%= render :partial=>"layouts/banner" %>
-      </div>
-      <div>
-        <h1 class=""><%= @title || yield(:title) %></h1>
-        <%= yield %>
-        <div class="clear"> </div>
       </div>
 
-      <%=render :partial => "layouts/top_menu/footer"%>
-      <div class="copyline"></div>
-      <footer class="prepend-1 append-1">
-        <%= debug(params) if Rails.env.development? %>
-      </footer>
+      <%=render :partial => "layouts/top_menu/bottom_menu"%>
     </div>
+    
+    <footer class="">
+      <div class="page_width" style="text-align: center;">
+<ul><li>Copyright &copy;2011-2013 大连华晨汽车评估有限公司 </li>
+<li>公司常年法律顾问：大连华晨事务所</li>
+<li><a target="_blank" href="http://www.miibeian.gov.cn/"><span style="color:#999">辽ICP备11024635号-1</span></a></li><br>
+</ul>
+      </div>
+      <%= debug(params) if Rails.env.development? %>
+    </footer>
+
   </body>
 </html>

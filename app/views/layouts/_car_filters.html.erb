@@ -3,19 +3,19 @@ car_models =  CarModel
 %>
 <div class="basic-search-options clear">
     <div class="search-for filter">
-        <div >Search for</div>  
-        <input name="keyword" type="text" value="Keywords or Ref ID" id="findakeyword" class="filter-input" onblur="if(this.value=='')this.value='Keywords or Ref ID';" onfocus="if(this.value=='Keywords or Ref ID')this.value='';">
+        <div class="title" >关键字</div>  
+        <input name="keyword" type="text" value="关键字 或者 ID" id="findakeyword" class="filter-input" onblur="if(this.value=='')this.value='关键字 或者 ID';" onfocus="if(this.value=='关键字 或者 ID')this.value='';">
     </div>
 
     <div class="make filter">
-        <div >Make</div>   
+        <div class="title" >品牌</div>   
         <select name="findamake" id="findamake" class="filter-input">
           <option value="abc">abc</option>
         </select>
     </div>
-    <div class="nav-break filter"></div>
-    <div class="row filter">
-       <input type="submit" name="findabtn" value="Search" id="findabtn">
+    <div class="btn filter">
+      <div class="title" >&nbsp;</div>   
+       <input type="submit" name="findabtn" value="搜索" id="findabtn">
     </div>
     <div class="clear"></div>    
 </div>
