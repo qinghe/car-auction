@@ -8,7 +8,7 @@ class Message < ActiveRecord::Base
   before_validation :check_receiver_login, :if => ->{self.receiver.nil?}
 
   belongs_to :owner, :class_name => "User"
-  belongs_to :author, :class_name => "User", :include => true
+  belongs_to :author, :class_name => "User" #, :include => true
   belongs_to :receiver, :class_name => "User" #, :include => true
   belongs_to :auction
 
