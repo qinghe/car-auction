@@ -3,39 +3,46 @@ class SessionsController < ApplicationController
   def new
   	@title = "登录"
   end
-  
+
+  def backend_signin
+    @title = "后台登录"
+    render :new, :layout => "backend"
+  end
+
   def create
-  	@title = "登录"
-  	user = User.authenticate(params[:session][:email],
+    @title = params[:session][:title]
+    layout = @title == "登录" ? "frontend" : "backend"
+    user = User.authenticate(params[:session][:email],
                              params[:session][:password])
+    user = nil if user and user.role == "user" and layout == "backend"
     if user.nil?
       flash_t :error, 'login_error'
-      render 'new'
+      render 'new', :layout => layout
     elsif user.status == 0
-    	flash_t :error, 'deactivated'
-      render 'new'
-      elsif user.status == 1
-    	flash_t :error, 'unverified'
-      render 'new'
+      flash_t :error, 'deactivated'
+      render 'new', :layout => layout
+    elsif user.status == 1
+      flash_t :error, 'unverified'
+      render 'new', :layout => layout
     elsif user.status == 3
-    	flash_t :error, 'ban'
-      render 'new'
+      flash_t :error, 'ban'
+      render 'new', :layout => layout
     #elsif validate_recap(params, user.errors) == false
-    #	flash_t :error, 'captcha'
-    #  render 'new'
+    #  flash_t :error, 'captcha'
+    #  render 'new', :layout => layout
     else
       sign_in user
       reputation
       if current_user.role == "administrator"
-        redirect_to admin_users_path
-      elsif current_user.role == "insurance_company"
+        redirect_page = @title == "登录" ? admin_users_path : welcome_case_cars_path
+        redirect_to redirect_page
+      elsif current_user.role == "insurance_company" or current_user.role == "evaluating_company"
         redirect_to welcome_case_cars_path
       else
         redirect_back_from_login session
       end
     end
   end
-  
   def destroy
     sign_out
     redirect_to root_path
