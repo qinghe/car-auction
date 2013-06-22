@@ -19,6 +19,7 @@ gem "acts_as_list"
 #gem 'tinymce-rails-imageupload', '~> 3.5.6.3'
 
 group :development do
+  gem "thin"
   gem 'faker'
 end
 
