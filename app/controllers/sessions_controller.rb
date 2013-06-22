@@ -45,7 +45,11 @@ class SessionsController < ApplicationController
   end
   def destroy
     sign_out
-    redirect_to root_path
+    if params["end"] and params["end"] == "backend"
+      backend_signin
+    else
+      redirect_to root_path
+    end
     flash_t :notice
   end
   

@@ -51,7 +51,7 @@ Inz::Application.routes.draw do
   match '/signup',  :to => 'users#new'
   match '/signin',  :to => 'sessions#new'
   match '/backend_signin',  :to => 'sessions#backend_signin'
-  match 'signout',  :to => 'sessions#destroy'
+  match 'signout/:end',  :to => 'sessions#destroy'
   match '/ver', :to => 'users#mail_ver'
   match '/find', :to => 'users#find'
   match '/delete', :to => 'users#delete'

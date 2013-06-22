@@ -7,7 +7,7 @@
   </tr>
   <tr>
     <th width="100px">车型 </th>
-    <td><%= car.model_name %> </td>
+    <td colspan="7"><%= car.model_name %> </td>
   </tr>
   <tr>
     <th>流水单号 </th>
@@ -15,7 +15,7 @@
     <th>手/排 </th>
     <td><%= car.variator_name %> </td>
     <th>初次登记日期 </th>
-    <td><%= car.registered_at %> </td>
+    <td colspan="3"><%= car.registered_at %> </td>
   </tr>
   <tr>
     <th>车牌号 </th>
@@ -23,7 +23,7 @@
     <th>发动机号 </th>
     <td><%= car.engine_number %> </td>
     <th>车架钢印号 </th>
-    <td><%= car.frame_number %> </td>
+    <td colspan="3"><%= car.frame_number %> </td>
   </tr>
   <tr>   <th colspan="8" class="table_title"> 车辆出险信息</th>   </tr>
   <tr>
@@ -32,13 +32,13 @@
     <th>出险日期 </th>
     <td><%= accident.chuxian_riqi %> </td>
     <th>是否拆检 </th>
-    <td><%= accident.inspection %> </td>
+    <td colspan="3"><%= accident.inspection %> </td>
   </tr>
   <tr>
     <th>停车地点 </th>
     <td colspan="3"><%= accident.stop_location %></td>
     <th>车架号是否受损 </th>
-    <td><%= accident.frame_number_lost %> </td>
+    <td colspan="3"><%= accident.frame_number_lost %> </td>
   </tr>
   <tr>
     <th>责任认定 </th>
@@ -47,15 +47,15 @@
     <th>对方保险公司 </th>
     <td><%= accident.duifang_baoxian %><br/>(适用双方事故) </td>
     <th>人伤情况 </th>
-    <td><%= accident.injure_condition %> </td>
+    <td colspan="3"><%= accident.injure_condition %> </td>
   </tr>
   <tr>
     <th>碰撞部位 </th>
-    <td colspan="5"><%= accident.hit_position %></td>
+    <td colspan="7"><%= accident.hit_position %></td>
   </tr>
   <tr>
     <th>出险经过 </th>
-    <td colspan="5"><%= accident.chuxian_jingguo %> </td>
+    <td colspan="7"><%= accident.chuxian_jingguo %> </td>
   </tr>
 
   <tr><th colspan="8" class="table_title">车辆图片信息</th></tr>

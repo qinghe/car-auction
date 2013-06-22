@@ -127,7 +127,12 @@ table.car_accident tr
   background: none repeat scroll 0 0 transparent;
 }
 table.car_accident th{
-  width: 58px;
+    width: 58px;
+    border:1px solid #BF1F30;
+}
+
+table.car_accident td{
+    border:1px solid #BF1F30;
 }
 
 .table_title
