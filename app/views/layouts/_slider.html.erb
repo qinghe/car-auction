@@ -1,21 +1,16 @@
-<div id="slider" class="flexslider" style="overflow: hidden">
-<ul class="slides">
-  <li>
-    <%=image_tag("11.jpg")%>
-  </li>
-  <li>
-    <%=image_tag("12.jpg")%>
-  </li>
-</ul>
+<div id="KinSlideshow" >
+ <%=link_to image_tag("11.jpg", :width=>"970", :height=>"380"), root_path%>
+ <%=link_to image_tag("12.jpg", :width=>"970", :height=>"380" ), root_path%>
 </div>
 
 <script type="text/javascript">
-$(window).load(function() {
- $('.flexslider').removeClass('flexDelay').flexslider({
-            slideshow: true,
-            animation: "slide",
-            slideshowSpeed: "10000",
-            controlNav: false
- });
-});
+$(function(){
+  jQuery("#KinSlideshow").KinSlideshow({
+    moveStyle:"left",
+    intervalTime:7,
+    mouseEvent:"mouseover",
+    isHasTitleBar:false,
+    btn:{btn_bgColor:"#FFFFFF",btn_bgHoverColor:"#000",btn_fontColor:"#000000",btn_fontHoverColor:"#FFFFFF",btn_borderColor:"#fff",btn_borderHoverColor:"#fff",btn_borderWidth:1}
+    });
+}) 
 </script>

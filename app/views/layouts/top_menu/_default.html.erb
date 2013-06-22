@@ -1,7 +1,7 @@
-<ul id="mega-menu-1" class="mega-menu">
+<ul class="superfish" >
   <% if !signed_in? %>
-    <li><%= link_to 'signup', signup_path, :method => :new %></li>
-    <li class="signin"><%= link_to 'signin', signin_path, :method => :new %></li>
+    <li><%= link_to '注册', signup_path, :method => :new %></li>
+    <li class="signin"><%= link_to '登录', signin_path, :method => :new %></li>
   <% end %>
   <% if signed_in? %>
     <li><%= link_to '我的面板', user_path(current_user) %></li>
@@ -45,8 +45,8 @@
   <% end %>
 </ul>
 <%= javascript_tag do %>
-  $("#mega-menu-1").dcMegaMenu({
-  rowItems: '3',
-  speed: 'fast'
-  });
+  // initialise plugins
+    jQuery(function(){
+      jQuery('.superfish').superfish();
+    });
 <% end %>

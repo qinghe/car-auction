@@ -26,7 +26,7 @@
 
 /** floating divs **/
   #content,
-  #navbar,
+  #navbar, .fl, .fr,
   #sidebar-left,
   #sidebar-right
   {
