@@ -5,7 +5,7 @@
    @car.accident_files.build
    @car.frame_files.build
 %>
-<%= form_for(@car, :url => case_car_path(@car) ) do |car_form| %>
+<%= form_for(@car, :url => case_cars_path(@car) ) do |car_form| %>
   <% if @car.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>

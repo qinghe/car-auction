@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+  <title><%= @title || yield(:title) %> <%= @global_title %></title>
+  <%= render 'layouts/stylesheets' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag "jquery.hoverIntent.minified", "jquery.dcmegamenu" %>
+  <%= csrf_meta_tag %>
+  <%= yield :head %>
+</head>
+<body background-color='#fff'>
+<div class="container" style="width:970px;">
+
+  <% flash.keys.each do |key| %>
+      <section class="prepend-1 append-1"><div class="<%= key.to_s %>"><%= flash[key].force_encoding("UTF-8") %></div></section>
+  <% end %>
+
+  <article class="">
+    <h1 class="box bottom"><%= @title || yield(:title) %>华晨后台管理界面</h1>
+    <%= yield %>
+    <div class="clear"> </div>
+  </article>
+
+
+</div>
+</body>
+</html>

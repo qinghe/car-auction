@@ -1,7 +1,10 @@
 # encoding: utf-8
 class Case::CarsController < Case::ApplicationController
   def welcome
-    
+    logger.debug "---in welcome--------------------------"
+    respond_to do |format|
+      format.html # new.html.erb
+    end
   end
   
   # GET /cars
@@ -88,6 +91,7 @@ class Case::CarsController < Case::ApplicationController
   # POST /cars.json
   def create
     @car = Car.new(params[:car])
+    @car.publisher_id = current_user.id
       if @car.save
         flash_t :success
         redirect_to case_cars_path
@@ -101,7 +105,7 @@ class Case::CarsController < Case::ApplicationController
   # PUT /cars/1.json
   def update
     @car = Car.find(params[:id])
-
+    @car[:evaluator_id] = current_user.id if current_user.evaluator?
     respond_to do |format|
       if @car.update_attributes(params[:car])
         format.html { redirect_to case_car_url, notice=> '更新车辆信息成功！' }

@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
 	
 	validates :login, :presence => true, :format => {:with => string}, :length => {:within => 3..40}, :uniqueness => true
 	validates :name, :presence => true, :format => {:with => string2}, :length => {:within => 2..40}
-	validates :lastname, :presence => true, :format => {:with => string2}, :length => {:within => 3..40}
+	validates :lastname, :presence => true, :format => {:with => string2}, :length => {:within => 2..40}
 	validates :country, :presence => true
 	validates :email, :presence => true, :format => {:with => email_regex}, :uniqueness => { :case_sensitive => false }, :length => {:within => 6..50}
 	validates :password, :presence => true, :confirmation => true, :length => { :within => 5..100 }

@@ -13,7 +13,7 @@ class CreateCars < ActiveRecord::Migration
       t.string :frame_number
       t.integer :publisher_id
       t.integer :evaluator_id
-      t.integer :status
+      t.integer :status,:default=>0
       t.float :actual_value,:default=>0 #实际价值
       t.float :salvage_value,:default=>0 #残值价值
       t.float :secondhand_car_value,:default=>0 #二手车价值
