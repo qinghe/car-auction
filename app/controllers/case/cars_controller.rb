@@ -1,7 +1,10 @@
 # encoding: utf-8
 class Case::CarsController < Case::ApplicationController
   def welcome
-    
+    logger.debug "---in welcome--------------------------"
+    respond_to do |format|
+      format.html # new.html.erb
+    end
   end
   
   # GET /cars
@@ -66,17 +69,21 @@ class Case::CarsController < Case::ApplicationController
   end
 
   def search
-    process_method = params[:process_method].to_i
+    @process_method = params[:process_method].to_i
     insurance_company_id = params[:insurance_company_id]
     serial_no = params[:serial_no]
     model_name = params[:model_name]
-    @cars = Car.includes(:publisher).where('cars.serial_no'=>serial_no, 'cars.model_name'=>model_name,'users.company_id'=>insurance_company_id,'cars.status' =>process_method).all
+    condition = {'cars.status' =>@process_method}
+    condition.merge!({'users.company_id'=>insurance_company_id}) if insurance_company_id.to_i > 0
+    condition.merge!({'cars.serial_no'=>serial_no}) if serial_no != ""
+    condition.merge!({'cars.model_name'=>model_name}) if model_name != ""
+    @cars = Car.includes(:publisher).where(condition).all
     render 'case/cars/car_list'
   end
 
   def car_list
     @process_method = params[:process_method]
-    @cars = Car.list_by(@process_method.to_i)
+    @cars = Car.list_by(@process_method.to_i, current_user)
   end
 
   # GET /cars/1/edit
@@ -88,9 +95,10 @@ class Case::CarsController < Case::ApplicationController
   # POST /cars.json
   def create
     @car = Car.new(params[:car])
+    @car.publisher_id = current_user.id
       if @car.save
         flash_t :success
-        redirect_to case_cars_path
+        redirect_to edit_case_car_url(@car)
       else
         title_t :new
         render :action => :new
@@ -101,7 +109,7 @@ class Case::CarsController < Case::ApplicationController
   # PUT /cars/1.json
   def update
     @car = Car.find(params[:id])
-
+    @car[:evaluator_id] = current_user.id if current_user.evaluator?
     respond_to do |format|
       if @car.update_attributes(params[:car])
         format.html { redirect_to case_car_url, notice=> '更新车辆信息成功！' }

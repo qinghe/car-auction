@@ -19,24 +19,91 @@
 {
   height:100px;
 }
+
+#header_info1
+{ background-color: #BF1F30;
+  height:58px;
+  padding: 5px;
+}
+
+#backend_title
+{ color: white;
+  font-size:30px;
+    font-family: bitstream;
+}
+#header_info2
+{ background-color: transparent;
+  border-bottom:2px solid #BF1F30;
+  height:20px;
+  padding: 5px;
+}
+
 #center
-{
+{ background-color: transparent;
   position:absolute;
   left:0;
   right:0;
   top:100px;
   bottom:100px;
 }
+.center_title
+{
+    border-bottom:2px solid #BF1F30;
+    color: black;
+    height:30px;
+    font-size:20px;
+    font-weight:bold;
+    padding: 5px 5px 5px 30px;
+}
+
+#car_list_search
+{   borderbottom:2px solid #BF1F30;
+    height:30px;
+    font-size:16px;
+    font-weight:bold;
+    padding: 10px;
+}
+
 #lftnav
-{ position:absolute;
+{ border-right:2px solid #BF1F30;
+  position:absolute;
   top:0;
   left:0;
   width: 180px;
   min-height:100px;
 }
 
-#content
+.left_title
 {
+    color: #ffffff;
+    text-align:center;
+    padding-bottom: 2px;
+}
+.left_subtitle
+{   background-color: #BF1F30;
+    font-size:20px;
+    font-weight:bold;
+    padding: 5px;
+}
+.left_menu
+{   border-top:1px solid #BF1F30;
+    color: black;
+    font-size:15px;
+    padding: 5px;
+}
+
+.left_submenu
+{
+    color: black;
+    padding: 5px;
+}
+
+.link1
+{
+    color: black;
+}
+#content
+{ border-left:2px solid #BF1F30;
   position:absolute;
   top:0;
   left:180px;
@@ -51,11 +118,39 @@
   height:100px;
   
 }
-table.car_accident td
+table.car_accident
+{   width:770px;
+    padding: 5px;
+}
+table.car_accident tr
 {
-  border: solid 1px black;
+  background: none repeat scroll 0 0 transparent;
 }
 table.car_accident th{
-  width: 58px; 
-  
+  width: 58px;
+}
+
+.table_title
+{   background-color: #BF1F30;
+    color: white;
+    font-size:20px;
+    font-weight:bold;
+    text-align:center;}
+
+.popup
+{   position:fixed;
+    background-color: #f5f5f5;
+    height:450px;
+    top:200px;
+    border:2px solid #BF1F30;
+    overflow: auto;
+    z-index: 103;
+    display:none;
+}
+
+.popup_title
+{   background-color: #BF1F30;
+    color: white;
+    font-size:18px;
+    font-weight:bold;
 }

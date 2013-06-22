@@ -1,9 +1,9 @@
-<h4>事故车-车辆详细信息</h4>
+<div class="center_title">事故车-车辆详细信息</div>
 <% car = @car %>
 <% accident = car.accidents[0] %>
 <% auction = car.auction %>
 <table class='car_accident'>
-  <tr>   <th colspan="8"> 车辆信息</th>
+  <tr>   <th colspan="8" class="table_title"> 车辆信息</th>
   </tr>
   <tr>
     <th width="100px">车型 </th>
@@ -25,7 +25,7 @@
     <th>车架钢印号 </th>
     <td><%= car.frame_number %> </td>
   </tr>
-  <tr>   <th colspan="8"> 车辆出险信息</th>   </tr>
+  <tr>   <th colspan="8" class="table_title"> 车辆出险信息</th>   </tr>
   <tr>
     <th>损失类型 </th>
     <td><%= accident.lost_type %></td>
@@ -58,7 +58,7 @@
     <td colspan="5"><%= accident.chuxian_jingguo %> </td>
   </tr>
 
-  <tr><th colspan="8">车辆图片信息</th></tr>
+  <tr><th colspan="8" class="table_title">车辆图片信息</th></tr>
   <tr>
     <th colspan="8">  行驶证  </th>
   </tr>
@@ -91,7 +91,7 @@
     </td>
   </tr>
   <tr>
-    <th colspan="8">  价值信息  </th>
+    <th colspan="8" class="table_title">  价值信息  </th>
   </tr>
   <tr>
     <th>承保金额 </th>
@@ -116,13 +116,19 @@
 
 <% if car.status == 2 %>
   <tr>
-    <th colspan="8">  委托拍卖处理  </th>
+    <th colspan="8" class="table_title">  委托拍卖处理  </th>
   </tr>
   <tr>
-    <th colspan="8">  费用信息  </th>
+    <td colspan="8">  </td>
   </tr>
   <tr>
-    <th colspan="8">  拍卖信息  </th>
+    <th colspan="8" class="table_title">  费用信息  </th>
+  </tr>
+    <tr>
+      <td colspan="8">  </td>
+    </tr>
+  <tr>
+    <th colspan="8" class="table_title">  拍卖信息  </th>
   </tr>
   <tr>
     <th>中标价 </th>
@@ -147,7 +153,7 @@
 <%end%>
 
   <tr>
-    <th colspan="8">  附件查看  </th>
+    <th colspan="8" class="table_title">  附件查看  </th>
   </tr>
 <tr>
   <td colspan="8">
@@ -156,25 +162,28 @@
     <%end%>
   </td>
 </tr>
-  <tr>
-    <th colspan="8">  沟通记录  </th>
-  </tr>
+<tr>
+  <th colspan="8" class="table_title">  沟通记录  </th>
+</tr>
+<tr>
+  <td colspan="8">  无  </td>
+</tr>
 
   <tr>
-    <th colspan="8">  操作按钮  </th>
+    <th colspan="8" class="table_title">  操作按钮  </th>
   </tr>
   <tr>
     <td>
-      <%=link_to "点击沟通" %>
+      点击沟通
     </td>
     <td>
       <%=link_to "返回" %>
     </td>
     <td>
-      <%=link_to "转移负责人" %>
+      转移负责人
     </td>
     <td>
-      <%=link_to "催促回复" %>
+      催促回复
     </td>
     <td>
       <% if car.status == 0 or car.status == 1 %>
@@ -199,21 +208,19 @@
     </td>
   </tr>
   <tr>
-    <th colspan="8">  当前状态  </th>
+    <th colspan="8" class="table_title">  当前状态  </th>
   </tr>
   <tr>
     <th>当前处理人 </th>
-    <td>保险公司 </td>
+    <td  colspan="7">保险公司 </td>
   </tr>
   <tr>
     <th>业务负责人 </th>
-    <td>保险公司负责人：保险公司 商务负责人：华晨 客服负责人：华晨 </td>
+    <td  colspan="7">保险公司负责人：保险公司  商务负责人：华晨  客服负责人：华晨 </td>
   </tr>
 
 </table>
-<div id="show_auction">
+<div id="show_auction" class="popup">
 </div>
-<div id="show_pickup_car">
+<div id="show_pickup_car" class="popup">
 </div>
-<%= link_to 'Edit', edit_case_car_path(@car) %> |
-<%= link_to 'Back', case_cars_path %>

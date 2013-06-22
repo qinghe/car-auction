@@ -24,8 +24,8 @@
   <%= f.text_field :email, :value => @useradmin.email.force_encoding("UTF-8"), :class=>"span-6" %>
 </div>
 <div class="field">
-<%= f.label :country %><br />
-<%= f.country_select :country,  {:selected => @useradmin.country} %>
+<%= f.label :deposit, "保证金" %><br />
+<%= f.text_field :deposit %>
 </div>
 <div class="field">
 <%= f.label :avatar %><br />

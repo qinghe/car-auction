@@ -5,7 +5,10 @@
    @car.accident_files.build
    @car.frame_files.build
 %>
-<%= form_for(@car, :url => case_car_path(@car) ) do |car_form| %>
+<% action_word = @car.new_record? ? "上传" : "编辑" %>
+<div class="center_title">事故车-<%=action_word  %>车辆信息</div>
+<% form_url = @car.new_record? ? case_cars_path(@car) : case_car_path(@car) %>
+<%= form_for(@car, :url => form_url ) do |car_form| %>
   <% if @car.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
@@ -18,7 +21,7 @@
     </div>
   <% end %>
   <table class='car_accident'>
-  <tr>   <td colspan="6"> 车辆信息</td>  
+  <tr>   <td colspan="6" class="table_title"> 车辆信息</td>
   </tr>
 
   <tr>
@@ -47,7 +50,7 @@
   </tr>
 
   <%= car_form.fields_for :accidents, @accident, :child_index=>0 do |accident_form| %>
-  <tr>   <td colspan="6"> 车辆出险信息</td>   </tr>
+  <tr>   <td colspan="6" class="table_title"> 车辆出险信息</td>   </tr>
   <tr>
     <th><%= accident_form.label :sunshi_leixing,'损失类型' %> </th>
     <td><%= accident_form.select :sunshi_leixing,[['A损失类型',0],['b损失类型',1],['c损失类型',2]]  %></td>
@@ -91,9 +94,9 @@
   </tr>  
   <tr>
     <th><%= accident_form.label :chuxian_jingguo,'出险经过' %> </th>
-    <td colspan="5"><%= accident_form.text_area :chuxian_jingguo, :size => "90x3",:style=>"width:auto;height:auto;" %> </td>
+    <td colspan="5"><%= accident_form.text_area :chuxian_jingguo, :size => "80x3",:style=>"width:auto;height:auto;" %> </td>
   </tr> 
-  <tr><td colspan="6">价值信息</td></tr>
+  <tr><td colspan="6" class="table_title">价值信息</td></tr>
   <tr>
     <th><%= accident_form.label :chengbao_jine,'车保金额' %> </th>
     <td><%= accident_form.text_field :chengbao_jine,:class=>'span-3' %>元* </td>
@@ -101,7 +104,7 @@
     <td><%= accident_form.text_field :gusun_jine,:class=>'span-3' %>元* </td>
   </tr> 
   <% end %>  
-  <tr><td colspan="6">车辆图片信息</td></tr>
+  <tr><td colspan="6" class="table_title">车辆图片信息</td></tr>
   <tr>
     <th>  行驶证  </th>
     <td colspan="5">      

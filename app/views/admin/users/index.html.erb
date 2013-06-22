@@ -7,7 +7,7 @@
         <td>Login</td>
         <td>Email</td>
         <td>Status</td>
-        <td>Akcje</td>
+        <td>选项</td>
       </tr>
     </thead>
     <tbody>
@@ -20,7 +20,6 @@
           <td><% if user.status == 0 %>停用<% elsif user.status == 1 %>未验证<% elsif user.status == 2 %>已验证<% else %>禁止<% end %></td>
           <td>
           	<%= link_to "编辑个人资料", edit_admin_user_path(user) %><br />
-          	<%= link_to "保存 punkty", :action => "points", :id => user.id %><br />
           	<% if user.status == 2 %>
           		<%= link_to "禁止", admin_user_path(user, :status => 3), :method => "delete", :confirm => t('general.confirm') %>
           	<% elsif user.status == 1  %>

@@ -1,28 +1,26 @@
-<div>
-  <h3> 保险公司业务处理 </h3>
-  <div>
-<ul>
-  <li>
-    <%= link_to '车辆发布',  new_car_accident_case_cars_path %>
-  </li>
-  <li><%= link_to '待评估车辆',  :controller => "cars", :action => "car_list", :process_method => "0"%>  </li>
-  <li><%= link_to '待处理车辆', :controller => "cars", :action => "car_list", :process_method => "1" %>  </li>
-  <li><%= link_to '委托车辆',  :controller => "cars", :action => "car_list", :process_method => "2" %>  </li>
-  <li><%= link_to '待提车辆',  :controller => "cars", :action => "car_list", :process_method => "3" %>  </li>
-  <li><%= link_to '过户车辆',  :controller => "cars", :action => "car_list", :process_method => "4" %>  </li>
-</ul>    
+<div class="left_title">
+  <div class="left_subtitle">保险公司业务处理</div>
+  <div class="left_menu">
+    <ul>
+      <li class="left_submenu"><%= link_to '车辆发布',  new_car_accident_case_cars_path, :class=>"link1" %></li>
+      <li class="left_submenu"><%= link_to '待评估车辆', { :controller => "cars", :action => "car_list", :process_method => "0"}, :class=>"link1" %>  </li>
+      <li class="left_submenu"><%= link_to '待处理车辆', {:controller => "cars", :action => "car_list", :process_method => "1"}, :class=>"link1" %>  </li>
+      <li class="left_submenu"><%= link_to '委托车辆',  {:controller => "cars", :action => "car_list", :process_method => "2"}, :class=>"link1" %>  </li>
+      <li class="left_submenu"><%= link_to '待提车辆',  {:controller => "cars", :action => "car_list", :process_method => "3"}, :class=>"link1" %>  </li>
+      <li class="left_submenu">过户车辆</li>
+    </ul>
   </div>
 </div>
 
-<div>
-  <h3> 员工管理 </h3>
+<div class="left_title">
+  <div class="left_subtitle">员工管理</div>
   <div>
     
   </div>
 </div>
 
-<div>
-  <h3> 个人设置 </h3>
+<div class="left_title">
+  <div class="left_subtitle">个人设置</div>
   <div>
     
   </div>
