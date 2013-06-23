@@ -12,16 +12,16 @@
 #拍卖权限  您没有参与拍卖权限   >>点击申请参与拍卖
 #起拍价： ￥13000元  加价幅度：￥1000元 保留价：有
 #拍卖保证金：￥5000元  车辆承保金：￥90000元 过户保证金：中标价的10%(最低5000元，最高30000元)
+publisher_ids = User.where(:role=>'insurance_company').collect(&:id) 
+evaluator_ids = User.where(:role=>'evaluating_company').collect(&:id) 
 
 cars = [
   { :model_id=>1084,
     :variator=>0, :displacement =>'1.6', 
     :registered_at=>'2013-06-12',
     :auctioneer=>1,
-    :publisher=>2,
-    :evaluator_id=>1,
-    :publisher=>2,
-    :evaluator_id=>1,
+    :publisher=>publisher_ids.sample,
+    :evaluator_id=>evaluator_ids.sample,
     :accidents_attributes=>{'0'=>{
       "sunshi_leixing"=>"损失类型1",
       "guohu_shixiao"=>45, 
@@ -44,8 +44,8 @@ cars = [
     :variator=>0, :displacement =>'1.6', 
     :registered_at=>'2013-06-12',
     :auctioneer=>1,
-    :publisher=>2,
-    :evaluator_id=>1,
+    :publisher=>publisher_ids.sample,
+    :evaluator_id=>evaluator_ids.sample,
     :accidents_attributes=>{'0'=>{
       "sunshi_leixing"=>"损失类型1",
       "guohu_shixiao"=>45, 
@@ -68,8 +68,8 @@ cars = [
     :variator=>0, :displacement =>'1.6', 
     :registered_at=>'2013-06-12',
     :auctioneer=>1,
-    :publisher=>2,
-    :evaluator_id=>1,
+    :publisher=>publisher_ids.sample,
+    :evaluator_id=>evaluator_ids.sample,
     :accidents_attributes=>{'0'=>{
       "sunshi_leixing"=>"损失类型1",
       "guohu_shixiao"=>45, 
@@ -92,8 +92,8 @@ cars = [
     :variator=>0, :displacement =>'1.6', 
     :registered_at=>'2013-06-12',
     :auctioneer=>1,
-    :publisher=>2,
-    :evaluator_id=>1,
+    :publisher=>publisher_ids.sample,
+    :evaluator_id=>evaluator_ids.sample,
     :accidents_attributes=>{'0'=>{
       "sunshi_leixing"=>"损失类型1",
       "guohu_shixiao"=>45, 
@@ -115,15 +115,17 @@ cars = [
   
 ]
 
-cars.each_index{|idx|
-  car = Car.new(cars[idx])
-  car.save!  
-  #车辆图片
-  for file in Dir[File.join(File.dirname(__FILE__),'files', idx.to_s, "a_*.{jpg,gif,png}")]
-    open(file) do|f|
-      accident_file = car.accident_files.build
-      accident_file.car_file = f
-      accident_file.save!
+100.times{|i|
+  cars.each_index{|idx|
+    car = Car.new(cars[idx])
+    car.save!  
+    #车辆图片
+    for file in Dir[File.join(File.dirname(__FILE__),'files', idx.to_s, "a_*.{jpg,gif,png}")]
+      open(file) do|f|
+        accident_file = car.accident_files.build
+        accident_file.car_file = f
+        accident_file.save!
+      end
     end
-  end
-}  
+  }  
+}

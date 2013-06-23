@@ -18,10 +18,10 @@
           <td><%= c.project.name unless c.project.nil? %></td>
           <td>
             <% if c.status?(:active) %>
-              <%= link_to "Szczegóły", panel_comment_path(c) %>
+              <%= link_to "详细信息", panel_comment_path(c) %>
             <% end %>
             <% if c.status?(:pending) %>
-              <%= link_to "Wystaw komentarz", edit_panel_comment_path(c) %>
+              <%= link_to "编辑", edit_panel_comment_path(c) %>
             <% end %>
           </td>
         </tr>
@@ -30,5 +30,5 @@
   </table>
   <%= will_paginate %>
 <% else %>
-  <div class="notice">Nie znaleziono żadnych komentarzy.</div>
+  <div class="notice">There are no comments.</div>
 <% end %>

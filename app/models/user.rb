@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
 	before_update :encrypt_password, :if => ->{ self.password_changed? }
 
   def default_data
- 	self.status = 1
+ 	self.status = 2
 	self.role = "user"
   end
 	

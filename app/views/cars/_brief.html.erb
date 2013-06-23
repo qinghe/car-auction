@@ -7,7 +7,9 @@ accident = car.accidents.first
 
 <ul>
   <li>
+    <% if auction.present? %>
       <%= link_to model.name, auction_path(auction) %>
+    <% end %>
   </li>
   <li>
     车原地: <%= accident.huji_address%>

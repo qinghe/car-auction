@@ -6,7 +6,7 @@ def make_companies
     Company.create!(
         :name => names[i],
         :description => '',
-        :type => types[i],
+        :company_type => types[i],
         :is_approval => 1 ,
         :approval => '',
         :approved_at => Time.now

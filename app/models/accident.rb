@@ -28,12 +28,12 @@ class Accident < ActiveRecord::Base
       '左侧中部靠前'=>13, '左侧中部靠后'=>14 }
 
   def huji_address
-    if huji_province_id>0 and huji_city_id>0
+    if huji_province_id.present? and huji_province_id>0 and huji_city_id.present? and huji_city_id>0
       "#{ChineseCities::Province.find(huji_province_id).name}#{ChineseCities::City.find(huji_city_id).name}"
     end
   end
   def tingche_address
-    if tingche_province_id>0 and tingche_city_id>0
+    if tingche_province_id.present? and tingche_province_id>0 and tingche_city_id.present? and tingche_city_id>0
       "#{ChineseCities::Province.find(tingche_province_id).name}#{ChineseCities::City.find(tingche_city_id).name}"
     end    
   end

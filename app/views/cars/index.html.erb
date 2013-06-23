@@ -7,13 +7,16 @@
 	</tr>
   	<% @cars.each do |car| %>
 	        <tr>
-	          <td><%= link_to image_tag(car.accident_files.first.car_file.url(:thumb)), auction_path(car.auction) %></td>
+	          <td> 
+	            <%if car.accident_files.present? %>
+	            <%= link_to image_tag(car.accident_files.first.car_file.url(:thumb)), auction_path(car.auction) %></td>
+	            <% end %>
 	          <td><%= render :partial=>"brief", :locals=>{:car=>car} %></td>
-	          <td>publish_agency</td>
+	          <td> <%= car.try(:publisher).try(:company).try(:name) %></td>
 	          <td>
-	             <%= car.auction.start_at%>
+	             <%= car.auction.start_at if car.auction.present?%>
 	          </td>
-	          <td><%= car.auction.starting_price%></td>
+	          <td><%= car.auction.starting_price if car.auction.present?%></td>
 	        </tr>
 	 <% end %>
 </table>
