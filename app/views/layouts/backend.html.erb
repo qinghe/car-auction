@@ -26,9 +26,6 @@
          </b>
           <%= link_to "退出", "/signout/backend", :style=>"position:absolute;right:5px;"%>
         </div>
-        <div id="header_info2" >
-          <h3>INSURANCE CAR ACCIDENT PROCESSING SYSTEM</h3>
-        </div>
 
       </div>
       <div id="center">
@@ -47,7 +44,7 @@
 
 
       <div id="footer">
-        <%= debug(params) if Rails.env.development? %>
+        <%= Time.now %>
       </div>
     </div>
   </body>

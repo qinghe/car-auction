@@ -4,6 +4,15 @@ class Case::ApplicationController < ApplicationController
   #before_filter :get_project
   #before_filter :check_membership, :except =>[:accept, :reject]
   #before_filter :project_active, :except => [:show, :index]
+  before_filter :admin_check
+  
+  def admin_check
+    @title='华晨保险事故车处理系统'
+    if current_user.role == "user"
+        redirect_to backend_new_sessions_path
+        #flash[:error] = "请您先登录系统"
+    end
+  end
   
   #sprawdzenie uprawnien do edytowania wybranego elementu 
   def can_edit?(page)

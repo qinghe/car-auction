@@ -26,7 +26,7 @@ module SessionsHelper
   def authenticate
   	#dodajemy sobie controllery i akcje ktore sa dopuszczone dla niezalogowanego usera
   	controllers = ["welcome", "users", "sessions", "auctions", "blogposts"]
-    actions = ["new","backend_signin", "create", "index", "search", "result", "mail_ver", "show", "find"]
+    actions = ["new","backend_new", "create","backend_create", "index", "search", "result", "mail_ver", "show", "find"]
   	if controllers.include?(params[:controller]) && actions.include?(params[:action])
   		return
     else
@@ -36,8 +36,8 @@ module SessionsHelper
   
   def deny_access
   	store_location
-    if params[:controller] == "case/cars"
-      redirect_to backend_signin_path, :notice => "请登录浏览此页面"
+    if params[:controller] =~ /case/
+      redirect_to backend_new_sessions_path, :notice => "请登录浏览此页面"
     else
       redirect_to signin_path, :notice => "请登录浏览此页面"
     end

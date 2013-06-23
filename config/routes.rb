@@ -39,7 +39,11 @@ Inz::Application.routes.draw do
   		end
   	end
   end
-  resources :sessions, :only => [:new, :create, :destroy]
+  resources :sessions, :only => [:new, :create, :destroy] do
+    get :backend_new, :on => :collection
+    post :backend_create, :on => :collection
+  end
+  
   resources :relationships, :only => [:create, :destroy]
   #resources :blogposts
   resources :blogcomments do
@@ -50,8 +54,7 @@ Inz::Application.routes.draw do
   resources :bonuspoints
   match '/signup',  :to => 'users#new'
   match '/signin',  :to => 'sessions#new'
-  match '/backend_signin',  :to => 'sessions#backend_signin'
-  match 'signout/:end',  :to => 'sessions#destroy'
+  match '/signout',  :to => 'sessions#destroy'
   match '/ver', :to => 'users#mail_ver'
   match '/find', :to => 'users#find'
   match '/delete', :to => 'users#delete'

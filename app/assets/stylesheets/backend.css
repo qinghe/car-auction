@@ -10,18 +10,18 @@
   bottom:12px;
   left:0;
   right:0;
-  width: 970px;
+  width: 1000px;
   min-height:300px;
   margin:auto;
 }
 
 #header
 {
-  height:100px;
+  height:80px;
 }
 
 #header_info1
-{ background-color: #BF1F30;
+{ background-color: #BE1E2D;
   height:58px;
   padding: 5px;
 }
@@ -29,22 +29,33 @@
 #backend_title
 { color: white;
   font-size:30px;
-    font-family: bitstream;
 }
-#header_info2
-{ background-color: transparent;
-  border-bottom:2px solid #BF1F30;
-  height:20px;
-  padding: 5px;
-}
-
 #center
 { background-color: transparent;
   position:absolute;
   left:0;
   right:0;
-  top:100px;
-  bottom:100px;
+  top:80px;
+  bottom:30px;
+  border: 1px solid #E1E1E1;
+}
+#content
+{ border-left:2px solid #BF1F30;
+  position:absolute;
+  top:0;
+  left:180px;
+  bottom: 0;
+  right:0;
+  overflow:auto;
+}
+#footer
+{
+  border: 1px solid #E1E1E1;
+  position:absolute;
+  bottom:0;
+  height:30px;
+  left:0;
+  right:0;
 }
 .center_title
 {
@@ -57,7 +68,7 @@
 }
 
 #car_list_search
-{   borderbottom:2px solid #BF1F30;
+{   border-bottom:2px solid #BF1F30;
     height:30px;
     font-size:16px;
     font-weight:bold;
@@ -102,22 +113,7 @@
 {
     color: black;
 }
-#content
-{ border-left:2px solid #BF1F30;
-  position:absolute;
-  top:0;
-  left:180px;
-  bottom: 0;
-  right:0;
-  overflow:auto;
-}
-#footer
-{
-  position:absolute;
-  bottom:0;
-  height:100px;
-  
-}
+
 table.car_accident
 {   width:770px;
     padding: 5px;

@@ -19,14 +19,7 @@
             </ul>
 
             <div class="fr">
-              <% top_menu = case params[:controller].include?("admin")
-              when true
-                "layouts/top_menu/admin"
-              else
-                "layouts/top_menu/default"
-              end
-            %>
-              <%= render :partial => top_menu %>
+              <%= render :partial => "layouts/top_menu/default" %>
             </div>
           </div>
        </div>
