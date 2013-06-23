@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 
   def backend_signin
     @title = "后台登录"
-    render :new, :layout => "backend"
+    render :new, :layout => "backend_signin"
   end
 
   def create

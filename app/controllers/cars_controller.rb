@@ -1,10 +1,10 @@
+#encoding: utf-8
 class CarsController < ApplicationController
   skip_before_filter :authenticate
   
   def index
-    page = params[:page].to_i>0 ? params[:page] : 1
-
-    @cars = Car.all(:include=>[:auction,:model, :accidents]).paginate(:page => page, :per_page => 20)
+    @title="事故车"
+    @cars = Car.all(:include=>[:auction,:model, :accidents]).paginate(:page => params[:page], :per_page => 20)
 
     respond_to do |format|
       format.html # index.html.erb

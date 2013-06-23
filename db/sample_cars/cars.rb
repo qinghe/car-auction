@@ -20,7 +20,7 @@ cars = [
     :variator=>0, :displacement =>'1.6', 
     :registered_at=>'2013-06-12',
     :auctioneer=>1,
-    :publisher=>publisher_ids.sample,
+    :publisher_id=>publisher_ids.sample,
     :evaluator_id=>evaluator_ids.sample,
     :accidents_attributes=>{'0'=>{
       "sunshi_leixing"=>"损失类型1",
@@ -44,7 +44,7 @@ cars = [
     :variator=>0, :displacement =>'1.6', 
     :registered_at=>'2013-06-12',
     :auctioneer=>1,
-    :publisher=>publisher_ids.sample,
+    :publisher_id=>publisher_ids.sample,
     :evaluator_id=>evaluator_ids.sample,
     :accidents_attributes=>{'0'=>{
       "sunshi_leixing"=>"损失类型1",
@@ -68,7 +68,7 @@ cars = [
     :variator=>0, :displacement =>'1.6', 
     :registered_at=>'2013-06-12',
     :auctioneer=>1,
-    :publisher=>publisher_ids.sample,
+    :publisher_id=>publisher_ids.sample,
     :evaluator_id=>evaluator_ids.sample,
     :accidents_attributes=>{'0'=>{
       "sunshi_leixing"=>"损失类型1",
@@ -92,7 +92,7 @@ cars = [
     :variator=>0, :displacement =>'1.6', 
     :registered_at=>'2013-06-12',
     :auctioneer=>1,
-    :publisher=>publisher_ids.sample,
+    :publisher_id=>publisher_ids.sample,
     :evaluator_id=>evaluator_ids.sample,
     :accidents_attributes=>{'0'=>{
       "sunshi_leixing"=>"损失类型1",

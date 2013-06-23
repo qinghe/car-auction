@@ -1,5 +1,5 @@
 <%
-car_models =  CarModel
+car_models =  CarModel.roots
 %>
 <div class="basic-search-options clear">
     <div class="search-for filter">
@@ -8,10 +8,8 @@ car_models =  CarModel
     </div>
 
     <div class="make filter">
-        <div class="title" >品牌</div>   
-        <select name="findamake" id="findamake" class="filter-input">
-          <option value="abc">abc</option>
-        </select>
+        <div class="title" >品牌</div>
+        <%= select("search","make", car_models.collect{|car| [car.name,car.id]}, {:prompt=>"请选择品牌"})%>   
     </div>
     <div class="btn filter">
       <div class="title" >&nbsp;</div>   

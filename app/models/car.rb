@@ -2,7 +2,8 @@
 class Car < ActiveRecord::Base
   attr_accessible :engine_number, :frame_number, :variator, :model_id, :model_name, :plate_number, :registered_at, :serial_no, :displacement, :status, :bidding_price,
                   :final_compensate_price, :owner_name, :owner_phone, :pickup_contact_person, :pickup_contact_phone, :pay_method, :pickup_start_at, :pickup_expired_at,
-                  :pickup_address, :giveup_auction_reason, :giveup_pickupcar_reason
+                  :pickup_address, :giveup_auction_reason, :giveup_pickupcar_reason,
+                  :publisher_id, :evaluator_id
 
   belongs_to :publisher, :class_name => 'User'
   belongs_to :evaluator, :class_name => 'User'
