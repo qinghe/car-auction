@@ -114,7 +114,7 @@ accident = @auction.car.accidents.last
     <th>价格</th>
     <th>用户ID</th>
   </tr>
-  <% @auction.offers.each do |offer| %>
+  <% @auction.offers.order('created_at desc').limit(4).each do |offer| %>
   <tr>
     <td><%= offer.created_at%> </td><td><%= offer.price%> </td><td><%= offer.offerer.login%> </td>
   </tr>  

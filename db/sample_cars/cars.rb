@@ -12,11 +12,15 @@
 #拍卖权限  您没有参与拍卖权限   >>点击申请参与拍卖
 #起拍价： ￥13000元  加价幅度：￥1000元 保留价：有
 #拍卖保证金：￥5000元  车辆承保金：￥90000元 过户保证金：中标价的10%(最低5000元，最高30000元)
-publisher_ids = User.where(:role=>'insurance_company').collect(&:id) 
-evaluator_ids = User.where(:role=>'evaluating_company').collect(&:id) 
+publisher_ids = User.where(:role=>'insurance').collect(&:id) 
+evaluator_ids = User.where(:role=>'evaluating').collect(&:id) 
+car_model_ids = CarModel.leaves.collect(&:id)
+prices = (3000..50000).collect{|i| i}
+
+start_times = 50.times.collect{|i|Time.now-5.day+i.day}
 
 cars = [
-  { :model_id=>1084,
+  { :model_id=>car_model_ids.sample,
     :variator=>0, :displacement =>'1.6', 
     :registered_at=>'2013-06-12',
     :auctioneer=>1,
@@ -40,7 +44,7 @@ cars = [
      :starting_price=>13000, :price_increment=>1000, :reserve_price=>14000     
     }  
   },
-  { :model_id=>1084,#opened
+  { :model_id=>car_model_ids.sample,#opened
     :variator=>0, :displacement =>'1.6', 
     :registered_at=>'2013-06-12',
     :auctioneer=>1,
@@ -64,7 +68,7 @@ cars = [
      :starting_price=>13000, :price_increment=>1000, :reserve_price=>14000     
     }  
   },
-  { :model_id=>1084,#open
+  { :model_id=>car_model_ids.sample,#open
     :variator=>0, :displacement =>'1.6', 
     :registered_at=>'2013-06-12',
     :auctioneer=>1,
@@ -88,7 +92,7 @@ cars = [
      :starting_price=>13000, :price_increment=>1000, :reserve_price=>14000     
     }  
   },
-  { :model_id=>1084, #open
+  { :model_id=>car_model_ids.sample, #open
     :variator=>0, :displacement =>'1.6', 
     :registered_at=>'2013-06-12',
     :auctioneer=>1,
@@ -115,9 +119,13 @@ cars = [
   
 ]
 
-100.times{|i|
+25.times{|i|
   cars.each_index{|idx|
+    cars[idx][:auction_attributes][:starting_price]=prices.sample
+    cars[idx][:auction_attributes][:start_at]=start_times.sample
+    cars[idx][:auction_attributes][:expired_at]=cars[idx][:auction_attributes][:start_at]+20.minute
     car = Car.new(cars[idx])
+    car.model_id = car_model_ids.sample
     car.save!  
     #车辆图片
     for file in Dir[File.join(File.dirname(__FILE__),'files', idx.to_s, "a_*.{jpg,gif,png}")]

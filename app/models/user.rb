@@ -1,6 +1,7 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
-  attr_accessible :login, :name, :lastname, :email, :country, :status, :role, :password, :password_confirmation, :description, :avatar
+  attr_accessible :login, :name, :lastname, :email, :country, :status, :password, :password_confirmation, :description, :avatar, 
+    :company_id,:province_id, :city_id, :region_id
   
 	has_attached_file :avatar, :styles => { :thumb => "100x100>" }, :default_url => "/images/avatars/missing.png"
 	belongs_to :company
@@ -38,13 +39,13 @@ class User < ActiveRecord::Base
   string2 = /\A[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ\- ']+\z/
 	
 	validates :login, :presence => true, :format => {:with => string}, :length => {:within => 3..40}, :uniqueness => true
-	validates :name, :presence => true, :format => {:with => string2}, :length => {:within => 2..40}
+	validates :name, :presence => true, :length => {:within => 2..40}
 	#validates :lastname, :presence => true, :format => {:with => string2}, :length => {:within => 3..40}
 	validates :country, :presence => true
 	validates :email, :presence => true, :format => {:with => email_regex}, :uniqueness => { :case_sensitive => false }, :length => {:within => 6..50}
 	validates :password, :presence => true, :confirmation => true, :length => { :within => 5..100 }
 	validates_numericality_of :status, :presence => true
-	validates_inclusion_of :role, :in => ["administrator", "user", "insurance_company","evaluating_company"]
+	validates_inclusion_of :role, :in => ["administrator", "user", "insurance","evaluating"]
 	
 	validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png', 'image/gif']
 
@@ -107,11 +108,11 @@ class User < ActiveRecord::Base
   end
 
   def insurance_person?
-    role == "insurance_company"
+    role == "insurance"
   end
 
   def evaluator?
-    role == "evaluating_company"
+    role == "evaluating"
   end
 
   def company_name

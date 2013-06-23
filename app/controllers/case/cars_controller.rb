@@ -70,11 +70,11 @@ class Case::CarsController < Case::ApplicationController
 
   def search
     @process_method = params[:process_method].to_i
-    insurance_company_id = params[:insurance_company_id]
+    insurance_id = params[:insurance_id]
     serial_no = params[:serial_no]
     model_name = params[:model_name]
     condition = {'cars.status' =>@process_method}
-    condition.merge!({'users.company_id'=>insurance_company_id}) if insurance_company_id.to_i > 0
+    condition.merge!({'users.company_id'=>insurance_id}) if insurance_id.to_i > 0
     condition.merge!({'cars.serial_no'=>serial_no}) if serial_no != ""
     condition.merge!({'cars.model_name'=>model_name}) if model_name != ""
     @cars = Car.includes(:publisher).where(condition).all

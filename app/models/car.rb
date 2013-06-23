@@ -28,7 +28,7 @@ class Car < ActiveRecord::Base
   PAYMETHOD = {'0'=>"保险公司",'1'=>"车主"}
 
   def self.list_by(process_method,current_user)
-    if current_user.role == "insurance_company"
+    if current_user.role == "insurance"
       user_ids = current_user.company.members.collect{|m|m.id}
       return self.where("status =#{process_method} and publisher_id in (#{user_ids.join(',')})").all
     else
@@ -54,11 +54,11 @@ class Car < ActiveRecord::Base
     self.publisher ? "#{self.publisher.company.name}-#{self.publisher.role}" : "保险公司"
   end
 
-  def insurance_company_responsible_person
+  def insurance_responsible_person
     self.publisher ? self.publisher.name : "保险公司"
   end
 
-  def evaluating_company_responsible_person
+  def evaluating_responsible_person
     self.evaluator ? self.evaluator.name : "华晨"
   end
 

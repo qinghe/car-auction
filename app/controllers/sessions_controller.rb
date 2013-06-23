@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
     #  render 'new', :layout => layout
     else
       sign_in user
-      if current_user.role == "insurance_company" or current_user.role == "evaluating_company"
+      if current_user.role == "insurance" or current_user.role == "evaluating"
         redirect_to welcome_case_cars_path
       else
         redirect_back_from_login session

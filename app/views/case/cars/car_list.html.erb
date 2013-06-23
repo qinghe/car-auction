@@ -3,7 +3,7 @@
     <%= form_tag( "/case/cars/search" ) do  %>
         <% if current_user.administrator? or current_user.evaluator? %>
             <% insurance_companies_array = Company.insurance_companies.map { |company| [company.name, company.id] } %>
-            <%= select_tag(:insurance_company_id, options_for_select([["全部保险公司",0]]+insurance_companies_array)) %>
+            <%= select_tag(:insurance_id, options_for_select([["全部保险公司",0]]+insurance_companies_array)) %>
         <%end%>
 
         <%= label_tag(:serial_no, "流水号：") %>
@@ -35,8 +35,8 @@
             <td> <%= car.serial_no %></td>
             <td> <%= car.model_name %></td>
             <td> <%= car.publish_agency %></td>
-            <td> <%= car.insurance_company_responsible_person %></td>
-            <td> <%= car.evaluating_company_responsible_person %></td>
+            <td> <%= car.insurance_responsible_person %></td>
+            <td> <%= car.evaluating_responsible_person %></td>
             <td> <%= car.publisher.company.name %></td>
             <% if @process_method == "2" %><td> <%= car.status %></td><%end%>
             <td> <%= car.limitation %></td>

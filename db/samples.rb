@@ -1,8 +1,8 @@
 #encoding: utf-8
 def make_companies
-  names = ['平安保险公司','人寿保险公司','华晨评估公司']
-  types = ['insurance','insurance','evaluating']
-  3.times do |i|
+  names = ['华晨评估公司','平安保险公司','华安保险公司','太平洋保险公司','人保财险']
+  types = ['evaluating','insurance','insurance','insurance','insurance']
+  names.each_index do |i|    
     Company.create!(
         :name => names[i],
         :description => '',
@@ -11,58 +11,18 @@ def make_companies
         :approval => '',
         :approved_at => Time.now
     )
-
+    user = User.create!(
+      :login => "publisher#{i}",
+      :password => 'password',
+      :name => names[i][0,2],
+      :lastname => '',
+      :status => 2,
+      :email => "b#{i}@example.com",
+      :description => "我是#{names[i]}的工作人员。"
+    )
+    user.update_attribute( :role, types[i] )
   end
 end
-
-def make_users
-  user = User.create!(
-      :login => 'insurance_person',
-      :password => 'password',
-      :name => 'ming',
-      :lastname => 'li',
-      :role => 'insurance_company',
-      :status => 2,
-      :email => "pingan@example.com",
-      :description => '我是平安保险的工作人员。'
-  )
-  user.role = 'insurance_company'
-  user.status = 2
-  user.company_id = 1
-  user.save
-
-  user = User.create!(
-      :login => 'evaluating_person',
-      :password => 'password',
-      :name => 'li',
-      :lastname => 'zhang',
-      :status => 2,
-      :email => "huachen@example.com",
-      :description => '我是华晨的工作人员。'
-  )
-  user.role = 'evaluating_company'
-  user.status = 2
-  user.company_id = 3
-  user.save
-
-  user = User.create!(
-      :login => 'renshou_insurance_person',
-      :password => 'password',
-      :name => 'hua',
-      :lastname => 'yang',
-      :role => 'insurance_company',
-      :status => 2,
-      :email => "renshou@example.com",
-      :description => '我是人寿保险的工作人员。'
-  )
-  user.role = 'insurance_company'
-  user.status = 2
-  user.company_id = 2
-  user.save
-
-end  
-
 make_companies
-make_users
 load File.join(Rails.root,'db','sample_cars','cars.rb')
 
