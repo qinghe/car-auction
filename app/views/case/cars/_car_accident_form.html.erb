@@ -8,6 +8,7 @@
 <% action_word = @car.new_record? ? "上传" : "编辑" %>
 <div class="center_title">事故车-<%=action_word  %>车辆信息</div>
 <% form_url = @car.new_record? ? case_cars_path(@car) : case_car_path(@car) %>
+
 <%= form_for(@car, :url => form_url ) do |car_form| %>
   <% if @car.errors.any? %>
     <div id="error_explanation">
@@ -26,9 +27,9 @@
 
   <tr>
     <th width="100px">选择车型 </th>
-    <% car_models = CarModel.roots.all(:include=>{:children=>:children}).collect{|root| root.children(:include=>:children)}.flatten
+    <% #car_models = CarModel.roots.all(:include=>{:children=>:children}).collect{|root| root.children(:include=>:children)}.flatten
     %>
-    <td colspan="3"><%= car_form.grouped_collection_select :model_id,car_models, 'children','group_name','id','name' %></td>
+    <td colspan="3"><%#= #car_form.grouped_collection_select :model_id,car_models, 'children','group_name','id','name' %></td>
     <th><%= car_form.label :model_name,'特殊车型' %> </th>
     <td><%= car_form.text_field :model_name,:class=>'span-3' %> </td>
   </tr>
@@ -61,8 +62,13 @@
   </tr>
   <tr>
     <th><%= accident_form.label :tingche_address,'停车地点' %> </th>
-    <td colspan="3"><%= accident_form.region_select [:tingche_province, :tingche_city] %> <br/>
-       <%= accident_form.text_field :tingche_more %> 街道
+    <td colspan="3">
+      <% if @accident.new_record? %>
+        <%= accident_form.region_select [:tingche_province, :tingche_city] %> <br/>
+      <% else %>
+        <%= accident_form.region_select [:tingche_province, :tingche_city],{:selected=>[@accident.tingche_province_id,@accident.tingche_city_id]} %> <br/>
+      <% end %>
+      <%= accident_form.text_field :tingche_more %> 街道
     </td>
     <th><%= accident_form.label :chejiaohao_sousun,'车架号是否受损' %> </th>
     <td><%= accident_form.select :chejiaohao_sousun,[['是',0],['否',1]] %> </td>

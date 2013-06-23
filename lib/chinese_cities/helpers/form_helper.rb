@@ -6,8 +6,7 @@ module ChineseCities
       
       def region_select(object, methods, options = {}, html_options = {})
         output = ''
-
-        html_options[:class] ? 
+        html_options[:class] ?
           (html_options[:class].prepend('region_select ')) : 
             (html_options[:class] = 'region_select')
             
@@ -17,17 +16,30 @@ module ChineseCities
             region_klass = ('chinese_cities/'+klass_name.to_s).classify.safe_constantize
             if region_klass.present?
               choices = (index == 0 ? region_klass.all.collect {|p| [ p.name, p.id ] } : [])
+              origin_selected = options[:selected]
+              if options[:selected]
+                if Array === options[:selected]
+                  selected = options[:selected][index]
+                else
+                  selected = options[:selected] if index == 0
+                end
+              end
+              if index > 0 and selected
+                parent_selected = options[:selected][index-1]
+                scope_method = [ 'province','city','region' ][index-1]+"_id"
+                choices = region_klass.all.select{|q|q.send(scope_method) == parent_selected}.collect {|p| [ p.name, p.id ] }
+              end
               next_method = methods.at(index + 1)
-              
               set_region_options(method, options, region_klass)
               set_region_html_options(object, method, html_options, next_method)
+              options[:selected] = selected if selected
               output << select(object, "#{method.to_s}_id", choices,  options,  html_options)
+              options[:selected] = origin_selected
             else
               raise "Method '#{method}' is not a vaild attribute of #{object}"
             end
           end
         else
-
           _methods = unless methods.to_s.include?('_id')
             (methods.to_s + ('_id')).to_sym 
           else
