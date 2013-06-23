@@ -3,7 +3,7 @@ def make_companies
   names = ['华晨评估公司','平安保险公司','华安保险公司','太平洋保险公司','人保财险']
   types = ['evaluating','insurance','insurance','insurance','insurance']
   names.each_index do |i|    
-    Company.create!(
+    company = Company.create!(
         :name => names[i],
         :description => '',
         :company_type => types[i],
@@ -12,6 +12,7 @@ def make_companies
         :approved_at => Time.now
     )
     user = User.create!(
+      :company_id=> company.id,    
       :login => "publisher#{i}",
       :password => 'password',
       :name => names[i][0,2],
