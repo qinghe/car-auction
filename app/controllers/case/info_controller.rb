@@ -1,4 +1,4 @@
-class CarProject::InfoController < CarProject::ApplicationController
+class Case::InfoController < Case::ApplicationController
 	before_filter :check_privileges, :only => :update
 	
   def show
