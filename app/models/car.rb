@@ -27,6 +27,10 @@ class Car < ActiveRecord::Base
   CARPROCESS = {'0'=>"待评估车辆",'1'=>"待处理车辆",'2'=>"委托车辆",'3'=>"待提车辆",'4'=>"过户车辆",'5'=>"放弃委托拍卖",'6'=>"放弃提车"}
   PAYMETHOD = {'0'=>"保险公司",'1'=>"车主"}
 
+  validates :engine_number, :presence => true, :length => {:within => 2..40}
+  validates :frame_number, :presence => true, :length => {:within => 2..40}
+  validates :plate_number, :presence => true, :length => {:within => 2..40}
+
   def self.list_by(process_method,current_user)
     if current_user.role == "insurance"
       user_ids = current_user.company.members.collect{|m|m.id}
@@ -51,7 +55,7 @@ class Car < ActiveRecord::Base
   end
 
   def publish_agency
-    self.publisher ? "#{self.publisher.company.name}-#{self.publisher.role}" : "保险公司"
+    self.publisher ? "#{self.publisher.company.name}" : "保险公司"
   end
 
   def insurance_responsible_person
@@ -63,7 +67,7 @@ class Car < ActiveRecord::Base
   end
 
   def name
-    self.model ? self.model.name : model_name
+    self.model.present? ? self.model.name : model_name
   end
 
   def variator_name

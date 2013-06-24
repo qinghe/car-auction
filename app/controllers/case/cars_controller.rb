@@ -45,17 +45,6 @@ class Case::CarsController < Case::ApplicationController
     end
   end
 
-  # GET /cars/new
-  # GET /cars/new.json
-  def new
-    @car = Car.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @car }
-    end
-  end
-
   def new_car_accident
     @car = Car.new
 
@@ -101,7 +90,7 @@ class Case::CarsController < Case::ApplicationController
         redirect_to edit_case_car_url(@car)
       else
         title_t :new
-        render :action => :new
+        render :action => :new_car_accident
       end
   end
 

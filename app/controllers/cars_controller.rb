@@ -21,4 +21,9 @@ class CarsController < ApplicationController
       format.json { render json: @car_models }
     end
   end
+  
+  def get_model
+    @car = Car.find(params[:id])
+  end
+  
 end

@@ -7,6 +7,7 @@ Inz::Application.routes.draw do
   
   resources :cars, :only => [:index, :show] do    
     get :get_models, :on => :collection
+    get :get_model, :on => :member
   end
   
   resources :auctions, :only => [:index, :show] do

@@ -18,17 +18,16 @@
 <table class='car_accident'>
 
     <% if @cars.size > 0%>
-      <tr class="table_title" style="font-size:15px;">
-        <td class="table_title" style="font-size:15px;"> 流水号</td>
-        <td class="table_title" style="font-size:15px;"> 车型</td>
-        <td class="table_title" style="font-size:15px;"> 发布机构</td>
-        <td class="table_title" style="font-size:15px;"> 保险公司负责人</td>
-        <td class="table_title" style="font-size:15px;"> 华晨负责人</td>
-        <td class="table_title" style="font-size:15px;"> 处理方</td>
-        <% if @process_method == "2" %><td class="table_title" style="font-size:15px;"> 处理状态</td><%end%>
-        <td class="table_title" style="font-size:15px;"> 发生时效</td>
-        <td class="table_title" style="font-size:15px;"> </td>
-        <td class="table_title" style="font-size:15px;"> </td>
+      <tr class="table_title" >
+        <td class="table_title" > 流水号</td>
+        <td cl="font-size:15px;"> 车型</td>
+        <td class="table_title" > 发布机构</td>
+        <td class="table_title" > 保险公司负责人</td>
+        <td class="table_title" > 华晨负责人</td>
+        <td class="table_title" > 处理方</td>
+        <% if @process_method == "2" %><td class="table_title" > 处理状态</td><%end%>
+        <td class="table_title" > 发生时效</td>
+        <td class="table_title" > </td>
       </tr>
       <%@cars.each{|car|%>
           <tr>
@@ -40,8 +39,8 @@
             <td> <%= car.publisher.company.name %></td>
             <% if @process_method == "2" %><td> <%= car.status %></td><%end%>
             <td> <%= car.limitation %></td>
-            <td> <%=link_to '查看详情', case_car_url(car) %></td>
-            <td> <%=link_to '编辑', edit_case_car_url(car) %></td>
+            <td> <%=link_to '详情', case_car_url(car) %> |
+            <%=link_to '编辑', edit_case_car_url(car) %></td>
           </tr>
       <%}%>
     <%else%>
