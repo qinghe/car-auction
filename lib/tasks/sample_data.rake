@@ -17,8 +17,6 @@ namespace :db do
     Rake::Task['db:migrate'].invoke
     puts "start seed load"
     Rake::Task['db:seed'].invoke
-    puts "after seed loaded"
-    `mysql -uroot < #{File.join(Rails.root,'db','car_models.sql')}`
     puts "start load sample"
     load File.join(Rails.root,'db',"samples.rb")
 

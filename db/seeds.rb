@@ -98,3 +98,6 @@ end
 #source car_models.sql instead, it is too slow running rake.
 #`rake car:initial_models RAILS_ENV=#{Rails.env}`
 #load File.join(File.dirname(__FILE__),"samples.rb")
+puts "load sql seed"
+`mysql -uroot < #{File.join(Rails.root,'db','car_models.sql')}`
+puts "complete load seeds"
