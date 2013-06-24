@@ -5,7 +5,10 @@ Inz::Application.routes.draw do
   match 'static/:page', :to => 'blogposts#static', :as=>:static
 
   
-  resources :cars, :only => [:index, :show]
+  resources :cars, :only => [:index, :show] do    
+    get :get_models, :on => :collection
+  end
+  
   resources :auctions, :only => [:index, :show] do
     resources :offers, :only => [:new, :create] do
       #get :to_reject, :on => :member

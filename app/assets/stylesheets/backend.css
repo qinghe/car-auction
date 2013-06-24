@@ -11,7 +11,7 @@
   left:0;
   right:0;
   width: 1000px;
-  min-height:300px;
+  min-height:600px;
   margin:auto;
   background-color: white;
 }
@@ -41,14 +41,20 @@
   border: 1px solid #E1E1E1;
 }
 #content
-{ border-left:2px solid #BF1F30;
+{ 
+  border-left:1px solid #E1E1E1;
   position:absolute;
   top:0;
-  left:180px;
+  left:160px;
   bottom: 0;
   right:0;
   overflow:auto;
 }
+
+.content_inner{
+    padding:5px;
+}
+
 #footer
 {
   border: 1px solid #E1E1E1;
@@ -69,7 +75,7 @@
 }
 
 #car_list_search
-{   border-bottom:2px solid #BF1F30;
+{   border-bottom:px solid #BF1F30;
     height:30px;
     
     font-weight:bold;
@@ -77,11 +83,11 @@
 }
 
 #lftnav
-{ border-right:2px solid #BF1F30;
+{ 
   position:absolute;
   top:0;
   left:0;
-  width: 180px;
+  width: 160px;
   min-height:100px;
 }
 
@@ -116,25 +122,26 @@
 }
 
 table.car_accident
-{   width:770px;
-    padding: 5px;
+{   
+    border:1px solid #E1E1E1;
 }
 table.car_accident tr
 {
   background: none repeat scroll 0 0 transparent;
 }
-table.car_accident th{
+table.car_accident td.thead{
     width: 58px;
-    border:1px solid #BF1F30;
 }
 
 table.car_accident td{
-    border:1px solid #BF1F30;
+  border:1px solid #E1E1E1;
 }
 
+table.car_accident td td{
+  border:none;
+}
 .table_title
-{   background-color: #BF1F30;
-    color: white;
+{  /* background-color: #D6D6D6;*/
     
     font-weight:bold;
     text-align:center;}

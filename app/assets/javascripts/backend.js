@@ -1,0 +1,8 @@
+//= require jquery.min
+//= require jquery_ujs
+//= require jquery.countdown
+//= require jquery.chained.min
+//= require jquery.chained.remote.min
+//= require jquery.hoverIntent.minified
+//= require jquery.dcmegamenu
+//= require ajax

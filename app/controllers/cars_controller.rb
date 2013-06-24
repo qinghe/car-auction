@@ -12,4 +12,13 @@ class CarsController < ApplicationController
     end
   end
 
+
+  def get_models
+    
+    car_models = CarModel.where(:parent_id=> (params[:pinpai_id]||params[:chexi_id]))
+    @car_models = car_models.collect{|cm| [cm.id, cm.name]}
+    respond_to do |format|
+      format.json { render json: @car_models }
+    end
+  end
 end

@@ -1,1 +1,6 @@
+<div class="content_inner">
+  <% action_word = @car.new_record? ? "上传" : "编辑" %>
+  <div class="center_title">事故车-<%=action_word  %>车辆信息</div>
+
 <%= render 'car_accident_form' %>
+</div>
