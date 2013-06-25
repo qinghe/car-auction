@@ -144,7 +144,13 @@ table.car_accident td td{
 {  /* background-color: #D6D6D6;*/
     
     font-weight:bold;
-    text-align:center;}
+    text-align:center;
+}
+
+form.buttonform
+{
+    float:left;
+}
 
 .popup
 {   position:fixed;

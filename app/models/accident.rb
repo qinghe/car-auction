@@ -38,10 +38,6 @@ class Accident < ActiveRecord::Base
     end    
   end
 
-  def stop_location
-    ""
-  end
-
   def lost_type
     SUNSHILEIXING.key(sunshi_leixing)
   end

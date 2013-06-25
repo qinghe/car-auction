@@ -3,7 +3,7 @@
 <% accident = car.accidents[0] %>
 <% auction = car.auction %>
 <table class='car_accident'>
-  <tr>   <th colspan="8" class="table_title"> 车辆信息</td>
+  <tr>   <td colspan="8" class="table_title"> 车辆信息</td>
   </tr>
   <tr>
     <td class="thead">车型 </td>
@@ -25,7 +25,7 @@
     <td class="thead">车架钢印号 </td>
     <td colspan="3"><%= car.frame_number %> </td>
   </tr>
-  <tr>   <th colspan="8" class="table_title"> 车辆出险信息</td>   </tr>
+  <tr>   <td colspan="8" class="table_title"> 车辆出险信息</td>   </tr>
   <tr>
     <td class="thead">损失类型 </td>
     <td><%= accident.lost_type %></td>
@@ -36,7 +36,7 @@
   </tr>
   <tr>
     <td class="thead">停车地点 </td>
-    <td colspan="3"><%= accident.stop_location %></td>
+    <td colspan="3"><%= accident.tingche_address %></td>
     <td class="thead">车架号是否受损 </td>
     <td colspan="3"><%= accident.frame_number_lost %> </td>
   </tr>
@@ -58,9 +58,9 @@
     <td colspan="7"><%= accident.chuxian_jingguo %> </td>
   </tr>
 
-  <tr><th colspan="8" class="table_title">车辆图片信息</td></tr>
+  <tr><td colspan="8" class="table_title">车辆图片信息</td></tr>
   <tr>
-    <th colspan="8">  行驶证  </td>
+    <td class="thead" colspan="8">  行驶证  </td>
   </tr>
   <tr>
     <td colspan="8">
@@ -70,7 +70,7 @@
     </td>
   </tr>
   <tr>
-    <th colspan="8">   车架号  </td>
+    <td class="thead" colspan="8">   车架号  </td>
   </tr>
   <tr>
     <td colspan="8">
@@ -81,7 +81,7 @@
   </tr>
 
   <tr>
-    <th colspan="8">   车辆损失图片展示  </td>
+    <td class="thead" colspan="8">   车辆损失图片展示  </td>
   </tr>
   <tr>
     <td colspan="8">
@@ -91,7 +91,7 @@
     </td>
   </tr>
   <tr>
-    <th colspan="8" class="table_title">  价值信息  </td>
+    <td colspan="8" class="table_title">  价值信息  </td>
   </tr>
   <tr>
     <td class="thead">承保金额 </td>
@@ -116,19 +116,19 @@
 
 <% if car.status == 2 %>
   <tr>
-    <th colspan="8" class="table_title">  委托拍卖处理  </td>
+    <td colspan="8" class="table_title">  委托拍卖处理  </td>
   </tr>
   <tr>
     <td colspan="8">  </td>
   </tr>
   <tr>
-    <th colspan="8" class="table_title">  费用信息  </td>
+    <td colspan="8" class="table_title">  费用信息  </td>
   </tr>
     <tr>
       <td colspan="8">  </td>
     </tr>
   <tr>
-    <th colspan="8" class="table_title">  拍卖信息  </td>
+    <td colspan="8" class="table_title">  拍卖信息  </td>
   </tr>
   <tr>
     <td class="thead">中标价 </td>
@@ -153,7 +153,7 @@
 <%end%>
 
   <tr>
-    <th colspan="8" class="table_title">  附件查看  </td>
+    <td colspan="8" class="table_title">  附件查看  </td>
   </tr>
 <tr>
   <td colspan="8">
@@ -163,52 +163,41 @@
   </td>
 </tr>
 <tr>
-  <th colspan="8" class="table_title">  沟通记录  </td>
+  <td colspan="8" class="table_title">  沟通记录  </td>
 </tr>
 <tr>
   <td colspan="8">  无  </td>
 </tr>
 
   <tr>
-    <th colspan="8" class="table_title">  操作按钮  </td>
+    <td colspan="8" class="table_title">  操作按钮  </td>
   </tr>
   <tr>
-    <td>
-      点击沟通
-    </td>
-    <td>
-      <%=link_to "返回" %>
-    </td>
-    <td>
-      转移负责人
-    </td>
-    <td>
-      催促回复
-    </td>
-    <td>
+    <td colspan="8">
+      <%=button_to "返回", {:action => "index"}, :form_class => "buttonform"  %>
+      <%= button_to "点击沟通", {:action => "index"}, :form_class => "buttonform", :disabled=>'disabled' %>
+      <%= button_to "转移负责人", {:action => "index"}, :form_class => "buttonform", :disabled=>'disabled' %>
+      <%= button_to "催促回复", {:action => "index"}, :form_class => "buttonform", :disabled=>'disabled' %>
+
       <% if car.status == 0 or car.status == 1 %>
-          <%=link_to "委托拍卖", {:controller=>"cars", :action=>"show_auction", :car_id=>car.id, :confirm => 1 }, :remote => true %>
+          <%=button_to "委托拍卖", {:controller=>"cars", :action=>"show_auction", :car_id=>car.id, :confirm => 1 }, :remote => true, :form_class => "buttonform" %>
       <% elsif car.status == 2 %>
-          <%=link_to "提车确认", {:controller=>"cars", :action=>"show_pickup_car", :car_id=>car.id, :confirm => 1 }, :remote => true  %>
+          <%=button_to "提车确认", {:controller=>"cars", :action=>"show_pickup_car", :car_id=>car.id, :confirm => 1 }, :remote => true, :form_class => "buttonform"  %>
       <%elsif car.status == 3%>
-          <%=link_to "过户确认"  %>
+          <%=button_to "过户确认", {:action => "index"}  , :form_class => "buttonform"%>
       <%end%>
-    </td>
-    <td>
       <% if car.status == 0 or car.status == 1 %>
-          <%=link_to "不委托拍卖", {:controller=>"cars", :action=>"show_auction", :car_id=>car.id, :confirm => 0 }, :remote => true %>
+          <%=button_to "不委托拍卖", {:controller=>"cars", :action=>"show_auction", :car_id=>car.id, :confirm => 0 }, :remote => true, :form_class => "buttonform" %>
       <% elsif car.status == 2 %>
-          <%=link_to "不能提车", {:controller=>"cars", :action=>"show_pickup_car", :car_id=>car.id, :confirm => 0 }, :remote => true %>
+          <%=button_to "不能提车", {:controller=>"cars", :action=>"show_pickup_car", :car_id=>car.id, :confirm => 0 }, :remote => true, :form_class => "buttonform" %>
       <%elsif car.status == 3 %>
-          <%=link_to "不能过户"  %>
+          <%=button_to "不能过户" , {:action => "index"} , :form_class => "buttonform"%>
       <%end%>
-    </td>
-    <td>
-      <%=link_to "上传附件" %>
+      <%=button_to "上传附件", {:action => "index"} , :form_class => "buttonform"%>
     </td>
   </tr>
   <tr>
-    <th colspan="8" class="table_title">  当前状态  </td>
+    <td colspan="8" class="table_title">  当前状态  </td>
   </tr>
   <tr>
     <td class="thead">当前处理人 </td>
