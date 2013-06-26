@@ -78,4 +78,7 @@ class Car < ActiveRecord::Base
     update_column(:status, new_status)
   end
   
+  def status?( some_status)
+    self.status == some_status
+  end
 end

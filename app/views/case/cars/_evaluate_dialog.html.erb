@@ -1,0 +1,51 @@
+<% #@car
+car = @car
+%>
+<% if car.status?(0) or car.status?(1) %>
+    <div id="evaluate_dialog" title="事故车初始报价函">
+    
+    <%=form_for car, :url=>evaluate_case_car_path(car), :remote=>true, :html=>{:id=>"evaluate_car_form"}  do|f| %>
+    <table>
+        <tr>
+          <td> 车辆ID </td>   <td>  <%= car.id %>  </td>    
+          <td>车型</td>   <td colspan="3"> <%= car.name %> </td>
+        </tr>
+        <tr>
+          <td> 承保金额 </td> <td> <%= f.text_field :chengbao_jine,:class=>'span-3', :readonly=>'readonly' %>元    </td>
+          <td> 估损金额 </td> <td> <%= f.text_field :gusun_jine,:class=>'span-3', :readonly=>'readonly' %>元  </td>
+          <td> 实际价值 </td> <td> <%= f.text_field :shiji_jiazhi,:class=>'span-3', :readonly=>'readonly' %>元  </td>
+        </tr>
+        <tr>
+          <td>残值价值 </td>  <td colspan="5"><%= f.text_field :canzhi_jiazhi,:class=>'span-3' %>元*  </td>
+        </tr>
+        <tr>
+          <td>二手车价值</td> <td colspan="5"><%= f.text_field :ershou_jiazhi,:class=>'span-3' %>元*  </td>
+        </tr>
+    </table>
+    <% end %>
+    </div>
+    <%= javascript_tag do %>
+      $(function() {
+        $( "#evaluate_dialog" ).dialog({
+          autoOpen: false,
+          width:800,
+          modal: true,
+          buttons: {
+            "保存": function() {
+               $( "#evaluate_car_form" ).submit();
+            },
+            "取消": function() {
+              $( this ).dialog( "close" );
+            }
+          },
+          close: function() {
+          }
+        });
+      $( "#evaluate_car_button" )
+          .button()
+          .click(function() {
+            $( "#evaluate_dialog" ).dialog( "open" );
+          });
+      });    
+    <%end %>
+<%end %>

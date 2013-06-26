@@ -32,10 +32,30 @@ class Case::CarsController < Case::ApplicationController
   def evaluate
     @car = Car.find(params[:id])    
     @car.update_attributes!( params[:car] )
+    @car.evaluator_id = current_user.id
     @car.to_status!(1)
     respond_to do |format|
       format.js # show.html.erb
     end  
+  end
+
+  def new_auction
+    @car = Car.find(params[:id])
+    @car.update_attributes(params[:car])
+    @car.to_status!(2)
+    respond_to do |format|
+      format.js { render "auction_saved"}
+    end 
+  end
+
+  def abandon    
+    @car = Car.find(params[:id])
+    @car.update_attributes(params[:car])
+    @return_to_path = case_car_list_path(@car.status)
+    @car.to_status!(5)    
+    respond_to do |format|
+      format.js { render "abandoned"}
+    end     
   end
 
   def show_auction
@@ -106,7 +126,6 @@ class Case::CarsController < Case::ApplicationController
   # PUT /cars/1.json
   def update
     @car = Car.find(params[:id])
-    @car[:evaluator_id] = current_user.id if current_user.evaluator?
     respond_to do |format|
       if @car.update_attributes(params[:car])
         format.html { redirect_to case_car_url, notice=> '更新车辆信息成功！' }
