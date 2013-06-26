@@ -1,5 +1,5 @@
 <%
-   @accident = @car.new_record? ? @car.build_accident : @car.accident
+   @accident = @car.new_record? ? @car.accidents.build : @car.accidents[0]
    @auction = @car.new_record? ? @car.build_auction : (@car.auction ?  @car.auction : @car.build_auction)
    @car.license_files+[@car.license_files.build]
    @car.accident_files+[@car.accident_files.build]
