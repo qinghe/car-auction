@@ -10,10 +10,10 @@ class Case::CarsController < Case::ApplicationController
   # GET /cars
   # GET /cars.json
   def index
-    @cars = Car.all
-
+    @process_method = params[:process_method].to_i
+    @cars = Car.list_by(@process_method, current_user)
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :cart_list}
       format.json { render json: @cars }
     end
   end
@@ -27,6 +27,15 @@ class Case::CarsController < Case::ApplicationController
       format.html # show.html.erb
       format.json { render json: @car }
     end
+  end
+
+  def evaluate
+    @car = Car.find(params[:id])    
+    @car.update_attributes!( params[:car] )
+    @car.to_status!(1)
+    respond_to do |format|
+      format.js # show.html.erb
+    end  
   end
 
   def show_auction
@@ -47,7 +56,6 @@ class Case::CarsController < Case::ApplicationController
 
   def new_car_accident
     @car = Car.new
-
     respond_to do |format|
       format.html # new.html.erb      
     end
@@ -67,12 +75,12 @@ class Case::CarsController < Case::ApplicationController
     condition.merge!({'cars.serial_no'=>serial_no}) if serial_no != ""
     condition.merge!({'cars.model_name'=>model_name}) if model_name != ""
     @cars = Car.includes(:publisher).where(condition).all
-    render 'case/cars/car_list'
+    render 'case/cars/list'
   end
 
-  def car_list
-    @process_method = params[:process_method]
-    @cars = Car.list_by(@process_method.to_i, current_user)
+  def list
+    @process_method = params[:process_method].to_i
+    @cars = Car.list_by(@process_method, current_user)
   end
 
   # GET /cars/1/edit

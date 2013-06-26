@@ -26,7 +26,8 @@ cars = [
     :auctioneer=>1,
     :publisher_id=>publisher_ids.sample,
     :evaluator_id=>evaluator_ids.sample,
-    :accidents_attributes=>{'0'=>{
+    "chengbao_jine"=>"", "gusun_jine"=>"",
+    :accident_attributes=>{
       "sunshi_leixing"=>"损失类型1",
       "guohu_shixiao"=>45, 
       :tingche_province_id=>6, :tingche_city_id=>38, :tingche_more=>"",
@@ -36,7 +37,7 @@ cars = [
       :cheliang_beizhu=>"已经完全拆检；钥匙一把；无抵押；有1000服务费和5000的费用需由中标方承担；国四排放标准；其他信息以照片为准；请客户谨慎出价。",
       "chejiaohao_sousun"=>"1", "zeren_rending"=>"1", "duifang_baoxian"=>"", "renshang_qingkuang"=>"0", "pengzhuang_buwei"=>["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
       "chuxian_riqi(1i)"=>"2013", "chuxian_riqi(2i)"=>"6", "chuxian_riqi(3i)"=>"13", "chuxian_riqi"=>"0", 
-      "chuxian_jingguo"=>"", "chengbao_jine"=>"", "gusun_jine"=>""}
+      "chuxian_jingguo"=>""
     },   
     :auction_attributes=>{:title=>"上海大众-POLO劲情-POLO劲情 1.4 MT", :description=>"some description",
      :hall=>0,:system=>0, :owner_id => 2,
@@ -50,7 +51,8 @@ cars = [
     :auctioneer=>1,
     :publisher_id=>publisher_ids.sample,
     :evaluator_id=>evaluator_ids.sample,
-    :accidents_attributes=>{'0'=>{
+    :chengbao_jine=>"", "gusun_jine"=>"",
+    :accident_attributes=>{
       "sunshi_leixing"=>"损失类型1",
       "guohu_shixiao"=>45, 
       :tingche_province_id=>6, :tingche_city_id=>38, :tingche_more=>"",
@@ -60,7 +62,7 @@ cars = [
       :cheliang_beizhu=>"已经完全拆检；钥匙一把；无抵押；有1000服务费和5000的费用需由中标方承担；国四排放标准；其他信息以照片为准；请客户谨慎出价。",
       "chejiaohao_sousun"=>"1", "zeren_rending"=>"1", "duifang_baoxian"=>"", "renshang_qingkuang"=>"0", "pengzhuang_buwei"=>["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
       "chuxian_riqi(1i)"=>"2013", "chuxian_riqi(2i)"=>"6", "chuxian_riqi(3i)"=>"13", "chuxian_riqi"=>"0", 
-      "chuxian_jingguo"=>"", "chengbao_jine"=>"", "gusun_jine"=>""}
+      "chuxian_jingguo"=>""
     },   
     :auction_attributes=>{:title=>"上海大众-POLO劲情-POLO劲情 1.4 MT", :description=>"some description",
      :hall=>0,:system=>0, :owner_id => 2,
@@ -74,7 +76,8 @@ cars = [
     :auctioneer=>1,
     :publisher_id=>publisher_ids.sample,
     :evaluator_id=>evaluator_ids.sample,
-    :accidents_attributes=>{'0'=>{
+    "chengbao_jine"=>"", "gusun_jine"=>"",
+    :accident_attributes=>{
       "sunshi_leixing"=>"损失类型1",
       "guohu_shixiao"=>45, 
       :tingche_province_id=>6, :tingche_city_id=>38, :tingche_more=>"",
@@ -84,7 +87,7 @@ cars = [
       :cheliang_beizhu=>"已经完全拆检；钥匙一把；无抵押；有1000服务费和5000的费用需由中标方承担；国四排放标准；其他信息以照片为准；请客户谨慎出价。",
       "chejiaohao_sousun"=>"1", "zeren_rending"=>"1", "duifang_baoxian"=>"", "renshang_qingkuang"=>"0", "pengzhuang_buwei"=>["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
       "chuxian_riqi(1i)"=>"2013", "chuxian_riqi(2i)"=>"6", "chuxian_riqi(3i)"=>"13", "chuxian_riqi"=>"0", 
-      "chuxian_jingguo"=>"", "chengbao_jine"=>"", "gusun_jine"=>""}
+      "chuxian_jingguo"=>""
     },   
     :auction_attributes=>{:title=>"上海大众-POLO劲情-POLO劲情 1.4 MT", :description=>"some description",
      :hall=>0,:system=>0, :owner_id => 2,
@@ -98,7 +101,8 @@ cars = [
     :auctioneer=>1,
     :publisher_id=>publisher_ids.sample,
     :evaluator_id=>evaluator_ids.sample,
-    :accidents_attributes=>{'0'=>{
+    "chengbao_jine"=>"", "gusun_jine"=>"",
+    :accident_attributes=>{
       "sunshi_leixing"=>"损失类型1",
       "guohu_shixiao"=>45, 
       :tingche_province_id=>6, :tingche_city_id=>38, :tingche_more=>"",
@@ -108,7 +112,7 @@ cars = [
       :cheliang_beizhu=>"已经完全拆检；钥匙一把；无抵押；有1000服务费和5000的费用需由中标方承担；国四排放标准；其他信息以照片为准；请客户谨慎出价。",
       "chejiaohao_sousun"=>"1", "zeren_rending"=>"1", "duifang_baoxian"=>"", "renshang_qingkuang"=>"0", "pengzhuang_buwei"=>["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"], 
       "chuxian_riqi(1i)"=>"2013", "chuxian_riqi(2i)"=>"6", "chuxian_riqi(3i)"=>"13", "chuxian_riqi"=>"0", 
-      "chuxian_jingguo"=>"", "chengbao_jine"=>"", "gusun_jine"=>""}
+      "chuxian_jingguo"=>""
     },   
     :auction_attributes=>{:title=>"上海大众-POLO劲情-POLO劲情 1.4 MT", :description=>"some description",
      :hall=>0,:system=>0, :owner_id => 2,
@@ -119,12 +123,15 @@ cars = [
   
 ]
 
-25.times{|i|
+10.times{|i|
   cars.each_index{|idx|
     cars[idx][:auction_attributes][:starting_price]=prices.sample
     cars[idx][:auction_attributes][:start_at]=start_times.sample
     cars[idx][:auction_attributes][:expired_at]=cars[idx][:auction_attributes][:start_at]+20.minute
     car = Car.new(cars[idx])
+    car.engine_number = ("e%010d" % i)
+    car.plate_number = ("p%010d" % i)
+    car.frame_number = ("f%010d" % i)
     car.model_id = car_model_ids.sample
     car.save!  
     #车辆图片

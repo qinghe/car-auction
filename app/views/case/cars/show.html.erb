@@ -1,6 +1,6 @@
 <div class="center_title">事故车-车辆详细信息</div>
 <% car = @car %>
-<% accident = car.accidents[0] %>
+<% accident = car.accident %>
 <% auction = car.auction %>
 <table class='car_accident'>
   <tr>   <td colspan="8" class="table_title"> 车辆信息</td>
@@ -95,23 +95,19 @@
   </tr>
   <tr>
     <td class="thead">承保金额 </td>
-    <td><%= accident.chengbao_jine %>元 </td>
+    <td><%= car.chengbao_jine %>元 </td>
     <td class="thead">估损金额 </td>
-    <td><%= accident.gusun_jine %>元 </td>
+    <td><%= car.gusun_jine %>元 </td>
     <td class="thead">实际价值 </td>
-    <td><%= car.actual_value %>元 </td>
-    <td class="thead">残值价值 </td>
-    <td><%= car.salvage_value %>元 </td>
+    <td><%= car.shiji_jiazhi %>元 </td>
   </tr>
+    <%= render :partial=>'evaluated_info'%>
   <tr>
-    <td class="thead">二手车价值 </td>
-    <td><%= car.secondhand_car_value %>元 </td>
     <td class="thead">中标金额 </td>
     <td><%= car.get_bidding_price %>元 </td>
     <td class="thead">最终赔付金额 </td>
     <td><%= car.final_compensate_price %>元 </td>
-    <td class="thead"> </td>
-    <td> </td>
+    <td></td><td></td>
   </tr>
 
 <% if car.status == 2 %>
@@ -143,12 +139,10 @@
   <tr>
     <td class="thead">用户名 </td>
     <td><%=auction.won_offer.offerer.name if auction.won_offer %> </td>
-    <td class="thead">真实姓名 </td>
-    <td><%=auction.won_offer.offerer.name if auction.won_offer %> </td>
+    <td class="thead">真实姓名/联系电话 </td>
+    <td><%=auction.won_offer.offerer.name if auction.won_offer %>/<%=auction.won_offer.offerer.cellphone if auction.won_offer %> </td>
     <td class="thead">身份证号 </td>
-    <td><%=  %> </td>
-    <td class="thead"> 联系电话</td>
-    <td><%=auction.won_offer.offerer.cellphone if auction.won_offer %> </td>
+    <td><%=auction.won_offer.offerer.id_number  if auction.won_offer %> </td>
   </tr>
 <%end%>
 
@@ -174,12 +168,13 @@
   </tr>
   <tr>
     <td colspan="8">
-      <%=button_to "返回", {:action => "index"}, :form_class => "buttonform"  %>
+      <%=button_to "返回", {:action => "list", :process_method=>car.status}, :form_class => "buttonform"  %>
       <%= button_to "点击沟通", {:action => "index"}, :form_class => "buttonform", :disabled=>'disabled' %>
       <%= button_to "转移负责人", {:action => "index"}, :form_class => "buttonform", :disabled=>'disabled' %>
       <%= button_to "催促回复", {:action => "index"}, :form_class => "buttonform", :disabled=>'disabled' %>
 
       <% if car.status == 0 or car.status == 1 %>
+          <button id="evaluate_car_button">车辆评估</button>
           <%=button_to "委托拍卖", {:controller=>"cars", :action=>"show_auction", :car_id=>car.id, :confirm => 1 }, :remote => true, :form_class => "buttonform" %>
       <% elsif car.status == 2 %>
           <%=button_to "提车确认", {:controller=>"cars", :action=>"show_pickup_car", :car_id=>car.id, :confirm => 1 }, :remote => true, :form_class => "buttonform"  %>
@@ -213,3 +208,5 @@
 </div>
 <div id="show_pickup_car" class="popup">
 </div>
+    <%= render :partial=>'evaluate_car'%>
+

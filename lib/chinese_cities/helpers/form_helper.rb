@@ -75,7 +75,7 @@ module ChineseCities
       def set_region_html_options(object, method, html_options, next_region)
         html_options[:data] ? (html_options[:data][:region_klass] = "#{method.to_s}") : (html_options[:data] = { region_klass: "#{method.to_s}" })
         if next_region
-          # object may be car[accidents_attributes][0]_city_id
+          # object may be car[accident_attributes]_city_id
           #aciton_views/form_helper#sanitized_object_name
           object_name = object.dup.gsub(/\]\[|[^-a-zA-Z0-9:.]/, "_").sub(/_$/, "") 
           

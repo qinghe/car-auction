@@ -7,7 +7,7 @@
 #拍卖保证金：￥5000元  车辆承保金：￥44100元 过户保证金：中标价的10%(最低5000元，最高30000元)
 #拍卖时间  价格  用户ID
 car = @auction.car
-accident = @auction.car.accidents.last
+accident = @auction.car.accident
 %>
 <script type="text/javascript" charset="utf-8">
   g_auction_closed = <%= !@auction.open?%>
@@ -100,7 +100,7 @@ accident = @auction.car.accidents.last
     <td>
       车辆承保金
     </td>
-    <td><%= accident.chengbao_jine %></td>
+    <td><%= car.chengbao_jine %></td>
     <td>
       过户保证金
     </td>

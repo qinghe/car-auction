@@ -150,7 +150,7 @@ Inz::Application.routes.draw do
     end
   end
 
-  match 'case/cars/car_list/:process_method', :to => 'case/cars#car_list'
+  match 'case/cars/list/:process_method', :to => 'case/cars#list'
   match 'case/cars/search', :to => 'case/cars#search'
   match 'case/cars/show_auction', :to => 'case/cars#show_auction'
   match 'case/cars/show_pickup_car', :to => 'case/cars#show_pickup_car'
@@ -160,7 +160,7 @@ Inz::Application.routes.draw do
     resources :cars do
       get :new_car_accident, :on => :collection
       get :welcome, :on => :collection
-      resources :accidents
+      put :evaluate, :on => :member
     end
   end
     	

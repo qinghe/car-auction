@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Accident < ActiveRecord::Base
-  attr_accessible :chejiaohao_sousun, :chengbao_jine, :chuli_fangshi,:shifou_caijian, :chuxian_jingguo, :chuxian_riqi, :duifang_baoxian, :gusun_jine, :pengzhuang_buwei, :renshang_qingkuang, :sunshi_leixing, :zeren_rending,
+  attr_accessible :chejiaohao_sousun, :chuli_fangshi,:shifou_caijian, :chuxian_jingguo, :chuxian_riqi, :duifang_baoxian, :gusun_jine, :pengzhuang_buwei, :renshang_qingkuang, :sunshi_leixing, :zeren_rending,
     :tingche_province_id, :tingche_city_id, :tingche_more, 
     :guohu_shixiao, :huji_province_id, :huji_city_id, :huji_more,
     :gouzhi_shui, :chepai, :yaoshi,

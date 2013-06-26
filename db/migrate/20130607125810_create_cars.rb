@@ -14,9 +14,12 @@ class CreateCars < ActiveRecord::Migration
       t.integer :publisher_id
       t.integer :evaluator_id
       t.integer :status,:default=>0
-      t.float :actual_value,:default=>0 #实际价值
-      t.float :salvage_value,:default=>0 #残值价值
-      t.float :secondhand_car_value,:default=>0 #二手车价值
+      
+      t.float :chengbao_jine,:default=>0 #车辆承保金额
+      t.float :gusun_jine,:default=>0  #车辆估损金额      
+      t.float :shiji_jiazhi,:default=>0 #实际价值
+      t.float :canzhi_jiazhi,:default=>0 #残值价值
+      t.float :ershou_jiazhi,:default=>0 #二手车价值
       t.float :bidding_price,:default=>0 #中标价格
       t.float :final_compensate_price,:default=>0 #最终赔付金额
       t.string :owner_name

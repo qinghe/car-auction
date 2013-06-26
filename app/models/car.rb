@@ -3,12 +3,12 @@ class Car < ActiveRecord::Base
   attr_accessible :engine_number, :frame_number, :variator, :model_id, :model_name, :plate_number, :registered_at, :serial_no, :displacement, :status, :bidding_price,
                   :final_compensate_price, :owner_name, :owner_phone, :pickup_contact_person, :pickup_contact_phone, :pay_method, :pickup_start_at, :pickup_expired_at,
                   :pickup_address, :giveup_auction_reason, :giveup_pickupcar_reason,
-                  :publisher_id, :evaluator_id
+                  :publisher_id, :evaluator_id, :chengbao_jine, :gusun_jine, :shiji_jiazhi, :canzhi_jiazhi, :ershou_jiazhi
 
   belongs_to :publisher, :class_name => 'User'
   belongs_to :evaluator, :class_name => 'User'
 
-  has_many :accidents, :dependent => :destroy
+  has_one :accident, :dependent => :destroy
   has_many :car_files, :dependent => :destroy
   
   has_many :license_files, :conditions=>{:file_type=>0}, :class_name =>'CarFile'
@@ -18,8 +18,8 @@ class Car < ActiveRecord::Base
 
   has_one :auction, :dependent => :destroy
   belongs_to :model, :class_name=>'CarModel'
-  attr_accessible :accidents_attributes, :license_files_attributes, :frame_files_attributes, :accident_files_attributes, :auction_attributes
-  accepts_nested_attributes_for :accidents, :license_files,:frame_files,:accident_files, :auction
+  attr_accessible :accident_attributes, :license_files_attributes, :frame_files_attributes, :accident_files_attributes, :auction_attributes
+  accepts_nested_attributes_for :accident, :license_files,:frame_files,:accident_files, :auction
   
   #DISPLACEMENTS={'','1.2'=>12,'1.5'=>15,'1.6'=>16,'2.4'=>24} #排量
   VARIATORS={'MT'=>0,'AT'=>1,'A/MT'=>2, 'CVT'=>3}
@@ -74,4 +74,8 @@ class Car < ActiveRecord::Base
     VARIATORS.key(variator)
   end
 
+  def to_status!(new_status)
+    update_column(:status, new_status)
+  end
+  
 end

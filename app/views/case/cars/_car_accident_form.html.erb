@@ -1,5 +1,5 @@
 <%
-   @accident = @car.new_record? ? @car.accidents.build : @car.accidents[0]
+   @accident = @car.new_record? ? @car.build_accident : @car.accident
    @auction = @car.new_record? ? @car.build_auction : (@car.auction ?  @car.auction : @car.build_auction)
    @car.license_files.build
    @car.accident_files.build
@@ -49,7 +49,7 @@
     <td><%= car_form.text_field :frame_number,:class=>'span-3' %>* </td>
   </tr>
 
-  <%= car_form.fields_for :accidents, @accident, :child_index=>0 do |accident_form| %>
+  <%= car_form.fields_for :accident, @accident do |accident_form| %>
   <tr>   <td colspan="6" class="table_title"> 车辆出险信息</td>   </tr>
   <tr>
     <td class="thead"><%= accident_form.label :sunshi_leixing,'损失类型' %> </td>
@@ -88,7 +88,7 @@
           <% Accident::POSITIONS.to_a.each{|key_val| %>
             <% if key_val[1]%6==1 %> <tr> <% end %>
             <td>             
-    <%= accident_form.check_box :pengzhuang_buwei, {:name=>"car[accidents_attributes][0][pengzhuang_buwei][]"}, key_val[1].to_s %>
+    <%= accident_form.check_box :pengzhuang_buwei, {:name=>"car[accident_attributes][pengzhuang_buwei][]"}, key_val[1].to_s %>
     <%= key_val[0] %>
             </td>
             <% if key_val[1]==6 or key_val[1]==12 or key_val[1]==14%> </tr> <% end %>
@@ -103,10 +103,13 @@
   </tr> 
   <tr><td colspan="6" class="table_title">价值信息</td></tr>
   <tr>
-    <td class="thead"><%= accident_form.label :chengbao_jine,'车保金额' %> </td>
-    <td><%= accident_form.text_field :chengbao_jine,:class=>'span-3' %>元* </td>
+    <td class="thead"><%= car_form.label :chengbao_jine,'车保金额' %> </td>
+    <td><%= car_form.text_field :chengbao_jine,:class=>'span-3' %>元* </td>
     <td class="thead"><%= accident_form.label :gusun_jine,'估损金额' %> </td>
-    <td><%= accident_form.text_field :gusun_jine,:class=>'span-3' %>元* </td>
+    <td><%= car_form.text_field :gusun_jine,:class=>'span-3' %>元* </td>
+    <td class="thead"><%= accident_form.label :shiji_jiazhi,'实际价值' %> </td>
+    <td><%= car_form.text_field :shiji_jiazhi,:class=>'span-3' %>元* </td>
+    
   </tr> 
   <% end %>  
   <tr><td colspan="6" class="table_title">车辆图片信息</td></tr>

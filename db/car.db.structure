@@ -8,8 +8,9 @@ is_at:bool,
 plate_number :string,
 engine_number :string
 frame_number :string
-
-model_id:integer, model_name:string, serial_no:string, registered_at:date, is_at:bool, plate_number:string, engine_number:string, frame_number:string
+chengbao_jine :integer
+gusun_jine :integer
+model_id:integer, model_name:string, serial_no:string, registered_at:date, is_at:bool, plate_number:string, engine_number:string, frame_number:string, chengbao_jine:integer, gusun_jine:integer,
 
 
 #accident info
@@ -25,11 +26,10 @@ duifang_baoxian :string
 renshang_qingkuang
 pengzhuang_buwei :integer
 chuxian_jingguo :string
-chengbao_jine :integer
-gusun_jine :integer
+
 chuli_fangshi :ingerger 
 
-sunshi_leixing:integer, chuxian_riqi:date, tingche_provice_id:integer, tingche_city_id:integer, tingche_more:string, chejiaohao_sousun:boolean, zeren_rending:integer, duifang_baoxian:string, renshang_qingkuang:integer, pengzhuang_buwei:integer, chuxian_jingguo:string, chengbao_jine:integer, gusun_jine:integer, chuli_fangshi:interger
+sunshi_leixing:integer, chuxian_riqi:date, tingche_provice_id:integer, tingche_city_id:integer, tingche_more:string, chejiaohao_sousun:boolean, zeren_rending:integer, duifang_baoxian:string, renshang_qingkuang:integer, pengzhuang_buwei:integer, chuxian_jingguo:string,  chuli_fangshi:interger
 
 #委托拍卖，询问底价
 

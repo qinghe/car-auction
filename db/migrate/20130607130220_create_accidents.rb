@@ -18,8 +18,6 @@ class CreateAccidents < ActiveRecord::Migration
       t.integer :renshang_qingkuang
       t.string :pengzhuang_buwei, :default=>''
       t.string :chuxian_jingguo
-      t.float :chengbao_jine,:default=>0 #车辆承保金额
-      t.float :gusun_jine,:default=>0  #车辆估损金额
       t.float :zuizhong_peifu_jine,:default=>0  #最终赔付金额
       t.integer :chuli_fangshi,:default=>0 # 处理方式(委托拍卖，询问底价)
       t.integer :guohu_shixiao,:default=>0 # n天 过户时效 
