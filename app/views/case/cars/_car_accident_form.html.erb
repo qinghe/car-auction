@@ -1,9 +1,9 @@
 <%
-   @accident = @car.new_record? ? @car.build_accident : @car.accident
+   @accident = @car.new_record? ? @car.accidents.build : @car.accidents[0]
    @auction = @car.new_record? ? @car.build_auction : (@car.auction ?  @car.auction : @car.build_auction)
-   @car.license_files.build
-   @car.accident_files.build
-   @car.frame_files.build
+   @car.license_files+[@car.license_files.build]
+   @car.accident_files+[@car.accident_files.build]
+   @car.frame_files+[@car.frame_files.build]
 %>
 
 <% form_url = @car.new_record? ? case_cars_path(@car) : case_car_path(@car) %>
@@ -114,46 +114,69 @@
   <% end %>  
   <tr><td colspan="6" class="table_title">车辆图片信息</td></tr>
   <tr>
-    <td class="thead">  行驶证  </td>
-    <td colspan="5">      
+    <td class="thead">  行驶证图片  </td>
+    <td colspan="5">
+      <%= car_form.fields_for :license_files do |f| %>
+          <% unless f.object.new_record? %>
+              <% div_id = "image"+f.object.id.to_s%>
+              <div id='<%=div_id %>' class="image_with_close">
+              <%=link_to "X", "#", :style=>"display:block;float:right;", :onclick=>"$('##{div_id}').hide();$('[name=\"#{f.object_name}[_destroy]\"]').val('1');"%>
+              <%= image_tag f.object.image_path,:alt=>f.object.name,:style=>"display:block;" %>
+              <%= f.hidden_field :_destroy %>
+              </div>
+          <% else %>
+              <div style="margin:5px;clear:both;">
+                <%= f.label :car_file, '添加文件' %>
+                <%= f.file_field :car_file %>
+              </div>
+          <% end %>
+      <%end%>
     </td>
   </tr> 
+
   <tr>
-    <td class="thead">上传图片</td>
-    <td colspan="5">        
-    <%= car_form.fields_for :license_files, @license_files do |file_form| %>
-      <%= file_form.label :car_file, '添加文件' %>
-      <%= file_form.file_field :car_file %>
-    <%end%>
-    
-    </td>
-  </tr>
-  <tr>
-    <td class="thead">   车架号  </td>
-    <td colspan="5">   
-    </td>
-  </tr>
-  <tr>
-    <td class="thead">上传图片</td>
+    <td class="thead">   车架号图片  </td>
     <td colspan="5">
-      <%= render :partial=>'upload_file', :locals=>{:object=>CarFile.new, :field_name=>'car_file'}%>
-    </td>    
+      <%= car_form.fields_for :frame_files do |f| %>
+          <% unless f.object.new_record? %>
+              <% div_id = "image"+f.object.id.to_s%>
+              <div id='<%=div_id %>' class="image_with_close">
+              <%=link_to "X", "#", :style=>"display:block;float:right;", :onclick=>"$('##{div_id}').hide();$('[name=\"#{f.object_name}[_destroy]\"]').val(1);"%>
+              <%= image_tag f.object.image_path,:alt=>f.object.name,:style=>"display:block;" %>
+              <%= f.hidden_field :_destroy %>
+              </div>
+          <% else %>
+              <div style="margin:5px;clear:both;">
+                <%= f.label :car_file, '添加文件' %>
+                <%= f.file_field :car_file %>
+              </div>
+          <% end %>
+      <%end%>
+    </td>
   </tr>
-    
-  <tr>  
-    <td class="thead">   车辆损失图片展示  </td>
-      <td  colspan="5">      
-      </td>
-  </tr>
+
   <tr>
-      <td class="thead">上传图片</td>
-      <td colspan="5">      
-        <%= car_form.fields_for :accident_files, @accident_files do |file_form| %>
-            <%= file_form.label :car_file, '添加文件' %>
-            <%= file_form.file_field :car_file %>
+    <td class="thead">   车辆损失图片  </td>
+      <td  colspan="5">
+        <%= car_form.fields_for :accident_files do |f| %>
+            <% unless f.object.new_record? %>
+                <% div_id = "image"+f.object.id.to_s%>
+                <div id='<%=div_id %>' class="image_with_close">
+                  <%=link_to "X", "#", :style=>"display:block;float:right;", :onclick=>"$('##{div_id}').hide();$('[name=\"#{f.object_name}[_destroy]\"]').val('1');"%>
+                  <%= image_tag f.object.image_path,:alt=>f.object.name,:style=>"display:block;" %>
+                  <%= f.hidden_field :_destroy %>
+                </div>
+            <% else %>
+                <div style="margin:5px;clear:both;">
+                  <%= f.label :car_file, '添加文件' %>
+                  <%= f.file_field :car_file %>
+                </div>
+            <% end %>
         <%end%>
       </td>
-  </tr> 
+  </tr>
+
+
   <tr>  
     <td class="thead">  选择车辆处理方式  </td>
       <td  colspan="5">     
@@ -177,4 +200,3 @@
 
   
 <% end %>
-
