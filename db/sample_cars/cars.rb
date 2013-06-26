@@ -129,6 +129,7 @@ cars = [
     cars[idx][:auction_attributes][:start_at]=start_times.sample
     cars[idx][:auction_attributes][:expired_at]=cars[idx][:auction_attributes][:start_at]+20.minute
     car = Car.new(cars[idx])
+    car.serial_no = ("s%010d" % (i*10+idx))
     car.engine_number = ("e%010d" % i)
     car.plate_number = ("p%010d" % i)
     car.frame_number = ("f%010d" % i)

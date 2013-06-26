@@ -125,6 +125,7 @@
       <%= file_form.label :car_file, '添加文件' %>
       <%= file_form.file_field :car_file %>
     <%end%>
+    
     </td>
   </tr>
   <tr>
@@ -135,10 +136,7 @@
   <tr>
     <td class="thead">上传图片</td>
     <td colspan="5">
-    <%= car_form.fields_for :frame_files, @frame_files do |file_form| %>
-      <%= file_form.label :car_file, '添加文件' %>
-      <%= file_form.file_field :car_file %>
-    <%end%>
+      <%= render :partial=>'upload_file', :locals=>{:object=>CarFile.new, :field_name=>'car_file'}%>
     </td>    
   </tr>
     

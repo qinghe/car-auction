@@ -6,5 +6,5 @@
 //= require jquery.hoverIntent.minified
 //= require jquery.dcmegamenu
 //= require jquery.ui.dialog
-//= require jquery-fileupload
+//= require jquery-fileupload/basic
 //= require ajax

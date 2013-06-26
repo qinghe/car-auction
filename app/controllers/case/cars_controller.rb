@@ -1,5 +1,7 @@
 # encoding: utf-8
 class Case::CarsController < Case::ApplicationController
+  prepend_before_filter :get_data, :only=>[:show,:evaluate,:sendback,:new_auction, :abandon]
+
   def welcome
     logger.debug "---in welcome--------------------------"
     respond_to do |format|
@@ -21,16 +23,20 @@ class Case::CarsController < Case::ApplicationController
   # GET /cars/1
   # GET /cars/1.json
   def show
-    @car = Car.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @car }
     end
   end
-
+  
+  def sendback
+    if @car.status>0
+      @car.to_status!(@car.status-1)
+    end
+    redirect_to case_car_url(@car)
+  end
+  
   def evaluate
-    @car = Car.find(params[:id])    
     @car.update_attributes!( params[:car] )
     @car.evaluator_id = current_user.id
     @car.to_status!(1)
@@ -39,8 +45,16 @@ class Case::CarsController < Case::ApplicationController
     end  
   end
 
+  def upload_file
+    
+    car_file = CarFile.new(params[:car_file])
+    car_file.car_file = params[:car_file]["car_file"]
+    logger.debug "car_file=#{car_file.car_file}, params[:car_file]=#{params[:car_file]["car_file"]}"
+    car_file.save!
+    format.json { car_file.to_jq_upload}
+  end
+  
   def new_auction
-    @car = Car.find(params[:id])
     @car.update_attributes(params[:car])
     @car.to_status!(2)
     respond_to do |format|
@@ -49,21 +63,12 @@ class Case::CarsController < Case::ApplicationController
   end
 
   def abandon    
-    @car = Car.find(params[:id])
     @car.update_attributes(params[:car])
     @return_to_path = case_car_list_path(@car.status)
     @car.to_status!(5)    
     respond_to do |format|
       format.js { render "abandoned"}
     end     
-  end
-
-  def show_auction
-    @confirm = params[:confirm].to_i
-    @car = Car.find(params[:car_id])
-    respond_to do |format|
-      format.js
-    end
   end
 
   def show_pickup_car
@@ -148,4 +153,15 @@ class Case::CarsController < Case::ApplicationController
       format.json { head :no_content }
     end
   end
+  private
+  def get_data      
+    unless Car.exists? params[:id]
+      flash_t_general :error, 'car.dont_exists'
+      redirect_to case_cars_path
+      return
+    end
+        
+    @car = Car.find(params[:id])
+  end
+  
 end

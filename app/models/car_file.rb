@@ -1,10 +1,11 @@
 class CarFile < ActiveRecord::Base
   TYPES = {:license => 0, :frame_number => 1, :accident => 2, :attachment => 3}
   FILE_MAX_SIZE = 10.megabytes
-  belongs_to :car
+  attr_accessible :car_file
   
+  belongs_to :car  
   validates_attachment_presence :car_file,
-                                :message => I18n.t('general.project.car_file.must_be_set')
+                                :message => I18n.t('general.case.car_file.must_be_set')
   validates_attachment_size :car_file,
                             :less_than => FILE_MAX_SIZE,
                             :message => "moze maksymalnie wynosic #{(FILE_MAX_SIZE/1.megabyte).round(2)} MB"
@@ -36,5 +37,17 @@ class CarFile < ActiveRecord::Base
   def file_path
     "/system/car_files/#{id}/#{name}"
   end
+  
+  #  include Rails.application.routes.url_helpers
+  def to_jq_upload
+    {
+      "name" => read_attribute(:upload_file_name),
+      "size" => read_attribute(:upload_file_size),
+      "url" => upload.url(:original),
+   #   "delete_url" => upload_path(self),
+      "delete_type" => "DELETE" 
+    }
+  end
+  
 end
 

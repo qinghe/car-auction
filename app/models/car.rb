@@ -27,6 +27,7 @@ class Car < ActiveRecord::Base
   CARPROCESS = {'0'=>"待评估车辆",'1'=>"待处理车辆",'2'=>"委托车辆",'3'=>"待提车辆",'4'=>"过户车辆",'5'=>"放弃委托拍卖",'6'=>"放弃提车"}
   PAYMETHOD = {'0'=>"保险公司",'1'=>"车主"}
 
+  validates :serial_no, :presence => true, :length => {:within => 1..40}
   validates :engine_number, :presence => true, :length => {:within => 2..40}
   validates :frame_number, :presence => true, :length => {:within => 2..40}
   validates :plate_number, :presence => true, :length => {:within => 2..40}
@@ -52,10 +53,6 @@ class Car < ActiveRecord::Base
 
   def get_bidding_price
     auction ? auction.bidding_price : 0
-  end
-
-  def publish_agency
-    self.publisher ? "#{self.publisher.company.name}" : "保险公司"
   end
 
   def insurance_responsible_person

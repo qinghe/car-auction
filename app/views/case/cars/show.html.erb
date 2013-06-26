@@ -166,8 +166,11 @@
   </tr>
   <tr>
     <td colspan="6">
-      <%=button_to "返回", {:action => "list", :process_method=>car.status}, :form_class => "buttonform"  %>
+      <% button_to "返回", {:action => "list", :process_method=>car.status}, :form_class => "buttonform"  %>
       <%= button_to "点击沟通", {:action => "index"}, :form_class => "buttonform", :disabled=>'disabled' %>
+<%if car.status?(1) or car.status?(2) %>
+      <%= button_to "退回", sendback_case_car_path(), :form_class => "buttonform", :method=>:put  %>
+<% end %>
       <%= button_to "转移负责人", {:action => "index"}, :form_class => "buttonform", :disabled=>'disabled' %>
       <%= button_to "催促回复", {:action => "index"}, :form_class => "buttonform", :disabled=>'disabled' %>
 
@@ -206,3 +209,4 @@
     <%= render :partial=>'abandon_dialog'%>
     <%= render :partial=>'evaluate_dialog'%>
 
+<div id="show_pickup_car"></div>

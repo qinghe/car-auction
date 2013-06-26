@@ -20,27 +20,27 @@
     <% if @cars.size > 0%>
       <tr class="table_title" >
         <td class="table_title" > 流水号</td>
-        <td cl="font-size:15px;"> 车型</td>
+        <td class="table_title"> 车型</td>
         <td class="table_title" > 发布机构</td>
         <td class="table_title" > 保险公司负责人</td>
         <td class="table_title" > 华晨负责人</td>
-        <td class="table_title" > 处理方</td>
         <% if @process_method == "2" %><td class="table_title" > 处理状态</td><%end%>
         <td class="table_title" > 发生时效</td>
-        <td class="table_title" > </td>
+        <td class="table_title" > 选项</td>
       </tr>
       <%@cars.each{|car|%>
           <tr>
             <td> <%= car.serial_no %></td>
             <td> <%= car.name %></td>
-            <td> <%= car.publish_agency %></td>
+            <td> <%= car.publisher.company.name %></td>
             <td> <%= car.insurance_responsible_person %></td>
             <td> <%= car.evaluating_responsible_person %></td>
-            <td> <%= car.publisher.company.name %></td>
             <% if @process_method == "2" %><td> <%= car.status %></td><%end%>
             <td> <%= car.limitation %></td>
-            <td> <%=link_to '详情', case_car_url(car) %> |
-            <%=link_to '编辑', edit_case_car_url(car) %></td>
+            <td> <%=link_to '详情', case_car_url(car) %>
+              <% if car.status?(0)%> |
+            <%=link_to '编辑', edit_case_car_url(car) %>
+              <% end %></td>
           </tr>
       <%}%>
     <%else%>

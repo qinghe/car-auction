@@ -1,0 +1,20 @@
+<%
+ # locals: object, filed_name
+ element_id = "fu#{object.object_id}"
+%>
+
+<%= file_field object.class.name.underscore, field_name, :id=>element_id,"data-url"=>upload_file_case_cars_path %>
+
+<%= javascript_tag do %>
+$(function () {
+    $('#<%=element_id%>').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                $('<p/>').text(file.name).appendTo(document.body);
+            });
+        }
+    });
+});
+
+<% end %>

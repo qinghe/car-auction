@@ -152,16 +152,17 @@ Inz::Application.routes.draw do
 
   match 'case/cars/list/:process_method', :to => 'case/cars#list', :as=>:case_car_list
   match 'case/cars/search', :to => 'case/cars#search'
-  match 'case/cars/show_auction', :to => 'case/cars#show_auction'
   match 'case/cars/show_pickup_car', :to => 'case/cars#show_pickup_car'
   match 'case', :to => 'case/cars#welcome'
 
   namespace "case" do
     resources :cars do
+      post :upload_file, :on => :collection
       get :new_car_accident, :on => :collection
       get :welcome, :on => :collection
       put :evaluate, :on => :member
       put :abandon, :on => :member
+      put :sendback, :on => :member
       put :new_auction, :on => :member
     end
   end
