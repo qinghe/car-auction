@@ -5,7 +5,7 @@ class CarFile < ActiveRecord::Base
   
   belongs_to :car  
   validates_attachment_presence :uploaded,
-                                :message => I18n.t('general.case.car_file.must_be_set')
+                                :message => I18n.t('general.case.uploaded.must_be_set')
   validates_attachment_size :uploaded,
                             :less_than => FILE_MAX_SIZE,
                             :message => "moze maksymalnie wynosic #{(FILE_MAX_SIZE/1.megabyte).round(2)} MB"

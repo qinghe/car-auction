@@ -64,8 +64,8 @@
   </tr>
   <tr>
     <td colspan="6">
-      <% car.license_images.each do |license_file| %>
-          <%= image_tag license_file.image_path,:alt=>license_file.name %>
+      <% car.car_license_images.each do |license_file| %>
+          <%= image_tag license_file.uploaded.url(:thumb),:alt=>license_file.name %>
       <%end%>
     </td>
   </tr>
@@ -74,8 +74,8 @@
   </tr>
   <tr>
     <td colspan="6">
-      <% car.frame_images.each do |frame_file|  %>
-          <%= image_tag frame_file.image_path,:alt=>frame_file.name %>
+      <% car.car_frame_images.each do |frame_file|  %>
+          <%= image_tag frame_file.uploaded.url(:thumb),:alt=>frame_file.name %>
       <%end%>
     </td>
   </tr>

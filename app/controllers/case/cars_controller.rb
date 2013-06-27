@@ -47,14 +47,17 @@ class Case::CarsController < Case::ApplicationController
 
   def upload_file
     @car_file = nil
-    ['car_image', 'car_frame_image'].each{|key|
-      if params.key?(key)
+    ['car_image', 'car_frame_image', 'car_license_image'].each{|key|
+      if params.key?(key) and params[key].key?(:uploaded)
         file_class = key.classify.safe_constantize
         if file_class
           @car_file = file_class.new(params[key])
+          @car_file.user_id = current_user.id
         end
       end
     }
+logger.debug "@car_file=#{@car_file.inspect}"
+@car_file.save!    
     respond_to do |format|
       if @car_file.save
         format.json { render :json=> {:files=> [@car_file.to_jq_upload]}, :status=> :created, :location=> @car_file.uploaded.url }

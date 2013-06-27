@@ -113,42 +113,24 @@
   <tr>
     <td class="thead">  行驶证图片  </td>
     <td colspan="5">
-      <%= car_form.fields_for :license_images do |f| %>
-          <% unless f.object.new_record? %>
-              <% div_id = "image"+f.object.id.to_s%>
-              <div id='<%=div_id %>' class="image_with_close">
-              <%=link_to "X", "#", :style=>"display:block;float:right;", :onclick=>"$('##{div_id}').hide();$('[name=\"#{f.object_name}[_destroy]\"]').val('1');"%>
-              <%= image_tag f.object.image_path,:alt=>f.object.name,:style=>"display:block;" %>
-              <%= f.hidden_field :_destroy %>
-              </div>
-          <% else %>
-              <div style="margin:5px;clear:both;">
-                <%= f.label :car_file, '添加文件' %>
-                <%= f.file_field :car_file %>
-              </div>
-          <% end %>
-      <%end%>
+        <div id="car_license_image_list">  
+          <%= render :partial=>'car_file', :collection=>@car.car_license_images%>
+        </div>
+        <div class="clear">
+          <%= render :partial=>"upload_file", :locals=>{:object=>@car.car_license_images.build, :field_name=>'uploaded'}%>  
+        </div>
     </td>
   </tr> 
 
   <tr>
     <td class="thead">   车架号图片  </td>
     <td colspan="5">
-      <%= car_form.fields_for :frame_images do |f| %>
-          <% unless f.object.new_record? %>
-              <% div_id = "image"+f.object.id.to_s%>
-              <div id='<%=div_id %>' class="image_with_close">
-              <%=link_to "X", "#", :style=>"display:block;float:right;", :onclick=>"$('##{div_id}').hide();$('[name=\"#{f.object_name}[_destroy]\"]').val(1);"%>
-              <%= image_tag f.object.image_path,:alt=>f.object.name,:style=>"display:block;" %>
-              <%= f.hidden_field :_destroy %>
-              </div>
-          <% else %>
-              <div style="margin:5px;clear:both;">
-                <%= f.label :car_file, '添加文件' %>
-                <%= f.file_field :car_file %>
-              </div>
-          <% end %>
-      <%end%>
+        <div id="car_frame_image_list">  
+          <%= render :partial=>'car_file', :collection=>@car.car_frame_images%>
+        </div>
+        <div class="clear">
+          <%= render :partial=>"upload_file", :locals=>{:object=>@car.car_frame_images.build, :field_name=>'uploaded'}%>  
+        </div>
     </td>
   </tr>
 
@@ -158,20 +140,11 @@
         <div id="car_image_list">  
           <%= render :partial=>'car_file', :collection=>@car.car_images%>
         </div>
-        
         <div class="clear">
           <%= render :partial=>"upload_file", :locals=>{:object=>@car.car_images.build, :field_name=>'uploaded'}%>  
         </div>
       </td>
   </tr>
-  <tr>
-      <td class="thead">添加图片      
-      </td>
-      <td colspan="5">
-          
-      </td>
-  </tr>
-
 
   <tr>  
     <td class="thead">  选择车辆处理方式  </td>
