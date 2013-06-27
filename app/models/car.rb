@@ -14,11 +14,12 @@ class Car < ActiveRecord::Base
   has_many :car_license_images, :class_name =>'CarLicenseImage'
   has_many :car_frame_images, :class_name =>'CarFrameImage'
   has_many :car_images,  :class_name =>'CarImage'
+  has_many :car_docs,  :class_name =>'CarDoc'
   has_many :attachment_files, :class_name =>'CarFile'
 
   has_one :auction, :dependent => :destroy
   belongs_to :model, :class_name=>'CarModel'
-  attr_accessible :accident_attributes, :auction_attributes, :car_license_image_ids, :car_frame_image_ids, :car_image_ids
+  attr_accessible :accident_attributes, :auction_attributes, :car_license_image_ids, :car_frame_image_ids, :car_image_ids, :car_doc_ids
   accepts_nested_attributes_for :accident, :auction
   
   #DISPLACEMENTS={'','1.2'=>12,'1.5'=>15,'1.6'=>16,'2.4'=>24} #排量

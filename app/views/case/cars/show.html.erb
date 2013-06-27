@@ -149,8 +149,8 @@
   </tr>
 <tr>
   <td colspan="6">
-    <% car.attachment_files.each do |attachment_file| %>
-        <%= image_tag attachment_file.uploaded.url,:alt=>attachment_file.name %>
+    <% car.car_docs.each do |doc_file| %>
+        <%= image_tag doc_file.uploaded.url,:alt=>attachment_file.name %>
     <%end%>
   </td>
 </tr>

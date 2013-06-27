@@ -1,0 +1,3 @@
+class CarDoc < CarFile
+  
+end
