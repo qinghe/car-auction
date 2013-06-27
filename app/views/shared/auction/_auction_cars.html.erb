@@ -15,7 +15,7 @@
   <tr>
     <td>
        <% highlight = (auction.highlight)? :highlight : nil %>
-       <%= link_to image_tag(auction.car.accident_files.first.car_file.url(:thumb)), auction_path(auction), :class => highlight %>
+       <%= link_to car_image_tag(auction.car), auction_path(auction), :class => highlight %>
 
     </td>
     <td> <%= auction.car.model.name %></td>

@@ -1,0 +1,3 @@
+class CarImage < CarFile
+  
+end

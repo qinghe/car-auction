@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Case::CarsController < Case::ApplicationController
-  prepend_before_filter :get_data, :only=>[:show,:evaluate,:sendback,:new_auction, :abandon]
+  prepend_before_filter :get_data, :only=>[:show,:evaluate,:sendback,:new_auction, :abandon, :delete_car_file]
 
   def welcome
     logger.debug "---in welcome--------------------------"
@@ -46,14 +46,34 @@ class Case::CarsController < Case::ApplicationController
   end
 
   def upload_file
-    
-    car_file = CarFile.new(params[:car_file])
-    car_file.car_file = params[:car_file]["car_file"]
-    logger.debug "car_file=#{car_file.car_file}, params[:car_file]=#{params[:car_file]["car_file"]}"
-    car_file.save!
-    format.json { car_file.to_jq_upload}
+    @car_file = nil
+    ['car_image', 'car_frame_image'].each{|key|
+      if params.key?(key)
+        file_class = key.classify.safe_constantize
+        if file_class
+          @car_file = file_class.new(params[key])
+        end
+      end
+    }
+    respond_to do |format|
+      if @car_file.save
+        format.json { render :json=> {:files=> [@car_file.to_jq_upload]}, :status=> :created, :location=> @car_file.uploaded.url }
+      else
+        format.json { render :json=> @car_file.errors, :status=> :unprocessable_entity }
+      end
+    end
   end
   
+  def delete_file
+    @deleted_file = CarFile.find(params[:file_id])
+    @deleted_file.delete
+    #@files = file.type.constantize.where(["user_id=? and car_id=?",current_user.id, file.car_id ])
+    respond_to do |format|
+      format.js { render "file_deleted"}
+    end    
+  end
+  
+ 
   def new_auction
     @car.update_attributes(params[:car])
     @car.to_status!(2)

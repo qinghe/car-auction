@@ -1,4 +1,6 @@
 module CarsHelper
+  
+  
   def car_model_select(car)
     pinpais = CarModel.roots
     selected_pinpai = selected_chexi =  selected_chexing = nil;

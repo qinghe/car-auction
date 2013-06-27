@@ -100,5 +100,12 @@ include ReCaptcha::ViewHelper #wazne dla recaptcha
     content_for :head, javascript_include_tag("tinymce/tinymce.min")+tinymce_init
   end
 
-
+  def car_first_image(car, size=:thumb)
+    image = car.car_images.first
+    image_tag(image.uploaded.url(size), :alt=>image.name)
+  end
+  def car_image_tag(car, size=:thumb)
+    image = car.car_images.first
+    image_tag(image.uploaded.url(size), :alt=>image.name)
+  end
 end

@@ -150,8 +150,8 @@ cars = [
     #车辆图片
     for file in Dir[File.join(File.dirname(__FILE__),'files', idx.to_s, "a_*.{jpg,gif,png}")]
       open(file) do|f|
-        accident_file = car.accident_files.build
-        accident_file.car_file = f
+        accident_file = car.car_images.build
+        accident_file.uploaded = f
         accident_file.save!
       end
     end

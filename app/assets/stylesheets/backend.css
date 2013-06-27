@@ -170,9 +170,15 @@ form.buttonform
     font-weight:bold;
 }
 
-.image_with_close
+.image_container
 {
-    width:100px;
     float:left;
     margin:5px;
+    position: relative;
+}
+a.image_delete_button
+{
+    background-color: red;
+    position: absolute;
+    right: 0;
 }

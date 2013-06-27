@@ -60,8 +60,8 @@ Inz::Application.routes.draw do
   match '/signin',  :to => 'sessions#new'
   match '/signout',  :to => 'sessions#destroy'
   match '/ver', :to => 'users#mail_ver'
-  match '/find', :to => 'users#find'
-  match '/delete', :to => 'users#delete'
+  #match '/find', :to => 'users#find'
+  #match '/delete', :to => 'users#delete'
 
   # PANEL
   namespace :panel do
@@ -157,7 +157,9 @@ Inz::Application.routes.draw do
 
   namespace "case" do
     resources :cars do
-      post :upload_file, :on => :collection
+      post :upload_file, :on => :collection #new car
+      put :upload_file, :on => :collection  #edit car
+      delete :delete_file, :on => :collection #delete file have not assigned to car
       get :new_car_accident, :on => :collection
       get :welcome, :on => :collection
       put :evaluate, :on => :member

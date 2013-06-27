@@ -2,8 +2,7 @@
     <h2 class=""><%= @auction.title %></h2>
 
     <div class="left-section">
-     <%=  image_tag(@auction.car.accident_files.first.car_file.url(:medium)) %>
-
+     <%=  car_image_tag(car, :medium) %>
     </div>
     <div class="right-section">
       <%= render :partial => "auction_form" %>
@@ -52,7 +51,7 @@
   </div>
   
   <div class="carimage-list">
-    <% @auction.car.accident_files.each{|file| %>
-     <%=  image_tag file.car_file.url  %>      
+    <% @auction.car.car_images.each{|file| %>
+     <%=  image_tag file.uploaded.url  %>      
     <% } %>
   </div>
