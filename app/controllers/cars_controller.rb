@@ -4,7 +4,7 @@ class CarsController < ApplicationController
   
   def index
     @title="事故车"
-    @cars = Car.all(:include=>[:auction,:model, :accidents]).paginate(:page => params[:page], :per_page => 20)
+    @cars = Car.all(:include=>[:auction,:model, :accident]).paginate(:page => params[:page], :per_page => 20)
 
     respond_to do |format|
       format.html # index.html.erb

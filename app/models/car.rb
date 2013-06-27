@@ -8,7 +8,7 @@ class Car < ActiveRecord::Base
   belongs_to :publisher, :class_name => 'User'
   belongs_to :evaluator, :class_name => 'User'
 
-  has_many :accidents, :dependent => :destroy
+  has_one :accident, :dependent => :destroy
   has_many :car_files, :dependent => :destroy
   
   has_many :license_files, :conditions=>{:file_type=>0}, :class_name =>'CarFile'
@@ -18,8 +18,8 @@ class Car < ActiveRecord::Base
 
   has_one :auction, :dependent => :destroy
   belongs_to :model, :class_name=>'CarModel'
-  attr_accessible :accidents_attributes, :license_files_attributes, :frame_files_attributes, :accident_files_attributes, :auction_attributes
-  accepts_nested_attributes_for :accidents, :license_files,:frame_files,:accident_files, :auction, allow_destroy: true
+  attr_accessible :accident_attributes, :license_files_attributes, :frame_files_attributes, :accident_files_attributes, :auction_attributes
+  accepts_nested_attributes_for :accident, :license_files,:frame_files,:accident_files, :auction, allow_destroy: true
   
   #DISPLACEMENTS={'','1.2'=>12,'1.5'=>15,'1.6'=>16,'2.4'=>24} #排量
   VARIATORS={'MT'=>0,'AT'=>1,'A/MT'=>2, 'CVT'=>3}
