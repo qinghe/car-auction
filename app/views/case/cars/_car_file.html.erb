@@ -1,5 +1,15 @@
 
 <div id="car_file_<%=car_file.id%>" class="image_container">
+  <% if car_file.uploaded_content_type=~/image/%>
   <%=link_to "X", delete_file_case_cars_path(:file_id=>car_file.id), :class=>"image_delete_button",  :remote=>true, :method=>:delete%>
   <%= image_tag car_file.uploaded.url(:thumb),:alt=>car_file.name %>
+  <% else %>
+    <div>
+        <div> <%= car_file.name %></div>
+        <div>
+            <%=link_to "下载", car_file.uploaded.url %>
+            <%=link_to "删除", delete_file_case_cars_path(:file_id=>car_file.id), :remote=>true, :method=>:delete%>            
+        </div>
+    </div>
+  <% end %>
 </div>

@@ -1,5 +1,8 @@
 module CarsHelper
   
+  def build_unique_element_id(object)
+    "uni_#{object.object_id}"
+  end
   
   def car_model_select(car)
     pinpais = CarModel.roots

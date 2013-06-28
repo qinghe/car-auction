@@ -1,0 +1,46 @@
+<% car = @car %>
+<% unless car.new_record? %>
+    <%
+    doc = car.car_docs.build 
+    element_id = build_unique_element_id( doc ) 
+    %>
+    <div id="car_doc_dialog" title="事故车附件上传">    
+        <%=form_for doc, :url=>upload_doc_case_car_path(car), :remote=>true, :html=>{:id=>"upload_doc_form"}  do|f| %>
+        <table>
+            <tr>
+              <td> 车辆ID </td>   <td>  <%= car.id %>  </td>    
+              <td>车型</td>   <td > <%= car.name %> </td>
+            </tr>
+            <tr>
+              <td> 选择附件 </td> <td colspan="3"> <%= render :partial=>"upload_file", :locals=>{:object=>doc, :field_name=>'uploaded'} %>    </td>
+            </tr>
+        </table>
+        <% end %>
+    </div>
+    <%= javascript_tag do %>
+      $(function() {
+        $('#<%= element_id%>').fileupload( 'option', {'add': function(e, data){}, 'replaceFileInput':false}   );
+        $( "#car_doc_dialog" ).dialog({
+          autoOpen: false,
+          width:800,
+          modal: true,
+          buttons: {
+            "保存": function() {
+               //$( "#upload_doc_form" ).submit();
+               var fu = $('#<%= element_id%>').data('blueimpFileupload');
+               fu.submit();               
+            },
+            "取消": function() {
+              $( this ).dialog( "close" );
+            }
+          },
+          close: function() {
+          }
+        });
+      $( "#car_doc_button" )
+          .click(function() {
+            $( "#car_doc_dialog" ).dialog( "open" );
+          });
+      });    
+    <%end %>
+<% end %>    

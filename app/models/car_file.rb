@@ -35,6 +35,8 @@ class CarFile < ActiveRecord::Base
       "name" => read_attribute(:uploaded_file_name),
       "size" => read_attribute(:uploaded_file_size),
       "thumb_url" => uploaded.url(:thumb),
+      "url" => uploaded.url,
+      "content_type" => uploaded_content_type,
    #   "delete_url" => upload_path(self),
       "delete_type" => "DELETE" 
     }

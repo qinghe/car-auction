@@ -64,9 +64,9 @@
   </tr>
   <tr>
     <td colspan="6">
-      <% car.car_license_images.each do |license_file| %>
-          <%= image_tag license_file.uploaded.url(:thumb),:alt=>license_file.name %>
-      <%end%>
+      <div id="car_license_image_list">  
+          <%= render :partial=>'car_file', :collection=>@car.car_license_images%>
+      </div>
     </td>
   </tr>
   <tr>
@@ -74,9 +74,9 @@
   </tr>
   <tr>
     <td colspan="6">
-      <% car.car_frame_images.each do |frame_file|  %>
-          <%= image_tag frame_file.uploaded.url(:thumb),:alt=>frame_file.name %>
-      <%end%>
+      <div id="car_frame_image_list">  
+          <%= render :partial=>'car_file', :collection=>@car.car_frame_images%>
+      </div>
     </td>
   </tr>
 
@@ -84,10 +84,10 @@
     <td class="thead" colspan="6">   车辆损失图片展示  </td>
   </tr>
   <tr>
-    <td colspan="6">
-      <% car.car_images.each do |car_image| %>
-          <%= image_tag car_image.uploaded.url(:thumb),:alt=>car_image.name %>
-      <%end%>
+    <td colspan="6">      
+      <div id="car_image_list">  
+          <%= render :partial=>'car_file', :collection=>@car.car_images%>
+      </div>
     </td>
   </tr>
   <tr>
@@ -149,9 +149,9 @@
   </tr>
 <tr>
   <td colspan="6">
-    <% car.car_docs.each do |doc_file| %>
-        <%= image_tag doc_file.uploaded.url,:alt=>attachment_file.name %>
-    <%end%>
+    <div id="car_doc_list">  
+      <%= render :partial=>'car_file', :collection=>@car.car_docs%>
+    </div>
   </td>
 </tr>
 <tr>
@@ -189,7 +189,8 @@
       <%elsif car.status == 3 %>
           <%=button_to "不能过户" , {:action => "index"} , :form_class => "buttonform"%>
       <%end%>
-      <%=button_to "上传附件", {:action => "index"} , :form_class => "buttonform"%>
+        <button id="car_doc_button">上传附件</button>
+
     </td>
   </tr>
   <tr>
@@ -208,5 +209,6 @@
     <%= render :partial=>'auction_dialog'%>
     <%= render :partial=>'abandon_dialog'%>
     <%= render :partial=>'evaluate_dialog'%>
+    <%= render :partial=>'upload_doc_dialog'%>
 
 <div id="show_pickup_car"></div>

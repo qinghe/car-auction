@@ -166,6 +166,7 @@ Inz::Application.routes.draw do
       put :abandon, :on => :member
       put :sendback, :on => :member
       put :new_auction, :on => :member
+      post :upload_doc, :on => :member
     end
   end
     	
