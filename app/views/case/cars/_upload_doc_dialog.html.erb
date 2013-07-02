@@ -23,12 +23,7 @@
           autoOpen: false,
           width:800,
           modal:true,
-          buttons: [
-           { id:"car_doc_submit",
-             text: "保存",
-             click: function() {
-               $( this ).dialog( "close" );
-             }},
+          buttons: [           
            { id:"btn-cancel",
              text: "取消",
              click: function() {
@@ -39,14 +34,12 @@
           .click(function() {
             $( "#car_doc_dialog" ).dialog( "open" );
           });
-      $('#<%= element_id%>').fileupload( 'option', 
-        {'add': function(e, data){ 
-          $('#car_doc_submit').click(
-            function () {data.submit();}
+      $('#<%= element_id%>').change(
+            function () {$( "#car_doc_dialog" ).dialog("close");}
             );
-          }, 
-          'replaceFileInput':false
-        });
+          
+         
+        
       });    
     <%end %>
 <% end %>    
