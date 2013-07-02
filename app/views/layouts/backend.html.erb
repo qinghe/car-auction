@@ -14,7 +14,7 @@
     <%= yield :head %>
   </head>
   <body>
-    <div id="page" class="container" >
+    <div id="page" class="" >
       
       <div id="header">
         <div id="header_info1" >
@@ -26,7 +26,6 @@
         </div>
 
       </div>
-      <div id="center">
         <div id="lftnav">
           <%=render :partial=>'layouts/top_menu/case_nav' %>
         </div>
@@ -38,11 +37,10 @@
           <%= yield %>
           </div>
         </div>        
-      </div>
 
 
       <div id="footer">
-        <%= Time.now %>
+        <div><%= Time.now %> </div>
       </div>
     </div>
   </body>

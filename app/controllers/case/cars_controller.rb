@@ -56,15 +56,11 @@ class Case::CarsController < Case::ApplicationController
         end
       end
     }
-logger.debug "@car_file=#{@car_file.inspect}"
-@car_file.save!    
-    respond_to do |format|
       if @car_file.save
-        format.json { render :json=> {:files=> [@car_file.to_jq_upload]}, :status=> :created, :location=> @car_file.uploaded.url }
+        render :text=> {:files=> [@car_file.to_jq_upload]}.to_json, :status=> :created, :location=> @car_file.uploaded.url 
       else
-        format.json { render :json=> @car_file.errors, :status=> :unprocessable_entity }
+        render :text=> @car_file.errors, :status=> :unprocessable_entity 
       end
-    end
   end
   
   def delete_file

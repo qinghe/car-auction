@@ -3,24 +3,20 @@
 *= require jquery.ui.button
 */
 
-#page
-{
-  position:absolute;
-  top:0;
-  bottom:2px;
-  left:0;
-  right:0;
-  width: 1000px;
-  min-height:600px;
-  margin:auto;
-  background-color: white;
-}
+*{ list-style:none; margin:0; padding:0;}
+html{ height:100%; overflow:hidden;}
+body{ height:100%;}
+#page{ height:100%; width:900px; margin:auto; position:relative;background-color: white; }
+#header,#lftnav,#content,#footer{  position:absolute;}
+#header{ height:90px; left:0px; top:0; right:0;}
+#lftnav{ width:160px; left:0px; top:90px; bottom:30px; }
+#content{ left:160px; right:0px; top:90px; bottom:30px; overflow: auto;}
+#footer{height:30px; left:0px; right:0px; bottom:0px;}
 
-#header
-{
-  height:80px;
+#page{
+  border-left: 1px solid #E1E1E1;
+  border-right: 1px solid #E1E1E1;
 }
-
 #header_info1
 { background-color: #BE1E2D;
   height:58px;
@@ -31,38 +27,18 @@
 { color: white;
   font-size:30px;
 }
-#center
-{ background-color: transparent;
-  position:absolute;
-  left:0;
-  right:0;
-  top:80px;
-  bottom:30px;
-  border: 1px solid #E1E1E1;
-}
+
 #content
 { 
-  border-left:1px solid #E1E1E1;
-  position:absolute;
-  top:0;
-  left:160px;
-  bottom: 0;
-  right:0;
-  overflow:auto;
+  /*border-left:1px solid #E1E1E1;*/
 }
-
 .content_inner{
-    padding:5px;
+   padding:5px;
 }
 
 #footer
 {
-  border: 1px solid #E1E1E1;
-  position:absolute;
-  bottom:0;
-  height:30px;
-  left:0;
-  right:0;
+  /*border: 1px solid #E1E1E1;*/
 }
 .center_title
 {
@@ -82,14 +58,6 @@
     padding: 10px;
 }
 
-#lftnav
-{
-  position:absolute;
-  top:0;
-  left:0;
-  width: 160px;
-  min-height:100px;
-}
 
 .left_title
 {
