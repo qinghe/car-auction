@@ -19,28 +19,34 @@
     </div>
     <%= javascript_tag do %>
       $(function() {
-        $('#<%= element_id%>').fileupload( 'option', {'add': function(e, data){}, 'replaceFileInput':false}   );
         $( "#car_doc_dialog" ).dialog({
           autoOpen: false,
           width:800,
-          modal: true,
-          buttons: {
-            "保存": function() {
-               //$( "#upload_doc_form" ).submit();
-               var fu = $('#<%= element_id%>').data('blueimpFileupload');
-               fu.submit();               
-            },
-            "取消": function() {
-              $( this ).dialog( "close" );
-            }
-          },
-          close: function() {
-          }
+          modal:true,
+          buttons: [
+           { id:"car_doc_submit",
+             text: "保存",
+             click: function() {
+               $( this ).dialog( "close" );
+             }},
+           { id:"btn-cancel",
+             text: "取消",
+             click: function() {
+               $( this ).dialog( "close" );
+             }}]
         });
       $( "#car_doc_button" )
           .click(function() {
             $( "#car_doc_dialog" ).dialog( "open" );
           });
+      $('#<%= element_id%>').fileupload( 'option', 
+        {'add': function(e, data){ 
+          $('#car_doc_submit').click(
+            function () {data.submit();}
+            );
+          }, 
+          'replaceFileInput':false
+        });
       });    
     <%end %>
 <% end %>    
