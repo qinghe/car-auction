@@ -29,14 +29,14 @@
 
 $(function () {
     $('#<%=element_id%>').fileupload({
-       // dataType: 'json',
+        // dataType: 'json',
         done: function (e, data) {
           if($.browser.msie){
             var data_to_parse = $( data.result ).text();
           }else{
             var data_to_parse = data.result;
           }
-          alert(data_to_parse);
+          //alert(data_to_parse);
           var result = jQuery.parseJSON(data_to_parse);
             $.each(result.files, function (index, file) {
                 $('#<%=object_name%>_list').append(tmpl("t<%=element_id%>", file));
