@@ -13,7 +13,7 @@ class Case::CarsController < Case::ApplicationController
   # GET /cars.json
   def index
     @process_method = params[:process_method].to_i
-    @cars = Car.list_by(@process_method, current_user)
+    @cars = Car.list_by(@process_method, current_user).includes(:model).order('created_at DESC')
     respond_to do |format|
       format.html { render :cart_list}
       format.json { render json: @cars }
@@ -124,7 +124,7 @@ class Case::CarsController < Case::ApplicationController
 
   def list
     @process_method = params[:process_method].to_i
-    @cars = Car.list_by(@process_method, current_user)
+    @cars = Car.list_by(@process_method, current_user).includes(:model).order('created_at DESC')
   end
 
   # GET /cars/1/edit

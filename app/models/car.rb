@@ -20,6 +20,7 @@ class Car < ActiveRecord::Base
   has_one :auction, :dependent => :destroy
   belongs_to :model, :class_name=>'CarModel'
   attr_accessible :accident_attributes, :auction_attributes, :car_license_image_ids, :car_frame_image_ids, :car_image_ids, :car_doc_ids
+  attr_accessible :chengbao_jine, :gusun_jine, :shiji_jiazhi, :canzhi_jiazhi, :ershou_jiazhi
   accepts_nested_attributes_for :accident, :auction
   
   #DISPLACEMENTS={'','1.2'=>12,'1.5'=>15,'1.6'=>16,'2.4'=>24} #排量
@@ -36,9 +37,9 @@ class Car < ActiveRecord::Base
   def self.list_by(process_method,current_user)
     if current_user.role == "insurance"
       user_ids = current_user.company.members.collect{|m|m.id}
-      return self.where("status =#{process_method} and publisher_id in (#{user_ids.join(',')})").all
+      return self.where("status =#{process_method} and publisher_id in (#{user_ids.join(',')})")
     else
-      return self.where("status =#{process_method}").all
+      return self.where("status =#{process_method}")
     end
   end
 
@@ -74,5 +75,9 @@ class Car < ActiveRecord::Base
 
   def status?( some_status)
     self.status == some_status
+  end
+  
+  def to_status!( new_status)
+    self.update_attribute(:status, new_status)
   end
 end
