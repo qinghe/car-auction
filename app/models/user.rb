@@ -45,13 +45,20 @@ class User < ActiveRecord::Base
 	validates :email, :presence => true, :format => {:with => email_regex}, :uniqueness => { :case_sensitive => false }, :length => {:within => 6..50}
 	validates :password, :presence => true, :confirmation => true, :length => { :within => 5..100 }
 	validates_numericality_of :status, :presence => true
-	validates_inclusion_of :role, :in => ["administrator", "user", "insurance","evaluating"]
+	validates_inclusion_of :role, :in => ["administrator", "user", "insurance","evaluator"]
 	
 	validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png', 'image/gif']
 
 	before_create :encrypt_password
 	before_create :default_data
 	before_update :encrypt_password, :if => ->{ self.password_changed? }
+
+  def self.administrator
+    self.where(:role=>'administrator').first
+  end
+  def self.evaluator
+    self.where(:role=>'evaluator').first    
+  end
 
   def default_data
  	self.status = 2
@@ -107,12 +114,12 @@ class User < ActiveRecord::Base
     role == "administrator"
   end
 
-  def insurance_person?
+  def insurance_agent?
     role == "insurance"
   end
 
   def evaluator?
-    role == "evaluating"
+    role == "evaluator"
   end
 
   def company_name

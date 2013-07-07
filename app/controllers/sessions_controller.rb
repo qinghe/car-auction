@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
     #  render 'new', :layout => layout
     else
       sign_in user
-      if current_user.role == "insurance" or current_user.role == "evaluating"
+      if current_user.insurance_agent? or current_user.evaluator?
         redirect_to welcome_case_cars_path
       else
         redirect_back_from_login session
@@ -72,7 +72,7 @@ class SessionsController < ApplicationController
   end
   
   def destroy
-    return_to_path = current_user.insurance_person? ? backend_new_sessions_path : root_path
+    return_to_path = current_user.insurance_agent? ? backend_new_sessions_path : root_path
     sign_out
     redirect_to return_to_path    
     flash_t :notice

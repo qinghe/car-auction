@@ -64,10 +64,24 @@ class Auction < ActiveRecord::Base
   attr_accessor :expired_after
   #validates_inclusion_of :expired_after, :in => (1..MAX_EXPIRED_AFTER).to_a.collect{|d| d}, :on => :create
 
-  def open?    
+  def opened?    
     (status? :active) and ( DateTime.now > self.start_at ) and  ( DateTime.now < self.expired_at )      
   end
-
+  
+  def closed?
+    (status? :active) and ( DateTime.now > self.expired_at )
+  end
+  
+  def close! #choose_win_offer
+    offer = self.offers.first(:order=>"price DESC")
+    unless offer.present?
+      offer = new_offer( :price =>self.starting_price,:offerer_id => self.car.evaluator_id )  
+      offer.save!
+    end
+    set_won_offer!(offer)   
+    car.to_status!(3)   
+  end
+  
   def bidding_price
     self.won_offer ? self.won_offer.price : 0
   end
@@ -110,7 +124,7 @@ class Auction < ActiveRecord::Base
   #czy uzytkownik moze zlozyc oferte
   def allowed_to_offer? user
     return false if user.nil? || self.owner?(user) #|| self.made_offer?(user)
-
+    return true if user.evaluator?
     return true if user.deposit >= self.deposit
     #unnecessary but in most cases will end before its time
     #return true if self.public?

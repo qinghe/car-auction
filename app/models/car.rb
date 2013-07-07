@@ -35,7 +35,7 @@ class Car < ActiveRecord::Base
   validates :plate_number, :presence => true, :length => {:within => 2..40}
 
   def self.list_by(process_method,current_user)
-    if current_user.role == "insurance"
+    if current_user.insurance_agent?
       user_ids = current_user.company.members.collect{|m|m.id}
       return self.where("status =#{process_method} and publisher_id in (#{user_ids.join(',')})")
     else
@@ -57,14 +57,6 @@ class Car < ActiveRecord::Base
     auction ? auction.bidding_price : 0
   end
 
-  def insurance_responsible_person
-    self.publisher ? self.publisher.name : "保险公司"
-  end
-
-  def evaluating_responsible_person
-    self.evaluator ? self.evaluator.name : "华晨"
-  end
-
   def name
     self.model.present? ? self.model.name : model_name
   end
@@ -78,6 +70,12 @@ class Car < ActiveRecord::Base
   end
   
   def to_status!( new_status)
-    self.update_attribute(:status, new_status)
+    if new_status== 1
+      if self.canzhi_jiazhi>0 
+        self.update_attribute(:status, new_status)
+      end
+    else
+      self.update_attribute(:status, new_status)      
+    end
   end
 end

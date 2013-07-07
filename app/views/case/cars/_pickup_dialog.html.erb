@@ -1,0 +1,37 @@
+
+<% if @car.status?(2) %>
+<% car = @car
+   dialog_container_id = "pickup_dialog" 
+   dialog_form_id = "pickup_form"
+%>
+<div id="<%=dialog_container_id%>"title="确认车辆<%=car.name%>提车">
+
+<%= form_for(car, :url => pickup_case_car_path(car),:html=>{:id=>dialog_form_id}, :remote=>true ) do |car_form| %>
+    <%= render :partial=>"pickup_car_form", :locals => { :car_form => car_form } %>
+<%end%>
+
+    <%= javascript_tag do %>
+      $(function() {
+        $( "#<%=dialog_container_id%>" ).dialog({
+          autoOpen: false,
+          width:800,
+          modal: true,
+          buttons: {
+            "提交": function() {
+               $( "#<%=dialog_form_id%>" ).submit();
+            },
+            "取消": function() {
+              $( this ).dialog( "close" );
+            }
+          },
+          close: function() {
+          }
+        });
+      $( "#pickup_car_button" )
+          .click(function() {
+            $( "#<%=dialog_container_id%>" ).dialog( "open" );
+          });
+      });    
+    <%end %>
+<%end %>
+    

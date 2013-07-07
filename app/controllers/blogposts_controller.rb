@@ -5,7 +5,7 @@ class BlogpostsController < ApplicationController
   before_filter :right_user, :only => :new
   
   def static
-    @title="关于华晨" if params[:page]=='about' 
+    @title="关于华宸" if params[:page]=='about' 
     @page = params[:page]
   end
   

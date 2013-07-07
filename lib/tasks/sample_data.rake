@@ -58,7 +58,7 @@ def make_users #zmieniony format emailu dla latwiejszego logowania
       :password => 'password',
       :name => firstname,
       :lastname => lastname,
-      :role => ((i%2)==0 ? 'insurance_company':'evaluating_company'),
+      :role => ((i%2)==0 ? 'insurance_company':'evaluator_company'),
       :status => 2,
       :email => "#{i+1+n}@example.com",
       :description => description
@@ -307,8 +307,8 @@ def make_offers
 end
 
 def make_companies
-  names = ['平安保险公司','人寿保险公司','华晨评估公司']
-  types = ['insurance','insurance','evaluating']
+  names = ['平安保险公司','人寿保险公司','华宸评估公司']
+  types = ['insurance','insurance','evaluator']
   3.times do |i|
     Company.create!(
         :name => names[i],

@@ -32,7 +32,7 @@ class AuctionsController < ApplicationController
   # ajax post only
   def bid
     #"offer"=>{"price"=>"14000.0"}
-    @offer = Offer.new(params[:offer])
+    @offer = @auction.new_offer(params[:offer])
     @offer.auction_id = @auction.id
     @offer.offerer_id = current_user.id
 logger.debug "@offer.price=#{@offer.price}, @auction.current_price=#{@auction.current_price}"    

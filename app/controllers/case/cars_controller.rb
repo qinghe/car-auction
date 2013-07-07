@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Case::CarsController < Case::ApplicationController
-  prepend_before_filter :get_data, :only=>[:show,:evaluate,:sendback,:new_auction, :abandon, :delete_car_file]
+  prepend_before_filter :get_data, :only=>[:show,:evaluate,:sendback,:new_auction, :abandon,:pickup, :abandon2, :delete_car_file]
 
   def welcome
     logger.debug "---in welcome--------------------------"
@@ -23,6 +23,11 @@ class Case::CarsController < Case::ApplicationController
   # GET /cars/1
   # GET /cars/1.json
   def show
+    if @car.status? 2
+      if @car.auction.closed? and @car.auction.won_offer.blank?
+        @car.auction.close!
+      end
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @car }
@@ -38,8 +43,8 @@ class Case::CarsController < Case::ApplicationController
   
   def evaluate
     @car.update_attributes!( params[:car] )
-    @car.evaluator_id = current_user.id
-    @car.to_status!(1)
+      @car.evaluator_id = current_user.id
+      @car.to_status!(1)
     respond_to do |format|
       format.js # show.html.erb
     end  
@@ -90,11 +95,20 @@ class Case::CarsController < Case::ApplicationController
     end     
   end
 
-  def show_pickup_car
-    @confirm = params[:confirm].to_i
-    @car = Car.find(params[:car_id])
+  def pickup
+    @car.update_attributes(params[:car])
+    @return_to_path = case_car_path(@car)
+    @car.to_status!(4)   
     respond_to do |format|
-      format.js
+      format.js { render "pickuped"}
+    end
+  end
+  def abandon2
+    @car.update_attributes(params[:car])
+    @return_to_path = case_car_list_path(@car.status)
+    @car.to_status!(6)   
+    respond_to do |format|
+      format.js { render "abandoned2"}
     end
   end
 
@@ -103,10 +117,6 @@ class Case::CarsController < Case::ApplicationController
     respond_to do |format|
       format.html # new.html.erb      
     end
-  end
-
-  def upload_car_files
-    
   end
 
   def search

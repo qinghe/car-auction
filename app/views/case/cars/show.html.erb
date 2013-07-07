@@ -178,14 +178,14 @@
           <button id="evaluate_car_button">车辆评估</button>
           <button id="auction_car_button">委托拍卖</button>
       <% elsif car.status == 2 %>
-          <%=button_to "提车确认", {:controller=>"cars", :action=>"show_pickup_car", :car_id=>car.id, :confirm => 1 }, :remote => true, :form_class => "buttonform"  %>
+          <button id="pickup_car_button">提车确认</button>
       <%elsif car.status == 3%>
           <%=button_to "过户确认", {:action => "index"}  , :form_class => "buttonform"%>
       <%end%>
       <% if car.status == 0 or car.status == 1 %>
           <button id="abandon_car_button">不委托拍卖</button>
       <% elsif car.status == 2 %>
-          <%=button_to "不能提车", {:controller=>"cars", :action=>"show_pickup_car", :car_id=>car.id, :confirm => 0 }, :remote => true, :form_class => "buttonform" %>
+          <button id="abandon2_car_button">不能提车</button>
       <%elsif car.status == 3 %>
           <%=button_to "不能过户" , {:action => "index"} , :form_class => "buttonform"%>
       <%end%>
@@ -202,7 +202,7 @@
   </tr>
   <tr>
     <td class="thead">业务负责人 </td>
-    <td  colspan="5">保险公司负责人：保险公司  商务负责人：华晨  客服负责人：华晨 </td>
+    <td  colspan="5">保险公司负责人：保险公司  商务负责人：华宸  客服负责人：华宸 </td>
   </tr>
 
 </table>
@@ -210,5 +210,6 @@
     <%= render :partial=>'abandon_dialog'%>
     <%= render :partial=>'evaluate_dialog'%>
     <%= render :partial=>'upload_doc_dialog'%>
+    <%= render :partial=>'pickup_dialog'%>
+    <%= render :partial=>'abandon2_dialog'%>
 
-<div id="show_pickup_car"></div>

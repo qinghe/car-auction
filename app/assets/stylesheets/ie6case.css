@@ -4,3 +4,38 @@ html{ padding:90px 0 30px 0;}
 #lftnav {height:100%;margin-top:0px; float:left;}
 #content {height:100%; margin:0px 0 0 160px;}
 #footer {margin-top:0px;}
+
+/*
+ * IE CSS
+ *
+ * CSS targeted specifically for Internet Explorer for Windows.
+ *
+ * Properties starting with an underscore _ are for IE 5 and 6 only.
+ * Properties starting with head:first-child+body are for IE7 only.
+ * Properties with a child selector (>) or sibling selector (+) are for IE7 only.
+ *
+ */
+  
+  body
+  {
+    position:relative;
+/*    _text-align: center;*/ /* 1st part of IE5/IE6quirks centering hack */
+  }
+
+
+  table {
+    width:auto;
+    border-collapse:collapse;
+    border-spacing:0;
+  }
+  th,td {
+      padding: 0;
+  }
+/*
+ * REFERENCES
+ *
+1. http://www.positioniseverything.net/explorer/doubled-margin.html
+2. http://browservulsel.blogspot.com/2005/04/ie-overflow-auto-scrollbar-overlap.html
+3. http://www.howtocreate.co.uk/wrongWithIE/?chapter=overflow%3Avisible%3B
+ *
+ */

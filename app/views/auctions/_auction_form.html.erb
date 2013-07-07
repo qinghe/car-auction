@@ -10,12 +10,12 @@ car = @auction.car
 accident = @auction.car.accident
 %>
 <script type="text/javascript" charset="utf-8">
-  g_auction_closed = <%= !@auction.open?%>
+  g_auction_closed = <%= !@auction.opened?%>
 </script>
 <div id="auction_info">
 <table class="auctionInfo">
   <tr>
-    <td>当前价</td> <td colspan="2"><%= @auction.open? ? @auction.current_price : (@auction.start_at.future? ? "还没开始":"已经结束")  %></td>    
+    <td>当前价</td> <td colspan="2"><%= @auction.opened? ? @auction.current_price : (@auction.start_at.future? ? "还没开始":"已经结束")  %></td>    
   </tr>
   
   
@@ -28,7 +28,7 @@ accident = @auction.car.accident
   <tr>
     <td>距开始</td> 
     <td colspan="2">
-      <% if @auction.open? %> 正在拍卖
+      <% if @auction.opened? %> 正在拍卖
        
       <% else %>
           <% if @auction.start_at.future? %>
@@ -45,7 +45,7 @@ accident = @auction.car.accident
   <tr>
     <td>拍卖权限</td>
     <td colspan="2">
-      <% if @auction.open? %>
+      <% if @auction.opened? %>
       
         <% if @auction.allowed_to_offer?(@current_user) %>
           <%= form_for Offer.new,:url=>bid_auction_path, :remote=>true do |offer| %>

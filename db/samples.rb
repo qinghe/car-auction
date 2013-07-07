@@ -1,7 +1,7 @@
 #encoding: utf-8
 def make_companies
-  names = ['华晨评估公司','平安保险公司','华安保险公司','太平洋保险公司','人保财险']
-  types = ['evaluating','insurance','insurance','insurance','insurance']
+  names = ['华宸评估公司','平安保险公司','华安保险公司','太平洋保险公司','人保财险']
+  types = ['evaluator','insurance','insurance','insurance','insurance']
   names.each_index do |i|    
     company = Company.create!(
         :name => names[i],

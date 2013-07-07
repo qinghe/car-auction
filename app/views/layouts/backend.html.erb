@@ -8,7 +8,9 @@
 <!--[if lt IE 8]><%= stylesheet_link_tag 'blueprint/ie' %><![endif]-->
 <%= stylesheet_link_tag 'backend', :media => 'screen' %>
 <!--[if IE 7]> <%= stylesheet_link_tag 'ie7' %>   <![endif]-->
-<!--[if lte IE 6]> <%= stylesheet_link_tag 'ie6' %> <![endif]-->
+<!--[if lte IE 6]> 
+  <%= stylesheet_link_tag 'ie6case' %>
+<![endif]-->
     <%= javascript_include_tag 'backend' %>
     <%= csrf_meta_tag %>
     <%= yield :head %>
@@ -17,12 +19,17 @@
     <div id="page" class="" >
       
       <div id="header">
-        <div id="header_info1" >
-         <b>
-          <%= link_to "华晨保险事故车处理系统", "/", :id => "backend_title" %>&nbsp;&nbsp;&nbsp;&nbsp;
-          操作员：<%= current_user.name %> 所属公司：<%= current_user.company_name %> 职位：<%= current_user.role %>
-         </b>
-          <%= link_to "退出", signout_path, :style=>"position:absolute;right:5px;"%>
+        <div class="inner" >
+          <dir class='fl'>
+            <%= image_tag "case/logo.gif",:alt=>'华宸保险事故车处理系统'%>
+          </dir>
+          <div class="fr">  
+           <%= link_to "退出", signout_path, :style=>"position:absolute;right:5px;"%>
+           <br/>
+           <br/>
+           <br/>
+           操作员：<%= current_user.name %> 所属公司：<%= current_user.company_name %> 职位：<%= current_user.role %>
+          </div>
         </div>
 
       </div>

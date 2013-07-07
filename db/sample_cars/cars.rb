@@ -13,7 +13,7 @@
 #起拍价： ￥13000元  加价幅度：￥1000元 保留价：有
 #拍卖保证金：￥5000元  车辆承保金：￥90000元 过户保证金：中标价的10%(最低5000元，最高30000元)
 publisher_ids = User.where(:role=>'insurance').collect(&:id) 
-evaluator_ids = User.where(:role=>'evaluating').collect(&:id) 
+evaluator_ids = User.where(:role=>'evaluator').collect(&:id) 
 car_model_ids = CarModel.leaves.collect(&:id)
 prices = (3000..50000).collect{|i| i}
 
