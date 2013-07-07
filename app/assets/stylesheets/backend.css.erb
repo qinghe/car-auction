@@ -6,13 +6,29 @@
 *{ list-style:none; margin:0; padding:0;}
 html{ height:100%; overflow:hidden;}
 body{ height:100%;}
-#page{ height:100%; width:1000px; margin:auto; position:relative;background-color: white; }
+#page{ height:100%; width:1000px; margin:auto; position:relative;background-color: #FAFAFA; }
 #header,#lftnav,#content,#footer{  position:absolute;}
 #header{ height:90px; left:0px; top:0; right:0;}
 #lftnav{ width:160px; left:0px; top:90px; bottom:30px; }
 #content{ left:160px; right:0px; top:90px; bottom:30px; overflow: auto;}
 #footer{height:30px; left:0px; right:0px; bottom:0px;}
 
+.body_inner
+{
+  height:100%;
+  background: #FFF url(<%= asset_path 'v1/bg.gif' %>) no-repeat center -200px; 
+
+}
+#login_container
+{
+  border-top:1px solid #909092;
+  margin:120px auto auto auto;
+  width:600px;
+  padding:40px 100px;  
+}
+#login_container label{
+  color:#ffffff;
+}
 #page{
   border-left: 1px solid #E1E1E1;
   border-right: 1px solid #E1E1E1;
@@ -47,6 +63,7 @@ body{ height:100%;}
 
 #footer
 {
+  background-image: url(<%= asset_path 'case/footerbg.gif' %>); 
   /*border: 1px solid #E1E1E1;*/
 }
 .center_title

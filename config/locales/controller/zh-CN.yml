@@ -42,7 +42,7 @@ zh-CN:
     sessions:
       destroy: Logged out successfully
       new: You must sign in to view this page
-      login_error: Wrong username or password
+      login_error: 错误的用户名或密码
       deactivated: This account has been deactivated
       Ban: This account has been disabled by an administrator
       verified: This account is not yet verified

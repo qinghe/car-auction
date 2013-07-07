@@ -2,12 +2,8 @@
     width:970px;
     margin: auto;
 }
-.container {    
-    
-}
 
 body {
-   background: #c3e1a8;
    font-family: Microsoft Yahei,Arial,Helvetica,sans-serif;
 }
 
@@ -28,8 +24,7 @@ header img {
     background: #fff;*/
 }
 
-header {
-}
+
 footer{
   background: none repeat scroll 0 0 #333333;
   color: #FFFFFF;
