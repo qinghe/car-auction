@@ -1,0 +1,6 @@
+html{ padding:90px 0 30px 0;}
+#header,#lftnav,#content,#footer{ position:relative; top:0; right:0; bottom:0; left:0;}
+#header {margin-top:-90px;}
+#lftnav {height:100%;margin-top:0px; float:left;}
+#content {height:100%; margin:0px 0 0 160px;}
+#footer {margin-top:0px;}

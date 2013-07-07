@@ -22,11 +22,8 @@ class AuctionsController < ApplicationController
   end
   
   def close
-    if !@auction.won_offer_id.present?
-      @offer = @auction.offers.first(:order=>"price DESC")
-      if @offer.present?
-        @auction.set_won_offer!(@offer)
-      end
+    if @auction.closed? and @auction.won_offer.blank?
+      @auction.close!
     end
     
     render :partial=>"close", :handlers=>[:erb]    

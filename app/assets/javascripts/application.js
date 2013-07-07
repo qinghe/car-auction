@@ -1,3 +1,9 @@
+//= require jquery.min
+//= require jquery_ujs
+//= require jquery.countdown
+//= require jquery.KinSlideshow
+//= require superfish
+//= require ajax
 function clickableLabel(){
     $("input[data-clickable=true]").each(function(){
         var label = $("label[for="+$(this).attr("id")+"]").addClass("clickable").click(function(){ $(this).toggleClass("checked")});
