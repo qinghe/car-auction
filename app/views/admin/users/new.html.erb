@@ -1,0 +1,71 @@
+<% include_wysiwyg %>
+<% user = User.new %>
+<% company = Company.new %>
+<div class="prepend-1 span-18 last">
+  <div class="span-10">
+    <table class>
+      <tr>
+        <td colspan="2" id="table_title">
+          新建用户
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">
+          <%= form_for [:admin, user], :html => { :multipart => true } do |f| -%>
+              <div class="field">
+                <%= f.label :login %><br />
+                <%= f.text_field :login, :class=>"span-6" %>
+              </div>
+              <div class="field">
+                <%= f.label :name %><br />
+                <%= f.text_field :name, :class=>"span-6" %>
+              </div>
+              <div class="field">
+                <%= f.label :lastname %><br />
+                <%= f.text_field :lastname,  :class=>"span-6" %>
+              </div>
+              <div class="field">
+                <%= f.label :email %><br />
+                <%= f.text_field :email, :class=>"span-6" %>
+              </div>
+              <div class="field">
+                <%= f.label :password %><br />
+                <%= f.password_field :password, :value => "", :class=>"span-6" %>
+              </div>
+              <div class="field">
+                <%= f.label :password_confirmation %><br />
+                <%= f.password_field :password_confirmation, :class=>"span-6" %>
+              </div>
+              <div class="field">
+                <%= f.label :deposit, "保证金" %><br />
+                <%= f.text_field :deposit %>
+              </div>
+              <%= f.fields_for :company, :html => { :multipart => true } do |cf| -%>
+              <div class="field">
+                <%= cf.label :company_type, "公司类型" %><br />
+                <%= cf.radio_button(:company_type, 'insurance') %>
+                <%= cf.label(:company_type, "保险公司") %>
+                <%= cf.radio_button(:company_type, 'evaluator') %>
+                <%= cf.label(:company_type, "评估公司") %>
+              </div>
+              <div class="field">
+                <%= cf.label :name, "公司名称" %><br />
+                <%= cf.text_field :name %>
+                <%= cf.hidden_field :description, :value=>"" %>
+              </div>
+              <% end %>
+              <div class="field">
+                <%= f.label :avatar %><br />
+                <%= f.file_field :avatar %>
+              </div>
+              <div class="field">
+                <%= f.label :description %><br />
+                <%= f.text_area :description, :class => "mceEditor span-10" %>
+              </div>
+              <%= f.submit "保存" %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

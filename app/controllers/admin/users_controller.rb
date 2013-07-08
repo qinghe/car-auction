@@ -7,7 +7,27 @@ class Admin::UsersController < Admin::ApplicationController
 		@title = "管理平台 :  用户"
 		@users = User.find(:all, :conditions => ["role NOT IN (?)", "administrator"], :order => "lastname").paginate :per_page => 15, :page => params[:page]	    	
 	end
-	
+
+  def new
+  end
+
+  def create
+    company = params[:user].delete("company")
+    @company = Company.new(company)
+    if @company.save
+      deposit = params[:user].delete("deposit")
+      @useradmin = @company.members.build(params[:user])
+      @useradmin.deposit = deposit
+      if @useradmin.save
+        redirect_to admin_users_path
+      else
+        render :action => :new
+      end
+    else
+      render :action => :new
+    end
+  end
+
 	def edit
     @title = "管理平台 :  用户"
     @useradmin = User.find(params[:id])

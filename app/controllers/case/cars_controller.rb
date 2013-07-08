@@ -3,7 +3,6 @@ class Case::CarsController < Case::ApplicationController
   prepend_before_filter :get_data, :only=>[:show,:evaluate,:sendback,:new_auction, :abandon,:pickup, :abandon2, :abandon3, :transfer, :delete_car_file]
 
   def welcome
-    logger.debug "---in welcome--------------------------"
     respond_to do |format|
       format.html # new.html.erb
     end
@@ -138,11 +137,22 @@ class Case::CarsController < Case::ApplicationController
     insurance_id = params[:insurance_id]
     serial_no = params[:serial_no]
     model_name = params[:model_name]
-    condition = {'cars.status' =>@process_method}
-    condition.merge!({'users.company_id'=>insurance_id}) if insurance_id.to_i > 0
-    condition.merge!({'cars.serial_no'=>serial_no}) if serial_no != ""
-    condition.merge!({'cars.model_name'=>model_name}) if model_name != ""
-    @cars = Car.includes(:publisher).where(condition).all
+
+    condition ="cars.status=#{@process_method} and cars.publisher_id=#{current_user.id}"
+    condition_values = []
+    if insurance_id.to_i > 0
+      condition+=" and users.company_id=?"
+      condition_values << insurance_id
+    end
+    if serial_no != ""
+      condition+=" and cars.serial_no=?"
+      condition_values << serial_no
+    end
+    if model_name != ""
+      condition+=" and (car_models.name=? or cars.model_name=?)"
+      condition_values += [model_name,model_name]
+    end
+    @cars = Car.includes(:publisher,:model).where([condition]+condition_values).all
     render 'case/cars/list'
   end
 
