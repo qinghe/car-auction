@@ -179,18 +179,19 @@
           <button id="auction_car_button">委托拍卖</button>
       <% elsif car.status == 2 %>
           <button id="pickup_car_button">提车确认</button>
-      <%elsif car.status == 3%>
-          <%=button_to "过户确认", {:action => "index"}  , :form_class => "buttonform"%>
-      <%end%>
+      <% elsif car.status == 3 %>
+          <%=button_to "过户确认", {:action => "transfer"}  , :form_class => "buttonform", :method=>"put", :data=>{:confirm=>"确定过户吗？"}%>
+      <% end %>
       <% if car.status == 0 or car.status == 1 %>
           <button id="abandon_car_button">不委托拍卖</button>
       <% elsif car.status == 2 %>
           <button id="abandon2_car_button">不能提车</button>
-      <%elsif car.status == 3 %>
-          <%=button_to "不能过户" , {:action => "index"} , :form_class => "buttonform"%>
-      <%end%>
+      <% elsif car.status == 3 %>
+          <button id="abandon3_car_button">不能过户</button>
+      <% end %>
+      <% if car.status != 4 %>
         <button id="car_doc_button">上传附件</button>
-
+      <% end %>
     </td>
   </tr>
   <tr>
@@ -212,4 +213,5 @@
     <%= render :partial=>'upload_doc_dialog'%>
     <%= render :partial=>'pickup_dialog'%>
     <%= render :partial=>'abandon2_dialog'%>
+    <%= render :partial=>'abandon3_dialog'%>
 

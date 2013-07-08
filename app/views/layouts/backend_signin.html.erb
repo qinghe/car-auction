@@ -26,7 +26,7 @@
       <% flash.keys.each do |key| %>
         <section class="prepend-1 append-1"><div class="<%= key.to_s %>"><%= flash[key].force_encoding("UTF-8") %></div></section>
       <% end %>
-        <div style="background-color: #BF1F30;padding:10px;">
+        <div style="background-color: #BF1F30;padding:10px 10px 10px 140px;">
         <%= yield %>
         </div>
       <div class="clear" > </div>

@@ -2,7 +2,7 @@
 class Car < ActiveRecord::Base
   attr_accessible :engine_number, :frame_number, :variator, :model_id, :model_name, :plate_number, :registered_at, :serial_no, :displacement, :status, :bidding_price,
                   :final_compensate_price, :owner_name, :owner_phone, :pickup_contact_person, :pickup_contact_phone, :pay_method, :pickup_start_at, :pickup_expired_at,
-                  :pickup_address, :giveup_auction_reason, :giveup_pickupcar_reason,
+                  :pickup_address, :giveup_auction_reason, :giveup_pickupcar_reason, :giveup_transfer_reason,
                   :publisher_id, :evaluator_id
 
   belongs_to :publisher, :class_name => 'User'
@@ -26,7 +26,7 @@ class Car < ActiveRecord::Base
   #DISPLACEMENTS={'','1.2'=>12,'1.5'=>15,'1.6'=>16,'2.4'=>24} #排量
   VARIATORS={'MT'=>0,'AT'=>1,'A/MT'=>2, 'CVT'=>3}
 
-  CARPROCESS = {'0'=>"待评估车辆",'1'=>"待处理车辆",'2'=>"委托车辆",'3'=>"待提车辆",'4'=>"过户车辆",'5'=>"放弃委托拍卖",'6'=>"放弃提车"}
+  CARPROCESS = {'0'=>"待评估车辆",'1'=>"待处理车辆",'2'=>"委托车辆",'3'=>"待提车辆",'4'=>"过户车辆",'5'=>"放弃委托拍卖",'6'=>"放弃提车",'7'=>"放弃过户"}
   PAYMETHOD = {'0'=>"保险公司",'1'=>"车主"}
 
   validates :serial_no, :presence => true, :length => {:within => 1..40}
@@ -72,10 +72,10 @@ class Car < ActiveRecord::Base
   def to_status!( new_status)
     if new_status== 1
       if self.canzhi_jiazhi>0 
-        self.update_attribute(:status, new_status)
+        self.update_attributes(:status=> new_status)
       end
     else
-      self.update_attribute(:status, new_status)      
+      self.update_attributes(:status=> new_status)      
     end
   end
 end

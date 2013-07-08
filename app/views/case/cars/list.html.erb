@@ -40,6 +40,7 @@
             <td> <%=link_to '详情', case_car_url(car) %>
               <% if car.status?(0)%> |
             <%=link_to '编辑', edit_case_car_url(car) %>
+            | <%=link_to '删除', case_car_url(car), :method=>:delete,:data=>{:confirm=>"确定要删除吗？"} %>
               <% end %></td>
           </tr>
       <%}%>

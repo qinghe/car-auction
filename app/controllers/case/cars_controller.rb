@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Case::CarsController < Case::ApplicationController
-  prepend_before_filter :get_data, :only=>[:show,:evaluate,:sendback,:new_auction, :abandon,:pickup, :abandon2, :delete_car_file]
+  prepend_before_filter :get_data, :only=>[:show,:evaluate,:sendback,:new_auction, :abandon,:pickup, :abandon2, :abandon3, :transfer, :delete_car_file]
 
   def welcome
     logger.debug "---in welcome--------------------------"
@@ -15,7 +15,7 @@ class Case::CarsController < Case::ApplicationController
     @process_method = params[:process_method].to_i
     @cars = Car.list_by(@process_method, current_user).includes(:model).order('created_at DESC')
     respond_to do |format|
-      format.html { render :cart_list}
+      format.html { render :list}
       format.json { render json: @cars }
     end
   end
@@ -98,7 +98,7 @@ class Case::CarsController < Case::ApplicationController
   def pickup
     @car.update_attributes(params[:car])
     @return_to_path = case_car_path(@car)
-    @car.to_status!(4)   
+    @car.to_status!(3)   
     respond_to do |format|
       format.js { render "pickuped"}
     end
@@ -111,7 +111,21 @@ class Case::CarsController < Case::ApplicationController
       format.js { render "abandoned2"}
     end
   end
-
+  
+  def abandon3
+    @car.update_attributes(params[:car])
+    @return_to_path = case_car_list_path(@car.status)
+    @car.to_status!(7)   
+    respond_to do |format|
+      format.js { render "abandoned3"}
+    end
+  end
+  
+  def transfer
+    @car.to_status!(4)
+    redirect_to case_car_list_path(@car.status)
+  end
+  
   def new_car_accident
     @car = Car.new
     respond_to do |format|

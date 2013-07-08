@@ -32,6 +32,7 @@ class CreateCars < ActiveRecord::Migration
       t.string :pickup_address
       t.string :giveup_auction_reason
       t.string :giveup_pickupcar_reason
+      t.string :giveup_transfer_reason
       t.timestamps
     end
   end
