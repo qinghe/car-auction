@@ -55,8 +55,8 @@
           lasting = {},
           interval = $this.data('countdownInterval'),
           currentDate = new Date(fromDate),
+          secondsSpend=0,
           secondsLeft = Math.floor((toDate.valueOf() - currentDate.valueOf()) / 1000);
-      
       function triggerEvents() {
         // Evaluate if this node is included in the html
         if($this.closest('html').length === 0) {
@@ -66,6 +66,7 @@
         }
         // Calculate the time offset
         secondsLeft--;
+        secondsSpend++;
         if(secondsLeft < 0) {
           secondsLeft = 0;
         }
@@ -93,7 +94,8 @@
       
       function dispatchEvent(eventName) {
         var event     = $.Event(eventName);
-        event.date    = new Date(new Date().valueOf() + secondsLeft);
+        event.fromDate = currentDate ;
+        event.date    = new Date(fromDate + secondsSpend*1000);
         event.value   = values[eventName] || "0";
         event.toDate  = toDate;
         event.lasting = lasting;

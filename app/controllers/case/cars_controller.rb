@@ -81,7 +81,9 @@ class Case::CarsController < Case::ApplicationController
     @car.update_attributes(params[:car])
     @car.to_status!(2)
     respond_to do |format|
-      format.js { render "auction_saved"}
+      format.js {
+        render "auction_saved"
+        }
     end 
   end
 
@@ -171,9 +173,10 @@ class Case::CarsController < Case::ApplicationController
   def create
     @car = Car.new(params[:car])
     @car.publisher_id = current_user.id
+    @car.evaluator_id = User.evaluator.id
       if @car.save
         flash_t :success
-        redirect_to edit_case_car_url(@car)
+        redirect_to case_car_url(@car)
       else
         title_t :new
         render :action => :new_car_accident

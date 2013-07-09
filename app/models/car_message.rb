@@ -1,0 +1,3 @@
+class AuctionApplicationMessage < Message
+
+end

@@ -1,4 +1,4 @@
-class AuctionInvitation < ActiveRecord::Base
+class BidApplication < ActiveRecord::Base
   belongs_to :auction
   belongs_to :user
 end

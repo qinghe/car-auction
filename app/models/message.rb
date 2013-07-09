@@ -48,7 +48,7 @@ class Message < ActiveRecord::Base
     self.owner_id = self.author_id
     return false unless self.save
 
-    new_msg = Message.new self.attributes
+    new_msg = self.class.new self.attributes
     new_msg.receiver_login = self.receiver.login
     new_msg.author_id = self.author_id
     new_msg.owner_id = self.receiver_id
@@ -56,7 +56,7 @@ class Message < ActiveRecord::Base
   end
   
   def prepare_reply_message
-    msg = Message.new
+    msg = self.class.new
     msg.receiver_login = self.author.login
     msg.topic = 'Re: '+self.topic
     msg.body = '<br /><br />'+self.author.to_s+' napisal: <br />'+self.body

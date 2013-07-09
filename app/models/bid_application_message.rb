@@ -1,0 +1,3 @@
+class BidApplicationMessage < Message
+  
+end
