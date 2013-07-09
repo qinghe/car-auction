@@ -2,26 +2,32 @@
 zh-CN:
   activerecord:
     models:
-      auction: auction
-      message: message
+      car: 车
+      auction: 拍卖
+      message: 消息
       project: project
       topic: topic
       post: post
       project_file: project_file
       role: role
-      user: user
+      user: 用户
       membership: membership
       invitation: invitation
     attributes:
+      car:
+        serial_no: 流水单号
+        engine_number: 发动机号
+        frame_number: 车架钢印号
+        plate_number: 车牌号
       alert:
         text: Content of the application
       user:
-        login: Login
-        name: name
+        登录帐号: Login
+        姓名: name
         lastname: lastname
-        password: password
+        密码: password
         password_confirmation: password_confirmation
-        country: country
+        国籍: country
       auction:
         title: title
         description: description

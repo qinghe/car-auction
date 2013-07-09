@@ -30,6 +30,9 @@ class Auction < ActiveRecord::Base
   belongs_to :auctioneer, :class_name => 'User' #huachen company
   belongs_to :car
   
+  #validates :price_increment, :numericality => {:greater_than => 0}
+  #validates :reserve_price, :numericality => {:greater_than => 0}
+  
   ThinkingSphinx::Index.define :auction, :with => :active_record do
     indexes :title
     indexes :description
@@ -75,7 +78,7 @@ class Auction < ActiveRecord::Base
   def close! #choose_win_offer
     offer = self.offers.first(:order=>"price DESC")
     unless offer.present?
-      offer = new_offer( :price =>self.starting_price,:offerer_id => self.car.evaluator_id )  
+      offer = new_offer( :price =>( self.starting_price > self.car.canzhi_jiazhi ?  self.starting_price : self.car.canzhi_jiazhi),:offerer_id => self.car.evaluator_id )  
       offer.save!
     end
     set_won_offer!(offer)   
