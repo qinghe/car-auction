@@ -106,6 +106,10 @@ include ReCaptcha::ViewHelper #wazne dla recaptcha
   end
   def car_image_tag(car, size=:thumb)
     image = car.car_images.first
-    image_tag(image.uploaded.url(size), :alt=>image.name)
+    if image.present?
+      image_tag(image.uploaded.url(size), :alt=>image.name)
+    else
+      image_tag('missing_car_thumb.jpg', :alt=>'missing-image')
+    end
   end
 end

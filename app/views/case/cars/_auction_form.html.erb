@@ -72,8 +72,8 @@
     <%end%>
 
     <%= car_form.fields_for :auction, @auction do |auction_form| %>
-      <%= auction_form.hidden_field :title,:value=>"" %>
-      <%= auction_form.hidden_field :description,:value=>"" %>
+      <%= auction_form.hidden_field :title,:value=>@car.name %>
+      <%= auction_form.hidden_field :description,:value=>@car.name %>
       <tr class="aution_info">
         <td colspan="6" class="table_title">费用信息</td>
       </tr>
