@@ -2,7 +2,7 @@
 zh-CN:
   activerecord:
     models:
-      car: 车
+      car: 车辆
       auction: 拍卖
       message: 消息
       project: project

@@ -3,7 +3,11 @@ class AddUserPhone < ActiveRecord::Migration
   def up
     add_column :auctions, :auctioneer_id, :integer, :default=>1
     add_column :auctions, :car_id, :integer, :default=>0
-    #add_column :auctions, :remarks, :string, :length=>500    
+    #add_column :auctions, :remarks, :string, :length=>500  
+    add_column :auctions, :expected_start_at, :datetime
+    add_column :auctions, :expected_expired_at, :datetime
+    add_column :auctions, :public_start_at, :datetime
+    add_column :auctions, :public_expired_at, :datetime
     add_column :auctions, :start_at, :datetime
     add_column :auctions, :starting_price, :float, :default=>0          #起拍价
     add_column :auctions, :price_increment, :float, :default=>0 

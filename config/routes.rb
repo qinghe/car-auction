@@ -170,6 +170,7 @@ Inz::Application.routes.draw do
       put :abandon3, :on => :member
       put :transfer, :on => :member
       put :new_auction, :on => :member
+      put :confirm_auction, :on => :member
       post :upload_doc, :on => :member
     end
   end

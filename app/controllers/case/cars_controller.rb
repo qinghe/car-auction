@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Case::CarsController < Case::ApplicationController
-  prepend_before_filter :get_data, :only=>[:show,:evaluate,:sendback,:new_auction, :abandon,:pickup, :abandon2, :abandon3, :transfer, :delete_car_file]
+  prepend_before_filter :get_data, :only=>[:show,:evaluate,:sendback,:new_auction,:confirm_auction, :abandon,:pickup, :abandon2, :abandon3, :transfer, :delete_car_file]
 
   def welcome
     respond_to do |format|
@@ -22,10 +22,10 @@ class Case::CarsController < Case::ApplicationController
   # GET /cars/1
   # GET /cars/1.json
   def show
-    if @car.status? 2
-      if @car.auction.closed? and @car.auction.won_offer.blank?
-        @car.auction.close!
-      end
+    if @car.status?( 2 ) 
+        if @car.auction.closed? and @car.auction.won_offer.blank?
+          @car.auction.close!
+        end
     end
     respond_to do |format|
       format.html # show.html.erb
@@ -85,6 +85,15 @@ class Case::CarsController < Case::ApplicationController
         render "auction_saved"
         }
     end 
+  end
+
+  def confirm_auction
+    @car.update_attributes(params[:car])
+    respond_to do |format|
+      format.js {
+        render "auction_saved"
+        }
+    end     
   end
 
   def abandon    

@@ -1,22 +1,24 @@
-<div class="fl">内部沟通记录：未查看短信（0）  
-</div>
-<div id="time_now" class="fr"><%= Time.now %> 
-</div>
-
-<script type="text/javascript" charset="utf-8">
-// Javascript
-$(function() {
-  var end = new Date(<%= (Time.now+1.year).to_i*1000 %>);  
-  var d, h, m, s;
-  $('#time_now').countdown(<%=Time.now.to_i*1000%>,end, function(event) {
-        $this = $(this);
-    switch(event.type) {
-      case "seconds":
-        s = event.value;
-        break;
-    }
-    // Display
-    $this.html(event.date.toLocaleString());
+<div class="footer_inner" style="">
+  <div class="fl">内部沟通记录：未查看短信（0）  
+  </div>
+  <div id="time_now" class="fr"><%= Time.now %> 
+  </div>
+  
+  <script type="text/javascript" charset="utf-8">
+  // Javascript
+  $(function() {
+    var end = new Date(<%= (Time.now+1.year).to_i*1000 %>);  
+    var d, h, m, s;
+    $('#time_now').countdown(<%=Time.now.to_i*1000%>,end, function(event) {
+          $this = $(this);
+      switch(event.type) {
+        case "seconds":
+          s = event.value;
+          break;
+      }
+      // Display
+      $this.html(event.date.toLocaleString());
+    });
   });
-});
-</script>
+  </script>
+</div>

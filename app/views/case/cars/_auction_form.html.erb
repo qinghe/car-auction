@@ -1,5 +1,4 @@
   <table class='car_accident'>
-
     <%= car_form.fields_for :accident, @accident do |accident_form| %>
     <tr class="aution_info">
       <td colspan="6" class="table_title">手续清单</td>
@@ -89,10 +88,10 @@
       <tr class="aution_info">
         <th>拍卖时间要求</th>
         <td colspan="5">
-          <%= auction_form.label :start_at, '开始时间' %>
-          <%= auction_form.date_select :start_at %>-
-          <%= auction_form.label :expired_at, '结束时间' %>
-          <%= auction_form.date_select :expired_at %>
+          <%= auction_form.label :expected_start_at, '开始时间' %>
+          <%= auction_form.date_select :expected_start_at %>-
+          <%= auction_form.label :expected_expired_at, '结束时间' %>
+          <%= auction_form.date_select :expected_expired_at,  :default=> 1.days.from_now %>
         </td>
       </tr>
     <%end%>

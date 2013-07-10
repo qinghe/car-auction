@@ -8,7 +8,7 @@
 <%= form_for(@car, :url => form_url ) do |car_form| %>
   <% if @car.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
+      <h2><%= t(:other, :scope=> [ :errors, :template, :header],:count=>@car.errors.count,:model=>Car.model_name.human) %> </h2>
 
       <ul>
       <% @car.errors.full_messages.each do |msg| %>
@@ -149,8 +149,8 @@
   <tr>  
     <td class="thead">  选择车辆处理方式  </td>
       <td  colspan="5">     
-         <%= car_form.radio_button :status,'2',:onclick=>"$('#auction_part').show()" %><%=car_form.label :status,"委托拍卖"%> &nbsp;
-         <%= car_form.radio_button :status,'0',:onclick=>"$('#auction_part').hide()" %><%=car_form.label :status,"询问底价"%>
+         <%= car_form.radio_button :status,'2',:onclick=>"$('#auction_part').show()" %><%=car_form.label :status,"委托拍卖",:value=>2%> &nbsp;
+         <%= car_form.radio_button :status,'0',:onclick=>"$('#auction_part').hide()" %><%=car_form.label :status,"询问底价",:value=>0%>
       </td>
   </tr>
 </table>

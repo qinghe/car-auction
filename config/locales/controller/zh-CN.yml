@@ -148,6 +148,9 @@ zh-CN:
         give: Task is returned
         end: The task has been completed
   title:
+    case:
+      cars:
+        new: 添加事故车辆
     auctions:
       index: Welcome!
       show: "{@auction.title} ({@auction.id})"

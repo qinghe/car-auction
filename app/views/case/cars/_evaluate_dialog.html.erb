@@ -3,7 +3,6 @@ car = @car
 %>
 <% if car.status?(0) or car.status?(1) %>
     <div id="evaluate_dialog" title="事故车初始报价函">
-    
     <%=form_for car, :url=>evaluate_case_car_path(car), :remote=>true, :html=>{:id=>"evaluate_car_form"}  do|f| %>
     <table>
         <tr>

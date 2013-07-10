@@ -68,11 +68,11 @@ class Auction < ActiveRecord::Base
   #validates_inclusion_of :expired_after, :in => (1..MAX_EXPIRED_AFTER).to_a.collect{|d| d}, :on => :create
 
   def opened?    
-    (status? :active) and ( DateTime.now > self.start_at ) and  ( DateTime.now < self.expired_at )      
+    (self.start_at.present?) and (status? :active) and ( DateTime.now > self.start_at ) and  ( DateTime.now < self.expired_at )      
   end
   
   def closed?
-    (status? :active) and ( DateTime.now > self.expired_at )
+    (self.start_at.present?) and (status? :active) and ( DateTime.now > self.expired_at )
   end
   
   def close! #choose_win_offer
@@ -263,7 +263,7 @@ class Auction < ActiveRecord::Base
   def init_auction_row
     #self.expired_after = self.expired_after.to_i
     if self.expired_at.blank? 
-      self.expired_at = self.start_at + MAX_EXPIRED_AFTER.days
+      #self.expired_at = self.start_at + MAX_EXPIRED_AFTER.days
     end
     #self.status = STATUSES[:active]
   end
