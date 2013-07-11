@@ -1,4 +1,3 @@
-
 <div >
   <h2>事故车</h2>
 <table class="car-list">
@@ -9,7 +8,9 @@
 	        <tr>
 	          <td> 
 	            <%if car.car_images.present? %>
+	            <%if car.auction.present? %>
 	            <%= link_to car_image_tag(car), auction_path(car.auction) %></td>
+	            <% end %>
 	            <% end %>
 	          <td><%= render :partial=>"brief", :locals=>{:car=>car} %></td>
 	          <td> <%= car.try(:publisher).try(:company).try(:name) %></td>
