@@ -150,20 +150,16 @@ class Case::CarsController < Case::ApplicationController
     model_name = params[:model_name]
 
     condition ="cars.status=#{@process_method} and cars.publisher_id=#{current_user.id}"
-    condition_values = []
     if insurance_id.to_i > 0
-      condition+=" and users.company_id=?"
-      condition_values << insurance_id
+      condition+=" and users.company_id=#{insurance_id}"
     end
     if serial_no != ""
-      condition+=" and cars.serial_no=?"
-      condition_values << serial_no
+      condition+=" and cars.serial_no=#{serial_no}"
     end
     if model_name != ""
-      condition+=" and (car_models.name=? or cars.model_name=?)"
-      condition_values += [model_name,model_name]
+      condition+=" and (car_models.name like '%#{model_name}%' or cars.model_name like '%#{model_name}%')"
     end
-    @cars = Car.includes(:publisher,:model).where([condition]+condition_values).all
+    @cars = Car.includes(:publisher,:model).where(condition).all
     render 'case/cars/list'
   end
 
