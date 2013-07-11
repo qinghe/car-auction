@@ -135,7 +135,7 @@ cars = [
   
 ]
 
-5.times{|i|
+7.times{|i|
   cars.each_index{|idx|
     cars[idx][:auction_attributes][:starting_price]=prices.sample
     cars[idx][:auction_attributes][:start_at]=start_times.sample

@@ -1,0 +1,16 @@
+
+1. car_model.sql is changed for production db, we have to revert 
+  git reset --hard
+
+2. update code
+  git pull
+
+3. vi car_model.sql, change db to production db.
+
+4. bundle exec rake db:reload
+
+5. bundle exec rake tmp:clear
+
+6. bundle exec rake assets:precompile
+
+7. touch tmp/restart.txt 
