@@ -1,0 +1,33 @@
+<% form_url = @company.new_record? ? case_companies_path(@company) : case_company_path(@company) %>
+<% disable_select = @company.new_record? ? false : true %>
+
+<%= form_for(@company, :url => form_url ) do |company_form| %>
+    <% if @company.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= t(:other, :scope=> [ :errors, :template, :header],:count=>@company.errors.count,:model=>Company.model_name.human) %> </h2>
+
+          <ul>
+            <% @company.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <table class='car_accident' border="1">
+      <tr>
+        <td class="thead" class="thead" width="100px">上级部门 </td>
+        <td colspan="3"><%=company_form.select :parent_id, nested_set_options([current_user.company]) {|i| "#{'-' * i.level} #{i.name}" },{}, :disabled=>disable_select  %>
+      </tr>
+      <tr>
+        <td class="thead" class="thead"><%= company_form.label :name,'部门名称' %> </td>
+        <td><%= company_form.text_field :name,:class=>'span-3' %></td>
+      </tr>
+      <tr>
+        <td class="thead"><%= company_form.label :description,'部门简介' %> </td>
+        <td><%= company_form.text_area :description, :size => "80x3",:style=>"width:auto;height:auto;" %>*</td>
+      </tr>
+      <tr>
+        <td colspan="2"> <%= company_form.submit '确认提交' %> </td>
+      </tr>
+   </table>
+<% end %>

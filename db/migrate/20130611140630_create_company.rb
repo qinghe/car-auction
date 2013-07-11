@@ -7,6 +7,9 @@ class CreateCompany < ActiveRecord::Migration
       t.boolean :is_approval, :null=>false, :default=>false
       t.string :approval  #审核描述
       t.date :approved_at #审核日期
+      t.integer :parent_id
+      t.integer :lft
+      t.integer :rgt
       t.timestamps
     end
     create_table :company_files do |t|

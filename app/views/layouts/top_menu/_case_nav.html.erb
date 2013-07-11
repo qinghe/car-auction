@@ -15,7 +15,12 @@
 <div class="left_title">
   <div class="left_subtitle">员工管理</div>
   <div>
-    
+    <ul>
+      <li class="left_submenu"><%= link_to '添加部门', { :controller => "companies", :action => "new"}, :class=>"link1" %>  </li>
+      <li class="left_submenu"><%= link_to '部门管理', { :controller => "companies", :action => "list"}, :class=>"link1" %>  </li>
+      <li class="left_submenu"><%= link_to '添加员工',  {:controller => "users", :action => "new"}, :class=>"link1" %>  </li>
+      <li class="left_submenu"><%= link_to '员工管理',  {:controller => "users", :action => "list"}, :class=>"link1" %>  </li>
+    </ul>
   </div>
 </div>
 

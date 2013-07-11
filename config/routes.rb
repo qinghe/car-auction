@@ -154,6 +154,8 @@ Inz::Application.routes.draw do
   match 'case/cars/search', :to => 'case/cars#search'
   match 'case/cars/show_pickup_car', :to => 'case/cars#show_pickup_car'
   match 'case', :to => 'case/cars#welcome'
+  match 'case/companies/list', :to => 'case/companies#list', :as=>:case_company_list
+  match 'case/users/list', :to => 'case/users#list', :as=>:case_user_list
 
   namespace "case" do
     resources :cars do
@@ -173,6 +175,7 @@ Inz::Application.routes.draw do
       put :confirm_auction, :on => :member
       post :upload_doc, :on => :member
     end
+    resources :companies, :users
   end
     	
   resources :alerts, :only => [:create]

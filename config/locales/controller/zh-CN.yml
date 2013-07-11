@@ -108,6 +108,10 @@ zh-CN:
         update: description has been updated
         create: 车辆添加成功。
         destroy: The file has been deleted
+      companies:
+        create: 部门添加成功。
+      users:
+        create: 员工添加成功。
     project:
       info:
         update: description has been updated

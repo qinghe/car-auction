@@ -1,0 +1,22 @@
+<h1><%= @companies.delete_at(0).name %> </h1>
+<table class='car_accident'>
+  <tr class="table_title" >
+    <td class="table_title" > 部门名称</td>
+    <td class="table_title" > </td>
+  </tr>
+  <%@companies.each{|company|%>
+      <tr>
+        <td>
+          <% if company.level > 1 %>
+            <%(company.level-1).times do%>-<%end%>
+          <%end%>
+          <%= company.name %>
+        </td>
+        <td>
+           <%=link_to '编辑', edit_case_company_url(company) %>
+           <%=link_to '删除', case_company_url(company), :method=>:delete,:data=>{:confirm=>"确定要删除吗？"} %>
+        </td>
+      </tr>
+  <%}%>
+
+</table>
