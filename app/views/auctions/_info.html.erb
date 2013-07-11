@@ -1,3 +1,7 @@
+    <%
+     car = @auction.car
+     accident = @auction.car.accident
+    %>
   <div class="clearfix auction-detail">
     <h2 class=""><%= @auction.title %></h2>
 
@@ -16,10 +20,7 @@
   </div>
   
   <div>
-    <%
-     car = @auction.car
-     accident = @auction.car.accident
-    %>
+
     <table class="car-detail">
       <tr>
         <th>车辆型号</th><td> <%=car.model.name%></td>  
