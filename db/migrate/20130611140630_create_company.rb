@@ -1,29 +1,32 @@
 class CreateCompany < ActiveRecord::Migration
   def up
     create_table :companies do |t|
-      t.string :name, :null => false
-      t.string :description, :null => false, :length => 500
-      t.string :company_type, :null => false #"insurance"=>保险公司,"evaluator"=>评估公司
+      t.string :name, :null => false,:default=>''
+      t.string :description, :null => false, :length => 500,:default=>''
+      t.string :company_type, :null => false,:default=>'' #""=>other, "insurance"=>保险公司,"evaluator"=>评估公司
       t.boolean :is_approval, :null=>false, :default=>false
       t.string :approval  #审核描述
       t.date :approved_at #审核日期
       t.integer :parent_id
       t.integer :lft
       t.integer :rgt
-      t.timestamps
-    end
-    create_table :company_files do |t|
-      t.references :company, :null => false
-      t.string :company_file_file_name
-      t.integer :company_file_file_size
-      t.integer :type
-      #1。委托人身份证正反面， 2.企业营业执照， 3.授权委托书。      
+      
+      t.string :agent_name
+      t.string :address
+      t.string :agent_id_file_name
+      t.string :agent_id_content_type
+      t.integer :agent_id_file_size
+      t.datetime :agent_id_updated_at    
+      t.string :company_id_file_name
+      t.string :company_id_content_type
+      t.integer :company_id_file_size
+      t.datetime :company_id_updated_at    
+      t.datetime :verified_at    
       t.timestamps
     end
   end
 
   def down
     drop_table :companies
-    drop_table :company_files
   end
 end

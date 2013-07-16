@@ -3,12 +3,10 @@
     <div style="float:left;width:20%">
         <dl class="blog_category-list">
             <% for category in @categories %>
-            <dt>
-              <%= category.name%>
-              <% for blogpost in category.blogposts%>
-                <dd> <%= link_to blogpost.title,  blogpost_path(blogpost)%> </dd>
-              <% end %>
-            </dt>
+              <dt><%= category.name%></dt>
+              <% category.blogposts.each_with_index do |blogpost,idx |%>
+                <dd class="<%= (idx==(category.blogposts.count-1)) ? "last":'' %>"> <%= link_to blogpost.title,  blogpost_path(blogpost)%> </dd>
+              <% end %>            
             <% end %>
         </dl>
     </div>

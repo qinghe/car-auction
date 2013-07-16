@@ -1,0 +1,54 @@
+<% include_wysiwyg %>
+    
+      <%= form_for @user, :html => { :multipart => true } do |f| -%>
+      <%= render "layouts/error_messages", :target => @user %>
+      <table>
+        <tr> <td colspan="2" id="table_title">编辑用户信息</td> </tr>
+        <tr> <td> <%= f.label :email,'电子邮箱' %></td> <td>
+          <%= f.text_field :email, :value => @user.email.force_encoding("UTF-8"), :class=>"span-6" %>
+        </td> </tr>
+          <tr>
+          <td><%= f.label :name,'真实姓名' %></td> <td>
+          <%= f.text_field :name, :value => @user.name.force_encoding("UTF-8"), :class=>"span-6" %></td>
+          </tr>
+        <tr> <td> <%= f.label :id_number,User.human_attribute_name(:id_number) %></td> <td>
+          <%= f.text_field :id_number, :class=>"span-6" %>
+        </td> </tr>
+        
+        <tr> <td> <%= f.label :login, '昵称' %></td> <td>
+          <%= f.text_field :login, :value => @user.login.force_encoding("UTF-8"), :class=>"span-6" %>
+        </td> </tr>
+        <tr> <td> <%= f.label :cellphone,'手机' %></td> <td>
+          <%= f.text_field :cellphone, :class=>"span-6" %>
+        </td> </tr>
+        
+        <tr> <td> <%= f.label :provice_id,'所在地区' %></td> <td>
+          <%= f.region_select [:province, :city],{:selected=>[@user.province_id,@user.city_id]} %>
+        </td> </tr>
+        <tr> <td>  <%= f.label :avatar,'头像' %></td> <td> <%= f.file_field :avatar %>   </td> </tr>
+        <tr> <td>
+          <%= f.label :个人描述 %></td> <td>
+          <%= f.text_area :description, :value => @user.description.force_encoding("UTF-8"), :class => "mceEditor span-10" %>
+        </td> </tr>
+        <tr> <td></td> <td> <%= f.submit "保存" %> </td></tr>
+        </table>
+        <% end %>
+
+    <% if current_user.role == "administrator" || current_user?(@user) %>
+
+                <%= form_for @user do |f| -%>
+                <%= render "layouts/error_messages", :target => @user %>
+                <table>
+                  <tr> <td colspan="2" id="table_title">  设置一个新的密码  </td> </tr>
+                  <tr>
+                    <td> <%= f.label :password %></td> 
+                    <td> <%= f.password_field :password, :value => "", :class=>"span-6" %> </td>
+                  </tr>
+                  <tr>
+                    <td> <%= f.label :password_confirmation %></td> 
+                    <td> <%= f.password_field :password_confirmation, :class=>"span-6" %> </td>
+                  </tr>
+                  <tr> <td></td><td><%= f.submit "保存" %> </td></tr>
+                </table>
+                <% end %>
+    <% end %>    

@@ -1,13 +1,12 @@
-<div class="prepend-1 last">
   <div class="span-6">
-    <table class>
+    <table >
       <tr>
       	<td colspan="2" id="table_title">
       		个人信息 
       	</td>
       </tr>
       <tr>
-        <td>Login</td>
+        <td>昵称</td>
         <td><b><%= @user.login %></b></td>
       </tr>
       <tr>
@@ -15,16 +14,24 @@
         <td><%= @user.name %></td>
       </tr>
       <tr>
-        <td>注册日期</td>
-        <td><%= escape_date(@user.created_at) %></td>
+        <td><%=User.human_attribute_name(:id_number)%></td>
+        <td><%= @user.id_number %></td>
       </tr>
       <tr>
-        <td>国籍</td>
-        <td><%= image_tag(@country_flag) %> <%= @country_name %></td>
-      </tr>
+        <td>手机号码</td>
+        <td> <%= @user.cellphone %></td>
+      </tr>      
       <tr>
         <td>Email</td>
         <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <td>所在地</td>
+        <td><%= @user.address %></td>
+      </tr>
+      <tr>
+        <td>注册日期</td>
+        <td><%= escape_date(@user.created_at) %></td>
       </tr>
       <tr>
         <td>帐户状态</td>
@@ -36,15 +43,16 @@
   	<% end %>
   	<%= render 'watch_form' if signed_in? %>
     </div>
-    <div class="prepend-0 span-9">
+  <div class="prepend-0 span-6">
     <table class>
-    <tr>
-    	<tr>
-      	<td colspan="2" id="table_title">
-      		个人描述
-      	</td>
-      </tr>
-        <td style="vertical-align: top; border-right: 1px solid black;"><%= image_tag @user.avatar.url(:thumb) %></td><td><%= simple_format(@user.description) -%></td>
-      </tr>
+      	<tr>
+        	<td colspan="2" id="table_title">
+        		个人描述
+        	</td>          
+        </tr>
+        <tr>
+          <td style="vertical-align: top; border-right: 1px solid black;"><%= image_tag @user.avatar.url(:thumb) %></td>
+          <td><%= simple_format(@user.description) -%></td>
+        </tr>
     </table>
-    </div>
+  </div>

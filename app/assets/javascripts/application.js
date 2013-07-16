@@ -2,7 +2,6 @@
 //= require jquery_ujs
 //= require jquery.countdown
 //= require jquery.KinSlideshow
-//= require superfish
 //= require ajax
 function clickableLabel(){
     $("input[data-clickable=true]").each(function(){

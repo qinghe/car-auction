@@ -1,35 +1,49 @@
 
 <div class="wrapper">
 <h2> 注册华宸网只需半分钟，竞拍事故车轻松方便</h2>
-  <div class="prepend-1 append-1 ">
+  <div class="box">
   <%= form_for [@user] do |f| -%>
   <%= render "layouts/error_messages", :target => @user %>
-  <div class="field">
-    <%= f.label :login,"登录帐号" %><br />
-    <%= f.text_field :login, :class=>"span-6" %>
-  </div>
-  <div class="field">
-    <%= f.label :name,"真实姓名" %><br />
-    <%= f.text_field :name, :class=>"span-6" %>
-  </div>
-  <div class="field">
-    <%= f.label :email,"电子邮箱" %><br />
-    <%= f.text_field :email, :class=>"span-6" %>
+  <table>
+  <tr> <td style="text-align:right;">
+    <%= f.label :email,"电子邮箱" %></td> <td>
+    <%= f.text_field :email, :class=>"span-6" %> <span> 登录系统时使用 </span>
     <%= hidden_field_tag(:ref, @referer) %>
-  </div>
-  <%= f.label :address, "所在地" %><br />
-  <%= f.region_select [:province, :city, :region] %>
-  <div class="field">
-    <%= f.label :password,"登录密码" %><br />
-    <%= f.password_field :password, :value => "", :class=>"span-6" %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation,"确认密码" %><br />
+    </td> 
+  </tr>  
+  <tr> <td style="text-align:right;">
+    <%= f.label :login,"昵称" %></td> <td>
+    <%= f.text_field :login, :class=>"span-6" %>   <span> 5-20位数字、字母或其组合 </span>
+    </td>
+  </tr>
+  <tr> <td style="text-align:right;">
+    <%= f.label :name,"真实姓名" %></td> <td>
+    <%= f.text_field :name, :class=>"span-6" %>  <span> 2-10位中文，提车联系之用 </span></td>
+  </tr>
+  <tr> <td style="text-align:right;">
+    <%= f.label :cellphone,"手机号码" %></td> <td>
+    <%= f.text_field :cellphone, :class=>"span-6" %>   <span> 11位手机号码 </span>
+    </td>
+  </tr>
+  <tr> <td style="text-align:right;">
+    <%= f.label :address, "所在地" %></td> <td>
+  <%= f.region_select [:province, :city] %>
+  </td></tr>
+  <tr> <td style="text-align:right;">
+    <%= f.label :password,"登录密码" %></td> <td>
+    <%= f.password_field :password, :value => "", :class=>"span-6" %><span> 5-20位字符</span>
+    </td> 
+  </tr>
+  <tr> <td style="text-align:right;">
+    <%= f.label :password_confirmation,"确认密码" %></td> <td>
     <%= f.password_field :password_confirmation, :class=>"span-6" %>
-  </div>
-  <div class="actions">
-      <%= f.submit "注册" %>
-    </div>
+    </td> 
+  </tr>
+  <tr>
+    <td></td>
+    <td>  <%= f.submit "注册" %>   </td>
+    </tr>
+    </table>
   <% end %>
   </div>
 </div>

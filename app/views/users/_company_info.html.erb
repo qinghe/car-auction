@@ -1,0 +1,42 @@
+    <table >
+      <tr>
+        <td colspan="2" id="table_title">
+          企业信息 
+        </td>
+      </tr>
+      <tr>
+        <td class="thead">企业名称</td>
+        <td><b><%= @company.name %></b></td>
+      </tr>
+      <tr>
+        <td class="thead">企业地址</td>
+        <td><%= @company.address %></td>
+      </tr>
+      <tr>
+        <td class="thead">被委托人</td>
+        <td><%= @company.agent_name %></td>
+      </tr>
+      <tr>
+        <td class="thead">被委托人身份证</td>
+        <td> <%= image_tag @company.agent_id.url(:thumb) %></td>
+      </tr>      
+      <tr>
+        <td class="thead">企业代码证/营业执照</td>
+        <td><%= image_tag @company.company_id.url(:thumb)%></td>
+      </tr>
+      <tr>
+        <td class="thead">审核通过</td>
+        <td><%= (@company.is_approval? ? "是" : "否") %></td>
+      </tr>
+      <tr>
+        <td class="thead">审核描述</td>
+        <td><%= @company.approval %></td>
+      </tr>
+      <tr>
+        <td class="thead">审核日期</td>
+        <td><%= @company.approved_at %></td>
+      </tr>
+      <tr>
+        <td></td> <td> <%= link_to "eidt", edit_company_user_path%></td>
+      </tr>
+    </table>

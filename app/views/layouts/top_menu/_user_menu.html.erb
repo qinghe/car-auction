@@ -1,43 +1,18 @@
-<ul class="superfish" >
-
+<dl class="user_menu" >
   <% if signed_in? %>
-    <li><%= link_to '我的面板', user_path(current_user) %></li>
-    <li><%= link_to '拍卖', panel_auctions_path %>
-      <ul>
-        <li>
-          <ul>
-            <li><%= link_to '正在进行', panel_auctions_path %></li>
-            <li><%= raw link_to '取消', panel_auctions_path(:status => :canceled) %></li>
-            <li><%= raw link_to '完成', panel_auctions_path(:status => :finished) %></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><%= link_to '私人消息', panel_messages_path %>
-      <ul>
-        <li>
-          <ul>
-            <li><%= link_to '收件箱', panel_messages_path %></li>
-            <li><%= link_to '发件箱', sent_panel_messages_path %></li>
-          </ul>
-        </li>
-        <li>
-          <ul>
-            <li><%= link_to '新的消息', new_panel_message_path %></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><%= link_to '投标', panel_offers_path %>
-      <ul>
-        <li>
-          <ul>
-            <li><%= raw link_to '参与竞标', panel_offers_path(:status => :active) %></li>
-            <li><%= raw link_to '成功竞标', panel_offers_path(:status => :won) %></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><%= link_to '退出(' + current_user.to_s + ')', signout_path, :method => :delete %></li>
+    <dt> 我的面板 </dt>
+      
+        <dd><%= link_to '个人信息', user_path(current_user) %></dd>
+        <dd class="last"><%= link_to '企业资质', show_company_user_path(current_user) %></dd>
+    
+    <dt><%= link_to '拍卖', panel_auctions_path %></dt>
+            <dd><%= link_to '正在进行', panel_auctions_path %></dd>
+            <dd><%= raw link_to '取消', panel_auctions_path(:status => :canceled) %></dd>
+            <dd class="last"><%= raw link_to '完成', panel_auctions_path(:status => :finished) %></dd>
+    
+    <dt><%= link_to '投标', panel_offers_path %></dt>
+            <dd><%= raw link_to '参与竞标', panel_offers_path(:status => :active) %></dd>
+            <dd class="last"><%= raw link_to '成功竞标', panel_offers_path(:status => :won) %></dd>
+    <dt><%= link_to '退出(' + current_user.to_s + ')', signout_path, :method => :delete %></dt>
   <% end %>
 </ul>

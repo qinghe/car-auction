@@ -21,13 +21,22 @@ zh-CN:
         plate_number: 车牌号
       alert:
         text: Content of the application
+      company:
+        name: 企业名称
+        address: 企业地址
       user:
-        登录帐号: Login
-        姓名: name
+        login: 昵称
+        name: 姓名
         lastname: lastname
-        密码: password
-        password_confirmation: password_confirmation
-        国籍: country
+        password: 密码 
+        password_confirmation: 确认密码
+        country: 国籍 
+        email: 电子邮箱
+        cellphone: 手机
+        id_number: 身份证
+        province_id: 省份
+        city_id: 城市
+        region_id: 县区
       auction:
         title: title
         description: description

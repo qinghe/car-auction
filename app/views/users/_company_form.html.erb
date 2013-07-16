@@ -1,0 +1,35 @@
+<% company = @user.company%>
+<%= form_for(company, :url => update_company_user_path(@user) ) do |company_form| %>
+    <%= render "layouts/error_messages", :target => company %>
+    <table >
+      <td colspan="2" id="table_title">编辑企业信息</td>
+
+      <tr>
+        <td class="thead">企业名称 </td>
+        <td><%= company_form.text_field :name,:class=>'span-8' %></td>
+      </tr>
+      <tr>
+        <td class="thead" class="thead">企业地址 </td>
+        <td><%= company_form.text_field :address,:class=>'span-8' %></td>
+      </tr>
+      <tr>
+        <td class="thead" class="thead">被委托人 </td>
+        <td><%= company_form.text_field :agent_name,:class=>'span-8' %></td>
+      </tr>
+      <tr>
+        <td class="thead" class="thead">被委托人身份证 </td>
+        <td><%= company_form.file_field :agent_id %></td>
+      </tr>
+      <tr>
+        <td class="thead" class="thead">企业代码证/营业执照 </td>
+        <td><%= company_form.file_field :company_id %></td>
+      </tr>
+      <tr>
+        <td class="thead"><%= company_form.label :description,'企业简介' %> </td>
+        <td><%= company_form.text_area :description, :size => "80x3",:style=>"width:auto;height:auto;" %></td>
+      </tr>
+      <tr>
+        <td></td><td > <%= company_form.submit '确认提交' %> </td>
+      </tr>
+   </table>
+<% end %>

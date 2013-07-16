@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :country, :null => false, :length => 30, :default=>'cn'
       t.integer :province_id,  :null => false, :default => 0
       t.integer :city_id,  :null => false, :default => 0
-      t.integer :region_id,  :null => false, :default => 0
+      #t.integer :region_id,  :null => false, :default => 0
       t.integer :company_id,  :null => false, :default => 0
       t.string :id_number, :null => false, :length => 20, :default=>''
       t.string :email, :null => false, :length => 50

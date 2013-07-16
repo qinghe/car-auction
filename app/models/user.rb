@@ -1,7 +1,7 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
   attr_accessible :login, :name, :lastname, :email, :country, :status, :password, :password_confirmation, :description, :avatar, 
-    :company_id,:province_id, :city_id, :region_id
+    :company_id,:province_id, :city_id, :cellphone, :id_number
   
 	has_attached_file :avatar, :styles => { :thumb => "100x100>" }, :default_url => "/images/avatars/missing.png"
 	belongs_to :company
@@ -39,17 +39,19 @@ class User < ActiveRecord::Base
   string = /\A[\w+żźćńółęąśŻŹĆĄŚĘŁÓŃß\-.]+\z/
   string2 = /\A[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ\- ']+\z/
 	
-	validates :login, :presence => true, :format => {:with => string}, :length => {:within => 3..40}, :uniqueness => true
+	validates :login, :presence => true, :format => {:with => string}, :length => {:within => 3..40}#, :uniqueness => true
 	validates :name, :presence => true, :length => {:within => 2..40}
 	#validates :lastname, :presence => true, :format => {:with => string2}, :length => {:within => 3..40}
-	validates :country, :presence => true
 	validates :email, :presence => true, :format => {:with => email_regex}, :uniqueness => { :case_sensitive => false }, :length => {:within => 6..50}
 	validates :password, :presence => true, :confirmation => true, :length => { :within => 5..100 }
+  #validates :cellphone, :length=>11
 	validates_numericality_of :status, :presence => true
 	validates_inclusion_of :role, :in => ["administrator", "user", "insurance","evaluator"]
 	
 	validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png', 'image/gif']
-
+  validates :province_id, :presence => true
+  validates :city_id, :presence => true
+  
 	before_create :encrypt_password
 	before_create :default_data
 	before_update :encrypt_password, :if => ->{ self.password_changed? }
@@ -121,6 +123,12 @@ class User < ActiveRecord::Base
 
   def evaluator?
     role == "evaluator"
+  end
+
+  def address
+    if province_id>0 and city_id>0 
+    "#{ChineseCities::Province.find(province_id).name}#{ChineseCities::City.find(city_id).name}"
+    end
   end
 
   def company_name

@@ -37,8 +37,8 @@ zh-CN:
         dont_exists: Job does not exist
         not_included: The job does not belong to this project
     users:
-      create: Welcome new user
-      update: Updated profile
+      create: 您的用户帐号创建成功
+      update: 个人信息更新成功
     sessions:
       destroy: 成功退出系统
       new: 请登录浏览请求页面

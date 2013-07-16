@@ -1,7 +1,7 @@
 #encoding: utf-8
 #require 'mail'
 class UsersController < ApplicationController
-	before_filter :correct_user, :only => [:edit, :update]
+	before_filter :correct_user, :only => [:edit, :update,:show_company,:edit_company,:update_company]
 	
 
 	def new
@@ -13,10 +13,8 @@ class UsersController < ApplicationController
       @referer = ""
       render :action => :new
     end
-	    
-	    	
 	end
-	
+		
 	def show
     @user = User.find(params[:id])
     @statuses = ["未激活","未验证","验证","禁止"]
@@ -35,6 +33,8 @@ class UsersController < ApplicationController
     @hash_mail = make_hash
     @user.status = 2 # fix email verify when needed.
     if  @user.save
+      company = @user.create_company
+      @user.update_column(:company_id, company.id)
       @emailver = Emailver.new(:hash_mail => @hash_mail, :user_id => @user.id)
       if @emailver.save
         Reputation.create!(:user_id => @user.id, :finished_auctions => 0, :auctions_overall_ratings => 0, :rated_projects => 0, :projects_overall_ratings => 0, :average_contact => 0, :average_realization => 0, :average_attitude => 0, :reputation => 0)
@@ -72,10 +72,30 @@ class UsersController < ApplicationController
       render :action => :edit
     end
   end
+  
+  def show_company
+    @title = "企业信息"
+    @company = @user.company
+  end
+    
+  def edit_company
+    @title = "修改企业信息"
+  end  
+  
+  def update_company
+    flash[:success] = "企业信息修改成功"
+    company_attributes = params[:company]
+    if company_attributes.present?
+      @user.company.update_attributes( company_attributes )
+    end
+    
+    redirect_to show_company_user_path(@user)
+
+  end
     
   def destroy
     @user = User.find_by_id(params[:id])
-	if @user.update_attribute(:status, params[:status]) && current_user.role != "administrator"
+	  if @user.update_attribute(:status, params[:status]) && current_user.role != "administrator"
       sign_out
       redirect_to root_path
       flash[:success] = "删除用户"
