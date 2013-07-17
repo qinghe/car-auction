@@ -1,62 +1,45 @@
 <% include_wysiwyg %>
 <% form_url = @user.new_record? ? case_users_path(@user) : case_user_path(@user) %>
-<div class="prepend-1 span-18 last">
-  <div class="span-10">
-    <table class>
-      <tr>
-        <td colspan="2" class="table_title">
-          新建用户
-        </td>
-      </tr>
-      <tr>
-        <td style="text-align: center;">
+<div class="">
           <%= form_for @user,:url=>form_url do |f| -%>
-              <div class="field">
-                <%= f.label :company_id, "所属部门" %><br />
+          <table>
+              <tr><td>
+                <%= f.label :company_id, "所属部门" %></td><td>
                 <%= f.select :company_id, nested_set_options([current_user.company]) {|i| "#{'-' * i.level} #{i.name}" } %>
-              </div>
-              <div class="field">
-                <%= f.label :login, "登录名称" %><br />
+              </td></tr>
+              <tr><td>
+                <%= f.label :login, "登录名称" %></td><td>
                 <%= f.text_field :login, :class=>"span-6" %>
-              </div>
-              <div class="field">
-                <%= f.label :name, "名" %><br />
+              </td></tr>
+              <tr><td>
+                <%= f.label :name, "姓名" %></td><td>
                 <%= f.text_field :name, :class=>"span-6" %>
-              </div>
-              <div class="field">
-                <%= f.label :lastname, "姓" %><br />
-                <%= f.text_field :lastname,  :class=>"span-6" %>
-              </div>
-              <div class="field">
-                <%= f.label :email, "邮箱" %><br />
+              </td></tr>
+              <tr><td>
+                <%= f.label :email, "邮箱" %></td><td>
                 <%= f.text_field :email, :class=>"span-6" %>
-              </div>
+              </td></tr>
               <% if @user.new_record? %>
-                  <div class="field">
-                    <%= f.label :password, "密码" %><br />
+                  <tr><td>
+                    <%= f.label :password, "密码" %></td><td>
                     <%= f.password_field :password, :value => "", :class=>"span-6" %>
-                  </div>
-                  <div class="field">
-                    <%= f.label :password_confirmation, "密码确认" %><br />
+                  </td></tr>
+                  <tr><td>
+                    <%= f.label :password_confirmation, "密码确认" %></td><td>
                     <%= f.password_field :password_confirmation, :class=>"span-6" %>
-                  </div>
+                  </td></tr>
               <% end %>
-              <div class="field">
-                <%= f.label :deposit, "保证金" %><br />
-                <%= f.text_field :deposit %>
-              </div>
-              <div class="field">
-                <%= f.label :avatar %><br />
+              <tr><td>
+                <%= f.label :avatar,'头像' %></td><td>
                 <%= f.file_field :avatar %>
-              </div>
-              <div class="field">
-                <%= f.label :description %><br />
+              </td></tr>
+              <tr><td>
+                <%= f.label :description, '个人简介' %></td><td>
                 <%= f.text_area :description, :class => "mceEditor span-10" %>
-              </div>
-              <%= f.submit "保存" %>
+              </td></tr>
+              <tr>
+                <td></td><td><%= f.submit "保存" %></td>
+              </tr>
+              </table>
           <% end %>
-        </td>
-      </tr>
-    </table>
-  </div>
 </div>

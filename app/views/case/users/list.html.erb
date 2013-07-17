@@ -1,15 +1,15 @@
+<div class="center_title">员工列表</div>
+
 <% unless @users.empty? %>
-    <table class="list">
-      <thead>
+    <table class='car_accident'>
       <tr>
         <td>ID</td>
         <td>姓名</td>
-        <td>Login</td>
-        <td>Email</td>
-        <td>Status</td>
+        <td>昵称</td>
+        <td>电子邮箱</td>
+        <td>状态</td>
         <td>选项</td>
       </tr>
-      </thead>
       <tbody>
       <%  @users.delete_at(0) %>
       <% @users.each do |user| %>
