@@ -17,6 +17,14 @@ include ReCaptcha::ViewHelper #wazne dla recaptcha
     status = model.class::STATUSES.invert[(status || model.status)]
     t("#{model.class.name.downcase}.statuses.#{status.to_s}")
   end
+
+  def escape_auction_status(model)
+    status = 'open'
+    status = 'opened' if model.opened?
+    status = 'closed' if model.closed?
+    
+    t("#{model.class.name.downcase}.statuses.#{status.to_s}")
+  end
 	
 	#Metoda tlumaczy zawartosc kolumny w modelu
   def escape_column(model, column)

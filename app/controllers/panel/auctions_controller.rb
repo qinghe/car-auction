@@ -4,9 +4,13 @@ class Panel::AuctionsController < Panel::ApplicationController
   skip_before_filter :authenticate, :only => [:user_form]
 
   def index	
-    @status = params[:status] || :active
+    @status = params[:status] || 'open'
     title_t @status
-    @auctions = current_user.auctions.with_status(@status).paginate :per_page => 15, :page => params[:page]
+    if @status== 'today'
+      @auctions = Auction.within_today.paginate :per_page => 15, :page => params[:page]    
+    else
+      @auctions = Auction.open.paginate :per_page => 15, :page => params[:page]        
+    end
   end
   
   def new

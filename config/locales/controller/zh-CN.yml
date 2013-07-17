@@ -164,6 +164,8 @@ zh-CN:
       new: Write a comment 
     panel:
       auctions:
+        today: 今日拍卖车辆
+        open: 正在拍卖车辆
         new: New auction
         active: Your current ongoing auctions
         canceled: Your canceled listings

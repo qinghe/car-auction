@@ -15,18 +15,11 @@
        <div class="container page_width clearfix">
           <div id="topNav">
             <ul class="fl">
-              <li class="selected"><a class="index">大连华宸</a></li>
+              <li class="selected"><a class="index" href="/">大连华宸</a></li>
             </ul>
 
             <div class="fr">
-              <% top_menu = case params[:controller].include?("admin")
-              when true
-                "layouts/top_menu/admin"
-              else
-                "layouts/top_menu/default"
-              end
-            %>
-              <%= render :partial => top_menu %>
+              <%= render :partial => "layouts/top_menu/default" %>
             </div>
           </div>
        </div>
@@ -36,7 +29,7 @@
         <header id="mainNav">
   
           <div id="logo" class="">
-          <%= link_to "华宸事故车拍卖平台", "/", :id => "logo" %>
+          <%= link_to image_tag('logo.gif'), "/", :id => "logo" %>
           </div>
           <div class="">
           <%= render :partial => "layouts/top_menu/main_menu" %>
@@ -65,7 +58,9 @@
                 <%= render 'layouts/top_menu/user_menu' %>        
               </div>
               <div class="fr" style="width:80%">
-                <%= yield %>    
+                <div class="user_info">
+                  <%= yield %>    
+                </div>
               </div>
             </div>
           <div class="clear"> </div>

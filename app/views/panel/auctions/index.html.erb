@@ -2,10 +2,8 @@
   <table class="list">
     <thead>
       <tr>
-        <td>拍卖名称</td>
-        <td>访问数量</td>
-        <td>报价数量</td>
-        <td>类型</td>
+        <td>拍卖车辆</td>
+        <td>起拍价</td>
         <td>开始时间</td>
         <td>状态</td>
         <td>结束时间</td>
@@ -15,35 +13,20 @@
     <tbody>
       <% @auctions.each do |auction| %>
         <tr>
-          <td><%= link_to auction.title, auction %>
+          <td><%= link_to image_tag(auction.car.car_images.first.uploaded.url(:thumb)), auction %>
             <br />
             <% if auction.status?(:finished) && auction.won_offer_exists? %>
               <%= o = auction.won_offer %>
             <% end %>
           </td>
-          <td><%= auction.visits %></td>
-          <td><%= auction.offers.count %></td>
-          <td style="font-weight: bold"><% if auction.public? %>publiczna<% else %>prywatna<% end %></td>
-          <td><%=raw escape_time(auction.created_at) %></td>
-          <td><%= escape_status(auction) %></td>
-          <td><% if auction.status?(:active) %>
-              za <%= distance_of_time_in_words auction.expired_at.to_i, Time.now.to_i %>
-            <% else %>
-              <%=raw escape_time(auction.expired_at)%>
-            <% end %>
+          <td style="font-weight: bold"><%= auction.starting_price %>元</td>
+          <td><%=raw escape_time(auction.start_at) %></td>
+          <td><%= escape_auction_status(auction) %></td>
+          <td>
+              <%=raw escape_time(auction.expired_at)%>            
           </td>
           <td>
-            <% if auction.status?(:active) %>
-              <%= link_to '取消拍卖', panel_auction_path(auction), :method => :delete, :confirm => "Czy napewno chcesz anulować aukcję #{auction.title}?" %><br />
-              <%= link_to '留言', new_panel_auction_communication_path(auction) %><br />
-            <% end %>
-
-            <% unless auction.status?(:canceled) || auction.offers.empty? || auction.won_offer_exists? %>
-              <%= link_to '挑选一个投标赢家', offers_panel_auction_path(auction) %><br />
-            <% end %>
-            <% if auction.status?(:canceled) || auction.status?(:finished) %>
-              <%= link_to '新建', new_panel_auction_path(:from_id => auction.id) %><br />
-            <% end %>
+            <%= link_to '详细', auction_path(auction) %>
           </td>
         </tr>
       <% end %>

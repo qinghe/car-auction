@@ -52,6 +52,8 @@ class Auction < ActiveRecord::Base
   scope :with_status, lambda { |status| where(:status => STATUSES[status.to_sym])}
   scope :online, lambda { where(:status => STATUSES[:active])}
   scope :public_auctions, lambda { where(:private => false)}
+  
+  scope :within_today, lambda { where(["(start_at > ?) and (expired_at < ?)", Date.current.to_time.beginning_of_day, Date.current.to_time.end_of_day])}
   scope :closed, lambda { where(["expired_at > ? ",Time.now])}
   scope :opened, lambda { where(["(start_at < ?) and (expired_at > ?)", Time.now, Time.now])}
   scope :open, lambda { where(["start_at > ? ",Time.now]) }

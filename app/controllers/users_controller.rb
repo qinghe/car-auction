@@ -1,9 +1,8 @@
 #encoding: utf-8
 #require 'mail'
 class UsersController < ApplicationController
-	before_filter :correct_user, :only => [:edit, :update,:show_company,:edit_company,:update_company]
+	before_filter :correct_user, :only => [:edit, :update,:show_company,:edit_company,:update_company,:edit_password,:update_password]
 	
-
 	def new
 		@title = "注册"
 		@user = User.new
@@ -90,7 +89,22 @@ class UsersController < ApplicationController
     end
     
     redirect_to show_company_user_path(@user)
+  end
 
+  def edit_password
+    @title = "修改密码"
+  end  
+  
+  def update_password
+    user_attributes = params[:user]
+    if  @user.update_attributes( user_attributes )
+      flash[:success] = "密码修改成功"
+      redirect_to user_path(@user)    
+    else
+      @title = "修改密码"
+      render :action => :edit_password
+    end
+    
   end
     
   def destroy

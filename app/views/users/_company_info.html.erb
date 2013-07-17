@@ -1,12 +1,12 @@
     <table >
       <tr>
-        <td colspan="2" id="table_title">
+        <td colspan="2" class="table_title">
           企业信息 
         </td>
       </tr>
       <tr>
-        <td class="thead">企业名称</td>
-        <td><b><%= @company.name %></b></td>
+        <td class="thead"><lable>企业名称</lable> </td>
+        <td><%= @company.name %></td>
       </tr>
       <tr>
         <td class="thead">企业地址</td>
@@ -37,6 +37,6 @@
         <td><%= @company.approved_at %></td>
       </tr>
       <tr>
-        <td></td> <td> <%= link_to "eidt", edit_company_user_path%></td>
+        <td></td> <td> <%= link_to "编辑", edit_company_user_path%></td>
       </tr>
     </table>

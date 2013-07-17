@@ -28,8 +28,8 @@ Inz::Application.routes.draw do
   #Users and sessions
   resources :users do
   	member do
-  		get :watching, :watchers, :edit_company, :show_company
-  		put :update_company
+  		get :watching, :watchers, :edit_company, :show_company, :edit_password
+  		put :update_company, :update_password
   	end
   	resources :userprojects, :only => [:index]
   	resources :blogposts do

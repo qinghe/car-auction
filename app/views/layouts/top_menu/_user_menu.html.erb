@@ -3,16 +3,16 @@
     <dt> 我的面板 </dt>
       
         <dd><%= link_to '个人信息', user_path(current_user) %></dd>
+        <dd><%= link_to '修改密码', edit_password_user_path(current_user) %></dd>
         <dd class="last"><%= link_to '企业资质', show_company_user_path(current_user) %></dd>
     
-    <dt><%= link_to '拍卖', panel_auctions_path %></dt>
-            <dd><%= link_to '正在进行', panel_auctions_path %></dd>
-            <dd><%= raw link_to '取消', panel_auctions_path(:status => :canceled) %></dd>
-            <dd class="last"><%= raw link_to '完成', panel_auctions_path(:status => :finished) %></dd>
+    <dt>拍卖</dt>
+            <dd><%= link_to '正在拍卖车辆', panel_auctions_path %></dd>
+            <dd class="last"><%= raw link_to '今日拍卖车辆', panel_auctions_path(:status => :today) %></dd>
     
-    <dt><%= link_to '投标', panel_offers_path %></dt>
+    <dt>投标</dt>
             <dd><%= raw link_to '参与竞标', panel_offers_path(:status => :active) %></dd>
             <dd class="last"><%= raw link_to '成功竞标', panel_offers_path(:status => :won) %></dd>
-    <dt><%= link_to '退出(' + current_user.to_s + ')', signout_path, :method => :delete %></dt>
+    <dt><%= link_to '退出(' + current_user.to_s + ')', signout_path, :method => :delete, :style=>"color:#FFFFFF;" %></dt>
   <% end %>
 </ul>

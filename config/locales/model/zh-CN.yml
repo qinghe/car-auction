@@ -181,6 +181,9 @@ zh-CN:
 
   auction:
     statuses:
+      open: 未开始
+      closed: 结束
+      opened: 正在拍卖
       active: Active
       finished: Closed
       canceled: Cancelled

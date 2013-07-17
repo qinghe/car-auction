@@ -23,7 +23,13 @@ header img {
    /* padding: 1em;
     background: #fff;*/
 }
-
+.table_title
+{  /* background-color: #D6D6D6;*/
+  font-weight: bold;
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #000000;
+}
 
 footer{
   background: none repeat scroll 0 0 #333333;
@@ -166,6 +172,9 @@ table p{
 table img{
 	text-align: center;
 }
+table td.thead{
+    width: 100px;
+}
 
 .statistics span {
     font-weight: bold;
@@ -184,11 +193,3 @@ table img{
     vertical-align: middle;
 }
 
-/* User */
-
-#table_title{
-	font-weight: bold;
-	text-align: center;
-	color: #FFFFFF;
-	background-color: #000000;
-}
