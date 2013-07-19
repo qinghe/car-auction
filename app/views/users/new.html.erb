@@ -2,7 +2,7 @@
 <div class="wrapper">
 <h2> 注册华宸网只需半分钟，竞拍事故车轻松方便</h2>
   <div class="box">
-  <%= form_for [@user] do |f| -%>
+  <%= form_for @user, :html=>{:id=>"new_user_form"} do |f| -%>
   <%= render "layouts/error_messages", :target => @user %>
   <table>
   <tr> <td style="text-align:right;">
@@ -13,7 +13,7 @@
   </tr>  
   <tr> <td style="text-align:right;">
     <%= f.label :login,"昵称" %></td> <td>
-    <%= f.text_field :login, :class=>"span-6" %>   <span> 5-20位数字、字母或其组合 </span>
+    <%= f.text_field :login, :class=>"span-6" %>   <span> 2-10位汉字、数字、字母或其组合 </span>
     </td>
   </tr>
   <tr> <td style="text-align:right;">
@@ -23,11 +23,17 @@
   <tr> <td style="text-align:right;">
     <%= f.label :cellphone,"手机号码" %></td> <td>
     <%= f.text_field :cellphone, :class=>"span-6" %>   <span> 11位手机号码 </span>
+    <br/>
+    <%= button_tag "免费获取手机验证码",{:id=>"vercode_button",:type=>"button"}%>
     </td>
   </tr>
   <tr> <td style="text-align:right;">
+    <%= f.label :vercode,"手机验证码" %></td> <td>
+    <%= f.text_field :vercode, :class=>"span-6" %>  </td>
+  </tr>
+  <tr> <td style="text-align:right;">
     <%= f.label :address, "所在地" %></td> <td>
-  <%= f.region_select [:province, :city] %>
+  <%= f.region_select [:province, :city],{:selected=>[@user.province_id,@user.city_id]} %>
   </td></tr>
   <tr> <td style="text-align:right;">
     <%= f.label :password,"登录密码" %></td> <td>

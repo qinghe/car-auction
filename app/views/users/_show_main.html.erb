@@ -19,8 +19,13 @@
       </tr>
       <tr>
         <td>手机号码</td>
-        <td> <%= @user.cellphone %></td>
-      </tr>      
+        <td> <%= @user.cellphone %> 
+          <%if @user.vercode.blank? %>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <%= button_tag "手机验证",{:id=>"verify_cellphone_button",:type=>"button"}%>
+          <%end%>
+        </td>
+      </tr>            
       <tr>
         <td>Email</td>
         <td><%= @user.email %></td>
@@ -56,3 +61,6 @@
         </tr>
     </table>
   </div>
+<%if @user.vercode.blank? %>
+<%= render :partial=>'vercode_dialog'%> 
+<%end%>

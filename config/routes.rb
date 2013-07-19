@@ -46,7 +46,9 @@ Inz::Application.routes.draw do
   end
   resources :sessions, :only => [:new, :create, :destroy] do
     get :backend_new, :on => :collection
-    post :backend_create, :on => :collection
+    post :backend_create, :on => :collection    
+    post :get_vercode, :on => :collection
+    put :get_vercode, :on => :collection
   end
   
   resources :relationships, :only => [:create, :destroy]

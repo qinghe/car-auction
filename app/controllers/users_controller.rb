@@ -31,7 +31,12 @@ class UsersController < ApplicationController
     	
     @hash_mail = make_hash
     @user.status = 2 # fix email verify when needed.
-    if  @user.save
+    if @user.cellphone.present? and @user.vercode.present?
+      if @user.vercode != session[:vercode]
+        @user.vercode=''
+      end
+    end
+    if @user.save
       company = @user.create_company
       @user.update_column(:company_id, company.id)
       @emailver = Emailver.new(:hash_mail => @hash_mail, :user_id => @user.id)
@@ -58,11 +63,16 @@ class UsersController < ApplicationController
   end
   	
   def update
-    @user = User.find(params[:id])
+    @user = User.find(params[:id])    
     if params[:user][:password] == ''
       @title = "Edit user"
       flash[:error] = "密码不能为空"
-      render :action => :edit
+      render :action => :edit      
+    elsif params[:user][:vercode].present?
+      if params[:user][:vercode] == session[:vercode]
+        @user.update_attributes(params[:user])
+      end
+      redirect_to @user
     elsif @user.update_attributes(params[:user])
       redirect_to @user
       flash_t :notice

@@ -10,6 +10,23 @@ class SessionsController < ApplicationController
     
   end
   
+  def get_vercode
+    vercode = Time.now.to_i.to_s[-4,4]
+    send_string="#{vercode}(大连华宸网手机验证码，请完成验证)，如非本人操作，请忽略本短信。【大连华宸网】"
+    cellphone = params[:user][:cellphone]
+    ChinaSMS.use :w371, :username=>'are22',:password=>'are22'
+    @result = ChinaSMS.to cellphone, send_string.encode('gb2312')
+    
+    if @result[:success]
+      session[:vercode] = vercode
+    else        
+      info = {:result=>@result,:user=>params[:user]}
+      Alert.create(:author_id=>( current_user.present? ? current_user.id : 0 ),:text=>info.inspect)    
+    end
+    logger.debug "result=#{@result}"
+    # {:success=>true, :code=>"0", :message=>"短信发送成功"}      
+  end
+  
   def backend_create
     user = User.authenticate(params[:session][:email],
                              params[:session][:password])

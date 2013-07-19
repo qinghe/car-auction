@@ -1,7 +1,7 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
   attr_accessible :login, :name, :lastname, :email, :country, :status, :password, :password_confirmation, :description, :avatar, 
-    :company_id,:province_id, :city_id, :cellphone, :id_number
+    :company_id,:province_id, :city_id, :cellphone, :id_number,:vercode
   
 	has_attached_file :avatar, :styles => { :thumb => "100x100>" }, :default_url => "/images/avatars/missing.png"
 	belongs_to :company
@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   string = /\A[\w+żźćńółęąśŻŹĆĄŚĘŁÓŃß\-.]+\z/
   string2 = /\A[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ\- ']+\z/
 	
-	validates :login, :presence => true, :format => {:with => string}, :length => {:within => 3..40}#, :uniqueness => true
+	validates :login, :presence => true,  :length => {:within => 2..40}#, :uniqueness => true
 	validates :name, :presence => true, :length => {:within => 2..40}
 	#validates :lastname, :presence => true, :format => {:with => string2}, :length => {:within => 3..40}
 	validates :email, :presence => true, :format => {:with => email_regex}, :uniqueness => { :case_sensitive => false }, :length => {:within => 6..50}

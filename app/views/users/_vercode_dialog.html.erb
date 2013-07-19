@@ -1,0 +1,45 @@
+<%
+   dialog_container_id = "vercode_dialog" 
+   dialog_form_id = "new_user_form"
+%>
+<div id="vercode_dialog" title="手机验证">
+<%= form_for @user, :html=>{:id=>"new_user_form"} do |f| %>
+<table>
+   <tr> <td>
+    <%= f.label :cellphone,"手机号码" %></td> <td>
+    <%= f.text_field :cellphone, :class=>"span-6" %>   
+   </td></tr>
+  <tr><td></td><td>
+     <%= button_tag "免费获取手机验证码",{:id=>"vercode_button",:type=>"button"}%>
+  </td></tr>
+  <tr><td>
+    <%= f.label :vercode,"手机验证码" %></td> <td>
+    <%= f.text_field :vercode, :class=>"span-6" %>  </td>
+  </tr>
+</table>
+<%end%>
+
+</div>
+    <%= javascript_tag do %>
+      $(function() {
+        $( "#<%=dialog_container_id%>" ).dialog({
+          autoOpen: false,
+          width:600,
+          modal: true,
+          buttons: {
+            "提交": function() {
+               $( "#<%=dialog_form_id%>" ).submit();
+            },
+            "取消": function() {
+              $( this ).dialog( "close" );
+            }
+          },
+          close: function() {
+          }
+        });
+      $( "#verify_cellphone_button" )
+          .click(function() {
+            $( "#<%=dialog_container_id%>" ).dialog( "open" );
+          });
+      });    
+    <%end %>
