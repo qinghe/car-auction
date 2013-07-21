@@ -118,7 +118,7 @@ class Admin::UsersController < Admin::ApplicationController
     def blogpostedit2
     	@title = "管理平台 : 文章"
     	@blogpost = Blogpost.find(params[:id])
-    	@blogpost.update_attributes(:title => params[:title][:title], :content => params[:content][:content])
+    	@blogpost.update_attributes(params[:blogpost])
     	flash[:success] = "成功修改"
     	redirect_to :action => :blogposts
     end

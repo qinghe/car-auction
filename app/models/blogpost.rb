@@ -9,7 +9,7 @@ class Blogpost < ActiveRecord::Base
 	
 	validates :title, :presence => true, :length => {:within => 2..100}
 	validates :content, :presence => true, :length => {:within => 10..5000}
-  	validates :user_id, :presence => true
+  validates :user_id, :presence => true
 	
 	default_scope :order => 'blogposts.created_at DESC'
 end
