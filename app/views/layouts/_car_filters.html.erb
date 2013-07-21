@@ -1,20 +1,23 @@
 <%
 car_models =  CarModel.roots
 %>
-<div class="basic-search-options clear">
+
+<div class="basic-search-options clear">  
+<%= form_for :filters, :url=>cars_path, :method=>:get do |f| %>
     <div class="search-for filter">
         <div class="title" >关键字</div>  
-        <input name="keyword" type="text" value="关键字 或者 ID" id="findakeyword" class="filter-input" onblur="if(this.value=='')this.value='关键字 或者 ID';" onfocus="if(this.value=='关键字 或者 ID')this.value='';">
+        <input name="filters[keyword]" type="text" value="关键字 或者 ID" id="findakeyword" class="filter-input" onblur="if(this.value=='')this.value='关键字 或者 ID';" onfocus="if(this.value=='关键字 或者 ID')this.value='';">
     </div>
 
     <div class="make filter">
         <div class="title" >品牌</div>
-        <%= select("search","make", car_models.collect{|car| [car.name,car.id]}, {:prompt=>"请选择品牌"})%>   
+        <%= select_tag("filters[model_id]", options_from_collection_for_select(car_models,:id,:name), {:prompt=>"请选择品牌"})%>   
     </div>
     <div class="btn filter">
       <div class="title" >&nbsp;</div>   
-       <input type="submit" name="findabtn" value="搜索" id="findabtn">
+       <input type="submit" name="findabtn" value="搜索" id="findabtn" onclick="if($('#findakeyword').val()=='关键字 或者 ID')$('#findakeyword').val('');">
     </div>
     <div class="clear"></div>    
+<% end %>
 </div>
 <div class="clear"></div>

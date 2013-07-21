@@ -11,7 +11,7 @@ class CreateAuctions < ActiveRecord::Migration
       t.text :description, :length => 2000, :null => false
       t.boolean :highlight, :default => 0
 
-      t.timestamp :expired_at
+      t.timestamp :expired_at, :default=>'1970-01-01 00:00:00'
       t.integer :offers_count, :default => 0
       t.integer :visits, :default => 0, :null => false
       

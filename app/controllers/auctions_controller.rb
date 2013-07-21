@@ -45,8 +45,8 @@ logger.debug "@offer.price=#{@offer.price}, @auction.current_price=#{@auction.cu
   def show
 
     @made_offer = @auction.made_offer?(current_user)
-    
-    if @auction.expired_at.past?
+    #@auction.expired_at many be nil
+    if @auction.expired_at and @auction.expired_at.past?
       @auction.status = Auction::STATUSES[:finished]
     end
 

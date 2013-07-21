@@ -33,15 +33,15 @@ class Auction < ActiveRecord::Base
   #validates :price_increment, :numericality => {:greater_than => 0}
   #validates :reserve_price, :numericality => {:greater_than => 0}
   
-  ThinkingSphinx::Index.define :auction, :with => :active_record do
-    indexes :title
-    indexes :description
-    #indexes :budget_id
-    indexes tags(:id), :as => :tags_ids
-    has :expired_at
-    where 'auctions.private = 0 AND auctions.expired_at > NOW()'
-    #set_property :delta => true
-  end
+ # ThinkingSphinx::Index.define :auction, :with => :active_record do
+ #   indexes :title
+ #   indexes :description
+ #   #indexes :budget_id
+ #   indexes tags(:id), :as => :tags_ids
+ #   has :expired_at
+ #   where 'auctions.private = 0 AND auctions.expired_at > NOW()'
+ #   #set_property :delta => true
+ # end
 
   #validates :title, :presence => true, :length => { :within => 8..50}
   #validates :description, :presence => true
@@ -70,11 +70,11 @@ class Auction < ActiveRecord::Base
   #validates_inclusion_of :expired_after, :in => (1..MAX_EXPIRED_AFTER).to_a.collect{|d| d}, :on => :create
 
   def opened?    
-    (self.start_at.present?) and (status? :active) and ( DateTime.now > self.start_at ) and  ( DateTime.now < self.expired_at )      
+    (self.start_at!=Time.at(0)) and (status? :active) and ( DateTime.now > self.start_at ) and  ( DateTime.now < self.expired_at )      
   end
   
   def closed?
-    (self.start_at.present?) and (status? :active) and ( DateTime.now > self.expired_at )
+    (self.start_at!=Time.at(0)) and (status? :active) and ( DateTime.now > self.expired_at )
   end
   
   def close! #choose_win_offer
