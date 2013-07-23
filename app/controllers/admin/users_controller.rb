@@ -9,6 +9,7 @@ class Admin::UsersController < Admin::ApplicationController
 	end
 
   def new
+    @title = "管理平台 :  新建用户"
   end
 
   def create

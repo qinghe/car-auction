@@ -6,24 +6,18 @@
       <tr>
         <td>名称</td>
         <td>所有人</td>
-        <td>type</td>
-        <td>started</td>
-        <td>end</td>
-        <td>status</td>
+        <td>拍卖时间</td>
+        <td>状态</td>
       </tr>
     </thead>
     <tbody>
       <% @auctions.each do |auction| %>
         <tr>
-          <td><%= link_to auction.title, edit_admin_auction_path(auction) %></td>
-          <td><%= link_to auction.owner, user_path(auction.owner) %></td>
-          <td style="font-weight: bold"><% if auction.public? %>publiczna<% else %>prywatna<% end %></td>
-          <td><%= escape_date(auction.created_at) %></td>
+          <td><%= link_to auction.car.name, auction_path(auction), :target=>"_blank" %></td>
+          <td><%= auction.car.publisher.name %></td>
+          <td><%= escape_time(auction.start_at) %>至<%= escape_time(auction.expired_at) %></td>
           <td>
-            za <%= distance_of_time_in_words auction.expired_at.to_i, Time.now.to_i %>
-          </td>
-          <td>
-            <%= escape_status(auction) %>
+            <%= escape_auction_status(auction) %>
           </td>
         </tr>
       <% end %>

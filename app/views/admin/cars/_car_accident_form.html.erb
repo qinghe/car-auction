@@ -85,7 +85,7 @@
           <% Accident::POSITIONS.to_a.each{|key_val| %>
             <% if key_val[1]%6==1 %> <tr> <% end %>
             <td>             
-    <%= accident_form.check_box :pengzhuang_buwei, {:name=>"accident_car[accident_attributes][pengzhuang_buwei][]"}, key_val[1].to_s %>
+    <%= accident_form.check_box :pengzhuang_buwei, {:name=>"car[accident_attributes][pengzhuang_buwei][]"}, key_val[1].to_s %>
     <%= key_val[0] %>
             </td>
             <% if key_val[1]==6 or key_val[1]==12 or key_val[1]==14%> </tr> <% end %>

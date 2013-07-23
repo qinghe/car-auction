@@ -1,0 +1,3 @@
+$( "#evaluate_dialog" ).dialog( "close" );
+
+$('#evaluated_info').replaceWith(<%=raw (render :partial=>"evaluated_info.html.erb").to_json%>);

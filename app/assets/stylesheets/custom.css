@@ -15,6 +15,21 @@ section, article, footer, header{
     padding: 0;
 }
 
+
+.image_container
+{
+    float:left;
+    margin:5px;
+    position: relative;
+}
+a.image_delete_button
+{
+    background-color: red;
+    position: absolute;
+    right: 0;
+}
+
+
 header a#logo {
     font-size: 200%;
 }

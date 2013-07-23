@@ -109,6 +109,17 @@ Inz::Application.routes.draw do
       get :reply, :on => :member
       get :sent, :on => :collection
     end
+    resources :cars do
+      get :accident, :on => :collection
+      get :used, :on => :collection
+      get :accessory, :on => :collection
+      post :create_used, :on => :collection
+      post :create_accessory, :on => :collection
+      get :edit_used, :on => :member
+      get :edit_accessory, :on => :member
+      get :new_used, :on => :collection
+      get :new_accessory, :on => :collection
+    end
     resources :groups, :except => [:show]
     resources :tags, :except => [:show]
     resources :communications, :only => [:destroy]
@@ -117,6 +128,7 @@ Inz::Application.routes.draw do
       resources :comments, :only => [:index, :edit, :update]
     end
   end
+  match 'admin/cars/search', :to => 'admin/cars#search'
   match 'admin/users/:id/points', :to => 'admin/users#points'
   match 'admin/users/:id/editpoints', :to => 'admin/users#editpoints'
   match 'admin/users/:id/status/:status/delete', :to => 'admin/users#delete'

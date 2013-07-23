@@ -1,0 +1,3 @@
+class CarAccessory < Car
+  
+end

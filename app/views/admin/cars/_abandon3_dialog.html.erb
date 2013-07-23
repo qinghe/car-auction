@@ -1,0 +1,45 @@
+<% if @car.status?(3) %>
+  <% car = @car
+     dialog_container_id = "abandon3_dialog" 
+     dialog_form_id = "abandon3_form"
+  %>
+
+<div id="<%=dialog_container_id%>"title="车辆<%=car.name%>放弃过户">
+<%= form_for(car, :url => abandon3_case_car_path(car),:html=>{:id=>dialog_form_id}, :remote=>true ) do |car_form| %>
+   <table>
+     <tr>
+       <td class="thead"  >
+         <%= car_form.label :giveup_transfer_reason, '放弃原因' %>
+       </td> <td>
+         <%= car_form.text_area :giveup_transfer_reason, :style => "width:600px;height:6em;" %>     
+       </td>
+     </tr>
+   </table>
+<%end%>
+</div>
+
+    <%= javascript_tag do %>
+      $(function() {
+        $( "#<%=dialog_container_id%>" ).dialog({
+          autoOpen: false,
+          width:800,
+          modal: true,
+          buttons: {
+            "提交": function() {
+               $( "#<%=dialog_form_id%>" ).submit();
+            },
+            "取消": function() {
+              $( this ).dialog( "close" );
+            }
+          },
+          close: function() {
+          }
+        });
+      $( "#abandon3_car_button" )
+          .click(function() {
+            $( "#<%=dialog_container_id%>" ).dialog( "open" );
+          });
+      });    
+    <%end %>
+<%end %>
+    

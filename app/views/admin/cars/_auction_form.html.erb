@@ -1,0 +1,98 @@
+  <table class='car_accident'>
+    <%= car_form.fields_for :accident, @accident do |accident_form| %>
+    <tr class="aution_info">
+      <td colspan="6" class="table_title">手续清单</td>
+    </tr>
+    <tr class="aution_info">
+      <th><%= accident_form.label :dengji_zhengshu, '登记证书' %></th>
+      <td>
+        <%= accident_form.radio_button(:dengji_zhengshu, 1) %>
+        <%= accident_form.label(:dengji_zhengshu, "有") %>
+        <%= accident_form.radio_button(:dengji_zhengshu, 0) %>
+        <%= accident_form.label(:dengji_zhengshu, "无") %>
+      </td>
+      <th><%= accident_form.label :xingche_zheng, '行车证' %></th>
+      <td>
+        <%= accident_form.radio_button(:xingche_zheng, 1) %>
+        <%= accident_form.label(:xingche_zheng, "有") %>
+        <%= accident_form.radio_button(:xingche_zheng, 0) %>
+        <%= accident_form.label(:xingche_zheng, "无") %>
+      </td>
+      <th><%= accident_form.label :gouzhi_shui, '购置税' %></th>
+      <td>
+        <%= accident_form.radio_button(:gouzhi_shui, 1) %>
+        <%= accident_form.label(:gouzhi_shui, "有") %>
+        <%= accident_form.radio_button(:gouzhi_shui, 0) %>
+        <%= accident_form.label(:gouzhi_shui, "无") %>
+      </td>
+    </tr>
+    <tr class="aution_info">
+      <th><%= accident_form.label :chepai, '车牌' %></th>
+      <td>
+        <%= accident_form.radio_button(:chepai, 1) %>
+        <%= accident_form.label(:chepai, "一块") %>
+        <%= accident_form.radio_button(:chepai, 2) %>
+        <%= accident_form.label(:chepai, "二块") %>
+      </td>
+      <th><%= accident_form.label :yaoshi, '钥匙' %></th>
+      <td>
+        <%= accident_form.radio_button(:yaoshi, 1) %>
+        <%= accident_form.label(:yaoshi, "一把") %>
+        <%= accident_form.radio_button(:yaoshi, 2) %>
+        <%= accident_form.label(:yaoshi, "二把") %>  </td>
+      <th></th>
+      <td></td>
+    </tr>
+    <tr class="aution_info">
+      <td colspan="6" class="table_title">委托协议</td>
+    </tr>
+    <tr class="aution_info">
+      <th><%= accident_form.label :weituo_xieyi, '委托协议' %></th>
+      <td>
+        <%= accident_form.radio_button(:weituo_xieyi, true) %>
+        <%= accident_form.label(:weituo_xieyi, "已签订") %>
+        <%= accident_form.radio_button(:weituo_xieyi, false) %>
+        <%= accident_form.label(:weituo_xieyi, "未签订") %>
+      </td>
+      <th><%= accident_form.label :youwu_diya, '有无抵押' %></th>
+      <td>
+        <%= accident_form.radio_button(:youwu_diya, true) %>
+        <%= accident_form.label(:youwu_diya, "有") %>
+        <%= accident_form.radio_button(:youwu_diya, false) %>
+        <%= accident_form.label(:youwu_diya, "无") %>
+      </td>
+      <th><%= accident_form.label :youwu_qita, '有无其他费用' %></th>
+      <td>
+        <%= accident_form.radio_button(:youwu_qita, true) %>
+        <%= accident_form.label(:youwu_qita, "有") %>
+        <%= accident_form.radio_button(:youwu_qita, false) %>
+        <%= accident_form.label(:youwu_qita, "无") %>
+      </td>
+    </tr>
+    <%end%>
+
+    <%= car_form.fields_for :auction, @auction do |auction_form| %>
+      <%= auction_form.hidden_field :title,:value=>@car.name %>
+      <%= auction_form.hidden_field :description,:value=>@car.name %>
+      <tr class="aution_info">
+        <td colspan="6" class="table_title">费用信息</td>
+      </tr>
+      <tr class="aution_info">
+        <th><%= auction_form.label :starting_price, '拍卖底价' %></th>
+        <td><%= auction_form.text_field :starting_price,:class=>'span-3' %></td>
+        <th><%= auction_form.label :reserve_price, '保留价' %></th>
+        <td><%= auction_form.text_field :reserve_price,:class=>'span-3' %></td>
+        <th><%= auction_form.label :price_increment, '加价额度' %></th>
+        <td><%= auction_form.text_field :price_increment,:class=>'span-3' %></td>
+      </tr>
+      <tr class="aution_info">
+        <th>拍卖时间要求</th>
+        <td colspan="5">
+          <%= auction_form.label :expected_start_at, '开始时间' %>
+          <%= auction_form.date_select :expected_start_at %>-
+          <%= auction_form.label :expected_expired_at, '结束时间' %>
+          <%= auction_form.date_select :expected_expired_at,  :default=> 1.days.from_now %>
+        </td>
+      </tr>
+    <%end%>
+  </table>

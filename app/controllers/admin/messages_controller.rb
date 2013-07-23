@@ -1,4 +1,5 @@
 class Admin::MessagesController < Panel::MessagesController
+  layout "application"
 
   private
   def set_path

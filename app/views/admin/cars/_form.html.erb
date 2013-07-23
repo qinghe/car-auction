@@ -1,0 +1,49 @@
+<%= form_for(@car, :url => case_cars_path() ) do |f| %>
+  <% if @car.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
+
+      <ul>
+      <% @car.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :model_id %><br />
+    <%= f.text_field :model_id %>
+  </div>
+  <div class="field">
+    <%= f.label :model_name %><br />
+    <%= f.text_field :model_name %>
+  </div>
+  <div class="field">
+    <%= f.label :serial_no %><br />
+    <%= f.text_field :serial_no %>
+  </div>
+  <div class="field">
+    <%= f.label :registered_at %><br />
+    <%= f.text_field :registered_at %>
+  </div>
+  <div class="field">
+    <%= f.label :variator %><br />
+    <%= f.text_field :variator %>
+  </div>
+  <div class="field">
+    <%= f.label :plate_number %><br />
+    <%= f.text_field :plate_number %>
+  </div>
+  <div class="field">
+    <%= f.label :engine_number %><br />
+    <%= f.text_field :engine_number %>
+  </div>
+  <div class="field">
+    <%= f.label :frame_number %><br />
+    <%= f.text_field :frame_number %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

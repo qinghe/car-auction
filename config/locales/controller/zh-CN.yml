@@ -80,6 +80,9 @@ zh-CN:
     admin:
       alerts:
         destroy: The report has been removed
+      cars:
+        new_used: "添加二手车"
+        create_used: "二手车添加成功"
       messages:
         destroy: Message has been deleted
         create: Message has been sent
@@ -193,6 +196,8 @@ zh-CN:
       alerts:
         index: List of requests
         Show: "Application No {@alert.id}"
+      cars:
+        new_used: "添加二手车"
       messages:
         new: New Message
         received: received messages

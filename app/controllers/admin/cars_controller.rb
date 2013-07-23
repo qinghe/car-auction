@@ -1,54 +1,68 @@
 # encoding: utf-8
-class Case::CarsController < Case::ApplicationController
+class Admin::CarsController < Case::CarsController
+  layout "application"
   prepend_before_filter :get_data, :only=>[:show,:evaluate,:sendback,:new_auction,:confirm_auction, :abandon,:pickup, :abandon2, :abandon3, :transfer, :delete_car_file]
 
-  def welcome
-    respond_to do |format|
-      format.html # new.html.erb
-    end
-  end
-  
   # GET /cars
   # GET /cars.json
   def index
-    @process_method = params[:process_method].to_i
-    @cars = Car.list_by(@process_method, current_user).includes(:model).order('created_at DESC')
+    @title="所有车辆"
+    @cars = Car.includes(:model).order('created_at DESC')
     respond_to do |format|
-      format.html { render :list}
+      format.html { render :index}
       format.json { render json: @cars }
     end
   end
 
+  def accident
+    @title="事故车"
+    @cars = AccidentCar.includes(:model).order('created_at DESC')
+    
+  end
+  
+  def used
+    @title="二手车"
+    @cars = UsedCar.includes(:model).order('created_at DESC')
+    
+  end
+  
+  def accessory
+    @title="汽车配件"
+    @cars = CarAccessory.includes(:model).order('created_at DESC')
+    
+  end
+  
   # GET /cars/1
   # GET /cars/1.json
   def show
-    if @car.status?( 2 ) 
-        if @car.auction.closed? and @car.auction.won_offer.blank?
-          @car.auction.close!
-        end
-    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @car }
     end
   end
   
-  def sendback
-    if @car.status>0
-      @car.to_status!(@car.status-1)
-    end
-    redirect_to case_car_url(@car)
+  def new_used
+    @title="添加二手车"
+    @car = UsedCar.new
   end
   
-  def evaluate
-    @car.update_attributes!( params[:accident_car] )
-      @car.evaluator_id = current_user.id
-      @car.to_status!(1)
-    respond_to do |format|
-      format.js # show.html.erb
-    end  
+  def create_used
+    @car = UsedCar.new(params[:used_car])
+    @car.publisher_id = current_user.id
+    @car.evaluator_id = User.evaluator.id
+      if @car.save
+        flash_t :success
+        redirect_to used_admin_cars_url()
+      else
+        title_t :new_used
+        render :action => :new_used
+      end
   end
-
+  
+  def edit_used
+    
+  end
+  
   def upload_file
     @car_file = nil
     ['car_doc','car_image', 'car_frame_image', 'car_license_image'].each{|key|
@@ -78,7 +92,7 @@ class Case::CarsController < Case::ApplicationController
   
  
   def new_auction
-    @car.update_attributes(params[:accident_car])
+    @car.update_attributes(params[:car])
     @car.to_status!(2)
     respond_to do |format|
       format.js {
@@ -88,7 +102,7 @@ class Case::CarsController < Case::ApplicationController
   end
 
   def confirm_auction
-    @car.update_attributes(params[:accident_car])
+    @car.update_attributes(params[:car])
     respond_to do |format|
       format.js {
         render "auction_saved"
@@ -97,7 +111,7 @@ class Case::CarsController < Case::ApplicationController
   end
 
   def abandon    
-    @car.update_attributes(params[:accident_car])
+    @car.update_attributes(params[:car])
     @return_to_path = case_car_list_path(@car.status)
     @car.to_status!(5)    
     respond_to do |format|
@@ -105,16 +119,8 @@ class Case::CarsController < Case::ApplicationController
     end     
   end
 
-  def pickup
-    @car.update_attributes(params[:accident_car])
-    @return_to_path = case_car_path(@car)
-    @car.to_status!(3)   
-    respond_to do |format|
-      format.js { render "pickuped"}
-    end
-  end
   def abandon2
-    @car.update_attributes(params[:accident_car])
+    @car.update_attributes(params[:car])
     @return_to_path = case_car_list_path(@car.status)
     @car.to_status!(6)   
     respond_to do |format|
@@ -123,32 +129,28 @@ class Case::CarsController < Case::ApplicationController
   end
   
   def abandon3
-    @car.update_attributes(params[:accident_car])
+    @car.update_attributes(params[:car])
     @return_to_path = case_car_list_path(@car.status)
     @car.to_status!(7)   
     respond_to do |format|
       format.js { render "abandoned3"}
     end
   end
-  
-  def transfer
-    @car.to_status!(4)
-    redirect_to case_car_list_path(@car.status)
-  end
-  
+    
   def new_car_accident
-    @car = AccidentCar.new
+    @car = Car.new
     respond_to do |format|
       format.html # new.html.erb      
     end
   end
 
   def search
+    @process_method = params[:process_method].to_i
     insurance_id = params[:insurance_id]
     serial_no = params[:serial_no]
     model_name = params[:model_name]
 
-    condition ="cars.publisher_id=#{current_user.id}"
+    condition ="cars.status=#{@process_method} and cars.publisher_id=#{current_user.id}"
     if insurance_id.to_i > 0
       condition+=" and users.company_id=#{insurance_id}"
     end
@@ -159,18 +161,18 @@ class Case::CarsController < Case::ApplicationController
       condition+=" and (car_models.name like '%#{model_name}%' or cars.model_name like '%#{model_name}%')"
     end
     @cars = Car.includes(:publisher,:model).where(condition).all
-    render 'case/cars/list'
+    render 'admin/cars/index'
   end
 
-  def list
-    @process_method = params[:process_method].to_i
-    @cars = Car.list_by(@process_method, current_user).includes(:model).order('created_at DESC')
+  # GET /cars/1/edit
+  def edit
+    @car = Car.find(params[:id])
   end
 
   # POST /cars
   # POST /cars.json
   def create
-    @car = AccidentCar.new(params[:accident_car])
+    @car = Car.new(params[:car])
     @car.publisher_id = current_user.id
     @car.evaluator_id = User.evaluator.id
       if @car.save
@@ -187,7 +189,7 @@ class Case::CarsController < Case::ApplicationController
   def update
     @car = Car.find(params[:id])
     respond_to do |format|
-      if @car.update_attributes(params[:accident_car])
+      if @car.update_attributes(params[:car])
         format.html { redirect_to edit_case_car_url, notice=> '更新车辆信息成功！' }
         format.json { head :no_content }
       else
@@ -204,7 +206,7 @@ class Case::CarsController < Case::ApplicationController
     @car.destroy
 
     respond_to do |format|
-      format.html { redirect_to case_cars_url }
+      format.html { redirect_to admin_cars_url, notice=> '车辆删除成功！' }
       format.json { head :no_content }
     end
   end
@@ -216,7 +218,7 @@ class Case::CarsController < Case::ApplicationController
       return
     end
         
-    @car = AccidentCar.find(params[:id])
+    @car = Car.find(params[:id])
   end
   
 end

@@ -1,0 +1,160 @@
+<div class="center_title">事故车-车辆详细信息</div>
+<% car = @car %>
+<% accident = car.accident %>
+<% auction = car.auction %>
+<table class='car_accident'>
+  <tr>   <td colspan="8" class="table_title"> 车辆信息</td>
+  </tr>
+  <tr>
+    <td class="thead">车型 </td>
+    <td colspan="5"><%= car.name %> </td>
+  </tr>
+  <tr>
+    <td class="thead">流水单号 </td>
+    <td><%= car.serial_no %></td>
+    <td class="thead">手/排 </td>
+    <td><%= car.variator_name %> </td>
+    <td class="thead">初次登记日期 </td>
+    <td ><%= car.registered_at %> </td>
+  </tr>
+  <tr>
+    <td class="thead">车牌号 </td>
+    <td><%= car.plate_number %></td>
+    <td class="thead">发动机号 </td>
+    <td><%= car.engine_number %> </td>
+    <td class="thead">车架钢印号 </td>
+    <td ><%= car.frame_number %> </td>
+  </tr>
+  <tr>   <td colspan="6" class="table_title"> 车辆出险信息</td>   </tr>
+  <tr>
+    <td class="thead">损失类型 </td>
+    <td><%= accident.lost_type %></td>
+    <td class="thead">出险日期 </td>
+    <td><%= accident.chuxian_riqi %> </td>
+    <td class="thead">是否拆检 </td>
+    <td ><%= accident.inspection %> </td>
+  </tr>
+  <tr>
+    <td class="thead">停车地点 </td>
+    <td colspan="3"><%= accident.tingche_address %></td>
+    <td class="thead">车架号是否受损 </td>
+    <td ><%= accident.frame_number_lost %> </td>
+  </tr>
+  <tr>
+    <td class="thead">责任认定 </td>
+    <td><%= accident.responsibility_cognizance %> </td>
+
+    <td class="thead">对方保险公司 </td>
+    <td><%= accident.duifang_baoxian %><br/>(适用双方事故) </td>
+    <td class="thead">人伤情况 </td>
+    <td ><%= accident.injure_condition %> </td>
+  </tr>
+  <tr>
+    <td class="thead">碰撞部位 </td>
+    <td colspan="5"><%= accident.hit_position %></td>
+  </tr>
+  <tr>
+    <td class="thead">出险经过 </td>
+    <td colspan="5"><%= accident.chuxian_jingguo %> </td>
+  </tr>
+
+  <tr><td colspan="6" class="table_title">车辆图片信息</td></tr>
+  <tr>
+    <td class="thead" colspan="8">  行驶证  </td>
+  </tr>
+  <tr>
+    <td colspan="6">
+      <div id="car_license_image_list">  
+          <%= render :partial=>'car_file', :collection=>@car.car_license_images%>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="thead" colspan="6">   车架号  </td>
+  </tr>
+  <tr>
+    <td colspan="6">
+      <div id="car_frame_image_list">  
+          <%= render :partial=>'car_file', :collection=>@car.car_frame_images%>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="thead" colspan="6">   车辆损失图片展示  </td>
+  </tr>
+  <tr>
+    <td colspan="6">      
+      <div id="car_image_list">  
+          <%= render :partial=>'car_file', :collection=>@car.car_images%>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="6" class="table_title">  价值信息  </td>
+  </tr>
+  <tr>
+    <td class="thead">承保金额 </td>
+    <td><%= car.chengbao_jine %>元 </td>
+    <td class="thead">估损金额 </td>
+    <td><%= car.gusun_jine %>元 </td>
+    <td class="thead">实际价值 </td>
+    <td><%= car.shiji_jiazhi %>元 </td>
+  </tr>
+    <%= render :partial=>'evaluated_info'%>
+  <tr>
+    <td class="thead">中标金额 </td>
+    <td><%= car.get_bidding_price %>元 </td>
+    <td class="thead">最终赔付金额 </td>
+    <td><%= car.final_compensate_price %>元 </td>
+    <td></td><td></td>
+  </tr>
+
+<% if car.status == 2 %>
+  <tr>
+    <td colspan="6" class="table_title">  委托拍卖处理  </td>
+  </tr>
+  <tr>
+    <td colspan="6">  </td>
+  </tr>
+  <tr>
+    <td colspan="6" class="table_title">  费用信息  </td>
+  </tr>
+    <tr>
+      <td colspan="6">  </td>
+    </tr>
+  <tr>
+    <td colspan="6" class="table_title">  拍卖信息  </td>
+  </tr>
+  <tr>
+    <td class="thead">中标价 </td>
+    <td><%= car.get_bidding_price %>元 </td>
+    <td class="thead">保留价 </td>
+    <td><%= auction.reserve_price %>元 </td>
+    <td class="thead">结果 </td>
+    <td><%= auction.bidding_result %> </td>
+  </tr>
+  <tr>
+    <td class="thead">用户名/真实姓名 </td>
+    <td><%=auction.won_offer.offerer.name if auction.won_offer %> /<%=auction.won_offer.offerer.name if auction.won_offer %></td>
+    <td class="thead">联系电话 </td>
+    <td><%=auction.won_offer.offerer.cellphone if auction.won_offer %> </td>
+    <td class="thead">身份证号 </td>
+    <td><%=auction.won_offer.offerer.id_number  if auction.won_offer %> </td>
+  </tr>
+<%end%>
+
+  <tr>
+    <td colspan="6" class="table_title">  附件查看  </td>
+  </tr>
+<tr>
+  <td colspan="6">
+    <div id="car_doc_list">  
+      <%= render :partial=>'car_file', :collection=>@car.car_docs%>
+    </div>
+  </td>
+</tr>
+
+ 
+</table>
+   

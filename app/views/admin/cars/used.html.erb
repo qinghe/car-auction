@@ -1,0 +1,35 @@
+<div id="car_list_search">
+    <%= form_tag( "/admin/cars/search" ) do  %>
+        <%= label_tag(:serial_no, "流水号：") %>
+        <%= text_field_tag(:serial_no) %>
+        <%= label_tag(:model_name, "车型：") %>
+        <%= text_field_tag(:model_name) %>
+        <%= submit_tag("搜索") %>
+    <%end%>
+</div>
+
+<table class='car_accident'>
+
+    <% if @cars.size > 0%>
+      <tr class="table_title" >
+        <td class="table_title" > 流水号</td>
+        <td class="table_title"> 车型</td>
+        <td class="table_title" > 发布机构</td>
+        <td class="table_title" > 发布人</td>
+        <td class="table_title" > 选项</td>
+      </tr>
+      <%@cars.each{|car|%>
+          <tr>
+            <td> <%= car.serial_no %></td>
+            <td> <%= car.name %></td>
+            <td> <%= car.publisher.company.name %></td>
+            <td> <%= car.publisher.name %></td>
+            <td> <%=link_to '详情', admin_car_url(car) %>
+            | <%=link_to '删除', admin_car_url(car), :method=>:delete,:data=>{:confirm=>"确定要删除吗？"} %>
+            </td>
+          </tr>
+      <%}%>
+    <%else%>
+       <tr><td> 没有符合条件的车辆</td></tr>
+    <%end%>
+</table>

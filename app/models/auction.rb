@@ -68,6 +68,9 @@ class Auction < ActiveRecord::Base
   #create form
   attr_accessor :expired_after
   #validates_inclusion_of :expired_after, :in => (1..MAX_EXPIRED_AFTER).to_a.collect{|d| d}, :on => :create
+  def open?    
+    (self.start_at!=Time.at(0)) and (status? :active) and ( DateTime.now > self.start_at ) and  ( self.start_at.future? )      
+  end
 
   def opened?    
     (self.start_at!=Time.at(0)) and (status? :active) and ( DateTime.now > self.start_at ) and  ( DateTime.now < self.expired_at )      

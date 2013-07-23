@@ -20,6 +20,7 @@ admin =  User.create!(
 )
 admin.status = 2
 admin.role = "administrator"
+admin.company_id = 1
 admin.save
 
 CommentKeyword.create!(

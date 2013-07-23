@@ -9,19 +9,19 @@
 <script id="t<%=element_id%>" type="text/x-tmpl">
 <div id="car_file_{%= o.id%}" class="image_container">
   {% if(o.content_type.match('image')){ %}
-  <a href="/case/cars/delete_file?file_id={%=o.id%}" class="image_delete_button" data-method="delete" data-remote="true" rel="nofollow">X</a>  
+  <a href="/admin/cars/delete_file?file_id={%=o.id%}" class="image_delete_button" data-method="delete" data-remote="true" rel="nofollow">X</a>  
   <img alt="{%= o.name %}" src="{%= o.thumb_url %}">
   {% }else{ %}
   <div>
     <div>{%= o.name %}</div>
     <div>
       <a href="{%= o.url %}" rel="nofollow">下载</a> 
-      <a href="/case/cars/delete_file?file_id={%=o.id%}" data-method="delete" data-remote="true" rel="nofollow">删除</a>  
+      <a href="/admin/cars/delete_file?file_id={%=o.id%}" data-method="delete" data-remote="true" rel="nofollow">删除</a>  
     </div> 
   <div>  
   {% }%}
   <% if object.car_id.to_i==0 %>
-  <input name=accident_car[<%=object_name%>_ids][] type='hidden', value="{%=o.id%}">
+  <input name=<%=@car.class.model_name.singular%>[<%=object_name%>_ids][] type='hidden', value="{%=o.id%}">
   <% end %>
 </div>
 </script>

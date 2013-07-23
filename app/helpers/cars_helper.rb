@@ -28,7 +28,7 @@ module CarsHelper
       select_tag_string << "<option value='#{selected_chexi.id}' selected='selected' > #{selected_chexi.name} </option>"      
     end
     select_tag_string << "</select>"
-    select_tag_string << "<select id='car_model_id' name='car[model_id]' >"     
+    select_tag_string << "<select id='car_model_id' name='#{car.class.model_name.singular}[model_id]' >"     
     if selected_chexing
       select_tag_string << "<option value='#{selected_chexing.id}' selected='selected' > #{selected_chexing.name} </option>"      
     end

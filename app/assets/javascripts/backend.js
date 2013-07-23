@@ -9,4 +9,3 @@
 //= require jquery-fileupload/basic
 //= require tmpl.min
 //= require ajax
-//= require application

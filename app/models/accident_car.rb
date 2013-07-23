@@ -1,0 +1,3 @@
+class AccidentCar < Car
+  
+end 

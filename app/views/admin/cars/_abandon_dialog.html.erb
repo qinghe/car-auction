@@ -1,0 +1,39 @@
+
+<% if @car.status?(1) or @car.status?(0) %>
+  <% @car.build_auction %>
+  <div id="abandon_dialog" title="放弃委托拍卖">
+    <%= form_for(@car, :url =>  abandon_case_car_path(@car),:html=>{:id=>'abandon_form'}, :remote=>true ) do |car_form| %>
+      <table>
+          <tr>
+              <td><%= car_form.label :giveup_auction_reason, '放弃原因' %></td>
+              <td><%= car_form.text_area :giveup_auction_reason, :size => "70x3" %></td>
+          </tr>
+      </table>
+    <%end%>
+  </div>
+<%= javascript_tag do %>
+  $(function() {
+    $( "#abandon_dialog" ).dialog({
+      autoOpen: false,
+      width:800,
+      modal: true,
+      buttons: {
+        "保存": function() {
+           $( "#abandon_form" ).submit();
+        },
+        "取消": function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+      }
+    });
+  $( "#abandon_car_button" )      
+      .click(function() {
+        $( "#abandon_dialog" ).dialog( "open" );
+      });
+  });    
+<%end %>
+
+
+<%end%>

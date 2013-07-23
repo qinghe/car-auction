@@ -15,11 +15,27 @@
       </li>
     </ul>
   </li>
-  <li><%= link_to '评论', admin_blogcomments_path %></li>
-  <li><%= link_to '拍卖', admin_auctions_path %></li>
+  <li><%= link_to '拍卖', admin_auctions_path %> </li>
+  <li><%= link_to '车辆', admin_cars_path %>
+    <ul>
+      <li><p>分组</p>
+        <ul>
+          <li><%= link_to '事故车', accident_admin_cars_path() %></li>
+          <li><%= link_to '二手车', used_admin_cars_path() %></li>
+          <li><%= link_to '汽车配件', accessory_admin_cars_path() %></li>
+        </ul>
+      </li>
+      <li><p>选项</p>
+        <ul>
+          <li><%= link_to '添加二手车', new_used_admin_cars_path() %></li>
+          <li><%= link_to '创建配件信息', new_accessory_admin_cars_path() %></li>
+        </ul>
+      </li>
+    </ul>    
+  </li>
   <li><%= link_to '建议', admin_alerts_path %></li>
 
-  <li><%= link_to '私人消息', admin_messages_path %>
+  <li><%= link_to '消息', admin_messages_path %>
     <ul>
       <li><p>文件夹</p>
         <ul>

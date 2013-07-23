@@ -3,6 +3,9 @@
 //= require jquery_ujs
 //= require jquery.countdown
 //= require jquery.KinSlideshow
+//= require jquery.chained.remote.min
+//= require jquery-fileupload/basic
+//= require tmpl.min
 //= require ajax
 function clickableLabel(){
     $("input[data-clickable=true]").each(function(){

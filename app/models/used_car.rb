@@ -1,0 +1,3 @@
+class UsedCar < Car
+  
+end 

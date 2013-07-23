@@ -5,15 +5,15 @@
     <title><%= @title || yield(:title) %> <%= @global_title %></title>
     <%= stylesheet_link_tag 'dcmegamenu' %>
     <%= render 'layouts/stylesheets' %>
-    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'admin' %>
     <%= javascript_include_tag "jquery.hoverIntent.minified", "jquery.dcmegamenu" %>
     <%= csrf_meta_tag %>
     <%= yield :head %>
   </head>
   <body>
-    <div class="container" style="width:970px;">
+    <div class="container" style="width:970px;background-color: #FFFFFF;">
       <header>
-        <%= link_to "华宸事故车拍卖平台", "/", :id => "logo" %>
+        <%= link_to "大连华宸网站管理平台", "/", :id => "logo" %>
         <nav>
           <% top_menu = case params[:controller].include?("admin")
           when true
