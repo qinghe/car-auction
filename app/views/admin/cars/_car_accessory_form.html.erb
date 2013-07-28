@@ -1,4 +1,4 @@
-<%= form_for(@car, :url => create_used_admin_cars_path ) do |car_form| %>
+<%= form_for(@car, :url => create_accessory_admin_cars_path ) do |car_form| %>
   <% if @car.errors.any? %>
     <div id="error_explanation">
       <h2><%= t(:other, :scope=> [ :errors, :template, :header],:count=>@car.errors.count,:model=>Car.model_name.human) %> </h2>
@@ -11,16 +11,16 @@
     </div>
   <% end %>
   <table class='car_accident' border="1">
-  <tr>   <td colspan="6" class="table_title"> 车辆信息</td>
+  <tr>   <td colspan="6" class="table_title"> 配件信息</td>
   </tr>
 
   <tr>
-    <td class="thead" class="thead" width="100px">选择车型 </td>
+    <td class="thead" class="thead"><%= car_form.label :model_name,'配件名称' %> </td>
+    <td><%= car_form.text_field :model_name,:class=>'span-3' %> </td>
+    <td class="thead" class="thead" width="100px">适用车型 </td>
     <td colspan="3"><%=raw car_model_select(@car)%></td>
         
     
-    <td class="thead" class="thead"><%= car_form.label :model_name,'特殊车型' %> </td>
-    <td><%= car_form.text_field :model_name,:class=>'span-3' %> </td>
   </tr>
   <tr>
     <td class="thead" class="thead"><%= car_form.label :serial_no,'流水单号' %> </td>
@@ -39,9 +39,9 @@
     <td><%= car_form.text_field :frame_number,:class=>'span-3' %>* </td>
   </tr>
 
-  <tr><td colspan="6" class="table_title">车辆图片信息</td></tr>
+  <tr><td colspan="6" class="table_title">配件图片信息</td></tr>
   <tr>
-    <td class="thead">   车辆图片  </td>
+    <td class="thead">   配件图片  </td>
       <td  colspan="5">
         <div id="car_image_list">  
           <%= render :partial=>'car_file', :collection=>@car.car_images%>

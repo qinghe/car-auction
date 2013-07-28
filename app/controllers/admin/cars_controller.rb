@@ -1,40 +1,43 @@
 # encoding: utf-8
 class Admin::CarsController < Case::CarsController
   layout "application"
-  prepend_before_filter :get_data, :only=>[:show,:evaluate,:sendback,:new_auction,:confirm_auction, :abandon,:pickup, :abandon2, :abandon3, :transfer, :delete_car_file]
+  prepend_before_filter :get_data, :only=>[:show,:evaluate,:confirm_auction, :abandon, :abandon2, :abandon3, :delete_car_file, :show_used,:show_accessory, :edit_used, :edit_accessory]
 
   # GET /cars
   # GET /cars.json
   def index
-    @title="所有车辆"
-    @cars = Car.includes(:model).order('created_at DESC')
-    respond_to do |format|
-      format.html { render :index}
-      format.json { render json: @cars }
-    end
+    if params[:type] == 'UsedCar'
+      used  
+    elsif  params[:type] == 'CarAccessory'
+      accessory
+    else
+      accident
+    end    
   end
 
   def accident
     @title="事故车"
-    @cars = AccidentCar.includes(:model).order('created_at DESC')
-    
+    @cars = AccidentCar.includes(:model).order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+    render :accident
   end
   
   def used
     @title="二手车"
-    @cars = UsedCar.includes(:model).order('created_at DESC')
-    
+    @cars = UsedCar.includes(:model).order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+    render :used    
   end
   
   def accessory
     @title="汽车配件"
-    @cars = CarAccessory.includes(:model).order('created_at DESC')
+    @cars = CarAccessory.includes(:model).order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+    render :accessory
     
   end
   
   # GET /cars/1
   # GET /cars/1.json
   def show
+    @title="事故车-详细信息"
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @car }
@@ -42,7 +45,7 @@ class Admin::CarsController < Case::CarsController
   end
   
   def new_used
-    @title="添加二手车"
+    @title="二手车-添加"
     @car = UsedCar.new
   end
   
@@ -60,9 +63,61 @@ class Admin::CarsController < Case::CarsController
   end
   
   def edit_used
-    
+    @title="二手车-编辑"      
   end
   
+  def show_used
+    @title="二手车-详细信息"  
+  end
+  
+  def new_accessory
+    @title="汽车配件-添加"
+    @car = CarAccessory.new
+  end
+
+  def show_accessory
+    @title="汽车配件-详细信息"  
+  end
+  def edit_accessory
+    @title="汽车配件-编辑"      
+  end
+  
+  def create_accessory
+    @car = CarAccessory.new(params[:car_accessory])
+    @car.publisher_id = current_user.id
+    @car.evaluator_id = User.evaluator.id
+      if @car.save
+        flash_t :success
+        redirect_to accessory_admin_cars_url()
+      else
+        title_t :new_accessory
+        render :action => :new_accessory
+      end
+  end
+  def update_used
+    @car = UsedCar.find(params[:id])
+    respond_to do |format|
+      if @car.update_attributes(params[:used_car])
+        format.html { redirect_to admin_cars_url(:type=>@car.type), notice=> '更新二手车信息成功！' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit_used" }
+        format.json { render json: @car.errors, status: :unprocessable_entity }
+      end
+    end
+  end  
+  def update_accessory
+    @car = CarAccessory.find(params[:id])
+    respond_to do |format|
+      if @car.update_attributes(params[:car_accessory])
+        format.html { redirect_to admin_cars_url(:type=>@car.type), notice=> '更新配件信息成功！' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit_accessory" }
+        format.json { render json: @car.errors, status: :unprocessable_entity }
+      end
+    end
+  end  
   def upload_file
     @car_file = nil
     ['car_doc','car_image', 'car_frame_image', 'car_license_image'].each{|key|
@@ -145,20 +200,18 @@ class Admin::CarsController < Case::CarsController
   end
 
   def search
-    @process_method = params[:process_method].to_i
     insurance_id = params[:insurance_id]
     serial_no = params[:serial_no]
     model_name = params[:model_name]
 
-    condition ="cars.status=#{@process_method} and cars.publisher_id=#{current_user.id}"
-    if insurance_id.to_i > 0
-      condition+=" and users.company_id=#{insurance_id}"
-    end
+    condition =""
     if serial_no != ""
-      condition+=" and cars.serial_no='#{serial_no}'"
+      condition<< " and " unless condition.empty?
+      condition<< "cars.serial_no='#{serial_no}'"
     end
     if model_name != ""
-      condition+=" and (car_models.name like '%#{model_name}%' or cars.model_name like '%#{model_name}%')"
+      condition<< " and " unless condition.empty?
+      condition<< "(car_models.name like '%#{model_name}%' or cars.model_name like '%#{model_name}%')"
     end
     @cars = Car.includes(:publisher,:model).where(condition).all
     render 'admin/cars/index'
@@ -206,7 +259,7 @@ class Admin::CarsController < Case::CarsController
     @car.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_cars_url, notice=> '车辆删除成功！' }
+      format.html { redirect_to admin_cars_url(:type=>@car.type), notice=> '车辆删除成功！' }
       format.json { head :no_content }
     end
   end

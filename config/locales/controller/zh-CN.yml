@@ -83,6 +83,7 @@ zh-CN:
       cars:
         new_used: "添加二手车"
         create_used: "二手车添加成功"
+        create_accessory: "配件添加成功"
       messages:
         destroy: Message has been deleted
         create: Message has been sent

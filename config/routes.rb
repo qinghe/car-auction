@@ -115,10 +115,15 @@ Inz::Application.routes.draw do
       get :accessory, :on => :collection
       post :create_used, :on => :collection
       post :create_accessory, :on => :collection
+      get :show_used, :on => :member
+      get :show_accessory, :on => :member
       get :edit_used, :on => :member
       get :edit_accessory, :on => :member
+      put :update_used, :on => :member
+      put :update_accessory, :on => :member
       get :new_used, :on => :collection
       get :new_accessory, :on => :collection
+      
     end
     resources :groups, :except => [:show]
     resources :tags, :except => [:show]

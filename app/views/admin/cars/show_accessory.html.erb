@@ -1,0 +1,42 @@
+  <table class='car_accident' border="1">
+  <tr>   <td colspan="6" class="table_title"> 配件信息</td>
+  </tr>
+
+  <tr>
+    <td class="thead" class="thead">配件名称 </td>
+    <td><%= @car.model_name %> </td>
+    <td class="thead" class="thead" width="100px">使用车型 </td>
+    <td colspan="3"><%=@car.model.name%></td>
+  </tr>
+  <tr>
+    <td class="thead" class="thead">流水单号 </td>
+    <td><%= @car.serial_no %></td>
+    <td class="thead" class="thead">手/排 </td>
+    <td><%= Car::VARIATORS.key(@car.variator) %> </td>
+    <td class="thead">登记日期  </td>
+    <td><%= @car.registered_at %> </td>
+  </tr>
+  <tr>
+    <td class="thead">车牌号 </td>
+    <td><%= @car.plate_number %></td>
+    <td class="thead">发动机号 </td>
+    <td><%= @car.engine_number %> </td>
+    <td class="thead">车架钢印号 </td>
+    <td><%= @car.frame_number %> </td>
+  </tr>
+
+  <tr>
+    <td class="thead">   配件图片  </td>
+      <td  colspan="5">
+        <div id="car_image_list">  
+          <%= render :partial=>'car_file', :collection=>@car.car_images, :locals=>{:has_delete_button=>false}%>
+        </div>       
+      </td>
+  </tr>
+
+  <tr>
+    <td class="thead"> </td>
+    <td colspan="5">  </td>
+  </tr>
+</table>
+ 
