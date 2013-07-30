@@ -17,39 +17,4 @@
   </table>
 <% end %>
 
-<% if @auction.offers.count>0 %>
-  <h2 class="box top-1">Offers</h2>
-  <div class="prepend-5 append-5">
-    <table class="list">
-      <thead>
-        <tr>
-          <td colspan="2">performer</td>
-          <td>data</td>
-        </tr>
-      </thead>
-      <tbody>
-        <% i = 0 %>
-        <% @auction.offers.each do |offer| %>
-          <% i += 1 %>
-          <% html = case
-          when offer.status == Offer::STATUSES[:rejected]
-            'rejected'
-          when offer.status == Offer::STATUSES[:won]
-            'winner'
-          end
-        %>
-          <tr<% unless html.nil? %> class="<%= html %>"<% end %>>
-            <td style="text-align: right">
-              <% unless nil %><img style="width:50px; height: 50px" src="/images/avatar.jpg" /><% end %>
-            </td>
-            <td class="<%= 'bold' if offer.offerer.eql?(@current_user)%>">
-              <%= escape_user(offer.offerer) %>
-            </td>
-            <td><%= escape_time(offer.created_at) %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-<% end %>
 

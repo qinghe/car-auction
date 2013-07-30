@@ -5,7 +5,7 @@
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
     <title><%= @title || yield(:title) %> <%= @global_title %></title>
     <%= render 'layouts/stylesheets' %>
-    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'frontend' %>
     <%= javascript_include_tag "jquery.hoverIntent.minified", "jquery.dcmegamenu" %>
     <%= csrf_meta_tag %>
     <%= yield :head %>

@@ -8,7 +8,7 @@ class AuctionsController < ApplicationController
 
   def index
     #per page = 20
-    @auctions = Auction.public_auctions.with_status(:active).open.order("start_at").paginate(:page => params[:page], :per_page => 18)
+    @auctions = Auction.public_auctions.with_status(:active).open.includes(:car=>[:model,:car_images]).order("start_at").paginate(:page => params[:page], :per_page => 18)
     #@users = User.count
     @blogs = Blogpost.order("id DESC").limit(18).includes(:user)
     #@projects = Project.where(:status => Project::STATUSES[:active]).count
