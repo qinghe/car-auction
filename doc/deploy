@@ -7,10 +7,12 @@
 
 3. vi car_model.sql, change db to production db.
 
-4. bundle exec rake db:reload
+4. bundle exec rake db:reload RAILS_ENV=production
 
 5. bundle exec rake tmp:clear
 
 6. bundle exec rake assets:precompile
 
-7. touch tmp/restart.txt 
+7. chown apache.apache tmp/cache/assets -R
+
+8. touch tmp/restart.txt 

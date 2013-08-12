@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Case::CarsController < Case::ApplicationController
-  prepend_before_filter :get_data, :only=>[:show,:evaluate,:sendback,:new_auction,:confirm_auction, :abandon,:pickup, :abandon2, :abandon3, :transfer, :delete_car_file]
+  prepend_before_filter :get_data, :only=>[:edit, :show,:evaluate,:sendback,:new_auction,:confirm_auction, :abandon,:pickup, :abandon2, :abandon3, :transfer, :delete_car_file]
 
   def welcome
     respond_to do |format|
@@ -166,7 +166,11 @@ class Case::CarsController < Case::ApplicationController
     @process_method = params[:process_method].to_i
     @cars = Car.list_by(@process_method, current_user).includes(:model).order('created_at DESC')
   end
-
+  
+  # GET /cars/1/edit
+  def edit
+    
+  end
   # POST /cars
   # POST /cars.json
   def create

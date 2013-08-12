@@ -30,9 +30,9 @@ class Car < ActiveRecord::Base
   PAYMETHOD = {'0'=>"保险公司",'1'=>"车主"}
 
   validates :serial_no, :presence => true, :length => {:within => 1..40}
-  validates :engine_number, :presence => true, :length => {:within => 2..40}
-  validates :frame_number, :presence => true, :length => {:within => 2..40}
-  validates :plate_number, :presence => true, :length => {:within => 2..40}
+#  validates :engine_number, :presence => true, :length => {:within => 2..40}
+#  validates :frame_number, :presence => true, :length => {:within => 2..40}
+#  validates :plate_number, :presence => true, :length => {:within => 2..40}
 
   def self.list_by(process_method,current_user)
     if current_user.insurance_agent?

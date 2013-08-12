@@ -4,7 +4,11 @@
         <ul class="inf">
           <h3><b>会员中心</b></h3>          
           <li> <%=link_to '免费注册', signup_path %> </li>
-          <li><a href="/u">个人中心</a> </li>
+          <% if signed_in? %>
+            <li><%=link_to '个人中心', user_path(current_user) %> </li>
+          <% else %>
+            <li> <%=link_to '个人中心', signin_path %> </li>
+          <% end %>
           <div style="clear:both"></div>
         </ul>
       </li>

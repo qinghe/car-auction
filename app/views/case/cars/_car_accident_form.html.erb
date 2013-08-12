@@ -37,7 +37,7 @@
     <td class="thead"><%= car_form.label :registered_at,'初次登记日期' %> </td>
     <td><%= car_form.date_select :registered_at %> </td>
   </tr>
-  <tr>
+  <tr style="display: none;">
     <td class="thead"><%= car_form.label :plate_number,'车牌号' %> </td>
     <td><%= car_form.text_field :plate_number,:class=>'span-3' %>*</td>
     <td class="thead"><%= car_form.label :engine_number,'发动机号' %> </td>
