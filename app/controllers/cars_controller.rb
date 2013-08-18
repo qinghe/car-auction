@@ -27,7 +27,7 @@ class CarsController < ApplicationController
       end
     end
     
-    @cars = Car.scoped.includes([:car_images, :auction,:model, :accident,[:publisher=>:company]]).where(filters).paginate(:page => params[:page], :per_page => 20)
+    @cars = Car.scoped.includes([:car_images, :auction,:model, :accident,[:publisher=>:company]]).where(["status=?",2]).where(filters).paginate(:page => params[:page], :per_page => 20)
 
     respond_to do |format|
       format.html # index.html.erb

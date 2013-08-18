@@ -39,6 +39,10 @@
         <td><%= escape_date(@user.created_at) %></td>
       </tr>
       <tr>
+        <td>保证金</td>
+        <td><%= @user.deposit %></td>
+      </tr>
+      <tr>
         <td>帐户状态</td>
         <td><%= @statuses[@user.status] %></td>
       </tr>

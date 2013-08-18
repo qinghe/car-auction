@@ -208,7 +208,7 @@ class Case::CarsController < Case::ApplicationController
     @car.destroy
 
     respond_to do |format|
-      format.html { redirect_to case_cars_url }
+      format.html { redirect_to case_cars_url(:process_method=>@car.status) }
       format.json { head :no_content }
     end
   end

@@ -40,6 +40,9 @@
         <% flash.keys.each do |key| %>
         <section class=""><div class="<%= key.to_s %>"><%= flash[key].force_encoding("UTF-8") %></div></section>
         <% end %>
+        <div>
+          <%=image_tag("banner2.gif")%>
+        </div>
         <% if current_page?(root_path) %>
         <div class="page_width" style="position:relative;overflow: hidden">
           <%= render :partial=>"layouts/slider" %>
@@ -65,7 +68,7 @@
       <div class="page_width" style="text-align: center;">
 <ul><li>Copyright &copy;2011-2013 大连华宸汽车评估有限公司 </li>
 <li>公司常年法律顾问：大连华宸事务所</li>
-<li><a target="_blank" href="http://www.miibeian.gov.cn/"><span style="color:#999">辽ICP备11024635号-1</span></a></li><br>
+<li><a target="_blank" href="http://www.miibeian.gov.cn/"><span style="color:#999">辽ICP备13009571号</span></a></li><br>
 </ul>
       </div>
       <%= debug(params) if Rails.env.development? %>

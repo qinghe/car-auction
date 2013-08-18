@@ -10,23 +10,24 @@ class Admin::UsersController < Admin::ApplicationController
 
   def new
     @title = "管理平台 :  新建用户"
+    @company = Company.new
+    @useradmin = @company.members.build
   end
 
   def create
+    @title = "管理平台 :  新建用户"
     company = params[:user].delete("company")
     @company = Company.new(company)
-    if @company.save
+    
       deposit = params[:user].delete("deposit")
       @useradmin = @company.members.build(params[:user])
       @useradmin.deposit = deposit
-      if @useradmin.save
+      if @company.save
         redirect_to admin_users_path
       else
         render :action => :new
       end
-    else
-      render :action => :new
-    end
+    
   end
 
 	def edit

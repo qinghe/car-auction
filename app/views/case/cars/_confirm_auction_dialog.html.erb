@@ -34,8 +34,8 @@
       <tr class="aution_info">
         <td>拍卖时间设置</td>
         <td colspan="5">
-          <%= auction_form.datetime_select :start_at, :default=>Time.now  %>  至 
-          <%= auction_form.datetime_select :expired_at, :default=>30.minute.from_now %>
+          <%= auction_form.datetime_select :start_at, :default=> (car.auction.open? ? car.auction.start_at : Time.now)  %>  至 
+          <%= auction_form.datetime_select :expired_at, :default=>(car.auction.open? ? car.auction.expired_at : 30.minute.from_now) %>
         </td>
       </tr>
       

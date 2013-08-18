@@ -1,7 +1,7 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
   attr_accessible :login, :name, :lastname, :email, :country, :status, :password, :password_confirmation, :description, :avatar, 
-    :company_id,:province_id, :city_id, :cellphone, :id_number,:vercode
+    :company_id,:province_id, :city_id, :cellphone, :id_number,:vercode,  :deposit
   
 	has_attached_file :avatar, :styles => { :thumb => "100x100>" }, :default_url => "/images/avatars/missing.png"
 	belongs_to :company

@@ -8,17 +8,19 @@
 #拍卖时间  价格  用户ID
 car = @auction.car
 accident = @auction.car.accident
+
+Rails.logger.debug "@auction=#{ @auction.inspect }"
+Rails.logger.debug "opened?=#{ @auction.opened?},open?=#{@auction.open?},closed?=#{@auction.closed?}"
 %>
 <script type="text/javascript" charset="utf-8">
   g_auction_closed = <%= !@auction.opened?%>
 </script>
 <div id="auction_info">
 <table class="auctionInfo">
+  <% if @auction.opened? or @auction.open? or @auction.closed? %>
   <tr>
-    <td>当前价</td> <td colspan="2"><%= @auction.opened? ? @auction.current_price : ( @auction.start_at.future? ? "还没开始":"已经结束")  %></td>    
-  </tr>
-  
-  
+    <td>当前价</td> <td colspan="2"><%= @auction.opened? ? @auction.current_price : ( @auction.open? ? "还没开始":"已经结束")  %></td>    
+  </tr> 
   <tr>
     <td>开始时间</td> <td colspan="2"><%= escape_time(@auction.start_at)%></td>
   </tr>
@@ -28,20 +30,26 @@ accident = @auction.car.accident
   <tr>
     <td>距开始</td> 
     <td colspan="2">
-      <% if @auction.opened? %> 正在拍卖
-       
+      <% if @auction.opened? %>
+       正在拍卖       
       <% else %>
-          <% if @auction.start_at.future? %>
+          <% if @auction.open? %>
             <% if @auction.start_at.today? %>
               <%= render :partial=>"time_to_start_countdown"%>
-            <%else %>
+            <% else %>
               <%= distance_of_time_in_words_to_now(@auction.start_at) %>            
-              <% # "#{left_time.yday}天#{left_time.hour}小时#{left_time.min}分#{left_time.sec}秒" %>
-            <%end %>           
+            <% end %>           
           <% end %>
       <% end %>
     </td>     
   </tr>
+  <%else%>
+  <tr><td>当前价</td> <td><%= 0 %></td> </tr>
+  <tr><td>计划开始日期</td> <td><%= escape_date(@auction.expected_start_at)%></td> </tr>
+  <tr><td>计划结束日期</td> <td><%= escape_date(@auction.expected_expired_at)%></td> </tr>
+  <tr><td>距开始</td> <td><%= distance_of_time_in_words_to_now(@auction.expected_start_at) %></td> </tr>
+  <%end%>
+  
   <tr>
     <td>拍卖权限</td>
     <td colspan="2">
@@ -60,7 +68,7 @@ accident = @auction.car.accident
           <% end %>
         
         <% end %>
-      <% elsif @auction.start_at.future? %>
+      <% elsif @auction.open? %>
         <% if @auction.allowed_to_offer?(@current_user) %>
           "您可以投标，请耐心等待"
         <% else %>

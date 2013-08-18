@@ -8,7 +8,8 @@ class AddUserPhone < ActiveRecord::Migration
     add_column :auctions, :expected_expired_at, :datetime
     add_column :auctions, :public_start_at, :datetime
     add_column :auctions, :public_expired_at, :datetime
-    add_column :auctions, :start_at, :datetime, :default=>'1970-01-01 00:00:00'
+    add_column :auctions, :start_at, :datetime
+    # should not set default value, select_datetime option :default would not work.
     add_column :auctions, :starting_price, :float, :default=>0          #起拍价
     add_column :auctions, :price_increment, :float, :default=>0 
     add_column :auctions, :reserve_price, :float, :default=>0 #保留价 

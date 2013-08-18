@@ -1,9 +1,12 @@
 <% include_wysiwyg %>
-<% user = User.new %>
-<% company = Company.new %>
+<% user = @useradmin %>
+<% company = @company %>
 <div class="prepend-1 last append-1">
     <table >
           <%= form_for [:admin, user], :html => { :multipart => true } do |f| -%>
+          <tr> <td colspan="2">
+  <%= render "layouts/error_messages", :target => user %>
+          </td> </tr>
               <tr><td>
                 <%= f.label :login %></td><td>
                 <%= f.text_field :login, :class=>"span-6" %>

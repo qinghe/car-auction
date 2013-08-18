@@ -46,9 +46,9 @@ logger.debug "@offer.price=#{@offer.price}, @auction.current_price=#{@auction.cu
 
     @made_offer = @auction.made_offer?(current_user)
     #@auction.expired_at many be nil
-    if @auction.expired_at and @auction.expired_at.past?
-      @auction.status = Auction::STATUSES[:finished]
-    end
+    #if @auction.expired_at and @auction.expired_at.past?
+    #  @auction.status = Auction::STATUSES[:finished]
+    #end
 
     unless (@auction.allowed_to_see?(current_user))
       render :text => t("flash.general.error.privileges"), :status => :forbidden

@@ -21,14 +21,14 @@
           <td>
           	<%= link_to "编辑个人资料", edit_admin_user_path(user) %><br />
           	<% if user.status == 2 %>
-          		<%= link_to "禁止", admin_user_path(user, :status => 3), :method => "delete", :confirm => t('general.confirm') %>
+          		<%= link_to "禁止", admin_user_path(user, :status => 3), :method => "delete", :data=>{ :confirm => t('general.confirm')} %>
           	<% elsif user.status == 1  %>
-          		<%= link_to "禁止", admin_user_path(user, :status => 3), :method => "delete", :confirm => t('general.confirm') %><br />
-          		<%= link_to "验证", admin_user_path(user, :status => 2), :method => "delete", :confirm => t('general.confirm') %>
+          		<%= link_to "禁止", admin_user_path(user, :status => 3), :method => "delete", :data=>{ :confirm => t('general.confirm')} %><br />
+          		<%= link_to "验证", admin_user_path(user, :status => 2), :method => "delete", :data=>{ :confirm => t('general.confirm')} %>
           	<% elsif user.status == 0 %>
-          		<%= link_to "激活", admin_user_path(user, :status => 2), :method => "delete", :confirm => t('general.confirm') %>
+          		<%= link_to "激活", admin_user_path(user, :status => 2), :method => "delete", :data=>{ :confirm => t('general.confirm')} %>
           	<% else %>
-          		<%= link_to "解除禁止", admin_user_path(user, :status => 2), :method => "delete", :confirm => t('general.confirm') %>	
+          		<%= link_to "解除禁止", admin_user_path(user, :status => 2), :method => "delete", :data=>{ :confirm => t('general.confirm')}%>	
           	<% end %>
           </td>
         </tr>
