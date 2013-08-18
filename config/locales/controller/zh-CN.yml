@@ -206,8 +206,8 @@ zh-CN:
       comments:
         edit: Edit Comment
       auctions:
-        index: user Auctions
-        edit: "Edit listing number {@auction.id}"
+        index: 拍卖车辆
+        edit: "编辑 {@auction.id}"
         show: "{@auction.title}"
       groups:
         new: New Group

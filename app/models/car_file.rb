@@ -13,7 +13,8 @@ class CarFile < ActiveRecord::Base
   before_post_process :skip_file_other_than_image # file other than images
 
   def skip_file_other_than_image
-    %w(image/gif image/jpeg image/bmp image/png).include?(uploaded_content_type)
+    #%w(image/gif image/jpeg image/bmp image/png image/pjpeg).include?(uploaded_content_type)
+    uploaded_content_type=~/image/
   end
 
   #scope :for_license, lambda { where(:file_type => TYPES[:license])}

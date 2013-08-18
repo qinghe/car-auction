@@ -8,9 +8,6 @@
 #拍卖时间  价格  用户ID
 car = @auction.car
 accident = @auction.car.accident
-
-Rails.logger.debug "@auction=#{ @auction.inspect }"
-Rails.logger.debug "opened?=#{ @auction.opened?},open?=#{@auction.open?},closed?=#{@auction.closed?}"
 %>
 <script type="text/javascript" charset="utf-8">
   g_auction_closed = <%= !@auction.opened?%>
@@ -63,6 +60,10 @@ Rails.logger.debug "opened?=#{ @auction.opened?},open?=#{@auction.open?},closed?
                 <td><%= offer.text_field :price, :value=>(@auction.current_price+@auction.price_increment), :class => "span-2" %> 
                   <%= offer.submit '出价', :confirm => "确认您的出价" %> 
                 </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><div id="bid_result"></div></td>
               </tr>
             </table>
           <% end %>

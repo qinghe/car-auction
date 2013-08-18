@@ -15,7 +15,11 @@
         <tr>
           <td><%= link_to auction.car.name, auction_path(auction), :target=>"_blank" %></td>
           <td><%= auction.car.publisher.name %></td>
-          <td><%= escape_time(auction.start_at) %>至<%= escape_time(auction.expired_at) %></td>
+          <td>
+            <%if auction.start_at.present?%>
+            <%= escape_time(auction.start_at) %>至<%= escape_time(auction.expired_at) %>
+            <%end%>
+          </td>
           <td>
             <%= escape_auction_status(auction) %>
           </td>

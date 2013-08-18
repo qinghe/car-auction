@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Admin::ApplicationController < Panel::ApplicationController
   layout "application"
   before_filter :admin_check
@@ -5,7 +6,7 @@ class Admin::ApplicationController < Panel::ApplicationController
 	def admin_check
 		if current_user.role != "administrator"
   			redirect_to root_path
-  			flash[:error] = "Nie jestes administratorem"
+  			flash[:error] = "没有操作权限，请以管理员身份登录。"
 		end
 	end
 

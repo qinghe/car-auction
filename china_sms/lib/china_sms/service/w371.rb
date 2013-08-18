@@ -3,6 +3,7 @@ module ChinaSMS
   module Service
     module W371
       extend self
+      #http://sms2.371.com/default.asp 这个是网关登陆的链接
       # ChinaSMS.use :w371, :username=>'are22',:password=>'are22'
       # ChinaSMS.to '13889611691','just a test'
       # => {:success=>true, :code=>"0", :message=>"短信发送成功"} 
