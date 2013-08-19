@@ -102,3 +102,4 @@ end
 puts "load sql seed"
 `mysql -uroot < #{File.join(Rails.root,'db','car_models.sql')}`
 puts "complete load seeds"
+# CarModel.leaves.each{|leaf| leaf.update_attribute(:full_name,leaf.self_and_ancestors.collect{|m| m.name}.join('-'))}

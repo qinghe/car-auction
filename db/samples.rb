@@ -18,6 +18,7 @@ def make_companies
       :name => names[i][0,2],
       :lastname => '',
       :status => 2,
+      :cellphone=> '13998409555',
       :email => "b#{i}@example.com",
       :description => "我是#{names[i]}的工作人员。"
     )

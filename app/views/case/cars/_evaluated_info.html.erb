@@ -1,8 +1,8 @@
   <tr id="evaluated_info">
     <td class="thead">残值价值 </td>
-    <td><%= @car.canzhi_jiazhi %>元 </td>
+    <td><%= escape_money @car.canzhi_jiazhi %> </td>
     <td class="thead">二手车价值 </td>
-    <td><%= @car.ershou_jiazhi %>元 </td>
+    <td><%= escape_money @car.ershou_jiazhi %> </td>
     <td></td> <td></td>
   </tr>
     

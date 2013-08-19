@@ -5,13 +5,16 @@ include ReCaptcha::ViewHelper #wazne dla recaptcha
 
   def escape_time(date = DateTime.now, time_new_line = false)
     t = (time_new_line)? '<br />' : ''
-    date.strftime('%d-%m-%Y' + t + ' %H:%M')
+    date.strftime('%Y-%m-%d' + t + ' %H:%M')
   end
   
   def escape_date(date = DateTime.now)
-    date = date.strftime('%d-%m-%Y')
+    date = date.strftime('%Y-%m-%d')
   end
 
+  def escape_money( money )
+    "#{money.to_i} 元"
+  end
   #gdy zwroci hash z slownika to obiekt ma ustawiony status bez pokrycia w STATUSES
   def escape_status(model, status = nil)
     status = model.class::STATUSES.invert[(status || model.status)]
@@ -57,9 +60,9 @@ include ReCaptcha::ViewHelper #wazne dla recaptcha
   	                  :count => size)
   		"#{size} #{translation}"
   	when 1.kilobyte..1.megabyte - 1
-  		"#{(size/1024.0).round(2)} KiB"
+  		"#{(size/1024.0).round(2)} KB"
   	else
-  		"#{(size/1024.0**2).round(2)} MiB"
+  		"#{(size/1024.0**2).round(2)} MB"
   	end
   end
   # Metoda tworzy pola wyboru dla kolumny status

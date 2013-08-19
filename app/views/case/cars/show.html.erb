@@ -7,7 +7,7 @@
   </tr>
   <tr>
     <td class="thead">车型 </td>
-    <td colspan="5"><%= car.name %> </td>
+    <td colspan="5"><%= car.model.full_name %> </td>
   </tr>
   <tr>
     <td class="thead">流水单号 </td>
@@ -87,42 +87,71 @@
   </tr>
   <tr>
     <td class="thead">承保金额 </td>
-    <td><%= car.chengbao_jine %>元 </td>
+    <td><%= escape_money car.chengbao_jine %> </td>
     <td class="thead">估损金额 </td>
-    <td><%= car.gusun_jine %>元 </td>
+    <td><%= escape_money car.gusun_jine %> </td>
     <td class="thead">实际价值 </td>
-    <td><%= car.shiji_jiazhi %>元 </td>
+    <td><%= escape_money car.shiji_jiazhi %> </td>
   </tr>
     <%= render :partial=>'evaluated_info'%>
   <tr>
     <td class="thead">中标金额 </td>
-    <td><%= car.get_bidding_price %>元 </td>
+    <td><%= escape_money car.get_bidding_price %> </td>
     <td class="thead">最终赔付金额 </td>
-    <td><%= car.final_compensate_price %>元 </td>
+    <td><%= escape_money car.final_compensate_price %> </td>
     <td></td><td></td>
   </tr>
 
 <% if car.status == 2 %>
   <tr>
-    <td colspan="6" class="table_title">  委托拍卖处理  </td>
+    <td colspan="6" class="table_title">  委托拍卖处理  </td>    
   </tr>
-  <tr>
-    <td colspan="6">  </td>
+  <tr>  
+    <td class="thead">展示时间</td>
+    <td colspan="5">
+      <% if car.auction.public_start_at.present? %>
+      <%= escape_date car.auction.public_start_at %> 至 
+      <%= escape_date car.auction.public_expired_at %>
+      <% end %>
+    </td>  
+  </tr>
+  <tr>  
+    <td class="thead">拍卖时间</td>
+    <td colspan="5">
+      <% if car.auction.start_at.present? %>
+      <%= escape_time car.auction.start_at %> 至 
+      <%= escape_time car.auction.expired_at %>
+      <% end %>
+    </td>  
   </tr>
   <tr>
     <td colspan="6" class="table_title">  费用信息  </td>
   </tr>
-    <tr>
-      <td colspan="6">  </td>
-    </tr>
+  <tr class="aution_info">
+    <td class="thead">拍卖底价</td>
+    <td><%= escape_money car.auction.starting_price %></td>
+    <td class="thead">保留价</td>
+    <td><%= escape_money car.auction.reserve_price %></td>
+    <td class="thead">加价额度</td>
+    <td><%= escape_money car.auction.price_increment %></td>
+  </tr>
+  <tr class="aution_info">
+    <td class="thead">拍卖时间要求</td>
+    <td colspan="5">
+      <% if car.auction.expected_start_at.present? %>
+      <%= escape_date car.auction.expected_start_at %> 至 
+      <%= escape_date car.auction.expected_expired_at %>
+      <% end %>
+    </td>
+  </tr>
   <tr>
     <td colspan="6" class="table_title">  拍卖信息  </td>
   </tr>
   <tr>
     <td class="thead">中标价 </td>
-    <td><%= car.get_bidding_price %>元 </td>
+    <td><%= escape_money car.get_bidding_price %> </td>
     <td class="thead">保留价 </td>
-    <td><%= auction.reserve_price %>元 </td>
+    <td><%= escape_money auction.reserve_price %> </td>
     <td class="thead">结果 </td>
     <td><%= auction.bidding_result %> </td>
   </tr>
