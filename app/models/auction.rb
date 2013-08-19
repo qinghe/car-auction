@@ -87,6 +87,7 @@ class Auction < ActiveRecord::Base
       offer.save!
     end
     set_won_offer!(offer)   
+    finish!
     car.to_status!(3)   
   end
   
@@ -107,13 +108,11 @@ class Auction < ActiveRecord::Base
   end
   #设置取消拍卖状态
   def cancel!
-    self.expired_at = DateTime.now
     self.status = STATUSES[:canceled]
     self.save
   end
 
   def finish!
-    self.expired_at = DateTime.now
     self.status = STATUSES[:finished]
     self.save
   end

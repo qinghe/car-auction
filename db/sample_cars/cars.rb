@@ -146,8 +146,12 @@ cars = [
     car.plate_number = ("p%010d" % i)
     car.frame_number = ("f%010d" % i)
     car.model_id = car_model_ids.sample
-    car.status = [0,1,2,3].sample
+    car.status = 2
     car.save!  
+    
+    if car.auction.closed?
+      car.auction.close!
+    end
     #车辆图片
     for file in Dir[File.join(File.dirname(__FILE__),'files', idx.to_s, "a_*.{jpg,gif,png}")]
       open(file) do|f|
