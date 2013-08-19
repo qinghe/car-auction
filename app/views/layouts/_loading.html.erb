@@ -1,0 +1,9 @@
+<div id="loading" class="loading" style="display:none;"></div>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+  	$("#loading").bind("ajaxStart", function(){
+     $(this).show();
+    }).bind("ajaxStop", function(){      $(this).hide();    });
+   
+})
+</script>

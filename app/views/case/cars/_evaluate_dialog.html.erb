@@ -10,9 +10,9 @@ car = @car
           <td>车型</td>   <td colspan="3"> <%= car.name %> </td>
         </tr>
         <tr>
-          <td> 承保金额 </td> <td> <%= f.text_field :chengbao_jine,:class=>'span-3', :readonly=>'readonly' %>元    </td>
-          <td> 估损金额 </td> <td> <%= f.text_field :gusun_jine,:class=>'span-3', :readonly=>'readonly' %>元  </td>
-          <td> 实际价值 </td> <td> <%= f.text_field :shiji_jiazhi,:class=>'span-3', :readonly=>'readonly' %>元  </td>
+          <td> 承保金额 </td> <td> <%= car.chengbao_jine %>元    </td>
+          <td> 估损金额 </td> <td> <%= car.gusun_jine %>元  </td>
+          <td> 实际价值 </td> <td> <%= car.shiji_jiazhi %>元  </td>
         </tr>
         <tr>
           <td>残值价值 </td>  <td colspan="5"><%= f.text_field :canzhi_jiazhi,:class=>'span-3' %>元*  </td>
