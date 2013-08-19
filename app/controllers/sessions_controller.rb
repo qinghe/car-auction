@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     vercode = Time.now.to_i.to_s[-4,4]
     send_string="#{vercode}(大连华宸网手机验证码，请完成验证)，如非本人操作，请忽略本短信。【大连华宸网】"
     cellphone = params[:user][:cellphone]
-    ChinaSMS.use :w371, :username=>'are22',:password=>'are22'
+    ChinaSMS.use :w371, :username=>'dlhc_vercode',:password=>'dlhc_vercode'
     @result = ChinaSMS.to cellphone, send_string.encode('gb2312')
     
     if @result[:success]
