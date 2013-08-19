@@ -21,7 +21,11 @@
       <tr class="aution_info">
         <td>拍卖时间要求</td>
         <td colspan="5">
+         <%# some seed have no expected_start_at 
+         %>
+          <% if car.auction.expected_start_at.present? %>
           <%= car.auction.expected_start_at.to_date %> 至 <%= car.auction.expected_expired_at.to_date %>
+          <% end %>
         </td>
       </tr>
       <tr class="aution_info">
