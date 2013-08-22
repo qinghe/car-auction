@@ -22,11 +22,12 @@ class Case::CarsController < Case::ApplicationController
   # GET /cars/1
   # GET /cars/1.json
   def show
-    if @car.status?( 2 ) 
-        if @car.auction.closed? and @car.auction.won_offer.blank?
-          @car.auction.close!
-        end
-    end
+    # may auction it again, let user decide.
+    #if @car.status?( 2 ) 
+    #    if @car.auction.closed? and @car.auction.won_offer.blank?
+    #      @car.auction.close!
+    #    end
+    #end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @car }
