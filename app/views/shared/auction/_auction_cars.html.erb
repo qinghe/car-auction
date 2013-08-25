@@ -25,7 +25,7 @@
       保证金： <%=auction.deposit%><br />
       
     </td>
-    <td><%= auction.start_at%></td>
+    <td><%= escape_time auction.start_at %></td>
     <td><%= auction.starting_price%></td>
     <td><%= link_to "参加拍卖",auction_path(auction)%></td>
   </tr>

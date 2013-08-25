@@ -32,18 +32,18 @@
   <tr>
     <td class="thead" class="thead"><%= car_form.label :serial_no,'流水单号' %> </td>
     <td><%= car_form.text_field :serial_no,:class=>'span-3' %></td>
-    <td class="thead" class="thead"><%= car_form.label :variator,'手/排' %> </td>
-    <td><%= car_form.select :variator,Car::VARIATORS.to_a %> </td>
+    <td class="thead" class="thead"><%= car_form.label :variator,'手自/排量' %> </td>
+    <td><%= car_form.select :variator,Car::VARIATORS.to_a %>/<%= car_form.text_field :displacement,:class=>'span-1'%> </td>
     <td class="thead"><%= car_form.label :registered_at,'初次登记日期' %> </td>
     <td><%= car_form.date_select :registered_at %> </td>
   </tr>
-  <tr style="display: none;">
+  <tr style="">
     <td class="thead"><%= car_form.label :plate_number,'车牌号' %> </td>
-    <td><%= car_form.text_field :plate_number,:class=>'span-3' %>*</td>
+    <td><%= car_form.text_field :plate_number,:class=>'span-3' %></td>
     <td class="thead"><%= car_form.label :engine_number,'发动机号' %> </td>
-    <td><%= car_form.text_field :engine_number,:class=>'span-3' %>* </td>
+    <td><%= car_form.text_field :engine_number,:class=>'span-3' %> </td>
     <td class="thead"><%= car_form.label :frame_number,'车架钢印号' %> </td>
-    <td><%= car_form.text_field :frame_number,:class=>'span-3' %>* </td>
+    <td><%= car_form.text_field :frame_number,:class=>'span-3' %> </td>
   </tr>
 
   <%= car_form.fields_for :accident, @accident do |accident_form| %>
@@ -60,23 +60,35 @@
     <td class="thead"><%= accident_form.label :tingche_address,'停车地点' %> </td>
     <td colspan="3">
       <% if @accident.new_record? %>
-        <%= accident_form.region_select [:tingche_province, :tingche_city] %> <br/>
+        <%= accident_form.region_select [:tingche_province, :tingche_city] %> </br> 
       <% else %>
-        <%= accident_form.region_select [:tingche_province, :tingche_city],{:selected=>[@accident.tingche_province_id,@accident.tingche_city_id]} %> <br/>
+        <%= accident_form.region_select [:tingche_province, :tingche_city],{:selected=>[@accident.tingche_province_id,@accident.tingche_city_id]} %> </br> 
       <% end %>
-      <%= accident_form.text_field :tingche_more %> 街道
+      &nbsp;<%= accident_form.text_field :tingche_more,:class=>'span-6' %> 街道
     </td>
     <td class="thead"><%= accident_form.label :chejiaohao_sousun,'车架号是否受损' %> </td>
     <td><%= accident_form.select :chejiaohao_sousun,[['是',0],['否',1]] %> </td>
   </tr>
   <tr>
+    <td class="thead"><%= accident_form.label :huji_address,'户籍' %> </td>
+    <td colspan="3">
+      <% if @accident.new_record? %>
+        <%= accident_form.region_select [:huji_province, :huji_city] %> </br>
+      <% else %>
+        <%= accident_form.region_select [:huji_province, :huji_city],{:selected=>[@accident.huji_province_id,@accident.huji_city_id]} %></br> 
+      <% end %>
+      &nbsp;<%= accident_form.text_field :huji_more,:class=>'span-6' %> 街道
+    </td>
+    <td class="thead"><%= accident_form.label :renshang_qingkuang,'人伤情况' %> </td>
+    <td><%= accident_form.select :renshang_qingkuang,[['无伤亡',0],['车主死亡',1],['车主轻伤',2]] %> </td>
+  </tr>
+
+  <tr>
     <td class="thead"><%= accident_form.label :zeren_rending,'责任认定' %> </td>
     <td><%= accident_form.select :zeren_rending,[['单方事故',0],['双方事故',1]] %> </td>
     
     <td class="thead"><%= accident_form.label :duifang_baoxian,'对方保险公司' %> </td>
-    <td><%= accident_form.text_field :duifang_baoxian,:class=>'span-3' %><br/>(适用双方事故) </td>
-    <td class="thead"><%= accident_form.label :renshang_qingkuang,'人伤情况' %> </td>
-    <td><%= accident_form.select :renshang_qingkuang,[['无伤亡',0],['车主死亡',1],['车主轻伤',2]] %> </td>
+    <td colspan="3"><%= accident_form.text_field :duifang_baoxian,:class=>'span-6' %>  (适用双方事故) </td>
   </tr>
   <tr>
     <td class="thead"><%= accident_form.label :pengzhuang_buwei,'碰撞部位' %> </td>
@@ -88,7 +100,7 @@
     <%= accident_form.check_box :pengzhuang_buwei, {:name=>"accident_car[accident_attributes][pengzhuang_buwei][]"}, key_val[1].to_s %>
     <%= key_val[0] %>
             </td>
-            <% if key_val[1]==6 or key_val[1]==12 or key_val[1]==14%> </tr> <% end %>
+            <% if key_val[1]==6 or key_val[1]==12 or key_val[1]==15%> </tr> <% end %>
           <% } %>  
       </table>
       

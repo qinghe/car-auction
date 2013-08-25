@@ -77,7 +77,7 @@ class Auction < ActiveRecord::Base
   end
   
   def closed?
-    (self.start_at.present?) and (status? :active) and ( DateTime.now > self.expired_at )
+    (self.start_at.present?) and ( DateTime.now > self.expired_at )
   end
   
   def close! #choose_win_offer

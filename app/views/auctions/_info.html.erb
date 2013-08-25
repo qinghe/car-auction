@@ -30,11 +30,11 @@
       <tr>
         <th>户籍所在地</th> <td><%=accident.huji_address %></td>  
         <th>车辆所在地</th> <td><%=accident.tingche_address %></td>  
-        <th>登记证书</th> <td></td>
+        <th>登记证书</th> <td><%= attribute_value_t(accident, :dengji_zhengshu, :boolean) %></td>
       </tr>
       <tr>
-        <th>排量</th> <td></td>    
-        <th>档位</th> <td></td>  
+        <th>排量</th> <td><%=car.displacement%></td>    
+        <th>档位</th> <td><%=Car::VARIATORS.key(car.variator)%></td>  
         <th>购置税</th> <td><%= attribute_value_t(accident, :gouzhi_shui, :boolean) %></td>
       </tr>
       <tr>
@@ -43,7 +43,7 @@
         <td>违章</td> <td><%= accident.weizhang.present? ? accident.weizhang : "未确定"%></td>
       </tr>
       <tr>
-        <td>咨询电话</td> <td colspan="5"></td>
+        <td>咨询电话</td> <td colspan="5"><%=car.publisher.cellphone %></td>
       </tr>
       <tr>
         <td>车辆备注</td> <td colspan="5"> <%= accident.cheliang_beizhu %></td>
@@ -53,6 +53,6 @@
   
   <div class="carimage-list">
     <% @auction.car.car_images.each{|file| %>
-     <%=  image_tag file.uploaded.url  %>      
+     <%=  image_tag file.uploaded.url, :class=>"watermark" %>      
     <% } %>
   </div>

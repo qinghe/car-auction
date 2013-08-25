@@ -1,0 +1,16 @@
+<%= javascript_include_tag 'watermark' %>
+<script>
+    var load = false;
+    window.onload = function(){
+      if(!load) {
+      wmark.init({
+      /* config goes here */
+      "position": "top-right", // default "bottom-right"
+      "opacity": 50, // default 50
+      "className": "watermark", // default "watermark"
+      "path": "/images/watermark.png"
+      });
+      load = true;
+      }
+    }
+</script>

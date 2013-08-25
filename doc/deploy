@@ -15,4 +15,6 @@
 
 7. chown apache.apache tmp/cache/assets -R
 
-8. touch tmp/restart.txt 
+8. vi .rvmrc  use ruby-1.9.2-p318@auction2
+
+9. touch tmp/restart.txt 

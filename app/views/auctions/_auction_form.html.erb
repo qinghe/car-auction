@@ -42,9 +42,9 @@ accident = @auction.car.accident
   </tr>
   <%else%>
   <tr><td>当前价</td> <td><%= 0 %></td> </tr>
-  <tr><td>计划开始日期</td> <td><%= escape_date(@auction.expected_start_at)%></td> </tr>
-  <tr><td>计划结束日期</td> <td><%= escape_date(@auction.expected_expired_at)%></td> </tr>
-  <tr><td>距开始</td> <td><%= distance_of_time_in_words_to_now(@auction.expected_start_at) %></td> </tr>
+  <tr><td>计划开始日期</td> <td><%= escape_date(@auction.expected_start_at) if @auction.expected_start_at.present? %></td> </tr>
+  <tr><td>计划结束日期</td> <td><%= escape_date(@auction.expected_expired_at) if @auction.expected_expired_at.present?%></td> </tr>
+  <tr><td>距开始</td> <td><%= distance_of_time_in_words_to_now(@auction.expected_start_at)  if @auction.expected_start_at.present?%></td> </tr>
   <%end%>
   
   <tr>
@@ -123,9 +123,9 @@ accident = @auction.car.accident
     <th>价格</th>
     <th>用户ID</th>
   </tr>
-  <% @auction.offers.order('created_at desc').limit(4).each do |offer| %>
+  <% @auction.offers.order('created_at desc').limit(6).each do |offer| %>
   <tr>
-    <td><%= offer.created_at%> </td><td><%= offer.price%> </td><td><%= offer.offerer.login%> </td>
+    <td><%= escape_time offer.created_at%> </td><td><%= offer.price%> </td><td><%= offer.offerer.login%> </td>
   </tr>  
   <% end %>
 </table>
