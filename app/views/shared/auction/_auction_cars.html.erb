@@ -27,7 +27,11 @@
     </td>
     <td><%= escape_time auction.start_at %></td>
     <td><%= auction.starting_price%></td>
-    <td><%= link_to "参加拍卖",auction_path(auction)%></td>
+    <td>
+      <% if auction.open? or auction.opened? %>
+      <%= link_to "参加拍卖",auction_path(auction)%>
+      <% end %>
+    </td>
   </tr>
   <% end %>
 <% end %>

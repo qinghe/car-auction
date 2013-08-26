@@ -8,14 +8,16 @@
 	        <tr>
 	          <td> 
 	            <%if car.car_images.present? %>
-	            <%if car.auction.present? %>
-	            <%= link_to car_image_tag(car), auction_path(car.auction) %></td>
-	            <% end %>
+  	            <%if car.auction.present? %>
+  	            <%= link_to car_image_tag(car), auction_path(car.auction) %></td>
+  	            <% end %>
 	            <% end %>
 	          <td><%= render :partial=>"brief", :locals=>{:car=>car} %></td>
 	          <td> <%= car.try(:publisher).try(:company).try(:name) %></td>
 	          <td>
-	             <%= car.auction.start_at if car.auction.present?%>
+	            <% if car.try(:auction).try(:start_at) %>
+	              <%= escape_time(car.auction.start_at) %>
+	            <% end %>
 	          </td>
 	          <td><%= car.auction.starting_price if car.auction.present?%></td>
 	        </tr>
