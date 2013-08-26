@@ -76,12 +76,12 @@ class Admin::UsersController < Admin::ApplicationController
 	
 	def destroy
 		@title = "管理平台 :  用户"
-    	@user = User.find_by_id(params[:id])
+  	@user = User.find_by_id(params[:id])
     	if @user.update_attribute(:status, params[:status])
     		redirect_to "/admin/users"
     		flash[:success] = "改变用户 id: #{@user.id} 的状态"
     	end
-    end
+  end
     
     def blogposts
     	@title = "管理平台 : 文章"
