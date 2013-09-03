@@ -25,10 +25,18 @@ accident = @auction.car.accident
     <td>结束时间</td> <td colspan="2"><%= escape_time(@auction.expired_at)%></td>
   </tr>
   <tr>
-    <td>距开始</td> 
+    <td>
+      <% if @auction.opened? %>
+      正在拍卖  
+      <% elsif @auction.open? %>
+      距开始
+      <% else %>
+      已结束
+      <% end %>
+      </td> 
     <td colspan="2">
       <% if @auction.opened? %>
-       正在拍卖       
+           <%=  Time.at( (@auction.expired_at-Time.now) ).utc.strftime("%H:%M:%S") %>
       <% else %>
           <% if @auction.open? %>
             <% if @auction.start_at.today? %>
@@ -36,6 +44,8 @@ accident = @auction.car.accident
             <% else %>
               <%= distance_of_time_in_words_to_now(@auction.start_at) %>            
             <% end %>           
+          <% else %>
+              <%= distance_of_time_in_words_to_now(@auction.expired_at) %>            
           <% end %>
       <% end %>
     </td>     
