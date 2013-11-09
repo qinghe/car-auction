@@ -100,7 +100,7 @@
     <%= accident_form.check_box :pengzhuang_buwei, {:name=>"accident_car[accident_attributes][pengzhuang_buwei][]"}, key_val[1].to_s %>
     <%= key_val[0] %>
             </td>
-            <% if key_val[1]==6 or key_val[1]==12 or key_val[1]==15%> </tr> <% end %>
+            <% if(key_val[1]%6==0)||(key_val[1]==Accident::POSITIONS.size)%> </tr> <% end %>
           <% } %>  
       </table>
       
