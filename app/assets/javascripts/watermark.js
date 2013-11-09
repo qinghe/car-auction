@@ -97,14 +97,18 @@
 			x = 0,
 			y = 0;
 			if(position.indexOf("top")!=-1)
-				y = 10;
+			{	y = 10;}
+			else if(position.indexOf("center")!=-1)
+			{	y = (gcanvas.height-watermark.height)/2;}
 			else
-				y = gcanvas.height-watermark.height-10;
+			{	y = gcanvas.height-watermark.height-10;}
 			
 			if(position.indexOf("left")!=-1)
-				x = 10;
+			{	x = 10;}
+			else if(position.indexOf("center")!=-1)
+			{	x = (gcanvas.width-watermark.width)/2;}
 			else
-				x = gcanvas.width-watermark.width-10;
+			{	x = gcanvas.width-watermark.width-10;}
 
 
 			gctx.drawImage(watermark, x, y);
