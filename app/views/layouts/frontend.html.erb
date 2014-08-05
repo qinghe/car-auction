@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
-    <title><%= @title || yield(:title) %> <%= @global_title %></title>
+    <title><%= @title.present? ? (@title +' - ') : "" %> <%= @global_title %></title>
     <%= render 'layouts/stylesheets' %>
     <%= javascript_include_tag 'frontend' %>
     <%= javascript_include_tag "jquery.hoverIntent.minified", "jquery.dcmegamenu" %>
@@ -73,7 +73,7 @@
       </div>
       <%= debug(params) if Rails.env.development? %>
     </footer>
- <%= render :partial=>"layouts/loading" %>    
+ <%=render :partial=>"layouts/loading" %>    
  <%=render :partial => "layouts/watermark"%>
   </body>
 </html>

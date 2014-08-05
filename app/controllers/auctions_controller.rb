@@ -7,14 +7,13 @@ class AuctionsController < ApplicationController
   before_filter :to_bidding, :only=> [:start, :bid, :close ]
 
   def index
-    
+    @title="拍卖厅"
     #per page = 20
     # get auction start_at> DateTime.now.beginning_of_day, or can not see open auction.
     @auctions = Auction.public_auctions.with_status(:active).where("start_at>?",DateTime.now.beginning_of_day).includes(:car=>[:model,:car_images]).order("start_at").paginate(:page => params[:page], :per_page => 18)
     #@users = User.count
     @blogs = Blogpost.order("id DESC").limit(18).includes(:user)
     #@projects = Project.where(:status => Project::STATUSES[:active]).count
-    title_t
   end
 
   # ajax for enable bidding, update auction form  
@@ -37,7 +36,7 @@ class AuctionsController < ApplicationController
     @offer = Offer.new(params[:offer])
     @offer.auction_id = @auction.id
     @offer.offerer_id = current_user.id
-logger.debug "@offer.price=#{@offer.price}, @auction.current_price=#{@auction.current_price}"    
+#logger.debug "@offer.price=#{@offer.price}, @auction.current_price=#{@auction.current_price}"    
     if @offer.price > @auction.current_price
       @offer.save!
     end 

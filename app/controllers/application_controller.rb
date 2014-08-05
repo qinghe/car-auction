@@ -13,7 +13,7 @@ require 'will_paginate/array'
 
   private
   def init
-    @global_title = '- 大连华宸'
+    @global_title = ' 大连资产评估 - 森林评估 - 机动车、二手车鉴定、评估、拍卖 - 大连华宸价格评估有限公司'
   end 
    
 =begin

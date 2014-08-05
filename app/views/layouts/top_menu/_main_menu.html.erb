@@ -1,7 +1,8 @@
 <% blog_category = BlogCategory.find_by_short_name( "helps" ) %>
 
 <ul class="main_menu clearfix">
-  <li class="find"> <%=link_to "查找车辆", root_path %> </li>
+  <li> <%=link_to "首页", root_path,:class=>(current_page?(auctions_path) ? "selected":"") %> </li>
+  <li> <%=link_to "查找车辆", search_car_path %> </li>
   <li> <%=link_to "拍卖厅", auctions_path,:class=>(current_page?(auctions_path) ? "selected":"") %></li>
   <li> <%=link_to "事故车", cars_path,:class=>(current_page?(cars_path) ? "selected":"") %></li>
   <li><%=link_to "新手指南", blog_category_path(blog_category),:class=>(current_page?(blog_category_path(blog_category)) ? "selected":"") %></li>
