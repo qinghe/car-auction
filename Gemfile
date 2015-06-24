@@ -1,6 +1,6 @@
 source 'https://ruby.taobao.org'
 ruby '2.0.0'
-gem 'rails', '3.2.7'
+gem 'rails', '3.2.18'
 gem 'mysql2'
 #gem 'carmen-rails'
 gem 'ruby-recaptcha'
