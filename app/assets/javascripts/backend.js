@@ -5,7 +5,7 @@
 //= require jquery.chained.remote.min
 //= require jquery.hoverIntent.minified
 //= require jquery.dcmegamenu
-//= require jquery.ui.dialog
+//= require jquery-ui/dialog
 //= require jquery-fileupload/basic
 //= require tmpl.min
 //= require ajax
