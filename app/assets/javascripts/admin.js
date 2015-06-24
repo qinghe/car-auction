@@ -1,5 +1,5 @@
 //= require jquery.min
-//= require jquery.ui.dialog
+//= require jquery_ui/dialog
 //= require jquery_ujs
 //= require jquery.countdown
 //= require jquery.KinSlideshow
