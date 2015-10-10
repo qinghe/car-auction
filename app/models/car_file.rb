@@ -4,13 +4,15 @@ class CarFile < ActiveRecord::Base
   #attr_accessible :uploaded, :car_id
 
   belongs_to :car
-  validates_attachment_presence :uploaded,
-                                :message => I18n.t('general.case.uploaded.must_be_set')
-  validates_attachment_size :uploaded,
-                            :less_than => FILE_MAX_SIZE,
-                            :message => "moze maksymalnie wynosic #{(FILE_MAX_SIZE/1.megabyte).round(2)} MB"
+
+  #validates_attachment_size :uploaded,
+  #                          :less_than => FILE_MAX_SIZE,
+  #                          :message => "moze maksymalnie wynosic #{(FILE_MAX_SIZE/1.megabyte).round(2)} MB"
   has_attached_file :uploaded, :styles => { :medium => "480x640", :thumb => "90x120" }
-  before_post_process :skip_file_other_than_image # file other than images
+  validates_attachment :uploaded, presence: true,
+    content_type: { content_type: "image/jpeg" },
+    size: { in: 0..10.megabytes }
+  #before_post_process :skip_file_other_than_image # file other than images
 
   def skip_file_other_than_image
     #%w(image/gif image/jpeg image/bmp image/png image/pjpeg).include?(uploaded_content_type)

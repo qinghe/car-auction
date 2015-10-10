@@ -6,18 +6,18 @@ class CreateCars < ActiveRecord::Migration
       t.string :model_name
       t.string :serial_no
       t.date :registered_at
-      t.integer :variator, :default=>0
+      t.integer :variator, :default=>0    #变速器
       t.string :displacement, :length=>24 #排量
-      t.string :plate_number
-      t.string :engine_number
-      t.string :frame_number
+      t.string :plate_number              #车牌号
+      t.string :engine_number             #引擎号
+      t.string :frame_number              #车架号
       t.integer :publisher_id
       t.integer :evaluator_id
       t.integer :status,:default=>0
       
       t.float :chengbao_jine,:default=>0 #车辆承保金额
-      t.float :gusun_jine,:default=>0  #车辆估损金额      
-      t.float :shiji_jiazhi,:default=>0 #实际价值
+      t.float :gusun_jine,:default=>0    #车辆估损金额      
+      t.float :shiji_jiazhi,:default=>0  #实际价值
       t.float :canzhi_jiazhi,:default=>0 #残值价值
       t.float :ershou_jiazhi,:default=>0 #二手车价值
       t.float :bidding_price,:default=>0 #中标价格

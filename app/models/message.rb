@@ -15,7 +15,7 @@ class Message < ActiveRecord::Base
   validates_length_of :topic, :maximum => 128, :minimum => 8, :allow_blank => false
   validates_length_of :body, :maximum => 500, :minimum => 8, :allow_blank => false
 
-  default_scope where('status>='+STATUSES[:read].to_s)
+  default_scope { where('status>='+STATUSES[:read].to_s) }
   scope :sent, lambda { where('author_id=owner_id')}
   scope :received, lambda { where('receiver_id=owner_id')}
   scope :with_status, lambda {|sts| where(:status => sts)}

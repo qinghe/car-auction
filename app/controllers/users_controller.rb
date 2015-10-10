@@ -2,7 +2,7 @@
 #require 'mail'
 class UsersController < ApplicationController
 	before_filter :correct_user, :only => [:edit, :update,:show_company,:edit_company,:update_company,:edit_password,:update_password]
-	
+
 	def new
 		@title = "注册"
 		@user = User.new
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       render :action => :new
     end
 	end
-		
+
 	def show
     @user = User.find(params[:id])
     @statuses = ["未激活","未验证","验证","禁止"]
@@ -23,12 +23,12 @@ class UsersController < ApplicationController
     sum_points
     @reputation = Reputation.find_by_user_id(@user.id)
   end
-	
+
 	def create
     @title = "创建"
-    @user = User.new(params[:user])
+    @user = User.new( permitted_user_params )
     @referential = User.find_by_login(params[:ref])
-    	
+
     @hash_mail = make_hash
     @user.status = 2 # fix email verify when needed.
     if @user.cellphone.present? and @user.vercode.present?
@@ -56,24 +56,24 @@ class UsersController < ApplicationController
       render :action => :new
     end
   end
-  	
+
   def edit
   	@title = "修改个人信息"
     @user = User.find(params[:id])
   end
-  	
+
   def update
-    @user = User.find(params[:id])    
+    @user = User.find(params[:id])
     if params[:user][:password] == ''
       @title = "Edit user"
       flash[:error] = "密码不能为空"
-      render :action => :edit      
+      render :action => :edit
     elsif params[:user][:vercode].present?
       if params[:user][:vercode] == session[:vercode]
-        @user.update_attributes(params[:user])
+        @user.update_attributes( permitted_user_params )
       end
       redirect_to @user
-    elsif @user.update_attributes(params[:user])
+    elsif @user.update_attributes( permitted_user_params )
       redirect_to @user
       flash_t :notice
     else
@@ -81,42 +81,42 @@ class UsersController < ApplicationController
       render :action => :edit
     end
   end
-  
+
   def show_company
     @title = "企业信息"
     @company = @user.company
   end
-    
+
   def edit_company
     @title = "修改企业信息"
-  end  
-  
+  end
+
   def update_company
     flash[:success] = "企业信息修改成功"
-    company_attributes = params[:company]
+    company_attributes = permitted_company_params
     if company_attributes.present?
       @user.company.update_attributes( company_attributes )
     end
-    
+
     redirect_to show_company_user_path(@user)
   end
 
   def edit_password
     @title = "修改密码"
-  end  
-  
+  end
+
   def update_password
     user_attributes = params[:user]
     if  @user.update_attributes( user_attributes )
       flash[:success] = "密码修改成功"
-      redirect_to user_path(@user)    
+      redirect_to user_path(@user)
     else
       @title = "修改密码"
       render :action => :edit_password
     end
-    
+
   end
-    
+
   def destroy
     @user = User.find_by_id(params[:id])
 	  if @user.update_attribute(:status, params[:status]) && current_user.role != "administrator"
@@ -127,7 +127,7 @@ class UsersController < ApplicationController
     redirect_to :back
     end
   end
-    
+
   #check the hash whose got the Box user
   def mail_ver
     @hash = Emailver.find_by_hash(params[:hash])
@@ -141,7 +141,7 @@ class UsersController < ApplicationController
       flash[:success] = "验证！"
     end
   end
-    
+
   def watching
     @user = User.find(params[:id])
     @title = "#{@user.name} #{@user.lastname} || Zaufani"
@@ -155,7 +155,7 @@ class UsersController < ApplicationController
     @users = @user.watchers.paginate(:page => params[:page])
     render 'show_watch'
   end
-    
+
   def find
     @title = "查找"
     @fraza = params[:find][:text]
@@ -194,16 +194,16 @@ class UsersController < ApplicationController
     end
   end
 
-  	
+
   private
-  	
+
   def sum_points
     @pts = 0
     @points.each do |points|
       @pts += points.points
     end
   end
-  	
+
   #generowanie hasha, ktory jest wysylany na email uzytkownika przy rejestracji w celu weryfikacji emaila
   def make_hash
     chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
@@ -213,9 +213,18 @@ class UsersController < ApplicationController
     end
     hash = Digest::SHA2.hexdigest(string)
   end
-  	
+
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_path) unless current_user?(@user) || current_user.role == "administrator"
   end
+
+
+	def permitted_company_params
+		params[:company].present? ? params.require(:company).permit! : ActionController::Parameters.new
+	end
+	def permitted_user_params
+		params[:user].present? ? params.require(:user).permit! : ActionController::Parameters.new
+	end
+
 end

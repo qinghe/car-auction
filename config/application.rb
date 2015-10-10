@@ -8,14 +8,13 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Inz
   class Application < Rails::Application
-  	
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
-    config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -29,11 +28,8 @@ module Inz
     config.time_zone = 'Beijing'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'pluralization', '*.{rb,yml}').to_s]
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'model', '*.yml').to_s]
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'controller', '*.yml').to_s]
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'cities', '*.yml').to_s]
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'rails', '*.yml').to_s]
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+
     config.i18n.default_locale = 'zh-CN'
 
     # JavaScript files you want as :defaults (application.js is always included).
@@ -44,7 +40,7 @@ module Inz
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
-    
+
     # Enable the asset pipeline
     config.assets.enabled = true
     config.assets.precompile += ['frontend.js', 'admin.js', 'backend.js']

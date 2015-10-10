@@ -7,10 +7,10 @@ class Tag < ActiveRecord::Base
   validates :name, :presence => true
   before_validation :default_attributes
 
-  default_scope order("name ASC")
+  default_scope { order("name ASC") }
   scope :unlinked, where("(SELECT COUNT(1) FROM groups_tags WHERE groups_tags.tag_id=tags.id)=0")
 
-  def self.from_text text   
+  def self.from_text text
     text.downcase!
     all.select {|t| not text[t.name].nil?}
   end

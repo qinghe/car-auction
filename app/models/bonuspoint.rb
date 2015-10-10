@@ -6,7 +6,7 @@ class Bonuspoint < ActiveRecord::Base
 	validates_numericality_of :points, :presence => true
 	validates_numericality_of :for_what, :presence => true
 
-	default_scope :order => 'bonuspoints.created_at DESC'
+	default_scope { :order => 'bonuspoints.created_at DESC' }
 
 	#for_what: 0 - bought, 1 - for blogpost, 2 - for reference user, 3 - admin, 4 - from auctions
 	def self.use!(points, user_id, for_what)

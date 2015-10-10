@@ -16,32 +16,32 @@ class AuctionsController < ApplicationController
     #@projects = Project.where(:status => Project::STATUSES[:active]).count
   end
 
-  # ajax for enable bidding, update auction form  
-  def start 
+  # ajax for enable bidding, update auction form
+  def start
     render :partial=>"start.js.erb"
   end
-  
+
   def close
     if @auction.closed? and @auction.won_offer.blank?
       @auction.close!
     end
-    
-    render :partial=>"close", :handlers=>[:erb]    
+
+    render :partial=>"close", :handlers=>[:erb]
   end
-  
+
   # ajax post only
   def bid
     #"offer"=>{"price"=>"14000.0"}
     #should not call @auction.offers.new
-    @offer = Offer.new(params[:offer])
+    @offer = Offer.new( permitted_offer_params )
     @offer.auction_id = @auction.id
     @offer.offerer_id = current_user.id
-#logger.debug "@offer.price=#{@offer.price}, @auction.current_price=#{@auction.current_price}"    
+#logger.debug "@offer.price=#{@offer.price}, @auction.current_price=#{@auction.current_price}"
     if @offer.price > @auction.current_price
       @offer.save!
-    end 
+    end
     render :partial=>"bid.js.erb"
-    
+
   end
 
   def show
@@ -62,7 +62,7 @@ class AuctionsController < ApplicationController
 
     @alert = Alert.new
     @auction.increment! :visits
-    
+
     unless current_user.nil?
     	@rated = @auction.rated_by?(current_user) || @auction.owner?(current_user)
     end
@@ -86,9 +86,9 @@ class AuctionsController < ApplicationController
       end
       return
     end
-    render 'apply_to_bid'    
+    render 'apply_to_bid'
   end
-  
+
   def applied
 
   end
@@ -96,7 +96,7 @@ class AuctionsController < ApplicationController
   def search
     title_t
   end
-  
+
   def result
     @query = params[:query] ||= ''
     @search_in_description = params[:search_in_description] ||= false
@@ -106,8 +106,12 @@ class AuctionsController < ApplicationController
     end
     title_t
   end
-  
+
   private
+
+  def permitted_offer_params
+    params[:offer].present? ? params.require(:offer).permit! : ActionController::Parameters.new
+  end
 
   def to_search_event
     params[:tag_ids] = {params[:tag_ids] => params[:tag_ids]} if params[:tag_ids].instance_of?(String)
@@ -115,13 +119,12 @@ class AuctionsController < ApplicationController
     @groups = Group.all
     @budgets_ids = (params[:budgets_ids] || Hash.new).values
   end
-  
+
   def to_bidding
     @auction.allowed_to_offer?(@current_user)
   end
-  
+
   def load_auction
-    options = {:include => [:owner, {:offers => :offerer}, :communications]}
-    @auction = Auction.find(params[:id], options)
+    @auction = Auction.includes([:owner, {:offers => :offerer}, :communications]).find(params[:id])
   end
 end

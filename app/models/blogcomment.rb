@@ -5,8 +5,8 @@ class Blogcomment < ActiveRecord::Base
 	belongs_to :user
 
 	validates :content, :presence => true, :length => {:within => 1..200}
-  	validates :user_id, :presence => true
-  	validates :blogpost_id, :presence => true
+  validates :user_id, :presence => true
+  validates :blogpost_id, :presence => true
 
-  	default_scope :order => 'blogcomments.created_at DESC'
+  default_scope { :order => 'blogcomments.created_at DESC' }
 end

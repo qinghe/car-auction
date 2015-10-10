@@ -5,7 +5,7 @@ class Case::CompaniesController < Case::ApplicationController
   end
 
   def create
-    @company = Company.new(params[:company])
+    @company = Company.new( permitted_resource_params )
     @company.company_type= current_user.company.company_type
     if @company.save
       flash_t :success
@@ -26,7 +26,7 @@ class Case::CompaniesController < Case::ApplicationController
   def update
     @company = Company.find(params[:id])
     respond_to do |format|
-      if @company.update_attributes(params[:company])
+      if @company.update_attributes( permitted_resource_params )
         format.html { redirect_to edit_case_company_url, notice=> '更新部门信息成功！' }
         format.json { head :no_content }
       else
@@ -45,4 +45,10 @@ class Case::CompaniesController < Case::ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def permitted_resource_params
+    params[:company].present? ? params.require(:company).permit! : ActionController::Parameters.new
+  end
+
+
 end

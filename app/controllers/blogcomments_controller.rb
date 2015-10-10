@@ -1,19 +1,19 @@
 class BlogcommentsController < ApplicationController
-  
+
   def show
   	@user = User.find(params[:user_id])
   	@blogpost = Blogpost.find(params[:blogpost_id])
   	@comment = Blogcomment.find(params[:id])
   	@title = "Komentarz"
   end
-  
+
   def new
     title_t
   	@user = current_user
   	@blogpost = Blogpost.find(params[:blogpost_id])
   	@blogcomment = Blogcomment.new
   end
-  
+
   def create
   	@blogpost = Blogpost.find(params[:blogpost_id])
     @blogcomment  = Blogcomment.new(:content => params[:blogcomment][:content], :blogpost_id => params[:blogpost_id], :user_id => current_user.id)
@@ -26,7 +26,7 @@ class BlogcommentsController < ApplicationController
       render :new, :blogpost_id => params[:blogpost_id], :user_id => current_user.id
     end
   end
-  
+
   def edit
   	@blogcomment = Blogcomment.find(params[:id])
   	@blogpost = Blogpost.find_by_id(@blogcomment.blogpost_id)
@@ -36,19 +36,19 @@ class BlogcommentsController < ApplicationController
   	@title = "Edycja komentarza dla wpisu: #{@blogpost.title}"
   	end
   end
-  
+
   def update
   	@blogcomment = Blogcomment.find(params[:id])
   	@blogpost = Blogpost.find_by_id(@blogcomment.blogpost_id)
-	if validate_recap(params, @blogcomment.errors) && @blogcomment.update_attributes(params[:blogcomment])
-		redirect_to user_blogpost_path(@blogpost.user_id, @blogcomment.blogpost_id)
-		flash_t :success
-	else
-		@title = "Edit comment"
-		render :action => :edit
-	end
+  	if validate_recap(params, @blogcomment.errors) && @blogcomment.update_attributes( permitted_resource_params )
+  		redirect_to user_blogpost_path(@blogpost.user_id, @blogcomment.blogpost_id)
+  		flash_t :success
+  	else
+  		@title = "Edit comment"
+  		render :action => :edit
+  	end
   end
-  
+
   def admin
   @blogcomment = Blogcomment.find(params[:id])
   	if @blogcomment.update_attribute(:admin, 1)
@@ -58,5 +58,8 @@ class BlogcommentsController < ApplicationController
   		redirect_to user_blogpost_path(@user, @blogpost)
   	end
   end
-  
+
+  def permitted_resource_params
+    params[:blogcomment].present? ? params.require(:blogcomment).permit! : ActionController::Parameters.new
+  end
 end

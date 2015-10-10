@@ -8,7 +8,7 @@
   <th>基本信息</th>
   <th>拍卖开始时间</th>
   <th>起拍价格</th>
-  <th>操作</th>  
+  <th>操作</th>
 </tr>
 <% if @auctions.present? %>
   <% for auction in @auctions%>
@@ -18,12 +18,12 @@
        <%= link_to car_image_tag(auction.car), auction_path(auction), :class => highlight %>
 
     </td>
-    <td> <%= auction.car.model.name %></td>
+    <td> <%= auction.car.model_name %></td>
     <td>
       拍卖厅： <%="倒计时出价大厅"%><br />
       低价： <%=auction.starting_price%><br />
       保证金： <%=auction.deposit%><br />
-      
+
     </td>
     <td><%= escape_time auction.start_at %></td>
     <td><%= auction.starting_price%></td>

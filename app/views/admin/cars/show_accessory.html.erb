@@ -6,7 +6,7 @@
     <td class="thead" class="thead">配件名称 </td>
     <td><%= @car.model_name %> </td>
     <td class="thead" class="thead" width="100px">使用车型 </td>
-    <td colspan="3"><%=@car.model.name%></td>
+    <td colspan="3"><%=@car.model_name%></td>
   </tr>
   <tr>
     <td class="thead" class="thead">流水单号 </td>
@@ -28,9 +28,9 @@
   <tr>
     <td class="thead">   配件图片  </td>
       <td  colspan="5">
-        <div id="car_image_list">  
+        <div id="car_image_list">
           <%= render :partial=>'car_file', :collection=>@car.car_images, :locals=>{:has_delete_button=>false}%>
-        </div>       
+        </div>
       </td>
   </tr>
 
@@ -39,4 +39,3 @@
     <td colspan="5">  </td>
   </tr>
 </table>
- 

@@ -3,12 +3,12 @@ class BlogpostsController < ApplicationController
   skip_before_filter :authenticate, :only=> :static
   before_filter :authorized_user, :only => :destroy
   before_filter :right_user, :only => :new
-  
+
   def static
-    @title="关于华宸" if params[:page]=='about' 
+    @title="关于华宸" if params[:page]=='about'
     @page = params[:page]
   end
-  
+
   def index
   	@user = User.find(params[:user_id])
   	@title = "#{@user.name} #{@user.lastname} || Blog"
@@ -18,7 +18,7 @@ class BlogpostsController < ApplicationController
   	@blogposts = @user.blogposts.paginate(:page => params[:page])
   	end
   end
-  
+
   def new
   	@user = User.find(params[:user_id])
   	@title = "#{@user.name} #{@user.lastname} || Blog || Nowy wpis"
@@ -26,7 +26,7 @@ class BlogpostsController < ApplicationController
   end
 
   def create
-    @blogpost  = current_user.blogposts.build(params[:blogpost])
+    @blogpost  = current_user.blogposts.build( permitted_resource_params )
     if validate_recap(params, @blogpost.errors) && @blogpost.save
       flash[:success] = "Blogpost created!"
       redirect_to user_blogposts_path(current_user)
@@ -35,7 +35,7 @@ class BlogpostsController < ApplicationController
       render :new
     end
   end
-  
+
   def show
   	@blogpost = Blogpost.find(params[:id])
   	@user = User.find_by_id(@blogpost.user_id)
@@ -45,7 +45,7 @@ class BlogpostsController < ApplicationController
   	end
   	@comments = Blogcomment.find_all_by_blogpost_id(@blogpost).paginate(:page => params[:page], :per_page => 10)
   end
-  
+
   def edit
   	@user = User.find_by_id(params[:user_id])
   	@blogpost = Blogpost.find(params[:id])
@@ -55,17 +55,17 @@ class BlogpostsController < ApplicationController
   	@title = "#{@user.name} #{@user.lastname} || Edycja wpisu"
   	end
   end
-  
+
   def update
   	@blogpost = Blogpost.find(params[:id])
-	if validate_recap(params, @blogpost.errors) && @blogpost.update_attributes(params[:blogpost])
-		redirect_to user_blogpost_path(current_user)
-		flash_t :notice
-	else
-		@user = current_user
-		@title = "#{@user.name} #{@user.lastname} || Edycja wpisu"
-		render :action => :edit
-	end
+  	if validate_recap(params, @blogpost.errors) && @blogpost.update_attributes(  permitted_resource_params )
+  		redirect_to user_blogpost_path(current_user)
+  		flash_t :notice
+  	else
+  		@user = current_user
+  		@title = "#{@user.name} #{@user.lastname} || Edycja wpisu"
+  		render :action => :edit
+  	end
   end
 
   def destroy
@@ -73,7 +73,7 @@ class BlogpostsController < ApplicationController
     flash[:success] = "Blogpost usuniety!"
     redirect_to user_blogposts_path(current_user)
   end
-  
+
   def admin
   	@blogpost = Blogpost.find(params[:id])
   	if @blogpost.update_attribute(:admin, 1)
@@ -86,12 +86,15 @@ class BlogpostsController < ApplicationController
   end
 
   private
+    def permitted_resource_params
+      params[:blogpost].present? ? params.require(:blogpost).permit! : ActionController::Parameters.new
+    end
 
     def authorized_user
       @blogpost = Blogpost.find(params[:id])
       redirect_to root_path unless current_user?(@blogpost.user)
     end
-    
+
     def right_user
       @user = User.find(params[:user_id])
       redirect_to user_blogposts_path(@user) unless current_user?(@user)

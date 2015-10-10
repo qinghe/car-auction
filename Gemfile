@@ -22,7 +22,7 @@ gem "jquery-fileupload-rails"
 gem 'china_sms',   :path => './china_sms'
 
 group :development do
-  gem "thin"
+  #gem "thin"
   gem 'faker'
 end
 

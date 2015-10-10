@@ -2,10 +2,10 @@
 #require 'mail'
 class Admin::UsersController < Admin::ApplicationController
 	before_filter :admin_user
-	
+
 	def index
 		@title = "管理平台 :  用户"
-		@users = User.find(:all, :conditions => ["role NOT IN (?)", "administrator"], :order => "lastname").paginate :per_page => 15, :page => params[:page]	    	
+		@users = User.where(["role NOT IN (?)", "administrator"]).order( "lastname").paginate( :per_page => 15, :page => params[:page] )
 	end
 
   def new
@@ -18,7 +18,7 @@ class Admin::UsersController < Admin::ApplicationController
     @title = "管理平台 :  新建用户"
     company = params[:user].delete("company")
     @company = Company.new(company)
-    
+
       deposit = params[:user].delete("deposit")
       @useradmin = @company.members.build(params[:user])
       @useradmin.deposit = deposit
@@ -27,14 +27,14 @@ class Admin::UsersController < Admin::ApplicationController
       else
         render :action => :new
       end
-    
+
   end
 
 	def edit
     @title = "管理平台 :  用户"
     @useradmin = User.find(params[:id])
   end
-    
+
   def update
     @useradmin = User.find(params[:id])
     if params[:user][:password] == ''
@@ -49,19 +49,19 @@ class Admin::UsersController < Admin::ApplicationController
       render :action => :edit
     end
   end
-	
+
 	def points
 		@user = User.find(params[:id])
 		@pointssum = Bonuspoint.find_all_by_user_id(params[:id])
 		@points = Bonuspoint.find_all_by_user_id(params[:id]).paginate :per_page => 15, :page => params[:page]
 		@title = "管理平台 :  用户点 #{@user}"
-		
+
 		@suma = 0
       	@pointssum.each do |sum|
       		@suma += sum.points
         end
 	end
-	
+
 	def editpoints
 		@title = "管理平台 :  punkty"
 		@value = params[:addorremove][:points]
@@ -73,7 +73,7 @@ class Admin::UsersController < Admin::ApplicationController
 		redirect_to :action => :points
 		end
 	end
-	
+
 	def destroy
 		@title = "管理平台 :  用户"
   	@user = User.find_by_id(params[:id])
@@ -82,14 +82,14 @@ class Admin::UsersController < Admin::ApplicationController
     		flash[:success] = "改变用户 id: #{@user.id} 的状态"
     	end
   end
-    
+
     def blogposts
     	@title = "管理平台 : 文章"
-    	
-    	if params[:is_admin].present?  	  
-        @blogposts = Blogpost.find_all_by_admin(params[:is_admin].to_i).paginate :per_page => 15, :page => params[:page]    	  
+
+    	if params[:is_admin].present?
+        @blogposts = Blogpost.find_all_by_admin(params[:is_admin].to_i).paginate :per_page => 15, :page => params[:page]
     	else
-        @blogposts = Blogpost.all.paginate :per_page => 15, :page => params[:page]    	  
+        @blogposts = Blogpost.all.paginate :per_page => 15, :page => params[:page]
     	end
     end
 
@@ -110,13 +110,13 @@ class Admin::UsersController < Admin::ApplicationController
         render :blogpostnew
       end
     end
-    
+
     def blogpostedit
     	@title = "管理平台 : 文章 || 编辑"
     	@blogpost = Blogpost.find(params[:id])
     	@title = "编辑文章 id: #{@blogpost.id}"
     end
-    
+
     def blogpostedit2
     	@title = "管理平台 : 文章"
     	@blogpost = Blogpost.find(params[:id])
@@ -124,7 +124,7 @@ class Admin::UsersController < Admin::ApplicationController
     	flash[:success] = "成功修改"
     	redirect_to :action => :blogposts
     end
-    
+
     def deleteblogpost
     	@title = "管理平台 : 文章"
     	@blogpost = Blogpost.find(params[:blogpost])
@@ -132,7 +132,7 @@ class Admin::UsersController < Admin::ApplicationController
     	redirect_to :action => :blogposts
     	flash[:success] = "成功删除: #{@blogpost.title}"
     end
-    
+
     def blogpostok
     	@blogpost = Blogpost.find(params[:id])
   		if @blogpost.update_attribute(:admin, 0)
@@ -143,12 +143,12 @@ class Admin::UsersController < Admin::ApplicationController
   			redirect_to :action => :blogposts
   		end
     end
-    
+
     def blogcomments
     	@title = "管理平台 :  评论"
     	@blogcomments = Blogcomment.find_all_by_admin(1).paginate :per_page => 15, :page => params[:page]
     end
-    
+
     def deleteblogcomment
     	@title = "管理平台 :  评论"
     	@blogcomment = Blogcomment.find(params[:blogcomment])
@@ -156,7 +156,7 @@ class Admin::UsersController < Admin::ApplicationController
     	redirect_to :action => :blogcomments
     	flash[:success] = "Usunieto komentarz o id: #{@blogcomment.id}"
     end
-    
+
     def blogcommentok
     	@blogcomment = Blogcomment.find(params[:id])
   		if @blogcomment.update_attribute(:admin, 0)
@@ -167,9 +167,9 @@ class Admin::UsersController < Admin::ApplicationController
   			redirect_to :action => :blogcomments
   		end
     end
-    
+
     private
-    
+
     def admin_user
     	if current_user.status != 2
     		redirect_to root_path

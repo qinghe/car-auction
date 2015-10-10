@@ -3,7 +3,7 @@ class Comment < ActiveRecord::Base
   LEVELS = {:auction => 0, :project => 1}
 
   attr_accessor :allowed_points
-  
+
   belongs_to :author, :class_name => "User"
   belongs_to :receiver, :class_name => "User"
   belongs_to :auction
@@ -14,7 +14,6 @@ class Comment < ActiveRecord::Base
 
   scope :pending, ->{ where(:status => STATUSES[:pending])}
   scope :active, ->{ where(:status => STATUSES[:active])}
-  default_scope includes(:values)
 
   before_save :default_attributes
   before_validation :check_points

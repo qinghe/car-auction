@@ -4,7 +4,7 @@ Inz::Application.routes.draw do
   get 'search_car', :to => 'welcome#search_car', :as=>:search_car
   get 'blogposts/:id', :to => 'blog_categories#blogpostshow', :as=>:blogpost
   get 'static/:page', :to => 'blogposts#static', :as=>:static
-
+  post 'InsCarQuo/PingAn', :to=> 'pingan#create'
 
   resources :cars, :only => [:index, :show] do
     get :get_models, :on => :collection

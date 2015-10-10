@@ -5,7 +5,7 @@
 car = @auction.car
 %>
 <div>
-  <h2> 您没有车辆 [ <%=car.model.name%>(<%= car.id%>) ] 的竞价权限 </h2>
+  <h2> 您没有车辆 [ <%=car.model_name%>(<%= car.id%>) ] 的竞价权限 </h2>
   <div class="prepend-1 append-1">
   <%= form_for @message, :url=>apply_auction_path(@auction) do |f| %>
     <%= render "layouts/error_messages", :target => @message %>

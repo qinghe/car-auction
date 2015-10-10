@@ -2,7 +2,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
-# how to load seed 
+# how to load seed
 # rake db:migrate:reset
 # mysql -uroot < db/car_models.sql
 # rake db:seed
@@ -36,9 +36,9 @@ Budget.create([
     {:title => "2500 - 5000 zł"},
     {:title => "> 5000 zł"}
   ])
-  
+
 Role.create!(:name => 'guest')
-Role.create!(:name => 'leader', :file => true, 
+Role.create!(:name => 'leader', :file => true,
                                 :forum => true,
                                 :member => true,
                                 :info => true,
@@ -61,7 +61,7 @@ category.children.create({:name => '常见问题', :short_name => 'faqs'})
 for node in category.reload.leaves
 #  puts File.join(File.dirname(__FILE__),'seeds',node.short_name,"*")
   for file_path in Dir[File.join(File.dirname(__FILE__),'seeds',node.short_name,"*")].sort
-    open(file_path) do |file|      
+    open(file_path) do |file|
       blogpost = node.blogposts.build
       blogpost.user_id = 1
       blogpost.title = file.gets
@@ -70,7 +70,7 @@ for node in category.reload.leaves
     end
   end
 end
-  
+
 
 #业务指南
 #  竞价指南,  拍卖前需做什么准备,  拍卖佣金,  中标后如何提车,  提车时效
@@ -99,7 +99,7 @@ end
 #source car_models.sql instead, it is too slow running rake.
 #`rake car:initial_models RAILS_ENV=#{Rails.env}`
 #load File.join(File.dirname(__FILE__),"samples.rb")
-puts "load sql seed"
-`mysql -uroot < #{File.join(Rails.root,'db','car_models.sql')}`
+#puts "load sql seed"
+#{}`mysql -uroot < #{File.join(Rails.root,'db','car_models.sql')}`
 puts "complete load seeds"
 # CarModel.leaves.each{|leaf| leaf.update_attribute(:full_name,leaf.self_and_ancestors.collect{|m| m.name}.join('-'))}

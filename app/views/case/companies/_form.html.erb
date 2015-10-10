@@ -16,7 +16,7 @@
     <table class='car_accident' border="1">
       <tr>
         <td class="thead" class="thead" width="100px">上级部门 </td>
-        <td colspan="3"><%=company_form.select :parent_id, nested_set_options([current_user.company]) {|i| "#{'-' * i.level} #{i.name}" },{}, :disabled=>disable_select  %>
+        <td colspan="3"><%=company_form.select :parent_id, nested_set_options( Company, current_user.company ) {|i| "#{'-' * i.level} #{i.name}" },{}, :disabled=>disable_select  %>
       </tr>
       <tr>
         <td class="thead" class="thead"><%= company_form.label :name,'部门名称' %> </td>

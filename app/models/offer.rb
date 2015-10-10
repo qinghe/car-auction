@@ -8,11 +8,11 @@ class Offer < ActiveRecord::Base
   validates :price, :numericality => {:greater_than => 0}
   #validates :days, :numericality => {:only_integer => true, :greater_than => 0}
 
-  scope :normal, lambda { where(:status => STATUSES[:active]) }
-  scope :won, lambda { where(:status => STATUSES[:won]) }
-  scope :rejected, lambda { where(:status => STATUSES[:rejected]) }
-  scope :with_status, lambda {|status| where(:status => STATUSES[status])}
-  default_scope includes(:offerer)
+  scope :normal, -> { where(:status => STATUSES[:active]) }
+  scope :won, -> { where(:status => STATUSES[:won]) }
+  scope :rejected, -> { where(:status => STATUSES[:rejected]) }
+  scope :with_status, ->(status) { where(:status => STATUSES[status]) }
+  #default_scope includes(:offerer)
 
   before_save :default_values, :on => :create
 
