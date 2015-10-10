@@ -72,8 +72,7 @@ class AuctionsController < ApplicationController
   # apply for bid
   def apply
 
-    data = params[:message] || {:topic => "apply to bid #{@auction.id}"}
-    @message = current_user.new_message(data)
+    @message = current_user.new_message( permitted_message_params )
     if request.post?
       @message.auction_id = @auction.id
       @message.receiver_id = @auction.auctioneer_id
@@ -111,6 +110,10 @@ class AuctionsController < ApplicationController
 
   def permitted_offer_params
     params[:offer].present? ? params.require(:offer).permit! : ActionController::Parameters.new
+  end
+
+  def permitted_message_params
+    params[:message].present? ? params.require(:message).permit! : ActionController::Parameters.new
   end
 
   def to_search_event

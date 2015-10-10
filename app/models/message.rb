@@ -48,7 +48,7 @@ class Message < ActiveRecord::Base
     self.owner_id = self.author_id
     return false unless self.save
 
-    new_msg = self.class.new self.attributes
+    new_msg = self.dup
     new_msg.receiver_login = self.receiver.login
     new_msg.author_id = self.author_id
     new_msg.owner_id = self.receiver_id

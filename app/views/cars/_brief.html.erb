@@ -1,14 +1,13 @@
 <% #local params: car,
 
 auction = car.auction
-model = car.model
 accident = car.accident
 %>
 
 <ul>
   <li>
     <% if auction.present? %>
-      <%= link_to model.name, auction_path(auction) %>
+      <%= link_to car.model_name, auction_path(auction) %>
     <% end %>
   </li>
   <li>
@@ -18,6 +17,6 @@ accident = car.accident
     停放地: <%= accident.tingche_address%>
   </li>
   <li>
-    初次登记: <%= car.registered_at%> 
+    初次登记: <%= car.registered_at%>
   </li>
 </ul>
