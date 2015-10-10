@@ -1,9 +1,9 @@
 class CarFile < ActiveRecord::Base
   TYPES = {:license => 0, :frame_number => 1, :accident => 2, :attachment => 3}
   FILE_MAX_SIZE = 10.megabytes
-  attr_accessible :uploaded, :car_id
-  
-  belongs_to :car  
+  #attr_accessible :uploaded, :car_id
+
+  belongs_to :car
   validates_attachment_presence :uploaded,
                                 :message => I18n.t('general.case.uploaded.must_be_set')
   validates_attachment_size :uploaded,
@@ -25,7 +25,7 @@ class CarFile < ActiveRecord::Base
   def name
     self.uploaded_file_name
   end
-  
+
   def size
     self.uploaded_file_size
   end
@@ -39,9 +39,8 @@ class CarFile < ActiveRecord::Base
       "url" => uploaded.url,
       "content_type" => uploaded_content_type,
    #   "delete_url" => upload_path(self),
-      "delete_type" => "DELETE" 
+      "delete_type" => "DELETE"
     }
   end
-  
-end
 
+end

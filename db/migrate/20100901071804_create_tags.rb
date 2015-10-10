@@ -6,13 +6,13 @@ class CreateTags < ActiveRecord::Migration
       t.string :name
       t.integer :auction_count, :default => 0
     end
-    
+
     create_table :auctions_tags, :id => false do |t|
       t.references :tag
       t.references :auction
     end
-    
-    add_index :auctions_tags, [:tag_id, :auction_id], :unique => true, :null => false
+
+    add_index :auctions_tags, [:tag_id, :auction_id], :unique => true
   end
 
   def self.down

@@ -1,7 +1,7 @@
 class Alert < ActiveRecord::Base
   STATUSES = {:unread => 0, :read => 1}
 
-  attr_accessible :text
+  #attr_accessible :text
 
   belongs_to :author, :class_name => "User"
   validates :text, :presence => true

@@ -2,6 +2,7 @@
 db/sphinx/development/*
 db/schema.rb
 db/seeds.rb
+db/*.sqlite3
 config/database.yml
 nbproject/
 log/*.log

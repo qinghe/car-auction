@@ -1,16 +1,18 @@
 # encoding: utf-8
 class Car < ActiveRecord::Base
-  attr_accessible :engine_number, :frame_number, :variator, :model_id, :model_name, :plate_number, :registered_at, :serial_no, :displacement, :status, :bidding_price,
-                  :final_compensate_price, :owner_name, :owner_phone, :pickup_contact_person, :pickup_contact_phone, :pay_method, :pickup_start_at, :pickup_expired_at,
-                  :pickup_address, :giveup_auction_reason, :giveup_pickupcar_reason, :giveup_transfer_reason,
-                  :publisher_id, :evaluator_id
+  #attr_accessible :engine_number, :frame_number, :variator, :model_id, :model_name, :plate_number, :registered_at, :serial_no, :displacement, :status, :bidding_price,
+  #                :final_compensate_price, :owner_name, :owner_phone, :pickup_contact_person, :pickup_contact_phone, :pay_method, :pickup_start_at, :pickup_expired_at,
+  #                :pickup_address, :giveup_auction_reason, :giveup_pickupcar_reason, :giveup_transfer_reason,
+  #                :publisher_id, :evaluator_id
+  #attr_accessible :accident_attributes, :auction_attributes, :car_license_image_ids, :car_frame_image_ids, :car_image_ids, :car_doc_ids
+  #attr_accessible :chengbao_jine, :gusun_jine, :shiji_jiazhi, :canzhi_jiazhi, :ershou_jiazhi
 
   belongs_to :publisher, :class_name => 'User'
   belongs_to :evaluator, :class_name => 'User'
 
   has_one :accident, :dependent => :destroy
   has_many :car_files, :dependent => :destroy
-  
+
   has_many :car_license_images, :class_name =>'CarLicenseImage'
   has_many :car_frame_images, :class_name =>'CarFrameImage'
   has_many :car_images,  :class_name =>'CarImage'
@@ -19,10 +21,8 @@ class Car < ActiveRecord::Base
 
   has_one :auction, :dependent => :destroy
   belongs_to :model, :class_name=>'CarModel'
-  attr_accessible :accident_attributes, :auction_attributes, :car_license_image_ids, :car_frame_image_ids, :car_image_ids, :car_doc_ids
-  attr_accessible :chengbao_jine, :gusun_jine, :shiji_jiazhi, :canzhi_jiazhi, :ershou_jiazhi
   accepts_nested_attributes_for :accident, :auction
-  
+
   #DISPLACEMENTS={'','1.2'=>12,'1.5'=>15,'1.6'=>16,'2.4'=>24} #排量
   VARIATORS={'MT'=>0,'AT'=>1,'A/MT'=>2, 'CVT'=>3}
 
@@ -72,14 +72,14 @@ class Car < ActiveRecord::Base
   def status?( some_status)
     self.status == some_status
   end
-  
+
   def to_status!( new_status)
     if new_status== 1
-      if self.canzhi_jiazhi>0 
+      if self.canzhi_jiazhi>0
         self.update_attributes(:status=> new_status)
       end
     else
-      self.update_attributes(:status=> new_status)      
+      self.update_attributes(:status=> new_status)
     end
   end
 end

@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Auction < ActiveRecord::Base
-  attr_protected :status, :hightlight
-  
+  #attr_protected :status, :hightlight
+
   STATUSES = {:active => 0, :finished => 1, :canceled => 2, :waiting_for_offer => 3}
   MAX_EXPIRED_AFTER = 14
   ORDER_MODES = [
@@ -14,10 +14,10 @@ class Auction < ActiveRecord::Base
   ]
 
   belongs_to :owner, :class_name => 'User'      #insurance company
-  belongs_to :won_offer, :class_name => 'Offer', :include => [:offerer]
+  belongs_to :won_offer, :class_name => 'Offer'
   has_many :offers, :dependent => :destroy #bid
-  has_many :communications, :dependent => :delete_all, :order => 'id DESC'
-  has_and_belongs_to_many :tags, 
+  has_many :communications, :dependent => :delete_all
+  has_and_belongs_to_many :tags,
     :after_add => :tag_counter_up,
     :after_remove => :tag_counter_down
   has_and_belongs_to_many :invited_users, :class_name => "User"
@@ -26,13 +26,13 @@ class Auction < ActiveRecord::Base
     :after_remove => :calculate_rating
   has_one :project
   belongs_to :budget
-  
+
   belongs_to :auctioneer, :class_name => 'User' #huachen company
   belongs_to :car
-  
+
   #validates :price_increment, :numericality => {:greater_than => 0}
   #validates :reserve_price, :numericality => {:greater_than => 0}
-  
+
  # ThinkingSphinx::Index.define :auction, :with => :active_record do
  #   indexes :title
  #   indexes :description
@@ -52,13 +52,13 @@ class Auction < ActiveRecord::Base
   scope :with_status, lambda { |status| where(:status => STATUSES[status.to_sym])}
   scope :online, lambda { where(:status => STATUSES[:active])}
   scope :public_auctions, lambda { where(:private => false)}
-  
+
   scope :within_today, lambda { where(["(start_at > ?) and (expired_at < ?)", Date.current.to_time.beginning_of_day, Date.current.to_time.end_of_day])}
   scope :closed, lambda { where(["expired_at > ? ",Time.now])}
   scope :opened, lambda { where(["(start_at < ?) and (expired_at > ?)", Time.now, Time.now])}
   scope :open, lambda { where(["start_at > ? ",Time.now]) }
-  
-  
+
+
   before_validation :init_auction_row, :on => :create
   before_update :won_offer_choosed, :if => :won_offer_id_changed?
   before_update :status_changed, :if => :down?
@@ -68,29 +68,29 @@ class Auction < ActiveRecord::Base
   #create form
   attr_accessor :expired_after
   #validates_inclusion_of :expired_after, :in => (1..MAX_EXPIRED_AFTER).to_a.collect{|d| d}, :on => :create
-  def open?    
-    (self.start_at.present?) and (status? :active) and ( self.start_at.future? )      
+  def open?
+    (self.start_at.present?) and (status? :active) and ( self.start_at.future? )
   end
 
-  def opened?    
-    (self.start_at.present?) and (status? :active) and ( DateTime.now > self.start_at ) and  ( DateTime.now < self.expired_at )      
+  def opened?
+    (self.start_at.present?) and (status? :active) and ( DateTime.now > self.start_at ) and  ( DateTime.now < self.expired_at )
   end
-  
+
   def closed?
     (self.start_at.present?) and ( DateTime.now > self.expired_at )
   end
-  
+
   def close! #choose_win_offer
     offer = self.offers.first(:order=>"price DESC")
     unless offer.present?
-      offer = new_offer( :price =>( self.starting_price > self.car.canzhi_jiazhi ?  self.starting_price : self.car.canzhi_jiazhi),:offerer_id => self.car.evaluator_id )  
+      offer = new_offer( :price =>( self.starting_price > self.car.canzhi_jiazhi ?  self.starting_price : self.car.canzhi_jiazhi),:offerer_id => self.car.evaluator_id )
       offer.save!
     end
-    set_won_offer!(offer)   
+    set_won_offer!(offer)
     finish!
-    car.to_status!(3)   
+    car.to_status!(3)
   end
-  
+
   def bidding_price
     self.won_offer ? self.won_offer.price : 0
   end
@@ -100,7 +100,7 @@ class Auction < ActiveRecord::Base
   end
 
   def current_price
-    if self.offers.present? 
+    if self.offers.present?
       self.offers.collect(&:price).max
     else
       self.starting_price
@@ -139,7 +139,7 @@ class Auction < ActiveRecord::Base
     #jesli zaproszony do aukcji
     self.invited?(user)
   end
-  
+
   def rate user, value
     self.rating_values.create :value => value, :user => user
   end
@@ -175,7 +175,7 @@ class Auction < ActiveRecord::Base
   def public?
     private == false
   end
-  
+
   #该用户是否有权观看拍卖
   def allowed_to_see? user
     return true if public? || self.owner?(user)
@@ -189,26 +189,26 @@ class Auction < ActiveRecord::Base
     return false if user.nil?
     self.offers.where(:offerer_id => user.id).count > 0
   end
-  
+
   def self.search_by_sphinx(query = '', search_in_description = false,
       tags_ids = [], budget_ids = [], order = nil, page = 1, per_page = 15)
 
     unless search_in_description || query.length == 0
       query = '@title ' + query
     end
-    
+
     unless tags_ids.empty?
       #options.merge! :weights => {:tag_list => 2}
       query += ' @tags_ids '+tags_ids.join(' | ')+''
     end
-    
+
     unless budget_ids.empty?
       #options.merge! :weights => {:tag_list => 2}
       query += ' @budget_id '+budget_ids.join(' | ')+''
     end
     now = DateTime.now
 
-    Auction.search query, 
+    Auction.search query,
       :field_weights => {:tags_ids => 3, :title => 2, :description => 1},
       :per_page => per_page,
       :page => page,
@@ -217,7 +217,7 @@ class Auction < ActiveRecord::Base
       :with => {:expired_at => now..(now+MAX_EXPIRED_AFTER.days)},
       :order => order || "@rank DESC"
   end
-  
+
   def new_offer params
     self.offers.new params do |o|
       o.status = Offer::STATUSES[:active]
@@ -228,7 +228,7 @@ class Auction < ActiveRecord::Base
   def self.admin_search(query = "", selected_date = nil, status = Array.new, order = 0, page = 1)
     criteria = self.includes(:owner)
     criteria.order(ORDER_MODES[order][1])
-    
+
     unless query.empty?
       criteria = criteria.where("auctions.title like ? OR auctions.id=?", "%#{query}%", query)
     end
@@ -246,7 +246,7 @@ class Auction < ActiveRecord::Base
 
   def update_offers params
     return true if params.nil?
-    
+
     status_won = Offer::STATUSES[:won]
     saved = true
     self.offers.each do |offer|
@@ -263,10 +263,10 @@ class Auction < ActiveRecord::Base
   def down?
     self.status_changed? && [STATUSES[:canceled], STATUSES[:finished]].include?(self.status)
   end
-  
+
   def init_auction_row
     #self.expired_after = self.expired_after.to_i
-    if self.expired_at.blank? 
+    if self.expired_at.blank?
       #self.expired_at = self.start_at + MAX_EXPIRED_AFTER.days
     end
     #self.status = STATUSES[:active]
@@ -292,7 +292,7 @@ class Auction < ActiveRecord::Base
     self.tags.delete_all
   end
 
-  def calculate_rating(v1)    
+  def calculate_rating(v1)
     if self.rating_values.count>0
       # self.rating_values may contain new_record, value is nil.
       self.update_attribute(:rating, self.rating_values.sum(:value).to_i / self.rating_values.count)

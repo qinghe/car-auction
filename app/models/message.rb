@@ -2,7 +2,7 @@ class Message < ActiveRecord::Base
   STATUSES = {:unread => 2, :replied => 1, :read => 0, :deleted => -1}
 
   attr_accessor :receiver_login
-  attr_accessible :receiver_id, :topic, :body, :receiver_login, :auction_id
+  #attr_accessible :receiver_id, :topic, :body, :receiver_login, :auction_id
 
   validates :receiver_login, :presence => true, :if => ->{self.receiver.nil?}
   before_validation :check_receiver_login, :if => ->{self.receiver.nil?}
@@ -13,7 +13,7 @@ class Message < ActiveRecord::Base
   belongs_to :auction
 
   validates_length_of :topic, :maximum => 128, :minimum => 8, :allow_blank => false
-  validates_length_of :body, :maximum => 500, :minimum => 8, :allow_blank => false  
+  validates_length_of :body, :maximum => 500, :minimum => 8, :allow_blank => false
 
   default_scope where('status>='+STATUSES[:read].to_s)
   scope :sent, lambda { where('author_id=owner_id')}
@@ -34,11 +34,11 @@ class Message < ActiveRecord::Base
   def replied!
     self.update_attribute(:status, STATUSES[:replied])
   end
-  
+
   def read!
     self.update_attribute(:status, STATUSES[:read])
   end
-  
+
   def delete!
     self.update_attribute(:status, STATUSES[:deleted])
   end
@@ -54,7 +54,7 @@ class Message < ActiveRecord::Base
     new_msg.owner_id = self.receiver_id
     new_msg.save
   end
-  
+
   def prepare_reply_message
     msg = self.class.new
     msg.receiver_login = self.author.login

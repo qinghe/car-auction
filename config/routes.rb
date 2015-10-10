@@ -1,16 +1,16 @@
 Inz::Application.routes.draw do
   #DEFAULT
   resources :blog_categories, :only => [:show]
-  match 'search_car', :to => 'welcome#search_car', :as=>:search_car
-  match 'blogposts/:id', :to => 'blog_categories#blogpostshow', :as=>:blogpost
-  match 'static/:page', :to => 'blogposts#static', :as=>:static
+  get 'search_car', :to => 'welcome#search_car', :as=>:search_car
+  get 'blogposts/:id', :to => 'blog_categories#blogpostshow', :as=>:blogpost
+  get 'static/:page', :to => 'blogposts#static', :as=>:static
 
-  
-  resources :cars, :only => [:index, :show] do    
+
+  resources :cars, :only => [:index, :show] do
     get :get_models, :on => :collection
     get :get_model, :on => :member
   end
-  
+
   resources :auctions, :only => [:index, :show] do
     resources :offers, :only => [:new, :create] do
       #get :to_reject, :on => :member
@@ -21,11 +21,11 @@ Inz::Application.routes.draw do
     get :apply, :on => :member
     post :apply, :on => :member
     get :applied, :on => :member
-    post :bid, :on => :member    
+    post :bid, :on => :member
     get :start, :on => :member
     get :close, :on => :member
   end
-  
+
   #Users and sessions
   resources :users do
   	member do
@@ -47,11 +47,11 @@ Inz::Application.routes.draw do
   end
   resources :sessions, :only => [:new, :create, :destroy] do
     get :backend_new, :on => :collection
-    post :backend_create, :on => :collection    
+    post :backend_create, :on => :collection
     post :get_vercode, :on => :collection
     put :get_vercode, :on => :collection
   end
-  
+
   resources :relationships, :only => [:create, :destroy]
   #resources :blogposts
   resources :blogcomments do
@@ -60,16 +60,16 @@ Inz::Application.routes.draw do
   	end
   end
   resources :bonuspoints
-  match '/signup',  :to => 'users#new'
-  match '/signin',  :to => 'sessions#new'
-  match '/signout',  :to => 'sessions#destroy'
-  match '/ver', :to => 'users#mail_ver'
-  #match '/find', :to => 'users#find'
-  #match '/delete', :to => 'users#delete'
+  get '/signup',  :to => 'users#new'
+  get '/signin',  :to => 'sessions#new'
+  get '/signout',  :to => 'sessions#destroy'
+  get '/ver', :to => 'users#mail_ver'
+  #get '/find', :to => 'users#find'
+  #get '/delete', :to => 'users#delete'
 
   # PANEL
   namespace :panel do
-    
+
     resources :auctions, :except => [:show] do
       resources :communications, :only => [:new, :create]
       get :offers, :on => :member # offers#index dla wlasnych ofert zarezerwowane
@@ -83,7 +83,7 @@ Inz::Application.routes.draw do
       #  end
       #end
     end
-    
+
     resources :offers, :only => [:index] do
       post :to_reject, :on => :member
     end
@@ -94,7 +94,7 @@ Inz::Application.routes.draw do
       get :reply, :on => :member
       get :sent, :on => :collection
     end
-    
+
     resources :projects, :only => :index
   end
 
@@ -124,7 +124,7 @@ Inz::Application.routes.draw do
       put :update_accessory, :on => :member
       get :new_used, :on => :collection
       get :new_accessory, :on => :collection
-      
+
     end
     resources :groups, :except => [:show]
     resources :tags, :except => [:show]
@@ -134,21 +134,21 @@ Inz::Application.routes.draw do
       resources :comments, :only => [:index, :edit, :update]
     end
   end
-  match 'admin/cars/search', :to => 'admin/cars#search'
-  match 'admin/users/:id/points', :to => 'admin/users#points'
-  match 'admin/users/:id/editpoints', :to => 'admin/users#editpoints'
-  match 'admin/users/:id/status/:status/delete', :to => 'admin/users#delete'
-  match 'admin/blogposts', :to => 'admin/users#blogposts', :via => :get
-  match 'admin/blogposts/new', :to => 'admin/users#blogpostnew'
-  match 'admin/blogposts', :to => 'admin/users#blogpostnew2', :via => :post
-  match 'admin/blogposts/:id', :to => 'admin/users#blogpostok'
-  match 'admin/blogpost/:id', :to => 'admin/users#blogpostedit'
-  match 'admin/blogpost/:id/edit', :to => 'admin/users#blogpostedit2'
-  match 'admin/blogposts/delete/:blogpost', :to => 'admin/users#deleteblogpost'
-  match 'admin/blogcomments', :to => 'admin/users#blogcomments'
-  match 'admin/blogcomments/:id', :to => 'admin/users#blogcommentok'
-  match 'admin/blogcomments/delete/:blogcomment', :to => 'admin/users#deleteblogcomment'
-  
+  get 'admin/cars/search', :to => 'admin/cars#search'
+  get 'admin/users/:id/points', :to => 'admin/users#points'
+  get 'admin/users/:id/editpoints', :to => 'admin/users#editpoints'
+  get 'admin/users/:id/status/:status/delete', :to => 'admin/users#delete'
+  get 'admin/blogposts', :to => 'admin/users#blogposts', :via => :get
+  get 'admin/blogposts/new', :to => 'admin/users#blogpostnew'
+  post 'admin/blogposts', :to => 'admin/users#blogpostnew2', :via => :post
+  get 'admin/blogposts/:id', :to => 'admin/users#blogpostok'
+  get 'admin/blogpost/:id', :to => 'admin/users#blogpostedit'
+  get 'admin/blogpost/:id/edit', :to => 'admin/users#blogpostedit2'
+  get 'admin/blogposts/delete/:blogpost', :to => 'admin/users#deleteblogpost'
+  get 'admin/blogcomments', :to => 'admin/users#blogcomments'
+  get 'admin/blogcomments/:id', :to => 'admin/users#blogcommentok'
+  get 'admin/blogcomments/delete/:blogcomment', :to => 'admin/users#deleteblogcomment'
+
   #PROJECT
   scope :module => "project" do
     resources :projects do
@@ -171,12 +171,12 @@ Inz::Application.routes.draw do
     end
   end
 
-  match 'case/cars/list/:process_method', :to => 'case/cars#list', :as=>:case_car_list
-  match 'case/cars/search', :to => 'case/cars#search'
-  match 'case/cars/show_pickup_car', :to => 'case/cars#show_pickup_car'
-  match 'case', :to => 'case/cars#welcome'
-  match 'case/companies/list', :to => 'case/companies#list', :as=>:case_company_list
-  match 'case/users/list', :to => 'case/users#list', :as=>:case_user_list
+  get 'case/cars/list/:process_method', :to => 'case/cars#list', :as=>:case_car_list
+  get 'case/cars/search', :to => 'case/cars#search'
+  get 'case/cars/show_pickup_car', :to => 'case/cars#show_pickup_car'
+  get 'case', :to => 'case/cars#welcome'
+  get 'case/companies/list', :to => 'case/companies#list', :as=>:case_company_list
+  get 'case/users/list', :to => 'case/users#list', :as=>:case_user_list
 
   namespace "case" do
     resources :cars do
@@ -198,11 +198,11 @@ Inz::Application.routes.draw do
     end
     resources :companies, :users
   end
-    	
+
   resources :alerts, :only => [:create]
-  
-  
-  
+
+
+
   root :to =>  "welcome#index"
 
   # The priority is based upon order of creation:

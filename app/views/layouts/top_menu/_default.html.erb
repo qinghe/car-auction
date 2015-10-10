@@ -1,10 +1,10 @@
 <ul class="superfish" >
   <% if !signed_in? %>
-    <li><%= link_to '注册', signup_path, :method => :new %></li>
-    <li class="signin"><%= link_to '登录', signin_path, :method => :new %></li>
+    <li><%= link_to '注册', signup_path %></li>
+    <li class="signin"><%= link_to '登录', signin_path %></li>
   <% end %>
   <% if signed_in? %>
-    <li><%= link_to '我的面板', user_path(current_user) %></li>   
+    <li><%= link_to '我的面板', user_path(current_user) %></li>
     <li><%= link_to '退出(' + current_user.to_s + ')', signout_path, :method => :delete %></li>
   <% end %>
 </ul>

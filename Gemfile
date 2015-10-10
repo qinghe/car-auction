@@ -1,11 +1,13 @@
 source 'https://ruby.taobao.org'
 ruby '2.0.0'
-gem 'rails', '3.2.18'
+gem 'rails', '~> 4.1.11'
+
+gem 'sqlite3'
 gem 'mysql2'
 #gem 'carmen-rails'
 gem 'ruby-recaptcha'
 gem 'mail'
-gem "paperclip", "~> 2.3"
+gem "paperclip", "~> 4.2.4"
 gem "will_paginate"
 #gem 'thinking-sphinx', "~> 3.0.2"
 gem "jquery-rails"
