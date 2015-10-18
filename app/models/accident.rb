@@ -47,11 +47,11 @@ class Accident < ActiveRecord::Base
   end
 
   def frame_number_lost
-  CHEJIAHAOSHOUSUN.key(chejiaohao_sousun)
+    CHEJIAHAOSHOUSUN.key(chejiaohao_sousun)
   end
 
   def responsibility_cognizance
-  ZERENRENDING.key(zeren_rending)
+    ZERENRENDING.key(zeren_rending)
   end
 
   def injure_condition

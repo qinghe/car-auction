@@ -9,7 +9,7 @@ gem 'ruby-recaptcha'
 gem 'mail'
 gem "paperclip", "~> 4.2.4"
 gem "will_paginate"
-#gem 'thinking-sphinx', "~> 3.0.2"
+
 gem "jquery-rails"
 gem 'jquery-ui-rails'
 gem "riddle"
@@ -22,9 +22,18 @@ gem "jquery-fileupload-rails"
 gem 'china_sms',   :path => './china_sms'
 
 group :development do
-  #gem "thin"
+  gem 'pry-rails'
   gem 'faker'
 end
+
+
+group :test do
+  gem 'database_cleaner', '~> 1.3'
+  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'rspec-rails', '~> 3.0'
+end
+
+
 
 #gem 'delayed_job_active_record'
 #gem 'whenever', :require => false
