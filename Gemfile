@@ -17,6 +17,8 @@ gem 'simple_form'
 gem "awesome_nested_set"
 gem "acts_as_list"
 gem "jquery-fileupload-rails"
+
+gem 'nokogiri'
 #gem 'tinymce-rails'
 #gem 'tinymce-rails-imageupload', '~> 3.5.6.3'
 gem 'china_sms',   :path => './china_sms'

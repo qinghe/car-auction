@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="GB2312"?>
+<REQUEST> 
+        <PARTNER_ID>icclm_htbc</PARTNER_ID> 
+        <SUITE_NAME>PCIS</SUITE_NAME> 
+        <TRAN_CODE>200406</TRAN_CODE>
+        <taskAuctionNo>taskAuctionNo</taskAuctionNo>
+        <modelName>modelName</modelName>
+        <location>location</location>
+        <registerDate>registerDate</registerDate>
+        <gearboxStatus>gearboxStatus</gearboxStatus>
+        <engineStatus>engineStatus</engineStatus>
+        <carMark>carMark</carMark>
+        <reportDate>reportDate</reportDate>
+        <carBelongKindName>carBelongKindName</carBelongKindName>
+        <hasScuttle>hasScuttle</hasScuttle>
+        <isTeardown>isTeardown</isTeardown>
+        <robberyCar>robberyCar</robberyCar>
+<completeFormalities>completeFormalities</completeFormalities>
+        <frameDamage>frameDamage</frameDamage>
+        <isMortgage>isMortgage</isMortgage>
+        <secondAccident>secondAccident</secondAccident>
+        <secondHand>secondHand</secondHand>
+        <isLoan>isLoan</isLoan>
+        <gear>gear</gear>
+        <rackNo>rackNo</rackNo>
+        <insuredValue>insuredValue</insuredValue>
+        <otherFee>otherFee</otherFee>
+        <actualValue>actualValue</actualValue>
+        <inquireStartDate>inquireStartDate</inquireStartDate>
+        <inquireEndDate>inquireEndDate</inquireEndDate>
+        <surveyUserId>surveyUserId</surveyUserId>
+        <estimateLoss>estimateLoss</estimateLoss> 
+      <remark>remark</remark>
+</REQUEST>
