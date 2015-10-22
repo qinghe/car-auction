@@ -31,11 +31,11 @@ class PinganController < ApplicationController
   #remark String 否 备注
   def create
     #<?xml version="1.0" encoding="GB2312"?>
-    car_info = CarInfo.new
-    car_info.from_xml( )
+    car_info = CarInfoHandler.new( params[:data])
+    @result, @car= car_info.import( )
 
     respond_to do |format|
-      format.xml  { render :xml => @forum }
+      format.xml  { render :xml => @result }
     end
   end
 
