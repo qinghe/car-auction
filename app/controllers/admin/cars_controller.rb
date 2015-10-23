@@ -202,16 +202,16 @@ class Admin::CarsController < Case::CarsController
   def search
     insurance_id = params[:insurance_id]
     serial_no = params[:serial_no]
-    model_name = params[:model_name]
+    model_title = params[:model_title]
 
     condition =""
     if serial_no != ""
       condition<< " and " unless condition.empty?
       condition<< "cars.serial_no='#{serial_no}'"
     end
-    if model_name != ""
+    if model_title != ""
       condition<< " and " unless condition.empty?
-      condition<< "(car_models.name like '%#{model_name}%' or cars.model_name like '%#{model_name}%')"
+      condition<< "(car_models.name like '%#{model_title}%' or cars.model_title like '%#{model_title}%')"
     end
     @cars = Car.includes(:publisher,:model).where(condition).all
     render 'admin/cars/index'

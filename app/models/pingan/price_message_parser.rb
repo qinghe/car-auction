@@ -1,5 +1,5 @@
 module Pingan
-  class PriceResponse < DataHandler
+  class PriceMessageParser < MessageParser
 
     #<success>true</success>
     #<message>无</message>

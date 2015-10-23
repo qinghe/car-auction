@@ -2,8 +2,8 @@
     <%= form_tag( "/admin/cars/search" ) do  %>
         <%= label_tag(:serial_no, "流水号：") %>
         <%= text_field_tag(:serial_no) %>
-        <%= label_tag(:model_name, "车型：") %>
-        <%= text_field_tag(:model_name) %>
+        <%= label_tag(:model_title, "车型：") %>
+        <%= text_field_tag(:model_title) %>
         <%= submit_tag("搜索") %>
     <%end%>
 </div>
@@ -21,7 +21,7 @@
       <%@cars.each{|car|%>
           <tr>
             <td> <%= car.serial_no %></td>
-            <td> <%= car.model_name %></td>
+            <td> <%= car.model_title %></td>
             <td> <%= car.publisher.company.name %></td>
             <td> <%= car.publisher.name %></td>
             <td> <%=link_to '详情', show_accessory_admin_car_url(car) %>

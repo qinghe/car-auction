@@ -1,5 +1,5 @@
 module Pingan
-  class DataHandler
+  class MessageParser
     attr_accessor :data
 
     def initialize( data )
@@ -21,5 +21,7 @@ module Pingan
     def parser
       Nokogiri::XML( data )
     end
+
+
   end
 end

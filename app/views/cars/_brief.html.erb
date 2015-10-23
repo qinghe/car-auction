@@ -7,7 +7,7 @@ accident = car.accident
 <ul>
   <li>
     <% if auction.present? %>
-      <%= link_to car.model_name, auction_path(auction) %>
+      <%= link_to car.model_title, auction_path(auction) %>
     <% end %>
   </li>
   <li>

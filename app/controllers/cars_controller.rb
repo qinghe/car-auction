@@ -21,8 +21,8 @@ class CarsController < ApplicationController
           filters[0] << " id=:id "
           filters[1][:id] = @filters[:keyword].to_i
         else
-          filters[0] << " car_models.name like :model_name "
-          filters[1][:model_name] = "%{@filters[:keyword]}%"
+          filters[0] << " car_models.name like :model_title "
+          filters[1][:model_title] = "%{@filters[:keyword]}%"
         end
       end
     end

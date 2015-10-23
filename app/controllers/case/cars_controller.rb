@@ -147,7 +147,7 @@ class Case::CarsController < Case::ApplicationController
   def search
     insurance_id = params[:insurance_id]
     serial_no = params[:serial_no]
-    model_name = params[:model_name]
+    model_title = params[:model_title]
 
     condition ="cars.publisher_id=#{current_user.id}"
     if insurance_id.to_i > 0
@@ -156,8 +156,8 @@ class Case::CarsController < Case::ApplicationController
     if serial_no != ""
       condition+=" and cars.serial_no='#{serial_no}'"
     end
-    if model_name != ""
-      condition+=" and (car_models.name like '%#{model_name}%' or cars.model_name like '%#{model_name}%')"
+    if model_title != ""
+      condition+=" and (car_models.name like '%#{model_title}%' or cars.model_title like '%#{model_title}%')"
     end
     @cars = Car.includes(:publisher,:model).where(condition).all
     render 'case/cars/list'

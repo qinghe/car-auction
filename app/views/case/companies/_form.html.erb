@@ -4,7 +4,7 @@
 <%= form_for(@company, :url => form_url ) do |company_form| %>
     <% if @company.errors.any? %>
         <div id="error_explanation">
-          <h2><%= t(:other, :scope=> [ :errors, :template, :header],:count=>@company.errors.count,:model=>Company.model_name.human) %> </h2>
+          <h2><%= t(:other, :scope=> [ :errors, :template, :header],:count=>@company.errors.count,:model=>Company.model_title.human) %> </h2>
 
           <ul>
             <% @company.errors.full_messages.each do |msg| %>

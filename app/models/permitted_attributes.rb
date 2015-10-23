@@ -34,7 +34,7 @@ module PermittedAttributes
 
     @@bonuspoint_attributes = [:points, :for_what, :user_id]
 
-    @@car_attributes = [:engine_number, :frame_number, :variator, :model_id, :model_name, :plate_number, :registered_at, :serial_no, :displacement, :status, :bidding_price,
+    @@car_attributes = [:engine_number, :frame_number, :variator, :model_id, :model_title, :plate_number, :registered_at, :serial_no, :displacement, :status, :bidding_price,
       :final_compensate_price, :owner_name, :owner_phone, :pickup_contact_person, :pickup_contact_phone, :pay_method, :pickup_start_at, :pickup_expired_at,
       :pickup_address, :giveup_auction_reason, :giveup_pickupcar_reason, :giveup_transfer_reason,
       :publisher_id, :evaluator_id,

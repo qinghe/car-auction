@@ -1,11 +1,11 @@
 module Pingan
-  class CarInfoHandler < DataHandler
+  class CarMessageParser < MessageParser
 
     #attr_accessor :taskAuctionNo, :modelName
 
     def import
       #taskAuctionNo String 否 拍卖编号           N   auction.no
-      #modelName String 否 车型                car.model_name                 Y
+      #modelName String 否 车型                car.model_title                 Y
       #location String 否 所在地                accident.huji_more             Y
       #registerDate Date 否 登记日期             car.registered_at              Y
       #gearboxStatus String 否 变速箱            N   car.gearbox_status
@@ -35,7 +35,7 @@ module Pingan
 
 
       attrs = attributes
-      car_params = { model_name: attrs['modelName'],
+      car_params = { model_title: attrs['modelName'],
         registered_at: attrs['registerDate'],
         gearbox_status: attrs['gearboxStatus'],
         engine_status:  attrs['engineStatus'],

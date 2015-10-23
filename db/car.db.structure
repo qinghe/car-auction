@@ -1,7 +1,7 @@
 Car info
 --------
 model_id:integer, 
-model_name :string
+model_title :string
 serial_no :string, 
 registered_at :date
 is_at:bool,
@@ -10,7 +10,7 @@ engine_number :string
 frame_number :string
 chengbao_jine :integer
 gusun_jine :integer
-model_id:integer, model_name:string, serial_no:string, registered_at:date, is_at:bool, plate_number:string, engine_number:string, frame_number:string, chengbao_jine:integer, gusun_jine:integer,
+model_id:integer, model_title:string, serial_no:string, registered_at:date, is_at:bool, plate_number:string, engine_number:string, frame_number:string, chengbao_jine:integer, gusun_jine:integer,
 
 
 #accident info

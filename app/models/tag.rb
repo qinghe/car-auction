@@ -8,7 +8,7 @@ class Tag < ActiveRecord::Base
   before_validation :default_attributes
 
   default_scope { order("name ASC") }
-  scope :unlinked, where("(SELECT COUNT(1) FROM groups_tags WHERE groups_tags.tag_id=tags.id)=0")
+  scope :unlinked, { where("(SELECT COUNT(1) FROM groups_tags WHERE groups_tags.tag_id=tags.id)=0") }
 
   def self.from_text text
     text.downcase!

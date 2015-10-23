@@ -1,7 +1,7 @@
 <%= form_for(@car, :url => update_accessory_admin_car_path ) do |car_form| %>
   <% if @car.errors.any? %>
     <div id="error_explanation">
-      <h2><%= t(:other, :scope=> [ :errors, :template, :header],:count=>@car.errors.count,:model=>Car.model_name.human) %> </h2>
+      <h2><%= t(:other, :scope=> [ :errors, :template, :header],:count=>@car.errors.count,:model=>Car.model_title.human) %> </h2>
 
       <ul>
       <% @car.errors.full_messages.each do |msg| %>
@@ -15,8 +15,8 @@
   </tr>
 
   <tr>
-    <td class="thead" class="thead"><%= car_form.label :model_name,'配件名称' %> </td>
-    <td><%= car_form.text_field :model_name,:class=>'span-3' %> </td>
+    <td class="thead" class="thead"><%= car_form.label :model_title,'配件名称' %> </td>
+    <td><%= car_form.text_field :model_title,:class=>'span-3' %> </td>
     <td class="thead" class="thead" width="100px">适用车型 </td>
     <td colspan="3"><%=raw car_model_select(@car)%></td>
         

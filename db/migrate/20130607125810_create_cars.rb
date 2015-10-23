@@ -2,9 +2,9 @@
 class CreateCars < ActiveRecord::Migration
   def self.up
     create_table :cars do |t|
-        #                                         所在表                                         添加列   
-	#taskAuctionNo String 否 拍卖编号             
-	#modelName String 否 车型                  car.model_name                 Y
+        #                                         所在表                                         添加列
+	#taskAuctionNo String 否 拍卖编号
+	#modelName String 否 车型                  car.model_title                 Y
 	#location String 否 所在地                 accident.huji_more             Y
 	#registerDate Date 否 登记日期             car.registered_at              Y
 	#gearboxStatus String 否 变速箱            N                                        car.gearbox_status
@@ -13,7 +13,7 @@ class CreateCars < ActiveRecord::Migration
 	#reportDate Date 否 出险日期               accident.chuxian_riqi          Y
 	#carBelongKindName String 否 车辆性质              N                                car.car_belong_kind_name
 	#hasScuttle String 否 天窗                        N                                car.has_scuttle
-	#isTeardown String 否 是否拆解             accident.shifou_caijian bool   Y               
+	#isTeardown String 否 是否拆解             accident.shifou_caijian bool   Y
 	#robberyCar String 否 盗抢车                       N                                car.robbery_car
 	#completeFormalities String 否 手续齐全            N                                car.complete_formalities
 	#frameDamage String 否 车架号损坏          accident.chejiaohao_sousun bool Y
@@ -34,7 +34,7 @@ class CreateCars < ActiveRecord::Migration
 
 
       t.integer :model_id
-      t.string :model_name
+      t.string :model_title
       t.string :serial_no
       t.date :registered_at               #登记日期
       t.integer :variator, :default=>0    #变速器
@@ -45,9 +45,9 @@ class CreateCars < ActiveRecord::Migration
       t.integer :publisher_id
       t.integer :evaluator_id
       t.integer :status,:default=>0
-      
+
       t.float :chengbao_jine,:default=>0 #车辆承保金额
-      t.float :gusun_jine,:default=>0    #车辆估损金额      
+      t.float :gusun_jine,:default=>0    #车辆估损金额
       t.float :shiji_jiazhi,:default=>0  #实际价值
       t.float :canzhi_jiazhi,:default=>0 #残值价值
       t.float :ershou_jiazhi,:default=>0 #二手车价值

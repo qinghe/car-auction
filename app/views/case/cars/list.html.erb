@@ -8,8 +8,8 @@
 
         <%= label_tag(:serial_no, "流水号：") %>
         <%= text_field_tag(:serial_no) %>
-        <%= label_tag(:model_name, "车型：") %>
-        <%= text_field_tag(:model_name) %>
+        <%= label_tag(:model_title, "车型：") %>
+        <%= text_field_tag(:model_title) %>
         <%= hidden_field_tag(:process_method, @process_method) %>
         <%= submit_tag("搜索") %>
     <%end%>

@@ -18,7 +18,7 @@
        <%= link_to car_image_tag(auction.car), auction_path(auction), :class => highlight %>
 
     </td>
-    <td> <%= auction.car.model_name %></td>
+    <td> <%= auction.car.model_title %></td>
     <td>
       拍卖厅： <%="倒计时出价大厅"%><br />
       低价： <%=auction.starting_price%><br />

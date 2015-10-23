@@ -1,7 +1,7 @@
 <% if target.errors.any? %>   
   <div class="error">
     <h2>
-      <%= t("activerecord.errors.template.header", :model=>target.class.model_name.human, :count => target.errors.count) %>:</h2>
+      <%= t("activerecord.errors.template.header", :model=>target.class.model_title.human, :count => target.errors.count) %>:</h2>
     <ul>
       <% target.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>

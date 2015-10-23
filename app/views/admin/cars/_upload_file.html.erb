@@ -21,7 +21,7 @@
   <div>  
   {% }%}
   <% if object.car_id.to_i==0 %>
-  <input name=<%=@car.class.model_name.singular%>[<%=object_name%>_ids][] type='hidden', value="{%=o.id%}">
+  <input name=<%=@car.class.model_title.singular%>[<%=object_name%>_ids][] type='hidden', value="{%=o.id%}">
   <% end %>
 </div>
 </script>

@@ -2,7 +2,7 @@
 
 one:
   model_id: 
-  model_name: 
+  model_title: 
   serial_no: 
   registered_at: 
   variator: 
@@ -12,7 +12,7 @@ one:
 
 two:
   model_id: 
-  model_name: 
+  model_title: 
   serial_no: 
   registered_at: 
   variator: 

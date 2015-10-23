@@ -2,7 +2,7 @@ class PinganController < ApplicationController
   respond_to :xml
 
   #taskAuctionNo String 否 拍卖编号
-  #modelName String 否 车型                  car.model_name                 Y
+  #modelName String 否 车型                  car.model_title                 Y
   #location String 否 所在地                 accident.huji_more             Y
   #registerDate Date 否 登记日期             car.registered_at              Y
   #gearboxStatus String 否 变速箱            N                                        car.gearbox_status

@@ -1,5 +1,5 @@
 # encoding: utf-8
-class ChangeForPingan < ActiveRecord::Migration
+class ChangeForPingan2 < ActiveRecord::Migration
   #                                         所在表                                         添加列
 #taskAuctionNo String 否 拍卖编号
 #modelName String 否 车型                  car.model_title                 Y

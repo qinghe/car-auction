@@ -1,0 +1,17 @@
+module Pingan
+  class BoolMessageWrapper < MessageWrapper
+    attr_accessor :succeed, :message
+
+    def initialize( succeed, message )
+
+    end
+
+    def to_xml
+      get_xml do |xml|
+        xml.succeed succeed
+        xml.message message
+      end
+    end
+
+  end
+end
