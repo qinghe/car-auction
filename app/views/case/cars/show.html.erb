@@ -7,7 +7,7 @@
   </tr>
   <tr>
     <td class="thead">车型 </td>
-    <td colspan="5"><%= car.model.full_name %> </td>
+    <td colspan="5"><%= car.model_title %> </td>
   </tr>
   <tr>
     <td class="thead">流水单号 </td>
@@ -72,7 +72,7 @@
   </tr>
   <tr>
     <td colspan="6">
-      <div id="car_license_image_list">  
+      <div id="car_license_image_list">
           <%= render :partial=>'car_file', :collection=>@car.car_license_images%>
       </div>
     </td>
@@ -82,7 +82,7 @@
   </tr>
   <tr>
     <td colspan="6">
-      <div id="car_frame_image_list">  
+      <div id="car_frame_image_list">
           <%= render :partial=>'car_file', :collection=>@car.car_frame_images%>
       </div>
     </td>
@@ -92,8 +92,8 @@
     <td class="thead" colspan="6">   车辆损失图片展示  </td>
   </tr>
   <tr>
-    <td colspan="6">      
-      <div id="car_image_list">  
+    <td colspan="6">
+      <div id="car_image_list">
           <%= render :partial=>'car_file', :collection=>@car.car_images%>
       </div>
     </td>
@@ -120,25 +120,25 @@
 
 <% if car.status == 2 or car.status == 3 or car.status == 4  %>
   <tr>
-    <td colspan="6" class="table_title">  委托拍卖处理  </td>    
+    <td colspan="6" class="table_title">  委托拍卖处理  </td>
   </tr>
-  <tr>  
+  <tr>
     <td class="thead">展示时间</td>
     <td colspan="5">
       <% if car.auction.public_start_at.present? %>
-      <%= escape_date car.auction.public_start_at %> 至 
+      <%= escape_date car.auction.public_start_at %> 至
       <%= escape_date car.auction.public_expired_at %>
       <% end %>
-    </td>  
+    </td>
   </tr>
-  <tr>  
+  <tr>
     <td class="thead">拍卖时间</td>
     <td colspan="5">
       <% if car.auction.start_at.present? %>
-      <%= escape_time car.auction.start_at %> 至 
+      <%= escape_time car.auction.start_at %> 至
       <%= escape_time car.auction.expired_at %>
       <% end %>
-    </td>  
+    </td>
   </tr>
   <tr>
     <td colspan="6" class="table_title">  费用信息  </td>
@@ -155,7 +155,7 @@
     <td class="thead">拍卖时间要求</td>
     <td colspan="5">
       <% if car.auction.expected_start_at.present? %>
-      <%= escape_date car.auction.expected_start_at %> 至 
+      <%= escape_date car.auction.expected_start_at %> 至
       <%= escape_date car.auction.expected_expired_at %>
       <% end %>
     </td>
@@ -186,7 +186,7 @@
   </tr>
 <tr>
   <td colspan="6">
-    <div id="car_doc_list">  
+    <div id="car_doc_list">
       <%= render :partial=>'car_file', :collection=>@car.car_docs%>
     </div>
   </td>
@@ -209,14 +209,14 @@
           <button id="auction_car_button">委托拍卖</button>
       <% elsif car.status == 2 %>
         <% if current_user.evaluator? %>
-          <button id="confirm_auction_button">确认拍卖</button>      
+          <button id="confirm_auction_button">确认拍卖</button>
         <% end %>
           <button id="pickup_car_button">提车确认</button>
       <% elsif car.status == 3 %>
           <%=button_to "过户确认", {:action => "transfer"}  , :form_class => "buttonform", :method=>"put", :data=>{:confirm=>"确定过户吗？"}%>
       <% end %>
-      
-      
+
+
       <% if car.status == 0 or car.status == 1 %>
           <button id="abandon_car_button">不委托拍卖</button>
       <% elsif car.status == 2 %>
@@ -250,4 +250,3 @@
     <%= render :partial=>'abandon2_dialog'%>
     <%= render :partial=>'abandon3_dialog'%>
     <%= render :partial=>'confirm_auction_dialog'%>
-

@@ -6,6 +6,10 @@ module Pingan
 
     end
 
+    def tran_code
+      TranCodeOutEnum.price
+    end
+
     def to_xml
       get_xml do |xml|
         xml.taskAuctionNo taskAuctionNo

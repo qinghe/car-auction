@@ -24,6 +24,7 @@ gem 'nokogiri'
 gem 'china_sms',   :path => './china_sms'
 
 group :development do
+  gem 'thin'
   gem 'pry-rails'
   gem 'faker'
 end

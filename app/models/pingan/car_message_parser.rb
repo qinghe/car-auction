@@ -3,7 +3,7 @@ module Pingan
 
     #attr_accessor :taskAuctionNo, :modelName
 
-    def import
+    def perform
       #taskAuctionNo String 否 拍卖编号           N   auction.no
       #modelName String 否 车型                car.model_title                 Y
       #location String 否 所在地                accident.huji_more             Y
@@ -35,7 +35,9 @@ module Pingan
 
 
       attrs = attributes
-      car_params = { model_title: attrs['modelName'],
+      car_params = {
+        serial_no: attrs['taskAuctionNo'],
+        model_title: attrs['modelName'],
         registered_at: attrs['registerDate'],
         gearbox_status: attrs['gearboxStatus'],
         engine_status:  attrs['engineStatus'],
@@ -63,16 +65,16 @@ module Pingan
         other_fee: attrs['otherFee'],
         cheliang_beizhu: attrs['remark']
         }
-      auction_params = { no: attrs['taskAuctionNo'],
+      auction_params = { serial_no: attrs['taskAuctionNo'],
         expected_start_at:  attrs['inquireStartDate'],
         expected_expired_at:  attrs['inquireEndDate'],
         }
-      result = Result.new
+      result = BoolMessageWrapper.new( false )
       car = AccidentCar.new( car_params )
-      car.build_acccident( accident_params )
+      car.build_accident( accident_params )
       car.build_auction( auction_params )
       result.succeed = car.save
-      result, car
+      result
     end
 
     def xpath

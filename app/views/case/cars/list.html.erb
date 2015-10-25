@@ -32,16 +32,16 @@
           <tr>
             <td> <%= car.serial_no %></td>
             <td> <%= car.name %></td>
-            <td> <%= car.publisher.company.name %></td>
-            <td> <%= car.publisher.name %></td>
-            <td> <%= car.evaluator.name %></td>
+            <td> <%= car.publisher.company.name if car.publisher %></td>
+            <td> <%= car.publisher.name  if car.publisher %></td>
+            <td> <%= car.evaluator.name  if car.evaluator %></td>
             <% if @process_method == "2" %><td> <%= car.status %></td><%end%>
             <td> <%= car.limitation %></td>
             <td> <%=link_to '详情', case_car_url(car) %>
               |
             <%=link_to '编辑', edit_case_car_url(car) %>
             | <%=link_to '删除', case_car_url(car), :method=>:delete,:data=>{:confirm=>"确定要删除吗？"} %>
-              
+
           </tr>
       <%}%>
     <%else%>

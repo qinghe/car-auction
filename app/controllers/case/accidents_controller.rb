@@ -40,7 +40,7 @@ class Case::AccidentsController < Case::ApplicationController
   # POST /accidents
   # POST /accidents.json
   def create
-    @accident = Accident.new(params[:accident])
+    @accident = Accident.new( permitted_params )
 
     respond_to do |format|
       if @accident.save
@@ -59,7 +59,7 @@ class Case::AccidentsController < Case::ApplicationController
     @accident = Accident.find(params[:id])
 
     respond_to do |format|
-      if @accident.update_attributes(params[:accident])
+      if @accident.update_attributes( permitted_params )
         format.html { redirect_to @accident, notice: 'Accident was successfully updated.' }
         format.json { head :no_content }
       else
@@ -80,4 +80,10 @@ class Case::AccidentsController < Case::ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def permitted_params
+    params.permit( :accident )
+  end
+
 end

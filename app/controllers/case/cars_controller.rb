@@ -7,7 +7,7 @@ class Case::CarsController < Case::ApplicationController
       format.html # new.html.erb
     end
   end
-  
+
   # GET /cars
   # GET /cars.json
   def index
@@ -23,7 +23,7 @@ class Case::CarsController < Case::ApplicationController
   # GET /cars/1.json
   def show
     # may auction it again, let user decide, if there are offers, select the heighest one
-    if @car.status?( 2 ) 
+    if @car.status?( 2 )
       if @car.auction.closed? and @car.auction.offers.present?
         @car.auction.close!
       end
@@ -33,21 +33,21 @@ class Case::CarsController < Case::ApplicationController
       format.json { render json: @car }
     end
   end
-  
+
   def sendback
     if @car.status>0
       @car.to_status!(@car.status-1)
     end
     redirect_to case_car_url(@car)
   end
-  
+
   def evaluate
-    @car.update_attributes!( params[:accident_car] )
+    @car.update_attributes!( permitted_params )
       @car.evaluator_id = current_user.id
       @car.to_status!(1)
     respond_to do |format|
       format.js # show.html.erb
-    end  
+    end
   end
 
   def upload_file
@@ -62,85 +62,84 @@ class Case::CarsController < Case::ApplicationController
       end
     }
       if @car_file.save
-        render :text=> {:files=> [@car_file.to_jq_upload]}.to_json, :status=> :created, :location=> @car_file.uploaded.url 
+        render :text=> {:files=> [@car_file.to_jq_upload]}.to_json, :status=> :created, :location=> @car_file.uploaded.url
       else
-        render :text=> @car_file.errors, :status=> :unprocessable_entity 
+        render :text=> @car_file.errors, :status=> :unprocessable_entity
       end
   end
-  
+
   def delete_file
     @deleted_file = CarFile.find(params[:file_id])
     @deleted_file.delete
     #@files = file.type.constantize.where(["user_id=? and car_id=?",current_user.id, file.car_id ])
     respond_to do |format|
       format.js { render "file_deleted"}
-    end    
+    end
   end
-  
- 
+
   def new_auction
-    @car.update_attributes(params[:accident_car])
+    @car.update_attributes( permitted_params )
     @car.to_status!(2)
     respond_to do |format|
       format.js {
         render "auction_saved"
         }
-    end 
+    end
   end
 
   def confirm_auction
-    @car.update_attributes(params[:accident_car])
+    @car.update_attributes( permitted_params )
     respond_to do |format|
       format.js {
         render "auction_saved"
         }
-    end     
+    end
   end
 
-  def abandon    
-    @car.update_attributes(params[:accident_car])
+  def abandon
+    @car.update_attributes( permitted_params )
     @return_to_path = case_car_list_path(@car.status)
-    @car.to_status!(5)    
+    @car.to_status!(5)
     respond_to do |format|
       format.js { render "abandoned"}
-    end     
+    end
   end
 
   def pickup
-    @car.update_attributes(params[:accident_car])
+    @car.update_attributes( permitted_params )
     @return_to_path = case_car_path(@car)
-    @car.to_status!(3)   
+    @car.to_status!(3)
     respond_to do |format|
       format.js { render "pickuped"}
     end
   end
   def abandon2
-    @car.update_attributes(params[:accident_car])
+    @car.update_attributes( permitted_params )
     @return_to_path = case_car_list_path(@car.status)
-    @car.to_status!(6)   
+    @car.to_status!(6)
     respond_to do |format|
       format.js { render "abandoned2"}
     end
   end
-  
+
   def abandon3
-    @car.update_attributes(params[:accident_car])
+    @car.update_attributes( permitted_params )
     @return_to_path = case_car_list_path(@car.status)
-    @car.to_status!(7)   
+    @car.to_status!(7)
     respond_to do |format|
       format.js { render "abandoned3"}
     end
   end
-  
+
   def transfer
     @car.to_status!(4)
     redirect_to case_car_list_path(@car.status)
   end
-  
+
   def new_car_accident
     @car = AccidentCar.new
     respond_to do |format|
-      format.html # new.html.erb      
+      format.html # new.html.erb
     end
   end
 
@@ -167,15 +166,15 @@ class Case::CarsController < Case::ApplicationController
     @process_method = params[:process_method].to_i
     @cars = Car.list_by(@process_method, current_user).includes(:model).order('created_at DESC')
   end
-  
+
   # GET /cars/1/edit
   def edit
-    
+
   end
   # POST /cars
   # POST /cars.json
   def create
-    @car = AccidentCar.new(params[:accident_car])
+    @car = AccidentCar.new( permitted_params )
     @car.publisher_id = current_user.id
     @car.evaluator_id = User.evaluator.id
       if @car.save
@@ -192,7 +191,7 @@ class Case::CarsController < Case::ApplicationController
   def update
     @car = Car.find(params[:id])
     respond_to do |format|
-      if @car.update_attributes(params[:accident_car])
+      if @car.update_attributes( permitted_params )
         format.html { redirect_to edit_case_car_url, notice=> '更新车辆信息成功！' }
         format.json { head :no_content }
       else
@@ -214,14 +213,17 @@ class Case::CarsController < Case::ApplicationController
     end
   end
   private
-  def get_data      
+  def get_data
     unless Car.exists? params[:id]
       flash_t_general :error, 'car.dont_exists'
       redirect_to case_cars_path
       return
     end
-        
+
     @car = AccidentCar.find(params[:id])
   end
-  
+
+  def permitted_params
+    params.require( :accident_car ).permit!
+  end
 end

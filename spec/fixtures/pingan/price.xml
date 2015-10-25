@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="GB2312"?>
+<Request>
+<PARTNER_ID>icclm_htbc</PARTNER_ID>
+<SUITE_NAME>PCIS</SUITE_NAME>
+<TRAN_CODE>102018</TRAN_CODE>
+<taskAuctionNo>taskAuctionNo</taskAuctionNo>
+<auctionPrice>auctionPrice</auctionPrice>
+<remark>remark</remark>
+</Request>

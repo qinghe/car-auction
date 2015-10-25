@@ -34,7 +34,7 @@ class CreateCars < ActiveRecord::Migration
 
 
       t.integer :model_id
-      t.string :model_title
+      t.string :model_name
       t.string :serial_no
       t.date :registered_at               #登记日期
       t.integer :variator, :default=>0    #变速器

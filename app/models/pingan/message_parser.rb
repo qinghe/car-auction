@@ -7,11 +7,15 @@ module Pingan
     end
 
     def attributes
-      elements = parser.xpath( xpath )
+      elements = parse
       #=> #(Element:0x208995c { name = "PARTNER_ID", children = [ #(Text "icclm_htbc")] })
       #ele.name => "PARTNER_ID"
       #ele.text => "icclm_htbc"
       elements.inject({}){|hash, ele| hash[ele.name] = ele.text; hash }
+    end
+
+    def parse
+      parser.xpath( xpath )
     end
 
     def xpath

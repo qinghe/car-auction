@@ -6,7 +6,7 @@ class AlertsController < ApplicationController
     params[:alert][:text] = params[:pre_text] + params[:alert][:text]
     @alert = Alert.new params[:alert]
     @alert.author = current_user
-    
+
     if (!current_user.nil? || validate_recap(params, @alert.errors)) && @alert.save
       flash_t :notice
       redirect_to session[:back]
@@ -14,5 +14,10 @@ class AlertsController < ApplicationController
     else
       render :new
     end
+  end
+
+  private
+  def permitted_params
+     params.require(:alert).permit( :text ,  :status, :author_id )
   end
 end

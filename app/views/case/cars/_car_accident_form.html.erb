@@ -8,7 +8,7 @@
 <%= form_for(@car, :url => form_url ) do |car_form| %>
   <% if @car.errors.any? %>
     <div id="error_explanation">
-      <h2><%= t(:other, :scope=> [ :errors, :template, :header],:count=>@car.errors.count,:model=>Car.model_title.human) %> </h2>
+      <h2><%= t(:other, :scope=> [ :errors, :template, :header],:count=>@car.errors.count,:model=>Car.model_name.human) %> </h2>
 
       <ul>
       <% @car.errors.full_messages.each do |msg| %>
@@ -24,8 +24,8 @@
   <tr>
     <td class="thead" class="thead" width="100px">选择车型 </td>
     <td colspan="3"><%=raw car_model_select(@car)%></td>
-        
-    
+
+
     <td class="thead" class="thead"><%= car_form.label :model_title,'特殊车型' %> </td>
     <td><%= car_form.text_field :model_title,:class=>'span-3' %> </td>
   </tr>
@@ -60,9 +60,9 @@
     <td class="thead"><%= accident_form.label :tingche_address,'停车地点' %> </td>
     <td colspan="3">
       <% if @accident.new_record? %>
-        <%= accident_form.region_select [:tingche_province, :tingche_city] %> </br> 
+        <%= accident_form.region_select [:tingche_province, :tingche_city] %> </br>
       <% else %>
-        <%= accident_form.region_select [:tingche_province, :tingche_city],{:selected=>[@accident.tingche_province_id,@accident.tingche_city_id]} %> </br> 
+        <%= accident_form.region_select [:tingche_province, :tingche_city],{:selected=>[@accident.tingche_province_id,@accident.tingche_city_id]} %> </br>
       <% end %>
       &nbsp;<%= accident_form.text_field :tingche_more,:class=>'span-6' %> 街道
     </td>
@@ -75,7 +75,7 @@
       <% if @accident.new_record? %>
         <%= accident_form.region_select [:huji_province, :huji_city] %> </br>
       <% else %>
-        <%= accident_form.region_select [:huji_province, :huji_city],{:selected=>[@accident.huji_province_id,@accident.huji_city_id]} %></br> 
+        <%= accident_form.region_select [:huji_province, :huji_city],{:selected=>[@accident.huji_province_id,@accident.huji_city_id]} %></br>
       <% end %>
       &nbsp;<%= accident_form.text_field :huji_more,:class=>'span-6' %> 街道
     </td>
@@ -86,7 +86,7 @@
   <tr>
     <td class="thead"><%= accident_form.label :zeren_rending,'责任认定' %> </td>
     <td><%= accident_form.select :zeren_rending,[['单方事故',0],['双方事故',1]] %> </td>
-    
+
     <td class="thead"><%= accident_form.label :duifang_baoxian,'对方保险公司' %> </td>
     <td colspan="3"><%= accident_form.text_field :duifang_baoxian,:class=>'span-6' %>  (适用双方事故) </td>
   </tr>
@@ -96,24 +96,24 @@
       <table>
           <% Accident::POSITIONS.to_a.each{|key_val| %>
             <% if key_val[1]%6==1 %> <tr> <% end %>
-            <td>             
+            <td>
     <%= accident_form.check_box :pengzhuang_buwei, {:name=>"accident_car[accident_attributes][pengzhuang_buwei][]"}, key_val[1].to_s %>
     <%= key_val[0] %>
             </td>
             <% if(key_val[1]%6==0)||(key_val[1]==Accident::POSITIONS.size)%> </tr> <% end %>
-          <% } %>  
+          <% } %>
       </table>
-      
+
       </td>
-  </tr>  
+  </tr>
   <tr>
     <td class="thead"><%= accident_form.label :chuxian_jingguo,'出险经过' %> </td>
     <td colspan="5"><%= accident_form.text_area :chuxian_jingguo, :size => "80x3",:style=>"width:auto;height:auto;" %> </td>
-  </tr> 
+  </tr>
   <tr>
     <td class="thead"><%= accident_form.label :cheliang_beizhu,'车辆备注' %> </td>
     <td colspan="5"><%= accident_form.text_area :cheliang_beizhu, :size => "80x3",:style=>"width:auto;height:auto;" %> </td>
-  </tr> 
+  </tr>
   <tr><td colspan="6" class="table_title">价值信息</td></tr>
   <tr>
     <td class="thead"><%= car_form.label :chengbao_jine,'车保金额' %> </td>
@@ -122,30 +122,30 @@
     <td><%= car_form.text_field :gusun_jine,:class=>'span-3' %>元* </td>
     <td class="thead"><%= accident_form.label :shiji_jiazhi,'实际价值' %> </td>
     <td><%= car_form.text_field :shiji_jiazhi,:class=>'span-3' %>元* </td>
-    
-  </tr> 
-  <% end %>  
+
+  </tr>
+  <% end %>
   <tr><td colspan="6" class="table_title">车辆图片信息</td></tr>
   <tr>
     <td class="thead">  行驶证图片  </td>
     <td colspan="5">
-        <div id="car_license_image_list">  
+        <div id="car_license_image_list">
           <%= render :partial=>'car_file', :collection=>@car.car_license_images%>
         </div>
         <div class="clear">
-          <%= render :partial=>"upload_file", :locals=>{:object=>@car.car_license_images.build, :field_name=>'uploaded'}%>  
+          <%= render :partial=>"upload_file", :locals=>{:object=>@car.car_license_images.build, :field_name=>'uploaded'}%>
         </div>
     </td>
-  </tr> 
+  </tr>
 
   <tr>
     <td class="thead">   车架号图片  </td>
     <td colspan="5">
-        <div id="car_frame_image_list">  
+        <div id="car_frame_image_list">
           <%= render :partial=>'car_file', :collection=>@car.car_frame_images%>
         </div>
         <div class="clear">
-          <%= render :partial=>"upload_file", :locals=>{:object=>@car.car_frame_images.build, :field_name=>'uploaded'}%>  
+          <%= render :partial=>"upload_file", :locals=>{:object=>@car.car_frame_images.build, :field_name=>'uploaded'}%>
         </div>
     </td>
   </tr>
@@ -153,18 +153,18 @@
   <tr>
     <td class="thead">   车辆损失图片  </td>
       <td  colspan="5">
-        <div id="car_image_list">  
+        <div id="car_image_list">
           <%= render :partial=>'car_file', :collection=>@car.car_images%>
         </div>
         <div class="clear">
-          <%= render :partial=>"upload_file", :locals=>{:object=>@car.car_images.build, :field_name=>'uploaded'}%>  
+          <%= render :partial=>"upload_file", :locals=>{:object=>@car.car_images.build, :field_name=>'uploaded'}%>
         </div>
       </td>
   </tr>
 
-  <tr>  
+  <tr>
     <td class="thead">  选择车辆处理方式  </td>
-      <td  colspan="5">     
+      <td  colspan="5">
          <%= car_form.radio_button :status,'2',:onclick=>"$('#auction_part').show()" %><%=car_form.label :status,"委托拍卖",:value=>2%> &nbsp;
          <%= car_form.radio_button :status,'0',:onclick=>"$('#auction_part').hide()" %><%=car_form.label :status,"询问底价",:value=>0%>
       </td>
@@ -183,5 +183,5 @@
 </table>
 
 
-  
+
 <% end %>

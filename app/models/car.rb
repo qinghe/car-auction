@@ -82,4 +82,5 @@ class Car < ActiveRecord::Base
       self.update_attributes(:status=> new_status)
     end
   end
+
 end

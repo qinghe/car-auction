@@ -1,6 +1,7 @@
 class PinganController < ApplicationController
-  respond_to :xml
-
+  skip_before_filter :authenticate
+  skip_before_action :verify_authenticity_token
+  
   #taskAuctionNo String 否 拍卖编号
   #modelName String 否 车型                  car.model_title                 Y
   #location String 否 所在地                 accident.huji_more             Y
@@ -29,17 +30,18 @@ class PinganController < ApplicationController
   #surveyUserId String 否 查勘员           car.evaluator_id int
   #estimateLoss BigDecimal 否 定损金额      accident.zuizhong_peifu_jine 最终赔付金额?
   #remark String 否 备注
-  def create
+  def funk
     #<?xml version="1.0" encoding="GB2312"?>
-    car_info = CarInfoHandler.new( params[:data])
-    @result, @car= car_info.import( )
+
+    data =  request.body.read
+Rails.logger.debug " data = #{data}"
+    @result = Pingan::MessageDispatcher.perform( data )
 
     respond_to do |format|
       format.xml  { render :xml => @result }
     end
   end
 
-  def permitted_params
-
+  def test
   end
 end

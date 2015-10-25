@@ -47,7 +47,7 @@ class ChangeForPingan < ActiveRecord::Migration
     add_column :cars, :survey_user, :string #carts.variator int
 
     add_column :accidents, :other_fee, :float, :default=>0
-    #add_column :auction, :other_fee, :string
+    rename_column :cars, :model_name, :model_title
   end
 
 end

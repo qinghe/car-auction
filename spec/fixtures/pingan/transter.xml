@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="GB2312"?>
+<Request>
+<PARTNER_ID>icclm_htbc</PARTNER_ID>
+<SUITE_NAME>PCIS</SUITE_NAME>
+<TRAN_CODE>002021</TRAN_CODE>
+<TASKINQUIRENO>TASKINQUIRENO</TASKINQUIRENO>
+<TRAN_CODE>TRAN_CODE</TRAN_CODE>
+<Complete_transfer >Complete_transfer</Complete_transfer>
+<transfer_time>transfer_time</transfer_time>
+</Request>

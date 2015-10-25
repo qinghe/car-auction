@@ -4,7 +4,8 @@ Inz::Application.routes.draw do
   get 'search_car', :to => 'welcome#search_car', :as=>:search_car
   get 'blogposts/:id', :to => 'blog_categories#blogpostshow', :as=>:blogpost
   get 'static/:page', :to => 'blogposts#static', :as=>:static
-  post 'InsCarQuo/PingAn', :to=> 'pingan#create'
+  post 'InsCarQuo/PingAn', :to=> 'pingan#funk', :defaults => { :format => 'xml' }
+  get  'InsCarQuo/PingAn', :to=> 'pingan#test', :defaults => { :format => 'xml' }
 
   resources :cars, :only => [:index, :show] do
     get :get_models, :on => :collection
@@ -30,7 +31,7 @@ Inz::Application.routes.draw do
   resources :users do
   	member do
   		get :watching, :watchers, :edit_company, :show_company, :edit_password
-  		put :update_company, :update_password
+  		patch :update_company, :update_password
   	end
   	resources :userprojects, :only => [:index]
   	resources :blogposts do
@@ -120,8 +121,8 @@ Inz::Application.routes.draw do
       get :show_accessory, :on => :member
       get :edit_used, :on => :member
       get :edit_accessory, :on => :member
-      put :update_used, :on => :member
-      put :update_accessory, :on => :member
+      patch :update_used, :on => :member
+      patch :update_accessory, :on => :member
       get :new_used, :on => :collection
       get :new_accessory, :on => :collection
 
@@ -185,15 +186,15 @@ Inz::Application.routes.draw do
       delete :delete_file, :on => :collection #delete file have not assigned to car
       get :new_car_accident, :on => :collection
       get :welcome, :on => :collection
-      put :evaluate, :on => :member
-      put :abandon, :on => :member
-      put :sendback, :on => :member
-      put :pickup, :on => :member
-      put :abandon2, :on => :member
-      put :abandon3, :on => :member
-      put :transfer, :on => :member
-      put :new_auction, :on => :member
-      put :confirm_auction, :on => :member
+      patch :evaluate, :on => :member
+      patch :abandon, :on => :member
+      patch :sendback, :on => :member
+      patch :pickup, :on => :member
+      patch :abandon2, :on => :member
+      patch :abandon3, :on => :member
+      patch :transfer, :on => :member
+      patch :new_auction, :on => :member
+      patch :confirm_auction, :on => :member
       post :upload_doc, :on => :member
     end
     resources :companies, :users

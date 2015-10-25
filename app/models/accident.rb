@@ -59,7 +59,9 @@ class Accident < ActiveRecord::Base
   end
 
   def hit_position
-    positions = pengzhuang_buwei.select{|p|p.to_i > 0}
-    positions.inject(""){|hp,p| hp + POSITIONS.key(p.to_i)+", " }
+    if pengzhuang_buwei.present?
+      positions = pengzhuang_buwei.select{|p|p.to_i > 0}
+      positions.inject(""){|hp,p| hp + POSITIONS.key(p.to_i)+", " }
+    end
   end
 end
