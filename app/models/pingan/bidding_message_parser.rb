@@ -12,6 +12,14 @@ module Pingan
     #<!--中标人, String, 必填 -->
     #<biddingUser></biddingUser>
     #</Request>
+
+    #{
+    #  "partnerAccount":"",
+    #  "taskAuctionNo":"",
+    #  "inquireAmount":"",
+    #  "biddingUser":""
+    #}
+
     def xpath
       "Request/*"
     end

@@ -3,11 +3,10 @@ module Pingan
     attr_accessor :taskAuctionNo, :auctionPrice, :remark
 
     def initialize( auction )
-
-    end
-
-    def tran_code
-      TranCodeOutEnum.price
+      self.partnerAccount = PartnerAccount
+      self.taskAuctionNo = ''
+      self.auctionPrice = 0
+      self.remark = ''
     end
 
     def to_xml

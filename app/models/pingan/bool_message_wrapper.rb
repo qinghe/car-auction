@@ -1,11 +1,14 @@
 module Pingan
   class BoolMessageWrapper < MessageWrapper
-    attr_accessor :succeed, :message, :tran_code
+    attr_accessor :succeed, :message
 
-    def initialize( succeed= false, tran_code=nil, message=nil )
+    def initialize( succeed= false, message=nil )
       self.succeed = succeed
-      self.tran_code = tran_code
+      self.message = message
+    end
 
+    def to_json
+      { succeed: succeed, message: message }.to_json
     end
 
     def to_xml( options = {} )

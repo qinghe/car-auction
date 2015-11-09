@@ -33,7 +33,38 @@ module Pingan
       #estimateLoss BigDecimal 否 定损金额      car.gusun_jine 最终赔付金额?
       #remark String 否 备注                   accident.cheliang_beizhu
 
-
+      #{
+      #    "partnerAccount":"",
+      #    "taskAuctionNo":"",
+      #    "modelName":"",
+      #    "location":"",
+      #    "registerDate":"",
+      #    "gearboxStatus":"",
+      #    "engineStatus":"",
+      #    "carMark":"",
+      #    "reportDate":"",
+      #    "carBelongKindName":"",
+      #    "hasScuttle":"",
+      #    "isTeardown":"",
+      #    "robberyCar":"",
+      #    "completeFormalities":"",
+      #    "frameDamage":"",
+      #    "isMortgage":"",
+      #    "secondAccident":"",
+      #    "secondHand":"",
+      #    "isLoan":"",
+      #    "gear":"",
+      #    "rackNo":"",
+      #    "insuredValue":"",
+      #    "otherFee":"",
+      #    "actualValue":"",
+      #    "inquireStartDate":"",
+      #    "inquireEndDate":"",
+      #    "surveyUserId":"",
+      #    "estimateLoss":"",
+      #    "url":"", # photo, comma seperated
+      #    "remark":""
+      #}
       attrs = attributes
       car_params = {
         serial_no: attrs['taskAuctionNo'],

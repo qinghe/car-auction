@@ -1,7 +1,7 @@
 class PinganController < ApplicationController
   skip_before_filter :authenticate
   skip_before_action :verify_authenticity_token
-  
+
   #taskAuctionNo String 否 拍卖编号
   #modelName String 否 车型                  car.model_title                 Y
   #location String 否 所在地                 accident.huji_more             Y
@@ -32,15 +32,17 @@ class PinganController < ApplicationController
   #remark String 否 备注
   def funk
     #<?xml version="1.0" encoding="GB2312"?>
+    task = param[:task]
 
     data =  request.body.read
-Rails.logger.debug " data = #{data}"
-    @result = Pingan::MessageDispatcher.perform( data )
+    @result = Pingan::MessageDispatcher.perform( task, data )
 
     respond_to do |format|
       format.xml  { render :xml => @result }
     end
   end
+
+
 
   def test
   end

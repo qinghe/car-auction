@@ -12,7 +12,7 @@ module Pingan
       #http.key =OpenSSL::PKey::RSA.new((File.read("D:/111/client.key")), "123456")# key and password
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE #这个也很重要
 
-      http.post(uri.path, message_wrapper.to_xml) {|response|
+      http.post(uri.path, message_wrapper.to_json) {|response|
           print response.body
       }
 

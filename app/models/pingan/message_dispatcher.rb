@@ -1,24 +1,25 @@
 module Pingan
   class MessageDispatcher < MessageParser
     #<TRAN_CODE>200406</TRAN_CODE>
-    TranCodeInEnum = Struct.new(:car, :bidding, :trust )['200406','200407','200408' ]
+    PartnerAccount = 'P_DLHC_CLAIM'
+    TranCodeInEnum = Struct.new(:send_car_inquire_info,
+      :send_highest_bidding_info,
+      :receive_auction )['sendCarInquireInfo','sendHighestBiddingInfo','receiveAuction' ]
 
 
-    def self.perform( message )
+    def self.perform( task_name,  message )
       dispatcher = new( message )
 
-      element = dispatcher.parse.first
+        message_parser = case task_name
+        when TranCodeInEnum.send_car_inquire_info
+          CarMessageParser.new( message )
+        when TranCodeInEnum.send_highest_bidding_info
+          BiddingMessageParser.new( message )
+        when TranCodeInEnum.receive_auction
+          TrustMessageParser.new( message )
+        end
 
-      message_parser = case element.try(:text)
-      when TranCodeInEnum.car
-        CarMessageParser.new( message )
-      when TranCodeInEnum.bidding
-        BiddingMessageParser.new( message )
-      when TranCodeInEnum.trust
-        TrustMessageParser.new( message )
-      end
-
-      result = message_parser.perform
+        result = message_parser.perform
 
     end
 
