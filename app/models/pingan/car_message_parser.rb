@@ -86,7 +86,8 @@ module Pingan
         frame_number:  attrs['rackNo'],
         shiji_jiazhi:  attrs['actualValue'],
         survey_user:  attrs['surveyUserId'],
-        gusun_jine: attrs['estimateLoss']
+        gusun_jine: attrs['estimateLoss'],
+        url: attrs['url']
         }
       accident_params = { huji_more: attrs['location'],
         chuxian_riqi: attrs['reportDate'],

@@ -7,7 +7,7 @@ module Pingan
       self.message = message
     end
 
-    def to_json
+    def to_json( options = {} )
       { succeed: succeed, message: message }.to_json
     end
 

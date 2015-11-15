@@ -30,15 +30,15 @@ class PinganController < ApplicationController
   #surveyUserId String 否 查勘员           car.evaluator_id int
   #estimateLoss BigDecimal 否 定损金额      accident.zuizhong_peifu_jine 最终赔付金额?
   #remark String 否 备注
-  def funk
+  def sink
     #<?xml version="1.0" encoding="GB2312"?>
-    task = param[:task]
+    @task = params[:task]
 
     data =  request.body.read
-    @result = Pingan::MessageDispatcher.perform( task, data )
+    @result = Pingan::MessageDispatcher.perform( @task, data )
 
     respond_to do |format|
-      format.xml  { render :xml => @result }
+      format.json  { render :json => @result }
     end
   end
 
