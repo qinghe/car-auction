@@ -23,32 +23,32 @@ admin.role = "administrator"
 admin.company_id = 1
 admin.save
 
-CommentKeyword.create!(
-  [{ :name => "联系" },
-    { :name => "实现" },
-    { :name => "与成员的关系" }
-  ])
+#CommentKeyword.create!(
+#  [{ :name => "联系" },
+#    { :name => "实现" },
+#    { :name => "与成员的关系" }
+#  ])
 
-Budget.create([
-    {:title => "< 500 zł"},
-    {:title => "500 - 1000 zł"},
-    {:title => "1000 - 2500 zł"},
-    {:title => "2500 - 5000 zł"},
-    {:title => "> 5000 zł"}
-  ])
+#Budget.create([
+#    {:title => "< 500 zł"},
+#    {:title => "500 - 1000 zł"},
+#    {:title => "1000 - 2500 zł"},
+#    {:title => "2500 - 5000 zł"},
+#    {:title => "> 5000 zł"}
+#  ])
 
-Role.create!(:name => 'guest')
-Role.create!(:name => 'leader', :file => true,
-                                :forum => true,
-                                :member => true,
-                                :info => true,
-                                :ticket => true)
-Role.create!(:name => 'owner', :info => true)
-Role.create!(:name => 'info_mod', :info => true)
-Role.create!(:name => 'member_mod', :member => true)
-Role.create!(:name => 'ticket_mod', :ticket => true)
-Role.create!(:name => 'file_mod', :file => true)
-Role.create!(:name => 'forum_mod', :forum => true)
+#Role.create!(:name => 'guest')
+#Role.create!(:name => 'leader', :file => true,
+#                                :forum => true,
+#                                :member => true,
+#                                :info => true,
+#                                :ticket => true)
+#Role.create!(:name => 'owner', :info => true)
+#Role.create!(:name => 'info_mod', :info => true)
+#Role.create!(:name => 'member_mod', :member => true)
+#Role.create!(:name => 'ticket_mod', :ticket => true)
+#Role.create!(:name => 'file_mod', :file => true)
+#Role.create!(:name => 'forum_mod', :forum => true)
 
 
 category = BlogCategory.create!(:name => '帮助', :short_name => 'helps')

@@ -89,7 +89,7 @@ module Pingan
         gusun_jine: attrs['estimateLoss'],
         url: attrs['url']
         }
-      accident_params = { huji_more: attrs['location'],
+      accident_params = { tingche_more: attrs['location'],
         chuxian_riqi: attrs['reportDate'],
         shifou_caijian:  attrs['isTeardown'],
         chejiaohao_sousun: attrs['frameDamage'],

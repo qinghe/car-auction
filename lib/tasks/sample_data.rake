@@ -7,10 +7,10 @@ I18n.locale = :en
 
 USERS = 10 #UWAGA kazdy uzytkownik to dodatkowe 40 rekordow
 
-namespace :db do
+namespace :lnhc do
 
   desc "Reset the base after changes in migration"
-  task :reload => :environment do
+  task :load_sample => :environment do
     File.delete("db/schema.rb") if File.exist?("db/schema.rb")
     Rake::Task['db:drop'].invoke
     Rake::Task['db:create'].invoke
@@ -67,7 +67,7 @@ def make_users #zmieniony format emailu dla latwiejszego logowania
     user.company_id = ((i%2)==0 ? ((i/2)==0 ? 1 : 2) : 3)
 	  user.save
   end
-  
+
   n = User.count
   USERS.times do |i|
   	login = Faker::Internet.user_name
@@ -128,7 +128,7 @@ def make_blogcomments
 end
 
 def make_points
-	11.times do |i|		
+	11.times do |i|
 		Bonuspoint.create!(
       :points => rand(100),
       :user_id => i+1,
@@ -144,23 +144,23 @@ def make_projects
   end
 
   roles = []
-  
+
   Role.all.each do |r|
     unless r.name == 'owner' || r.name == 'leader' || r.name == 'ticket_mod'
       roles << r.id
       roles << Role.get_id('guest')
     end
   end
-  
+
   all_users_src.each do |u|
 
     all_users = all_users_src.clone
     project_users = []
     avible_users = []
-    
+
     avible_users = all_users - [u]
     project_users << u
-    
+
     #auction
     name = Faker::Lorem.words(4).join(' ').capitalize
     description = Faker::Lorem.sentence(12)
@@ -170,7 +170,7 @@ def make_projects
       :description => description)
     a.owner_id = u
     a.save!
-    
+
     #auction offers
     offerers = avible_users
     5.times do
@@ -188,7 +188,7 @@ def make_projects
     a.finish!
     avible_users -= [won_offer.offerer_id]
     project_users += [won_offer.offerer_id]
-    
+
     #project
     p = Project.create!(:auction_id => a.id,
       :name => a.title,
@@ -197,25 +197,25 @@ def make_projects
       :duration => won_offer.days,
       :status => Project::STATUSES[:active],
       :description => a.description)
-    
+
     #project members
     4.times do
       new_user = avible_users.sample
       break if new_user.nil?
       avible_users -= [new_user]
       project_users += [new_user]
-      
+
       i = Invitation.new(:project_id => p.id,
         :user_id => new_user,
         :role_id => roles.sample,
         :status => Invitation::STATUSES[:accepted])
       i.save!
-                         
+
       Membership.create!(:user_id => i.user_id,
         :project_id => i.project_id,
         :role_id => i.role_id)
     end
-    
+
     ticket_users = []
     ticket_users = project_users - [p.leader_id, p.owner_id]
 
@@ -233,7 +233,7 @@ def make_projects
         :duration => rand(40)+1,
         :status => taken ? (finished ? Ticket::STATUSES[:finished] : Ticket::STATUSES[:implementation]) : Ticket::STATUSES[:free])
     end
-    
+
     #project topics
     3.times do
       title = Faker::Lorem.words(3).join(' ').capitalize
@@ -250,7 +250,7 @@ def make_projects
           :user_id => project_users.sample,
           :content => content)
       end
-    end 
+    end
   end
 end
 
@@ -271,7 +271,7 @@ def make_groups_and_tags
     programowanie => prog_tags,
     grafika => grafika_tags
   }
-  
+
   while (link = tags_list.shift).is_a?(Array) do
     group = link.shift
     link.shift.each do |tag|
