@@ -1,5 +1,5 @@
 source 'https://ruby.taobao.org'
-ruby '2.0.0'
+ruby '2.1.5'
 gem 'rails', '~> 4.2.4'
 
 gem 'sqlite3'
@@ -24,7 +24,7 @@ gem 'nokogiri'
 gem 'china_sms',   :path => './china_sms'
 
 group :development do
-  gem 'thin'
+  #  gem 'thin'
   gem 'pry-rails'
   gem 'faker'
 end
