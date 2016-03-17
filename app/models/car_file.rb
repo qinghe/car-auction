@@ -11,7 +11,10 @@ class CarFile < ActiveRecord::Base
   has_attached_file :uploaded, :styles => { :medium => "480x640", :thumb => "90x120" }
   validates_attachment :uploaded, presence: true,
     content_type: { content_type: "image/jpeg" },
-    size: { in: 0..10.megabytes }
+    size: { in: 0..10.megabytes },
+    :url => "/system/:attachments/:id/:style/:filename",
+    :path => ":rails_root/public/system/:attachments/:id/:style/:filename"
+
   #before_post_process :skip_file_other_than_image # file other than images
 
   def skip_file_other_than_image
