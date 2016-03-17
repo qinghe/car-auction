@@ -8,7 +8,7 @@ class Comment < ActiveRecord::Base
   belongs_to :receiver, :class_name => "User"
   belongs_to :auction
   belongs_to :project
-  has_many :values, :class_name => "CommentValue", :dependent => :destroy, :include => [:keyword]
+  has_many :values, :class_name => "CommentValue", :dependent => :destroy
 
   validates :values, :associated => true
 
