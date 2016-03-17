@@ -8,12 +8,13 @@ class CarFile < ActiveRecord::Base
   #validates_attachment_size :uploaded,
   #                          :less_than => FILE_MAX_SIZE,
   #                          :message => "moze maksymalnie wynosic #{(FILE_MAX_SIZE/1.megabyte).round(2)} MB"
-  has_attached_file :uploaded, :styles => { :medium => "480x640", :thumb => "90x120" }
+  has_attached_file :uploaded, :styles => { :medium => "480x640", :thumb => "90x120" },
+    :url => "/system/:attachment/:id/:style/:filename",
+    :path => ":rails_root/public/system/:attachment/:id/:style/:filename"
+
   validates_attachment :uploaded, presence: true,
     content_type: { content_type: "image/jpeg" },
-    size: { in: 0..10.megabytes },
-    :url => "/system/:attachments/:id/:style/:filename",
-    :path => ":rails_root/public/system/:attachments/:id/:style/:filename"
+    size: { in: 0..10.megabytes }
 
   #before_post_process :skip_file_other_than_image # file other than images
 
