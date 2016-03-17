@@ -19,7 +19,7 @@ class Project < ActiveRecord::Base
 	before_validation :set_default_status, :on => :create
 	after_create :add_default_users
 
-	default_scope {  :order => 'projects.id DESC' }
+	default_scope {  order 'id DESC' }
 
 	#zwraca date zakonczenia projektu
 	def deadline
