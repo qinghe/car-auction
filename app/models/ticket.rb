@@ -11,5 +11,5 @@ class Ticket < ActiveRecord::Base
                                        :greater_than => 0
   validates :status, :inclusion => { :in => STATUSES.values }
 
-  default_scope { :order => 'tickets.status ASC' }
+  #default_scope { :order => 'tickets.status ASC' }
 end

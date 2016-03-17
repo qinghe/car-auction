@@ -11,5 +11,5 @@ class Blogpost < ActiveRecord::Base
 	validates :content, :presence => true, :length => {:within => 10..5000}
   validates :user_id, :presence => true
 
-	default_scope { order( 'blogposts.created_at DESC') }
+	default_scope { order( 'created_at DESC') }
 end
