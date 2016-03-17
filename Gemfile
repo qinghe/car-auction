@@ -3,7 +3,7 @@ ruby '2.1.5'
 gem 'rails', '~> 4.2.4'
 
 gem 'sqlite3'
-gem 'mysql2','~> 0.4.2'
+gem 'mysql2', '~> 0.3.20'
 #gem 'carmen-rails'
 gem 'ruby-recaptcha'
 gem 'mail'
