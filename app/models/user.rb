@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
   has_many :tickets
   has_many :usefuls
 
+  alias_attribute :role_name, :role
 
   email_regex = /\A[\w+żźćńółęąśŻŹĆĄŚĘŁÓŃ\-.]+@[a-zżźćńółęąś\d\-.]+\.[a-z]+\z/i
   string = /\A[\w+żźćńółęąśŻŹĆĄŚĘŁÓŃß\-.]+\z/
@@ -64,8 +65,8 @@ class User < ActiveRecord::Base
   end
 
   def default_data
- 	self.status = 2
-	self.role = "user"
+   	self.status = 2
+	  self.role ||= "user"
   end
 
   def watching?(watched)
@@ -134,6 +135,11 @@ class User < ActiveRecord::Base
   def company_name
     company ? company.name : "无"
   end
+
+	def token_expired_at
+		token_updated_at.advance( seconds: token_expired_in )
+	end
+
   private
 
     def encrypt_password

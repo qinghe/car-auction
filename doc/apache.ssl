@@ -1,0 +1,9 @@
+http://dev.antoinesolutions.com/apache-server/mod_ssl
+http://httpd.apache.org/docs/current/ssl/ssl_howto.html
+http://www.thegeekstuff.com/2011/03/install-apache2-ssl/
+
+yum install openssl
+
+yum install mod_ssl
+
+

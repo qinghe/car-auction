@@ -3,6 +3,7 @@ module Pingan
   class MessageWrapper
     #YYYY-MM-DD HH24:MI:SS
     PartnerAccount = 'P_DLHC_CLAIM'
+    class_attribute :api_path
 
     attr_accessor :partnerAccount, :message
 
@@ -46,7 +47,7 @@ module Pingan
 
 
     def format_date_time( datatime )
-      datetime.to_s(:db)  
+      datetime.to_s(:db)
     end
 
   end

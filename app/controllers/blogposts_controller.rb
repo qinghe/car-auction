@@ -43,7 +43,7 @@ class BlogpostsController < ApplicationController
   	if signed_in?
   		@useful = Useful.find_by_user_id_and_blogpost_id(current_user.id, @blogpost.id)
   	end
-  	@comments = Blogcomment.find_all_by_blogpost_id(@blogpost).paginate(:page => params[:page], :per_page => 10)
+  	@comments = Blogcomment.where( blogpost: @blogpost).paginate(:page => params[:page], :per_page => 10)
   end
 
   def edit
@@ -79,7 +79,7 @@ class BlogpostsController < ApplicationController
   	if @blogpost.update_attribute(:admin, 1)
   		@user = User.find(params[:user_id])
   		@title = "#{@user.name} #{@user.lastname} || Blog"
-  		@comments = Blogcomment.find_all_by_blogpost_id(@blogpost).paginate(:page => params[:page], :per_page => 10)
+  		@comments = Blogcomment.where( blogpost: @blogpost).paginate(:page => params[:page], :per_page => 10)
   		flash[:success] = "Zgloszono wpis do administratora"
   		redirect_to user_blogpost_path(@user, @blogpost)
   	end
