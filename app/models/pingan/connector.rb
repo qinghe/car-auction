@@ -4,12 +4,12 @@ require 'oauth2'
 
 # pingan                                             huachen
 #  sendCarInquireInfo     ->
-#                              <-   /appsvr/property/receiveQuotedPrice
+#                              <-   receiveQuotedPrice ()
 #  sendHighestBiddingInfo ->
 #  receiveAuction         ->
-#                              <-   /appsvr/property/receiveQuotedPriceAgain
+#                              <-   receiveQuotedPriceAgain
 #  multiInquireFeedback   ->
-#                              <-   /appsvr/property/receiveAuctionResult
+#                              <-   receiveAuctionResult
 #  receiveAuctionCheck    ->
 #                              <-   receiveAuctionTransfer
 #  receiveTransferInfoCheck
@@ -19,7 +19,7 @@ require 'oauth2'
 module Pingan
   class Connector
     class << self
-      attr_accessor :site, :client_id, :client_secret, :auth_url, :resource_url,  :debug_mode
+      attr_accessor :site, :client_id, :client_secret, :auth_url, :debug_mode
 
       def debug_mode?
         !!@debug_mode
@@ -61,7 +61,7 @@ module Pingan
 
       def get_client
         client = OAuth2::Client.new( client_id, client_secret,
-          site: 'https://test-api.pingan.com.cn:20443',
+          site: site,
           token_url: '/oauth/oauth2/access_token',
           token_method: :get,
         )
@@ -83,12 +83,16 @@ module Pingan
       #    print response.body
       #}
       token = get_token
-
-      token.post(uri.path, message_wrapper.to_json) {|response|
+      path = message_wrapper.api_path + '?' + {access_token: token.token, request_id: message_wrapper.request_id}.to_param
+Rails.logger.debug "message_wrapper.api_path = #{message_wrapper.api_path} message_wrapper.to_json =#{message_wrapper.to_json} "
+Rails.logger.debug "message_wrapper = #{message_wrapper.to_hash}"
+      token.post( path, params: message_wrapper.to_json) {|response|
           print response.body
       }
 
     end
+
+
 
   end
 end

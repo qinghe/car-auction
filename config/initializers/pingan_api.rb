@@ -1,7 +1,7 @@
-PriceMessageWrapper.api_path = '/appsvr/property/receiveQuotedPrice'
+Pingan::QuotedPriceMessage.api_path = '/open/appsvr/property/receiveQuotedPrice'
 
-PriceAgainMessageWrapper.api_path = '/appsvr/property/receiveQuotedPriceAgain'
+Pingan::PriceAgainMessageWrapper.api_path = '/open/appsvr/property/receiveQuotedPriceAgain'
 
-BiddingMessageWrapper.api_path = '/appsvr/property/receiveAuctionResult'
+Pingan::BiddingMessageWrapper.api_path = '/open/appsvr/property/receiveAuctionResult'
 
-TransferMessageWrapper.api_path = '/appsvr/property/receiveAuctionTransfer'
+Pingan::TransferMessageWrapper.api_path = '/open/appsvr/property/receiveAuctionTransfer'

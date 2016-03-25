@@ -20,6 +20,9 @@ module Pingan
       raise "please implement it"
     end
 
+    def request_id
+      "#{api_path.split('/').last}#{DateTime.current.to_i}"
+    end
 
     def get_xml
     #  <<-EOF
