@@ -48,6 +48,10 @@ module Pingan
 
     end
 
+    def to_hash
+      instance_values
+    end
+
 
     def format_date_time( datatime )
       datetime.to_s(:db)

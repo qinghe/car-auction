@@ -72,7 +72,7 @@ module Pingan
 
     def self.post(message_wrapper)
 
-      uri = URI.parse('https://222.68.184.181:8107')
+      #uri = URI.parse('https://222.68.184.181:8107')
       #http = Net::HTTP.new(uri.host, uri.port)
       #http.use_ssl = true  # enable SSL/TLS
       ##http.cert =OpenSSL::X509::Certificate.ne(File.read("D:/111/client.crt"))
@@ -84,9 +84,7 @@ module Pingan
       #}
       token = get_token
       path = message_wrapper.api_path + '?' + {access_token: token.token, request_id: message_wrapper.request_id}.to_param
-Rails.logger.debug "message_wrapper.api_path = #{message_wrapper.api_path} message_wrapper.to_json =#{message_wrapper.to_json} "
-Rails.logger.debug "message_wrapper = #{message_wrapper.to_hash}"
-      token.post( path, params: message_wrapper.to_json) {|response|
+      token.post( path, params: message_wrapper.to_hash) {|response|
           print response.body
       }
 

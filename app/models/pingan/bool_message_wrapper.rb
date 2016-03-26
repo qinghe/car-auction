@@ -8,7 +8,7 @@ module Pingan
     end
 
     def to_json( options = {} )
-      { succeed: succeed, message: message }.to_json
+      attributes.to_json
     end
 
     def to_xml( options = {} )
@@ -18,5 +18,8 @@ module Pingan
       end
     end
 
+    def attributes
+      { succeed: succeed, message: message }
+    end
   end
 end
