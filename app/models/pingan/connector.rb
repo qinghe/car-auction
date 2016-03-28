@@ -3,15 +3,15 @@ require 'uri'
 require 'oauth2'
 
 # pingan                                             huachen
-#  sendCarInquireInfo     ->
-#                              <-   receiveQuotedPrice ()
-#  sendHighestBiddingInfo ->
-#  receiveAuction         ->
-#                              <-   receiveQuotedPriceAgain
-#  multiInquireFeedback   ->
-#                              <-   receiveAuctionResult
-#  receiveAuctionCheck    ->
-#                              <-   receiveAuctionTransfer
+#  sendCarInquireInfo       ->
+#                                <-   receiveQuotedPrice ()
+#  sendHighestBiddingInfo   ->
+#  receiveAuction(entrusted ->
+#                                <-   receiveQuotedPriceAgain
+#  multiInquireFeedback     ->
+#                                <-   receiveAuctionResult
+#  receiveAuctionCheck      ->
+#                                <-   receiveAuctionTransfer
 #  receiveTransferInfoCheck
 
 

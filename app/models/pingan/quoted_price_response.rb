@@ -1,5 +1,5 @@
 module Pingan
-  class QuotedPriceResponse < MessageWrapper
+  class QuotedPriceResponse < MessageBase
 
     self.api_path = '/open/appsvr/property/receiveQuotedPrice'
 

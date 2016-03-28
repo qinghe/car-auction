@@ -27,11 +27,11 @@ class ChangeForPingan2 < ActiveRecord::Migration
     add_column :auctions, :is_pass, :string
     add_column :auctions, :pass_times, :string
 
-    add_column :auctions, :commissioned_time, :string
+    add_column :auctions, :commissioned_time, :datetime
     add_column :auctions, :transfer_complete, :string
 
-    add_column :auctions, :transfer_request_time, :string
-    add_column :auctions, :transfer_real_time, :string
+    add_column :auctions, :transfer_request_time, :datetime
+    add_column :auctions, :transfer_real_time, :datetime
 
   end
 

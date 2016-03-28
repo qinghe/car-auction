@@ -1,5 +1,5 @@
 module Pingan
-  class AuctionMessageWrapper < MessageWrapper
+  class AuctionResultMessage < MessageBase
 
     #ANNOUNCEMENT_TIME    拍卖公示时间      auction.public_start_at
     #AUCTION_LOCATION     拍卖地点       N  auction.location
@@ -47,29 +47,26 @@ module Pingan
     #    ]
     #}
     def initialize( auction )
-      self.partnerAccount = PartnerAccount
-      self.taskAuctionNo = ''
-      self.announcementStartTime = ''
-      self.announcementEndTime = ''
-      self.auctionLocation = ''
-      self.startTime = ''
-      self.endTime = ''
-      self.auctionType = ''
-      self.isPass = ''
-      self.passTimes = ''
-      self.commissionedTime = ''
-      self.transferComplete = ''
-      self.transferRequestTime = ''
-      self.transferRealTime = ''
-      self.finalPrice = ''
-      self.bidTimes = ''
-      self.bidList = []
+      self.taskAuctionNo = auction.serial_no
+      self.announcementStartTime = auction.public_start_at
+      self.announcementEndTime = auction.public_expired_at
+      self.auctionLocation = auction.location
+      self.startTime =  auction.start_at
+      self.endTime =  auction.expired_at
+      self.auctionType = acution.type_name
+      self.isPass =  auction.is_pass
+      self.passTimes =  auction.pass_times
+      self.commissionedTime = auction.commissioned_time
+      self.transferComplete =  auction.transfer_complete
+      self.transferRequestTime =  auction.transfer_request_time
+      self.transferRealTime =   auction.transfer_real_time
+      self.finalPrice = auction.bidding_price
+      self.bidTimes = auction.offers.count
+      self.bidList = auction.offers.map{|offer|
+        { bidTime: offer.created_at, bidUser: offer.offerer.name, bidPrice: offer.price }
+      }
+      super
     end
-
-    def to_json
-
-    end
-
 
   end
 end

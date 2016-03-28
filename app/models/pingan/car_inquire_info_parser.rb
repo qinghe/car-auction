@@ -106,6 +106,9 @@ module Pingan
       car.build_accident( accident_params )
       car.build_auction( auction_params )
       result.succeed = car.save
+
+      touch_auction! if result.succeed
+      
       result
     end
 

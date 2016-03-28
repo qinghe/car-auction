@@ -1,5 +1,5 @@
 module Pingan
-  class BiddingInfoParser < MessageParser
+  class TransferCheckInfoParser < MessageParser
 
     #{
     #  "partnerAccount":"",

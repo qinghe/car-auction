@@ -7,6 +7,10 @@ module Pingan
       self.data = data
     end
 
+    def perform
+
+    end
+
     def attributes
       #elements = parse
       ##=> #(Element:0x208995c { name = "PARTNER_ID", children = [ #(Text "icclm_htbc")] })
@@ -36,15 +40,16 @@ module Pingan
     end
 
     def task_auction
-      Auction.where( serial_no: task_auction_no ).first
+      @task_auction||=Auction.where( serial_no: task_auction_no ).first
     end
 
     def xpath
       raise "please implement"
     end
 
-    def parser
-      #Nokogiri::XML( data )
+    def touch_auction!
+      task_auction.last_api_name = self.class.name
+      task_auction.save!
     end
 
 

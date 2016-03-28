@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Auction < ActiveRecord::Base
   #attr_protected :status, :hightlight
-
+  AuctionTypeEnum = Struct.new( :salesroom, :internet) ['1', '2']
   STATUSES = {:active => 0, :finished => 1, :canceled => 2, :waiting_for_offer => 3}
   MAX_EXPIRED_AFTER = 14
   ORDER_MODES = [
