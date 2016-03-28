@@ -35,3 +35,8 @@ Inz::Application.configure do
 
   config.eager_load = false
 end
+
+Pingan::Connector.client_id = 'P_DLHC_CLAIM'
+Pingan::Connector.client_name = '大连华宸'
+Pingan::Connector.client_secret = 'acn385tr'
+Pingan::Connector.site ='https://test-api.pingan.com.cn:20443'

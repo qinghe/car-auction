@@ -19,7 +19,7 @@ require 'oauth2'
 module Pingan
   class Connector
     class << self
-      attr_accessor :site, :client_id, :client_secret, :auth_url, :debug_mode
+      attr_accessor :site, :client_id, :client_secret, :auth_url, :debug_mode, :client_name
 
       def debug_mode?
         !!@debug_mode

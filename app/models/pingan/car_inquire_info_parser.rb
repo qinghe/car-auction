@@ -1,5 +1,5 @@
 module Pingan
-  class CarMessageParser < MessageParser
+  class CarInquireInfoParser < MessageParser
 
     #attr_accessor :taskAuctionNo, :modelName
 

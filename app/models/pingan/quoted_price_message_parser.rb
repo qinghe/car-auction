@@ -1,5 +1,5 @@
 module Pingan
-  class PriceMessageParser < MessageParser
+  class QuotedPriceMessageParser < MessageParser
 
     #<success>true</success>
     #<message>无</message>

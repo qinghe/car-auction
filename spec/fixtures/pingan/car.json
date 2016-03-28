@@ -1,6 +1,6 @@
 {
     "partnerAccount":"",
-    "taskAuctionNo":"",
+    "taskAuctionNo":"taskAuctionNo",
     "modelName":"",
     "location":"",
     "registerDate":"",

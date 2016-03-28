@@ -1,15 +1,24 @@
 require 'rails_helper'
 
-describe Pingan::CarInfo do
-  let( :xml ){  File.read(File.expand_path('../../fixtures/car.xml', __FILE__)) }
+describe Pingan::CarInquireInfoParser do
 
-  it "instance load info from xml" do
-    data =  { taskAuctionNo: 'taskAuctionNo', modelName: 'modelName' }
+  let( :serial_no) { "test-#{Time.now.to_i}" }
+  let( :json ){  File.read(File.expand_path('../../fixtures/pingan/car.json', __FILE__)) }
 
-    car =  Pingan::CarInfo.new
-    car.from_xml( data.to_xml )
+  it "should parse json to hash" do
+    car_info_parser =  Pingan::CarInquireInfoParser.new( json )
+    expect( car_info_parser.attributes ).to be_a Hash
+  end
 
-    car.taskAuctionNo.should eq 'taskAuctionNo'
+  it "create car info from json" do
+    expected_serial_no = serial_no
+    car_info_parser =  Pingan::CarInquireInfoParser.new( json )
+    car_info_parser.attributes['taskAuctionNo'] = expected_serial_no
+
+    expect{ car_info_parser.perform }.to change{Car.count}.by(1)
+
+    #result = car_info_parser.perform
+    Car.where( serial_no: expected_serial_no ).should be_exists
   end
 
 

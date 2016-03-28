@@ -52,3 +52,7 @@ Inz::Application.configure do
   config.log_level = :info
 end
 Paperclip.options[:command_path] = "/usr/local/bin/"
+Pingan::Connector.client_id = 'P_DLHC_CLAIM'
+Pingan::Connector.client_name = '大连华宸'
+Pingan::Connector.client_secret = 'uFF3T6a4'
+Pingan::Connector.site ='https://test-api.pingan.com.cn:20443'

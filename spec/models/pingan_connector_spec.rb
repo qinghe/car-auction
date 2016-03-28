@@ -1,12 +1,6 @@
 require 'rails_helper'
 
 describe Pingan::Connector do
-  before( :all ) {
-    Pingan::Connector.client_id = 'P_DLHC_CLAIM'
-    Pingan::Connector.client_secret = 'acn385tr'
-    Pingan::Connector.site ='https://test-api.pingan.com.cn:20443'
-
-  }
 
   before( :each) {
     @administrator = create(:user, :administrator)
@@ -19,10 +13,10 @@ describe Pingan::Connector do
     @administrator.access_token.should be_present
   end
 
-  context "send message" do
+  context "Response to pingan" do
     let( :auction) { create(:auction)  }
     it 'should post a PriceMessage' do
-      quoted_price_message = Pingan::QuotedPriceMessage.new( auction )
+      quoted_price_message = Pingan::QuotedPriceResponse.new( auction )
       quoted_price_message.post
 
     end

@@ -1,5 +1,6 @@
 module Pingan
   class MessageParser
+
     attr_accessor :data
 
     def initialize( data )
@@ -30,6 +31,13 @@ module Pingan
       attributes['partnerAccount']
     end
 
+    def task_auction_no
+      attributes['taskAuctionNo']
+    end
+
+    def task_auction
+      Auction.where( serial_no: task_auction_no ).first
+    end
 
     def xpath
       raise "please implement"
