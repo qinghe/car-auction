@@ -1,5 +1,5 @@
 module Pingan
-  class QuotedPriceAgainRequest < MessageBase
+  class QuotedPriceAgainMessage < MessageBase
     #{
     #    "partnerAccount":"拍卖公司标识",
     #    "taskAuctionNo":"拍卖编号",

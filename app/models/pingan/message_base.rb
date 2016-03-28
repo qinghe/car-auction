@@ -2,7 +2,7 @@ require 'builder'
 module Pingan
   class MessageBase
     #YYYY-MM-DD HH24:MI:SS
-    class_attribute :api_path
+    class_attribute :api_path, :required_fileds
 
     attr_accessor :partnerAccount
 

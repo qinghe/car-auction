@@ -53,7 +53,7 @@ module Pingan
       self.auctionLocation = auction.location
       self.startTime =  auction.start_at
       self.endTime =  auction.expired_at
-      self.auctionType = acution.type_name
+      self.auctionType = auction.type_name
       self.isPass =  auction.is_pass
       self.passTimes =  auction.pass_times
       self.commissionedTime = auction.commissioned_time

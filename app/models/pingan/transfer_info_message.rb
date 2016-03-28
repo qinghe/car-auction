@@ -1,6 +1,6 @@
 module Pingan
   class TransferInfoMessage < MessageBase
-
+    self.required_fileds = [ :partnerAccount, :taskAuctionNo, :isAuction, :transferBail, :isPayTransferBail, :isPayAuctionPrice, :transferTime, :transferOpinion]
     #{
     #  "partnerAccount":"",
     #  "taskInquireNo":"",
