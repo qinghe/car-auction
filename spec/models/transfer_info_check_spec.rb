@@ -15,7 +15,7 @@ describe Pingan::TransferInfoCheckParser do
 
     result =  info_parser.perform
     expect(result.succeed).to be true
-    expect(auction.reload.channel_inquire_result).to eq  Auction::FeedbackEnum.yes
+    expect(auction.reload.channel_transfer_result).to eq  Auction::FeedbackEnum.yes
 
   end
 

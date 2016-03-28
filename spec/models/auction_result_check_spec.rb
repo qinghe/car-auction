@@ -15,7 +15,7 @@ describe Pingan::AuctionResultCheckHandler do
 
     result =  info_parser.perform
     expect(result.succeed).to be true
-    expect(auction.reload.inquire_result).to eq  Auction::FeedbackEnum.yes
+    expect(auction.reload.feedback_result).to eq  Auction::FeedbackEnum.yes
 
   end
 
