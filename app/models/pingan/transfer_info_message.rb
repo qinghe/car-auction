@@ -1,5 +1,5 @@
 module Pingan
-  class TransferInfoResponse < MessageBase
+  class TransferInfoMessage < MessageBase
 
     #{
     #  "partnerAccount":"",

@@ -1,18 +1,18 @@
 module Pingan
-  class TransferCheckInfoParser < MessageParser
+  class TransferInfoCheckParser < MessageParser
 
     #{
-    #  "partnerAccount":"",
-    #  "taskAuctionNo":"",
-    #  "inquireAmount":"",
-    #  "biddingUser":""   =? '大连华宸'
+    #    "partnerAccount":"",
+    #    "taskAuctionNo":"",
+    #    "transferResult":"",
+    #    "transferOpinion":""
     #}
 
     def perform
       result = BoolMessageWrapper.new( false )
-      task_auction.inquire_amount = attributes['inquireAmount']
-      task_auction.bidding_user =  attributes['biddingUser']
-      result.succeed = auction.save
+      task_auction.channel_transfer_result = attributes['transferResult']
+      task_auction.channel_transfer_opinion =  attributes['transferOpinion']
+      result.succeed = task_auction.save
 
       touch_auction! if result.succeed
 

@@ -9,7 +9,7 @@ module Pingan
     #}
     def perform
       result = BoolMessageWrapper.new( false )
-
+Rails.logger.debug "MultiInquireFeedbackHandler attributes=#{attributes.inspect}"
       task_auction.inquire_result = attributes['inquireResult']
       task_auction.inquire_opinion = attributes['inquireOpinion']
       result.succeed = task_auction.save

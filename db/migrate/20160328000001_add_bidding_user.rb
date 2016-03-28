@@ -2,6 +2,9 @@
 class AddBiddingUser < ActiveRecord::Migration
 
   def change
+
+    add_column :auctions, :remark, :string
+
     add_column :auctions, :last_api_name, :string
     add_column :auctions, :last_api_succeed, :string
     add_column :auctions, :last_api_message, :string
@@ -31,6 +34,8 @@ class AddBiddingUser < ActiveRecord::Migration
     add_column :auctions, :is_pay_auction_price, :boolean, null: false, default: false
     add_column :auctions, :transfer_opinion, :string
 
+    add_column :auctions, :channel_transfer_result, :string
+    add_column :auctions, :channel_transfer_opinion, :string
     #
   end
 

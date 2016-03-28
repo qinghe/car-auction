@@ -7,7 +7,7 @@ module Pingan
     attr_accessor :partnerAccount
 
     def initialize( auction )
-      partnerAccount = Connector.client_id
+      self.partnerAccount = Connector.client_id
     end
 
     def post

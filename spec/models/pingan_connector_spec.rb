@@ -16,7 +16,7 @@ describe Pingan::Connector do
   context "Response to pingan" do
     let( :auction) { create(:auction)  }
     it 'should post a PriceMessage' do
-      quoted_price_message = Pingan::QuotedPriceResponse.new( auction )
+      quoted_price_message = Pingan::QuotedPriceMessage.new( auction )
       quoted_price_message.post
 
     end

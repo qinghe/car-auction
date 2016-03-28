@@ -1,15 +1,15 @@
 module Pingan
-  class QuotedPriceResponse < MessageBase
+  class QuotedPriceMessage < MessageBase
 
     self.api_path = '/open/appsvr/property/receiveQuotedPrice'
 
     attr_accessor :taskAuctionNo, :auctionPrice, :remark
 
     def initialize( auction )
-      self.partnerAccount = PartnerAccount
       self.taskAuctionNo = auction.serial_no
       self.auctionPrice =  auction.current_price
-      self.remark = ''
+      self.remark = auction.remark
+      super
     end
 
     #def to_xml
