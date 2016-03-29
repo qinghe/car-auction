@@ -2,13 +2,20 @@ module Pingan
   class QuotedPriceMessage < MessageBase
 
     self.api_path = '/open/appsvr/property/receiveQuotedPrice'
+    #{
+    #    "partnerAccount":"",
+    #    "taskAuctionNo":"",
+    #    "auctionPrice":"",
+    #    "remark":""
+    #}
+    self.required_fileds = [ :partnerAccount, :taskAuctionNo, :auctionPrice, :remark]
 
-    attr_accessor :taskAuctionNo, :auctionPrice, :remark
+    attr_accessor *required_fileds
 
     def initialize( auction )
       self.taskAuctionNo = auction.serial_no
-      self.auctionPrice =  auction.current_price
-      self.remark = auction.remark
+      self.auctionPrice =  auction.car.canzhi_jiazhi
+      self.remark = auction.car.remark
       super
     end
 

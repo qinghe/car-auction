@@ -105,10 +105,13 @@ module Pingan
       car = AccidentCar.new( car_params )
       car.build_accident( accident_params )
       car.build_auction( auction_params )
+
+      car.publisher = User.pingan_pusher
+
       result.succeed = car.save
 
       touch_auction! if result.succeed
-      
+
       result
     end
 

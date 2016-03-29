@@ -65,7 +65,7 @@ Inz::Application.routes.draw do
   resources :bonuspoints
   get '/signup',  :to => 'users#new'
   get '/signin',  :to => 'sessions#new'
-  get '/signout',  :to => 'sessions#destroy'
+  match '/signout',  :to => 'sessions#destroy', via: [:get, :delete]
   get '/ver', :to => 'users#mail_ver'
   #get '/find', :to => 'users#find'
   #get '/delete', :to => 'users#delete'
@@ -188,16 +188,18 @@ Inz::Application.routes.draw do
       delete :delete_file, :on => :collection #delete file have not assigned to car
       get :new_car_accident, :on => :collection
       get :welcome, :on => :collection
-      patch :evaluate, :on => :member
-      patch :abandon, :on => :member
-      patch :sendback, :on => :member
-      patch :pickup, :on => :member
-      patch :abandon2, :on => :member
-      patch :abandon3, :on => :member
-      patch :transfer, :on => :member
-      patch :new_auction, :on => :member
-      patch :confirm_auction, :on => :member
-      post :upload_doc, :on => :member
+      member do
+        patch :evaluate
+        patch :abandon
+        match :sendback, via: [:put, :patch]
+        patch :pickup
+        patch :abandon2
+        patch :abandon3
+        patch :transfer
+        patch :new_auction
+        patch :confirm_auction
+        post :upload_doc
+      end
     end
     resources :companies, :users
   end

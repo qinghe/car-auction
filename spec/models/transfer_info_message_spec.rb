@@ -12,7 +12,7 @@ describe Pingan::TransferInfoMessage do
 
   it "should has fields" do
     price_message =  Pingan::TransferInfoMessage.new( auction )
-    expect( price_message.to_hash.keys).to eq Pingan::TransferInfoMessage.required_fileds
+    expect( price_message.to_hash.keys ).to match_array(Pingan::TransferInfoMessage.required_fileds)
 
   end
 

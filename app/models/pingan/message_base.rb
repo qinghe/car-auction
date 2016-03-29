@@ -24,7 +24,7 @@ module Pingan
 
 
     def to_hash
-      instance_values
+      instance_values.symbolize_keys!() 
     end
 
 

@@ -148,7 +148,7 @@ class Admin::CarsController < Case::CarsController
 
   def new_auction
     @car.update_attributes( permitted_resource_params )
-    @car.to_status!(2)
+    @car.delegated!
     respond_to do |format|
       format.js {
         render "auction_saved"
@@ -168,7 +168,7 @@ class Admin::CarsController < Case::CarsController
   def abandon
     @car.update_attributes( permitted_resource_params )
     @return_to_path = case_car_list_path(@car.status)
-    @car.to_status!(5)
+    @car.abandon_on_auction!
     respond_to do |format|
       format.js { render "abandoned"}
     end
@@ -177,7 +177,7 @@ class Admin::CarsController < Case::CarsController
   def abandon2
     @car.update_attributes(  permitted_resource_params )
     @return_to_path = case_car_list_path(@car.status)
-    @car.to_status!(6)
+    @car.abandon_on_pick!
     respond_to do |format|
       format.js { render "abandoned2"}
     end
@@ -186,7 +186,7 @@ class Admin::CarsController < Case::CarsController
   def abandon3
     @car.update_attributes(  permitted_resource_params )
     @return_to_path = case_car_list_path(@car.status)
-    @car.to_status!(7)
+    @car.abandon_on_transfer!
     respond_to do |format|
       format.js { render "abandoned3"}
     end

@@ -1,6 +1,6 @@
-<% if @car.status?(2) %>
+<% if @car.delegated? %>
 <% car = @car
-   dialog_container_id = "abandon2_dialog" 
+   dialog_container_id = "abandon2_dialog"
    dialog_form_id = "abandon2_form"
 %>
 
@@ -11,11 +11,11 @@
        <td class="thead"  >
          <%= car_form.label :giveup_pickupcar_reason, '放弃原因' %>
        </td> <td>
-         <%= car_form.text_area :giveup_pickupcar_reason, :style => "width:600px;height:6em;" %>     
+         <%= car_form.text_area :giveup_pickupcar_reason, :style => "width:600px;height:6em;" %>
        </td>
      </tr>
    </table>
-    
+
 <%end%>
 </div>
 
@@ -40,7 +40,6 @@
           .click(function() {
             $( "#<%=dialog_container_id%>" ).dialog( "open" );
           });
-      });    
+      });
     <%end %>
 <%end %>
-    

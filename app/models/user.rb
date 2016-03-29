@@ -63,6 +63,10 @@ class User < ActiveRecord::Base
   def self.evaluator
     self.where(:role=>'evaluator').first
   end
+	def self.pingan_pusher
+    self.where(role: 'insurance', email: 'pingan_pusher@example.com').first
+  end
+
 
   def default_data
    	self.status = 2
@@ -125,6 +129,10 @@ class User < ActiveRecord::Base
   def evaluator?
     role == "evaluator"
   end
+
+  def pingan_pusher?
+		self == self.class.pingan_pusher
+	end
 
   def address
     if province_id>0 and city_id>0

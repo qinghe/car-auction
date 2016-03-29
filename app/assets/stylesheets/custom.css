@@ -4,7 +4,7 @@
 }
 
 body {
-   font-family: Microsoft Yahei,Arial,Helvetica,sans-serif;
+   font-family: Microsoft Yahei,Arial,Helvetica,sans-serif !important;
 }
 
 section, article, footer, header{
@@ -14,7 +14,6 @@ section, article, footer, header{
     margin: 0;
     padding: 0;
 }
-
 
 .image_container
 {
@@ -200,4 +199,3 @@ table td.thead{
 .offersList td {
     vertical-align: middle;
 }
-

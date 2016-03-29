@@ -44,6 +44,32 @@ namespace :lnhc do
     make_projects
     make_cars
   end
+
+
+  desc "Add publisher api 推送  Pingan"
+  task :create_pingan_api => :environment do
+      company = Company.new(
+          :name => "PingAn",
+          :description => '',
+          :company_type => 'insurance',
+          :is_approval => 1 ,
+          :approval => '',
+          :approved_at => Time.now
+      )
+      user = User.create!(
+        :login => 'pingan_pusher',
+        :password => 'password',
+        :name => 'pingan',
+        :role => 'insurance',
+        :status => 2,
+        :email => "pingan_pusher@example.com",
+        :description => "",
+        :company => company
+      )
+      user.save!
+  end
+
+
 end
 
 def make_users #zmieniony format emailu dla latwiejszego logowania

@@ -1,6 +1,6 @@
-<% if @car.status?(2) %>
+<% if @car.delegated? %>
 <% car = @car
-   dialog_container_id = "confirm_auction_dialog" 
+   dialog_container_id = "confirm_auction_dialog"
    dialog_form_id = "confirm_auction_form"
 %>
 <div id="<%=dialog_container_id%>"title="确认车辆<%=car.name%>拍卖时间">
@@ -21,7 +21,7 @@
       <tr class="aution_info">
         <td>拍卖时间要求</td>
         <td colspan="5">
-         <%# some seed have no expected_start_at 
+         <%# some seed have no expected_start_at
          %>
           <% if car.auction.expected_start_at.present? %>
           <%= car.auction.expected_start_at.to_date %> 至 <%= car.auction.expected_expired_at.to_date %>
@@ -30,19 +30,19 @@
       </tr>
       <tr class="aution_info">
         <td>车辆公示时间设置</td>
-        <td colspan="5">          
-          <%= auction_form.date_select :public_start_at %> 至           
+        <td colspan="5">
+          <%= auction_form.date_select :public_start_at %> 至
           <%= auction_form.date_select :public_expired_at %>
         </td>
       </tr>
       <tr class="aution_info">
         <td>拍卖时间设置</td>
         <td colspan="5">
-          <%= auction_form.datetime_select :start_at, :default=> (car.auction.open? ? car.auction.start_at : Time.now)  %>  至 
+          <%= auction_form.datetime_select :start_at, :default=> (car.auction.open? ? car.auction.start_at : Time.now)  %>  至
           <%= auction_form.datetime_select :expired_at, :default=>(car.auction.open? ? car.auction.expired_at : 30.minute.from_now) %>
         </td>
       </tr>
-      
+
     </table>
     <% end%>
   <%end%>
@@ -67,8 +67,7 @@
           .click(function() {
             $( "#<%=dialog_container_id%>" ).dialog( "open" );
           });
-      });    
+      });
     <%end %>
-</div>    
+</div>
 <%end %>
-    

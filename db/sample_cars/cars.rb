@@ -142,7 +142,7 @@ cars = [
     car.plate_number = ("p%010d" % i)
     car.frame_number = ("f%010d" % i)
     car.model_id = car_model_ids.sample
-    car.status = 2
+    car.status = 'delegated'
     car.save!
 
     if car.auction.closed?

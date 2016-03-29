@@ -23,7 +23,7 @@ class Case::CarsController < Case::ApplicationController
   # GET /cars/1.json
   def show
     # may auction it again, let user decide, if there are offers, select the heighest one
-    if @car.status?( 2 )
+    if @car.delegated?
       if @car.auction.closed? and @car.auction.offers.present?
         @car.auction.close!
       end
@@ -35,16 +35,25 @@ class Case::CarsController < Case::ApplicationController
   end
 
   def sendback
-    if @car.status>0
-      @car.to_status!(@car.status-1)
+    unless @car.wait_for_evaluate?
+      if @car.evaluated?
+        @car.wait_for_evaluate!
+      elsif @car.delegated?
+         @car.evaluated!
+      end
+      #@car.to_status!(@car.status-1)
     end
     redirect_to case_car_url(@car)
   end
 
   def evaluate
     @car.update_attributes!( permitted_params )
+
+    ActiveSupport::Notifications.instrument( 'dlhc.car.evaluated', { car: @car} ) do
       @car.evaluator_id = current_user.id
-      @car.to_status!(1)
+      @car.evaluated!
+    end
+
     respond_to do |format|
       format.js # show.html.erb
     end
@@ -79,7 +88,7 @@ class Case::CarsController < Case::ApplicationController
 
   def new_auction
     @car.update_attributes( permitted_params )
-    @car.to_status!(2)
+    @car.delegated!
     respond_to do |format|
       format.js {
         render "auction_saved"
@@ -99,7 +108,7 @@ class Case::CarsController < Case::ApplicationController
   def abandon
     @car.update_attributes( permitted_params )
     @return_to_path = case_car_list_path(@car.status)
-    @car.to_status!(5)
+    @car.abandon_on_auction!
     respond_to do |format|
       format.js { render "abandoned"}
     end
@@ -108,7 +117,7 @@ class Case::CarsController < Case::ApplicationController
   def pickup
     @car.update_attributes( permitted_params )
     @return_to_path = case_car_path(@car)
-    @car.to_status!(3)
+    @car.wait_for_pick!
     respond_to do |format|
       format.js { render "pickuped"}
     end
@@ -116,7 +125,7 @@ class Case::CarsController < Case::ApplicationController
   def abandon2
     @car.update_attributes( permitted_params )
     @return_to_path = case_car_list_path(@car.status)
-    @car.to_status!(6)
+    @car.abandon_on_pick!
     respond_to do |format|
       format.js { render "abandoned2"}
     end
@@ -125,14 +134,14 @@ class Case::CarsController < Case::ApplicationController
   def abandon3
     @car.update_attributes( permitted_params )
     @return_to_path = case_car_list_path(@car.status)
-    @car.to_status!(7)
+    @car.abandon_on_transfer!
     respond_to do |format|
       format.js { render "abandoned3"}
     end
   end
 
   def transfer
-    @car.to_status!(4)
+    @car.transferred!
     redirect_to case_car_list_path(@car.status)
   end
 

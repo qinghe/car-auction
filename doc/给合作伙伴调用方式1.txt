@@ -1,0 +1,33 @@
+你好，我们这边接口都是通过esg平台暴露出去的，接口开发完毕才会在平台上注册，合作伙伴这边调用的话需要配置一套账户和密码
+测试环境（后续由我们提供）：
+测试应用：xxx
+测试密码：yyy
+
+获取access_token：（GET方法）
+https://test-api.pingan.com.cn:20443/oauth/oauth2/access_token?client_id=xxx&grant_type=client_credentials&client_secret=yyy
+
+用上面获取的access_token取代下面超连接中的相应参数，测试联通性。
+执行方法案例(可以先用下面的连接测试一下是否可以连通)：
+https://test-api.pingan.com.cn:20443/open/appsvr/property/接口名?access_token=xxxxxxxx&request_id=接口名+时间戳
+入参（注意post方式）
+
+生产环境（后续由我们提供）：
+测试应用：xxx
+测试密码：yyy
+
+获取access_token：（GET方法）
+https://api.pingan.com.cn/oauth/oauth2/access_token?client_id=xxx&grant_type=client_credentials&client_secret=yyy
+
+用上面获取的access_token取代下面超连接中的相应参数，测试联通性。
+执行方法案例(可以先用下面的连接测试一下是否可以连通)：
+https://api.pingan.com.cn/open/appsvr/property/接口名?access_token=XXX&request_id=接口名+时间戳
+入参（注意post方式）
+
+可以参考测试网站上http://test-api.pingan.com.cn:20080/OPENAPI,/按分组查看/产险车险销售.
+
+
+注意
+
+获取token和保留token
+(1)   access_token目前预设置的是30天有效期, 你们可以保留access_token在本地环境数据库,在token失效之前, 重新获取并且重新置于本地使用.
+(2)   access_token只需要调用一次. 在失效前再调用一次重置.使用期间就一直使用该获取到的token

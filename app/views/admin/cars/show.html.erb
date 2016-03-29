@@ -63,7 +63,7 @@
   </tr>
   <tr>
     <td colspan="6">
-      <div id="car_license_image_list">  
+      <div id="car_license_image_list">
           <%= render :partial=>'car_file', :collection=>@car.car_license_images%>
       </div>
     </td>
@@ -73,7 +73,7 @@
   </tr>
   <tr>
     <td colspan="6">
-      <div id="car_frame_image_list">  
+      <div id="car_frame_image_list">
           <%= render :partial=>'car_file', :collection=>@car.car_frame_images%>
       </div>
     </td>
@@ -83,8 +83,8 @@
     <td class="thead" colspan="6">   车辆损失图片展示  </td>
   </tr>
   <tr>
-    <td colspan="6">      
-      <div id="car_image_list">  
+    <td colspan="6">
+      <div id="car_image_list">
           <%= render :partial=>'car_file', :collection=>@car.car_images%>
       </div>
     </td>
@@ -109,7 +109,7 @@
     <td></td><td></td>
   </tr>
 
-<% if car.status == 2 %>
+<% if car.delegated? %>
   <tr>
     <td colspan="6" class="table_title">  委托拍卖处理  </td>
   </tr>
@@ -148,12 +148,11 @@
   </tr>
 <tr>
   <td colspan="6">
-    <div id="car_doc_list">  
+    <div id="car_doc_list">
       <%= render :partial=>'car_file', :collection=>@car.car_docs%>
     </div>
   </td>
 </tr>
 
- 
+
 </table>
-   

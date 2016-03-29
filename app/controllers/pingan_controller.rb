@@ -31,19 +31,44 @@ class PinganController < ApplicationController
   #estimateLoss BigDecimal 否 定损金额      accident.zuizhong_peifu_jine 最终赔付金额?
   #remark String 否 备注
   def sink
-    #<?xml version="1.0" encoding="GB2312"?>
+    # pingan                                             huachen
+    #  sendCarInquireInfo        ->
+    #                                <-   receiveQuotedPrice ()
+    #  sendHighestBiddingInfo    ->
+    #  receiveAuction(entrusted) ->
+    #                                <-   receiveQuotedPriceAgain
+    #  multiInquireFeedback      ->
+    #                                <-   receiveAuctionResult
+    #  receiveAuctionCheck       ->
+    #                                <-   receiveAuctionTransfer
+    #  receiveTransferInfoCheck
+
     @task = params[:task]
 
-    data =  request.body.read
-    @result = Pingan::MessageDispatcher.perform( @task, data )
+    message =  request.body.read
+
+    message_parser = case @task
+      when 'sendCarInquireInfo'
+        CarMessageParser.new( message )
+      when 'sendHighestBiddingInfo'
+        BiddingMessageParser.new( message )
+      when 'receiveAuction'
+        TrustMessageParser.new( message )
+      when 'multiInquireFeedback'
+        MultiInquireFeedbackHandler.new( message )
+      when 'receiveAuctionCheck'
+        AuctionResultCheckHandler.new( message )
+      when 'receiveTransferInfoCheck'
+        TransferInfoCheckParser.new( message )
+    end
+
+      ActiveSupport::Notifications.instrument( 'pingan.event', { task: @task,  message_parser: message_parser, result: @result } ) do
+        @result = message_parser.perform
+      end
 
     respond_to do |format|
       format.json  { render :json => @result }
     end
   end
 
-
-
-  def test
-  end
 end

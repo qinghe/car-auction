@@ -27,12 +27,17 @@ class Car < ActiveRecord::Base
   VARIATORS={'MT'=>0,'AT'=>1,'A/MT'=>2, 'CVT'=>3}
 
   CARPROCESS = {'0'=>"待评估车辆",'1'=>"待处理车辆",'2'=>"委托车辆",'3'=>"待提车辆",'4'=>"过户车辆",'5'=>"放弃委托拍卖",'6'=>"放弃提车",'7'=>"放弃过户"}
+
+  enum status: { wait_for_evaluate: 0, evaluated: 1, delegated: 2, wait_for_pick: 3, transferred: 4, abandon_on_auction: 5, abandon_on_pick: 6, abandon_on_transfer: 7 }
+
   PAYMETHOD = {'0'=>"保险公司",'1'=>"车主"}
 
   validates :serial_no, :presence => true, :length => {:within => 1..40}
 #  validates :engine_number, :presence => true, :length => {:within => 2..40}
 #  validates :frame_number, :presence => true, :length => {:within => 2..40}
 #  validates :plate_number, :presence => true, :length => {:within => 2..40}
+
+  delegate :pingan_pusher?, to: :publisher,  prefix: true
 
   def self.list_by(process_method,current_user)
     if current_user.insurance_agent?
@@ -69,9 +74,9 @@ class Car < ActiveRecord::Base
     VARIATORS.key(variator)
   end
 
-  def status?( some_status)
-    self.status == some_status
-  end
+  #def status?( some_status)
+  #  self.status == some_status
+  #end
 
   def to_status!( new_status)
     if new_status== 1
@@ -82,5 +87,6 @@ class Car < ActiveRecord::Base
       self.update_attributes(:status=> new_status)
     end
   end
+
 
 end

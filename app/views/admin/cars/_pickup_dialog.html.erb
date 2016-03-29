@@ -1,6 +1,6 @@
-<% if @car.status?(2) %>
+<% if @car.delegated? %>
 <% car = @car
-   dialog_container_id = "pickup_dialog" 
+   dialog_container_id = "pickup_dialog"
    dialog_form_id = "pickup_form"
 %>
 <div id="<%=dialog_container_id%>"title="确认车辆<%=car.name%>提车">
@@ -28,8 +28,7 @@
           .click(function() {
             $( "#<%=dialog_container_id%>" ).dialog( "open" );
           });
-      });    
+      });
     <%end %>
-</div>    
+</div>
 <%end %>
-    

@@ -23,6 +23,9 @@ gem 'nokogiri'
 #gem 'tinymce-rails-imageupload', '~> 3.5.6.3'
 gem 'china_sms',   :path => './china_sms'
 gem 'oauth2'
+gem 'sass-rails', '>= 3.2'
+#gem 'bootstrap-sass', '~> 3.2.0'
+
 
 group :development do
   #  gem 'thin'

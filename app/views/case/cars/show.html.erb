@@ -118,7 +118,7 @@
     <td></td><td></td>
   </tr>
 
-<% if car.status == 2 or car.status == 3 or car.status == 4  %>
+<% if car.delegated? ||  car.wait_for_pick? || car.transferred? %>
   <tr>
     <td colspan="6" class="table_title">  委托拍卖处理  </td>
   </tr>
@@ -196,35 +196,33 @@
   </tr>
   <tr>
     <td colspan="6">
-      <% button_to "返回", {:action => "list", :process_method=>car.status}, :form_class => "buttonform"  %>
-      <%= button_to "点击沟通", {:action => "index"}, :form_class => "buttonform", :disabled=>'disabled' %>
-<%if car.status?(1) or car.status?(2) %>
-      <%= button_to "退回", sendback_case_car_path(), :form_class => "buttonform", :method=>:put  %>
-<% end %>
-      <%= button_to "转移负责人", {:action => "index"}, :form_class => "buttonform", :disabled=>'disabled' %>
-      <%= button_to "催促回复", {:action => "index"}, :form_class => "buttonform", :disabled=>'disabled' %>
+      <%= button_to "  返回  ", {:action => "list", :process_method=>car.status}, :form_class => "buttonform",  :method=> :get %>
 
-      <% if car.status == 0 or car.status == 1 %>
-          <button id="evaluate_car_button">车辆评估</button>
-          <button id="auction_car_button">委托拍卖</button>
-      <% elsif car.status == 2 %>
+<% if @car.delegated? || @car.evaluated? %>
+      <%= button_to "  退回  ", sendback_case_car_path(), :form_class => "buttonform", :method=>:put  %>
+<% end %>
+
+      <% if car.wait_for_evaluate? || car.evaluated? %>
+          <input id="evaluate_car_button" type="button" value="车辆评估"></input>
+          <input id="auction_car_button" type="button" value="委托拍卖"></input>
+      <% elsif car.delegated? %>
         <% if current_user.evaluator? %>
           <button id="confirm_auction_button">确认拍卖</button>
         <% end %>
           <button id="pickup_car_button">提车确认</button>
-      <% elsif car.status == 3 %>
+      <% elsif car.wait_for_pick? %>
           <%=button_to "过户确认", {:action => "transfer"}  , :form_class => "buttonform", :method=>"put", :data=>{:confirm=>"确定过户吗？"}%>
       <% end %>
 
 
-      <% if car.status == 0 or car.status == 1 %>
+      <% if car.wait_for_evaluate? || car.evaluated? %>
           <button id="abandon_car_button">不委托拍卖</button>
-      <% elsif car.status == 2 %>
+      <% elsif car.delegated? %>
           <button id="abandon2_car_button">不能提车</button>
-      <% elsif car.status == 3 %>
+      <% elsif car.wait_for_pick? %>
           <button id="abandon3_car_button">不能过户</button>
       <% end %>
-      <% if car.status != 4 %>
+      <% unless  car.transferred? %>
         <button id="car_doc_button">上传附件</button>
       <% end %>
     </td>

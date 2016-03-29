@@ -7,6 +7,10 @@ class Company < ActiveRecord::Base
   has_attached_file :agent_id, :styles => { :thumb => "100x100>" }, :default_url => "/images/avatars/missing.png"
   has_attached_file :company_id, :styles => { :thumb => "100x100>" }, :default_url => "/images/avatars/missing.png"
 
+  def self.pingan
+    insurance_companies.where( name: 'PingAn').first
+  end
+
   def all_members
     self.self_and_descendants.inject([]){|members,company|members+=company.members}
   end

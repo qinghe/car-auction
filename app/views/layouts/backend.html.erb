@@ -4,11 +4,10 @@
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
     <title><%= @title || yield(:title) %> <%= @global_title %></title>
 <%= stylesheet_link_tag 'blueprint/screen', :media => 'screen' %>
-<%= stylesheet_link_tag 'blueprint/print',  :media => 'print' %>
 <!--[if lt IE 8]><%= stylesheet_link_tag 'blueprint/ie' %><![endif]-->
 <%= stylesheet_link_tag 'backend', :media => 'screen' %>
 <!--[if IE 7]> <%= stylesheet_link_tag 'ie7' %>   <![endif]-->
-<!--[if lte IE 6]> 
+<!--[if lte IE 6]>
   <%= stylesheet_link_tag 'ie6case' %>
 <![endif]-->
     <%= javascript_include_tag 'backend' %>
@@ -17,13 +16,13 @@
   </head>
   <body>
     <div id="page" class="" >
-      
+
       <div id="header">
         <div class="inner" >
           <dir class='fl'>
             <%= image_tag "case/logo.gif",:alt=>'华宸保险事故车处理系统'%>
           </dir>
-          <div class="fr">  
+          <div class="fr">
            <%= link_to "退出", signout_path, :style=>"position:absolute;right:5px;"%>
            <br/>
            <br/>
@@ -45,7 +44,7 @@
           <% end %>
           <%= yield %>
           </div>
-        </div>        
+        </div>
 
         <%= render :partial=>"layouts/loading" %>
 

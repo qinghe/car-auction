@@ -171,7 +171,7 @@
   </tr>
 </table>
 
-<div id="auction_part" <%if @car.status.to_i == 2 %><%else%>style="display:none;"<%end%>>
+<div id="auction_part" <%if @car.delegated? %><%else%>style="display:none;"<%end%>>
   <%= render :partial=>"auction_form", :locals => { :car_form => car_form} %>
 </div>
 

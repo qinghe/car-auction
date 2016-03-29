@@ -90,7 +90,7 @@ class Auction < ActiveRecord::Base
     end
     set_won_offer!(offer)
     finish!
-    car.to_status!(3)
+    car.wait_for_pick!
   end
 
   def bidding_price
