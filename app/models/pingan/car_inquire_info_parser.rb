@@ -65,6 +65,7 @@ module Pingan
       #    "url":"", # photo, comma seperated
       #    "remark":""
       #}
+Rails.logger.debug " attributes = #{attributes}"
       attrs = attributes
       car_params = {
         serial_no: attrs['taskAuctionNo'],

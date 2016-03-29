@@ -46,20 +46,20 @@ class PinganController < ApplicationController
     @task = params[:task]
 
     message =  request.body.read
-
+Rails.logger.debug " message = #{message}"
     message_parser = case @task
       when 'sendCarInquireInfo'
-        CarMessageParser.new( message )
+        Pingan::CarInquireInfoParser.new( message )
       when 'sendHighestBiddingInfo'
-        BiddingMessageParser.new( message )
+        Pingan::BiddingInfoParser.new( message )
       when 'receiveAuction'
-        TrustMessageParser.new( message )
+        Pingan::TrustMessageParser.new( message )
       when 'multiInquireFeedback'
-        MultiInquireFeedbackHandler.new( message )
+        Pingan::MultiInquireFeedbackHandler.new( message )
       when 'receiveAuctionCheck'
-        AuctionResultCheckHandler.new( message )
+        Pingan::AuctionResultCheckHandler.new( message )
       when 'receiveTransferInfoCheck'
-        TransferInfoCheckParser.new( message )
+        Pingan::TransferInfoCheckParser.new( message )
     end
 
       ActiveSupport::Notifications.instrument( 'pingan.event', { task: @task,  message_parser: message_parser, result: @result } ) do

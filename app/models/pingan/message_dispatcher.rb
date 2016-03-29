@@ -11,8 +11,6 @@ module Pingan
 
     def self.perform( task_name,  message )
       #'sendCarInquireInfo','sendHighestBiddingInfo','receiveAuction', 'multiInquireFeedback', 'receiveAuctionCheck', 'receiveTransferInfoCheck'
-      dispatcher = new( message )
-
       message_parser = case task_name
         when 'sendCarInquireInfo'
           CarMessageParser.new( message )
