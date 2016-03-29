@@ -52,6 +52,9 @@ class Case::CarsController < Case::ApplicationController
     ActiveSupport::Notifications.instrument( 'dlhc.car.evaluated', { car: @car} ) do
       @car.evaluator_id = current_user.id
       @car.evaluated!
+      if @car.publisher_pingan_pusher?
+        Pingan::QuotedPriceMessage.new( @car.auction ).post
+      end
     end
 
     respond_to do |format|
@@ -221,7 +224,14 @@ class Case::CarsController < Case::ApplicationController
       format.json { head :no_content }
     end
   end
+
+
   private
+
+  def handle_pingan_api_result( pingan_api_result )
+
+  end
+
   def get_data
     unless Car.exists? params[:id]
       flash_t_general :error, 'car.dont_exists'

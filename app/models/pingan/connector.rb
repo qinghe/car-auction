@@ -69,7 +69,7 @@ module Pingan
 
     end
 
-
+    #return parsed json body as hash
     def self.post(message_wrapper)
 
       #uri = URI.parse('https://222.68.184.181:8107')
@@ -84,9 +84,7 @@ module Pingan
       #}
       token = get_token
       path = message_wrapper.api_path + '?' + {access_token: token.token, request_id: message_wrapper.request_id}.to_param
-      token.post( path, params: message_wrapper.to_hash) {|response|
-          print response.body
-      }
+      response = token.post( path, params: message_wrapper.to_hash)
 
     end
 
