@@ -153,26 +153,26 @@ Inz::Application.routes.draw do
   get 'admin/blogcomments/delete/:blogcomment', :to => 'admin/users#deleteblogcomment'
 
   #PROJECT
-  scope :module => "project" do
-    resources :projects do
-      resource :info, :only => [:show, :update], :controller => "info"
-      resources :members, :only => [:index, :update, :destroy]
-      resources :files, :except => [:edit]
-      resources :invitations, :except => [:show, :update] do
-        get :accept, :on => :member
-        get :reject, :on => :member
-        get :cancel, :on => :member
-      end
-      resources :topics do
-      	resources :posts, :except => [:index, :show]
-      end
-      resources :tickets do
-        get :take, :on => :member
-        get :give, :on => :member
-        get :end, :on => :member
-      end
-    end
-  end
+  #scope :module => "project" do
+  #  resources :projects do
+  #    resource :info, :only => [:show, :update], :controller => "info"
+  #    resources :members, :only => [:index, :update, :destroy]
+  #    resources :files, :except => [:edit]
+  #    resources :invitations, :except => [:show, :update] do
+  #      get :accept, :on => :member
+  #      get :reject, :on => :member
+  #      get :cancel, :on => :member
+  #    end
+  #    resources :topics do
+  #    	resources :posts, :except => [:index, :show]
+  #    end
+  #    resources :tickets do
+  #      get :take, :on => :member
+  #      get :give, :on => :member
+  #      get :end, :on => :member
+  #    end
+  #  end
+  #end
 
   get 'case/cars/list/:process_method', :to => 'case/cars#list', :as=>:case_car_list
   get 'case/cars/search', :to => 'case/cars#search'
@@ -195,8 +195,9 @@ Inz::Application.routes.draw do
         patch :pickup
         patch :abandon2
         patch :abandon3
-        patch :transfer
+        patch :confirm_transfer
         patch :new_auction
+        patch :feedback_auction
         patch :confirm_auction
         post :upload_doc
       end

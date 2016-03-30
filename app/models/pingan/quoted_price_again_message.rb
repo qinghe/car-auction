@@ -1,6 +1,7 @@
 module Pingan
   class QuotedPriceAgainMessage < MessageBase
-    #{
+    self.required_fields = [ :partnerAccount, :taskAuctionNo, :applyReason ]
+  #{
     #    "partnerAccount":"拍卖公司标识",
     #    "taskAuctionNo":"拍卖编号",
     #    "applyReason":"申请原因"

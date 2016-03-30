@@ -1,5 +1,9 @@
 module Pingan
   class AuctionResultMessage < MessageBase
+    self.required_fields = [ :partnerAccount, :taskAuctionNo, :announcementStartTime,:announcementEndTime,
+      :auctionLocation, :startTime, :endTime, :auctionType, :isPass, :passTimes,
+      :commissionedTime, :transferComplete, :transferRequestTime, :transferRealTime,
+      :finalPrice, :bidTimes, :bidList ]
 
     #ANNOUNCEMENT_TIME    拍卖公示时间      auction.public_start_at
     #AUCTION_LOCATION     拍卖地点       N  auction.location

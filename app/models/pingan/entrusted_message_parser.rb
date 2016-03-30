@@ -9,9 +9,11 @@ module Pingan
     def perform
       result = BoolMessageWrapper.new( false )
       task_auction.is_entrust = attributes['isEntrust']
+      if task_auction.is_entrust == EntrustingEnum.yes
+        task_auction.commissioned_time = DateTime.current
+      end
       result.succeed = task_auction.save
-
-      touch_auction! if result.succeed 
+      touch_history!( self,  result )
 
       result
     end

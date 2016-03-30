@@ -31,7 +31,7 @@ class Auction < ActiveRecord::Base
 
   belongs_to :auctioneer, :class_name => 'User' #huachen company
   belongs_to :car
-
+  has_many :action_histories
   #validates :price_increment, :numericality => {:greater_than => 0}
   #validates :reserve_price, :numericality => {:greater_than => 0}
 

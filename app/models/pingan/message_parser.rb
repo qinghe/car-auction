@@ -43,15 +43,24 @@ module Pingan
       @task_auction||=Auction.where( serial_no: task_auction_no ).first
     end
 
-    def xpath
-      raise "please implement"
+    def to_hash
+      attributes
     end
 
-    def touch_auction!
-      task_auction.last_api_name = self.class.name
-      task_auction.save!
-    end
+#    def touch_auction!
+#      task_auction.last_api_name = self.class.name
+#      task_auction.save!
+#    end
 
+    def touch_history!( message,  result )
+Rails.logger.debug " message = #{message} result=#{result.inspect}"
+      action_history = ActionHistory.new
+      action_history.auction_id = message.task_auction.id
+      action_history.api_name = message.class.name
+      action_history.api_params = message.to_json
+      action_history.api_result = result.to_json
+      action_history.save!
+    end
 
   end
 end

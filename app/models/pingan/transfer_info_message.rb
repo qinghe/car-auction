@@ -1,5 +1,7 @@
 module Pingan
   class TransferInfoMessage < MessageBase
+    self.api_path = '/open/appsvr/property/receiveAuctionTransfer'
+
     self.required_fields = [ :partnerAccount, :taskAuctionNo, :isAuction, :transferBail, :isPayTransferBail, :isPayAuctionPrice, :transferTime, :transferOpinion].sort!
     #{
     #  "partnerAccount":"",

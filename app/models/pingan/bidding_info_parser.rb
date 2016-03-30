@@ -14,8 +14,7 @@ module Pingan
       task_auction.bidding_user =  attributes['biddingUser']
       result.succeed = task_auction.save
 
-      touch_auction! if result.succeed
-
+      touch_history!( self,  result )
       result
     end
 
@@ -25,7 +24,7 @@ module Pingan
 
 
     def win_bid?
-      attributes['biddingUser'] == Connector.client_name
+      attributes['biddingUser'] ==  Rails.configuration.x.pingan['client_name']
     end
   end
 end

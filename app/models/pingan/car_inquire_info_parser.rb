@@ -110,8 +110,7 @@ Rails.logger.debug " attributes = #{attributes}"
       car.publisher = User.pingan_pusher
 
       result.succeed = car.save
-
-      touch_auction! if result.succeed
+      touch_history!( self,  result )
 
       result
     end

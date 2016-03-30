@@ -1,6 +1,5 @@
-# encoding: utf-8
 class Case::CarsController < Case::ApplicationController
-  prepend_before_filter :get_data, :only=>[:edit, :show,:evaluate,:sendback,:new_auction,:confirm_auction, :abandon,:pickup, :abandon2, :abandon3, :transfer, :delete_car_file]
+  prepend_before_filter :get_data, :only=>[:edit, :show,:evaluate,:sendback,:new_auction,:feedback_auction, :confirm_auction, :abandon,:pickup, :abandon2, :abandon3, :transfer, :delete_car_file, :confirm_transfer]
 
   def welcome
     respond_to do |format|
@@ -102,6 +101,20 @@ class Case::CarsController < Case::ApplicationController
     end
   end
 
+  def feedback_auction
+    @car.update_attributes( permitted_params )
+
+    if @car.publisher_pingan_pusher?
+      Pingan::AuctionResultMessage.new( @car.auction ).post
+    end
+
+    respond_to do |format|
+      format.js {
+        render "auction_saved"
+      }
+    end
+  end
+
   def confirm_auction
     @car.update_attributes( permitted_params )
     respond_to do |format|
@@ -146,9 +159,21 @@ class Case::CarsController < Case::ApplicationController
     end
   end
 
-  def transfer
-    @car.transferred!
-    redirect_to case_car_list_path(@car.status)
+  def confirm_transfer
+    @car.update_attributes( permitted_params )
+
+    ActiveSupport::Notifications.instrument( 'dlhc.car.transferred', { car: @car} ) do
+      @car.transferred!
+      if @car.publisher_pingan_pusher?
+        Pingan::TransferInfoMessage.new( @car.auction ).post
+      end
+    end
+
+    respond_to do |format|
+      format.js {
+        render "auction_saved"
+        }
+    end
   end
 
   def new_car_accident
@@ -228,12 +253,7 @@ class Case::CarsController < Case::ApplicationController
     end
   end
 
-
   private
-
-  def handle_pingan_api_result( pingan_api_result )
-
-  end
 
   def get_data
     unless Car.exists? params[:id]

@@ -16,7 +16,7 @@ ActiveSupport::Notifications.subscribe "pingan.event" do |*args|
   event = ActiveSupport::Notifications::Event.new *args
   # payload: { task: @task,  message_parser: message_parser, result: @result }
   task =  event.payload[:task]
-  Rails.logger.debug "pingan.event #{ event.payload }"
+  #Rails.logger.debug "pingan.event #{ event.payload }"
   #msg.post
 
 end

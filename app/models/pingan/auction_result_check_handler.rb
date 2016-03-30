@@ -14,7 +14,7 @@ module Pingan
       task_auction.feedback_opinion =  attributes['feedbackOpinion']
       result.succeed = task_auction.save
 #Rails.logger.debug "AuctionResultCheckHandler attributes#{attributes.inspect}, task_auction=#{task_auction.inspect}"
-      touch_auction! if result.succeed
+      touch_history!( self,  result )
 
       result
     end

@@ -46,14 +46,13 @@ class PinganController < ApplicationController
     @task = params[:task]
 
     message =  request.body.read
-Rails.logger.debug " message = #{message}"
     message_parser = case @task
       when 'sendCarInquireInfo'
         Pingan::CarInquireInfoParser.new( message )
       when 'sendHighestBiddingInfo'
         Pingan::BiddingInfoParser.new( message )
       when 'receiveAuction'
-        Pingan::TrustMessageParser.new( message )
+        Pingan::EntrustedMessageParser.new( message )
       when 'multiInquireFeedback'
         Pingan::MultiInquireFeedbackHandler.new( message )
       when 'receiveAuctionCheck'

@@ -13,7 +13,8 @@ Rails.logger.debug "MultiInquireFeedbackHandler attributes=#{attributes.inspect}
       task_auction.inquire_result = attributes['inquireResult']
       task_auction.inquire_opinion = attributes['inquireOpinion']
       result.succeed = task_auction.save
-      touch_auction! if result.succeed
+
+      touch_history!( self,  result )
       result
     end
 

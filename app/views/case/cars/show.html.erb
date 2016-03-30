@@ -198,20 +198,21 @@
     <td colspan="6">
       <%= button_to "  返回  ", {:action => "list", :process_method=>car.status}, :form_class => "buttonform",  :method=> :get %>
 
-<% if @car.delegated? || @car.evaluated? %>
-      <%= button_to "  退回  ", sendback_case_car_path(), :form_class => "buttonform", :method=>:put  %>
-<% end %>
+      <% if @car.delegated? || @car.evaluated? %>
+            <%= button_to "  退回  ", sendback_case_car_path(), :form_class => "buttonform", :method=>:put  %>
+      <% end %>
 
       <% if car.wait_for_evaluate? || car.evaluated? %>
-          <input id="evaluate_car_button" type="button" value="车辆评估"></input>
-          <input id="auction_car_button" type="button" value="委托拍卖"></input>
+        <input id="evaluate_car_button" type="button" value="车辆评估"></input>
+        <input id="auction_car_button" type="button" value="委托拍卖"></input>
       <% elsif car.delegated? %>
         <% if current_user.evaluator? %>
-          <button id="confirm_auction_button">确认拍卖</button>
+          <button id="confirm_auction_button">开始拍卖</button>
+          <button id="auction_feedback_button">拍卖反馈</button>
         <% end %>
           <button id="pickup_car_button">提车确认</button>
       <% elsif car.wait_for_pick? %>
-          <%=button_to "过户确认", {:action => "transfer"}  , :form_class => "buttonform", :method=>"put", :data=>{:confirm=>"确定过户吗？"}%>
+        <button id="confirm_transfer_button">过户确认</button>
       <% end %>
 
 
@@ -246,7 +247,9 @@
     <%= render :partial=>'abandon_dialog'%>
     <%= render :partial=>'evaluate_dialog'%>
     <%= render :partial=>'upload_doc_dialog'%>
+    <%= render :partial=>'auction_feedback_dialog'%>
     <%= render :partial=>'pickup_dialog'%>
     <%= render :partial=>'abandon2_dialog'%>
     <%= render :partial=>'abandon3_dialog'%>
     <%= render :partial=>'confirm_auction_dialog'%>
+    <%= render :partial=>'confirm_transfer_dialog'%>

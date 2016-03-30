@@ -14,7 +14,7 @@ module Pingan
       task_auction.channel_transfer_opinion =  attributes['transferOpinion']
       result.succeed = task_auction.save
 
-      touch_auction! if result.succeed
+      touch_history!( self,  result )
 
       result
     end

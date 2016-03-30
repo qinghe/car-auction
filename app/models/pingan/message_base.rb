@@ -8,16 +8,16 @@ module Pingan
 
     def initialize( auction )
       self.auction = auction
-      self.partnerAccount = Connector.partner_account
+      self.partnerAccount = Rails.configuration.x.pingan['partner_account']
     end
 
     # return  result.
     def post
       response = Connector.post( self )
       result = response.parsed
-      record_history!( self, result )
+      touch_history!( self, result )
       Rails.logger.debug " response = #{response.inspect} result=#{result.inspect}"
-      touch_auction!( result )
+      #touch_auction!( result )
       result
     end
 
@@ -51,9 +51,10 @@ module Pingan
       auction.save!
     end
 
-    def record_history!( message,  result )
-Rails.logger.debug " message = #{message} result=#{result.inspect}"
+    def touch_history!( message,  result )
+#Rails.logger.debug " message = #{message} result=#{result.inspect}"
       action_history = ActionHistory.new
+      action_history.auction_id = message.auction.id
       action_history.api_name = message.class.api_path
       action_history.api_params = message.to_json
       action_history.api_result = result.to_s

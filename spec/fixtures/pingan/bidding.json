@@ -1,6 +1,6 @@
 {
     "partnerAccount":"",
-    "taskAuctionNo":"",
-    "inquireAmount":"",
-    "biddingUser":""
+    "taskAuctionNo":"taskAuctionNo",
+    "inquireAmount":"100",
+    "biddingUser":"大连华宸"
 }

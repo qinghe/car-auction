@@ -14,13 +14,12 @@
 #http://test-api.pingan.com.cn:20080/
 module Pingan
   class Connector
-    class_attribute :site, :client_id, :client_secret, :partner_account, :auth_url, :debug_mode, :client_name
-
+    class_attribute :debug_mode
     class << self
 
-      def debug_mode?
-        !!@debug_mode
-      end
+      #def debug_mode?
+      #  !!@debug_mode
+      #end
 
       #def is_connected?
       #  token = get_token
@@ -57,9 +56,8 @@ module Pingan
       end
 
       def get_client
-Rails.logger.debug "self.site =#{Connector.site} self.client_id =#{Connector.client_id}"
-        OAuth2::Client.new( self.client_id.dup, self.client_secret.dup,
-          site: self.site.dup,
+        OAuth2::Client.new( Rails.configuration.x.pingan['client_id'], Rails.configuration.x.pingan['client_secret'],
+          site: Rails.configuration.x.pingan['site'],
           token_url: '/oauth/oauth2/access_token',
           token_method: :get,
         )
