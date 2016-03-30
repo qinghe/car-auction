@@ -8,9 +8,9 @@ module Pingan
     #    "auctionPrice":"",
     #    "remark":""
     #}
-    self.required_fileds = [ :partnerAccount, :taskAuctionNo, :auctionPrice, :remark]
+    self.required_fields = [ :partnerAccount, :taskAuctionNo, :auctionPrice, :remark]
 
-    attr_accessor *required_fileds
+    attr_accessor *required_fields
 
     def initialize( auction )
       self.taskAuctionNo = auction.serial_no

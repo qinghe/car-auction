@@ -1,7 +1,3 @@
-require 'net/https'
-require 'uri'
-require 'oauth2'
-
 # pingan                                             huachen
 #  sendCarInquireInfo        ->
 #                                <-   receiveQuotedPrice ()
@@ -18,8 +14,9 @@ require 'oauth2'
 #http://test-api.pingan.com.cn:20080/
 module Pingan
   class Connector
+    class_attribute :site, :client_id, :client_secret, :partner_account, :auth_url, :debug_mode, :client_name
+
     class << self
-      attr_accessor :site, :client_id, :client_secret, :auth_url, :debug_mode, :client_name
 
       def debug_mode?
         !!@debug_mode
@@ -34,17 +31,17 @@ module Pingan
         token = nil
         user = User.administrator
         if user.access_token.present?
-          token = OAuth2::AccessToken.from_hash(get_client, expires_at: user.token_expired_at )
-          if  token.expires?
+          token = OAuth2::AccessToken.from_hash(get_client, access_token: user.access_token, refresh_token: user.access_token, expires_at: user.token_expires_at )
+          if  token.expired?
             token = token.refresh!
             user.access_token = token.token
-            user.token_updated_at =  DateTime.current
+            user.token_expires_at = Time.zone.at( token.expires_at )
             user.token_expires_in = token.expires_in
           end
         else
           token = generate_token
           user.access_token = token.token
-          user.token_updated_at =  DateTime.current
+          user.token_expires_at = Time.zone.at( token.expires_at )
           user.token_expires_in = token.expires_in
         end
 
@@ -60,33 +57,35 @@ module Pingan
       end
 
       def get_client
-        client = OAuth2::Client.new( client_id, client_secret,
-          site: site,
+Rails.logger.debug "self.site =#{Connector.site} self.client_id =#{Connector.client_id}"
+        OAuth2::Client.new( self.client_id.dup, self.client_secret.dup,
+          site: self.site.dup,
           token_url: '/oauth/oauth2/access_token',
           token_method: :get,
         )
       end
 
+      #return parsed json body as hash
+      def post(message_wrapper)
+
+        #uri = URI.parse('https://222.68.184.181:8107')
+        #http = Net::HTTP.new(uri.host, uri.port)
+        #http.use_ssl = true  # enable SSL/TLS
+        ##http.cert =OpenSSL::X509::Certificate.ne(File.read("D:/111/client.crt"))
+        ##http.key =OpenSSL::PKey::RSA.new((File.read("D:/111/client.key")), "123456")# key and password
+        #http.verify_mode = OpenSSL::SSL::VERIFY_NONE #这个也很重要
+
+        #http.post(uri.path, message_wrapper.to_json) {|response|
+        #    print response.body
+        #}
+        token = get_token
+        path = message_wrapper.api_path + '?' + {access_token: token.token, request_id: message_wrapper.request_id}.to_param
+        response = token.post( path, params: message_wrapper.to_hash ,  headers: {'Accept' => 'application/json;charset=utf-8'})
+
+      end
     end
 
-    #return parsed json body as hash
-    def self.post(message_wrapper)
 
-      #uri = URI.parse('https://222.68.184.181:8107')
-      #http = Net::HTTP.new(uri.host, uri.port)
-      #http.use_ssl = true  # enable SSL/TLS
-      ##http.cert =OpenSSL::X509::Certificate.ne(File.read("D:/111/client.crt"))
-      ##http.key =OpenSSL::PKey::RSA.new((File.read("D:/111/client.key")), "123456")# key and password
-      #http.verify_mode = OpenSSL::SSL::VERIFY_NONE #这个也很重要
-
-      #http.post(uri.path, message_wrapper.to_json) {|response|
-      #    print response.body
-      #}
-      token = get_token
-      path = message_wrapper.api_path + '?' + {access_token: token.token, request_id: message_wrapper.request_id}.to_param
-      response = token.post( path, params: message_wrapper.to_hash)
-
-    end
 
 
 

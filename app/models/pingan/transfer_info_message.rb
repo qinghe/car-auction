@@ -1,6 +1,6 @@
 module Pingan
   class TransferInfoMessage < MessageBase
-    self.required_fileds = [ :partnerAccount, :taskAuctionNo, :isAuction, :transferBail, :isPayTransferBail, :isPayAuctionPrice, :transferTime, :transferOpinion].sort!
+    self.required_fields = [ :partnerAccount, :taskAuctionNo, :isAuction, :transferBail, :isPayTransferBail, :isPayAuctionPrice, :transferTime, :transferOpinion].sort!
     #{
     #  "partnerAccount":"",
     #  "taskInquireNo":"",
@@ -11,7 +11,7 @@ module Pingan
     #  "transferTime":  auction.transfer_real_time,
     #  "transferOpinion":""
     #}
-    attr_accessor *required_fileds
+    attr_accessor *required_fields
     #:taskAuctionNo, :isAuction, :transferBail, :isPayTransferBail, :isPayAuctionPrice, :transferTime, :transferOpinion
 
     def initialize( auction )

@@ -1,20 +1,22 @@
-require 'builder'
 module Pingan
   class MessageBase
     #YYYY-MM-DD HH24:MI:SS
-    class_attribute :api_path, :required_fileds
+    class_attribute :api_path, :required_fields
+    self.required_fields = []
 
     attr_accessor :auction, :partnerAccount
 
     def initialize( auction )
       self.auction = auction
-      self.partnerAccount = Connector.client_id
+      self.partnerAccount = Connector.partner_account
     end
 
     # return  result.
     def post
       response = Connector.post( self )
       result = response.parsed
+      record_history!( self, result )
+      Rails.logger.debug " response = #{response.inspect} result=#{result.inspect}"
       touch_auction!( result )
       result
     end
@@ -29,7 +31,7 @@ module Pingan
 
 
     def to_hash
-      instance_values.symbolize_keys!()
+      instance_values.symbolize_keys().slice( *self.required_fields )
     end
 
 
@@ -37,11 +39,25 @@ module Pingan
       datetime.to_s(:db)
     end
 
+    # { "ret":"0",
+    #    "msg":"",
+    #    "requestId":"receiveQuotedPrice1459307406",
+    #    "data":"{ "succeed":"false","message":"入参有为空的情况，请检查。" }
+    #  }
     def touch_auction!( result )
       auction.last_api_name = self.class.name
-      auction.last_api_succeed = result['succeed']
-      auction.last_api_message = result['message']
+      auction.last_api_succeed = result['data']['succeed']
+      auction.last_api_message = result['data']['message']
       auction.save!
+    end
+
+    def record_history!( message,  result )
+Rails.logger.debug " message = #{message} result=#{result.inspect}"
+      action_history = ActionHistory.new
+      action_history.api_name = message.class.api_path
+      action_history.api_params = message.to_json
+      action_history.api_result = result.to_s
+      action_history.save!
     end
 
   end

@@ -24,10 +24,13 @@ class Case::CarsController < Case::ApplicationController
   def show
     # may auction it again, let user decide, if there are offers, select the heighest one
     if @car.delegated?
-      if @car.auction.closed? and @car.auction.offers.present?
+      if @car.auction.closed? && @car.auction.offers.present?
         @car.auction.close!
       end
     end
+
+    @car.build_auction  if @car.auction.blank?
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @car }
@@ -220,7 +223,7 @@ class Case::CarsController < Case::ApplicationController
     @car.destroy
 
     respond_to do |format|
-      format.html { redirect_to case_cars_url(:process_method=>@car.status) }
+      format.html { redirect_to case_car_list_path(@car.status) }
       format.json { head :no_content }
     end
   end

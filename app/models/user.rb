@@ -144,9 +144,9 @@ class User < ActiveRecord::Base
     company ? company.name : "无"
   end
 
-	def token_expired_at
-		token_updated_at.advance( seconds: token_expired_in )
-	end
+	#def token_expires_at
+	#	token_updated_at.advance( seconds: token_expires_in )
+	#end
 
   private
 

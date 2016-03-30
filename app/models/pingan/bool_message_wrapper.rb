@@ -12,7 +12,7 @@ module Pingan
     end
 
     def attributes
-      { succeed: succeed, message: message }
+      { succeed: succeed.to_s, message: message }
     end
   end
 end

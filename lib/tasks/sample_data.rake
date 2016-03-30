@@ -11,14 +11,14 @@ namespace :lnhc do
 
   desc "Reset the base after changes in migration"
   task :load_sample => :environment do
-    File.delete("db/schema.rb") if File.exist?("db/schema.rb")
-    Rake::Task['db:drop'].invoke
-    Rake::Task['db:create'].invoke
-    Rake::Task['db:migrate'].invoke
+    Rake::Task['db:reset'].invoke
     puts "start seed load"
     Rake::Task['db:seed'].invoke
     puts "start load sample"
     load File.join(Rails.root,'db',"samples.rb")
+
+    Rake::Task['lnhc:create_pingan_api'].invoke
+
 
   end
   #task :reload => :environment do

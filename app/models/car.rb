@@ -12,6 +12,7 @@ class Car < ActiveRecord::Base
 
   has_one :accident, :dependent => :destroy
   has_many :car_files, :dependent => :destroy
+  has_one :auction, :dependent => :destroy
 
   has_many :car_license_images, :class_name =>'CarLicenseImage'
   has_many :car_frame_images, :class_name =>'CarFrameImage'
@@ -19,7 +20,6 @@ class Car < ActiveRecord::Base
   has_many :car_docs,  :class_name =>'CarDoc'
   has_many :attachment_files, :class_name =>'CarFile'
 
-  has_one :auction, :dependent => :destroy
   belongs_to :model, :class_name=>'CarModel'
   accepts_nested_attributes_for :accident, :auction
 
