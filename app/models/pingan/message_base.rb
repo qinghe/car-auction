@@ -35,7 +35,7 @@ module Pingan
     end
 
 
-    def format_date_time( datatime )
+    def format_date_time( datetime )
       datetime.to_s(:db)
     end
 
