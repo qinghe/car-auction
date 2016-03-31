@@ -13,11 +13,11 @@ module Pingan
       #'sendCarInquireInfo','sendHighestBiddingInfo','receiveAuction', 'multiInquireFeedback', 'receiveAuctionCheck', 'receiveTransferInfoCheck'
       message_parser = case task_name
         when 'sendCarInquireInfo'
-          CarMessageParser.new( message )
+          CarInquireInfoParser.new( message )
         when 'sendHighestBiddingInfo'
-          BiddingMessageParser.new( message )
+          BiddingInfoParser.new( message )
         when 'receiveAuction'
-          TrustMessageParser.new( message )
+          EntrustedMessageParser.new( message )
         when 'multiInquireFeedback'
           MultiInquireFeedbackHandler.new( message )
         when 'receiveAuctionCheck'
@@ -27,12 +27,18 @@ module Pingan
         end
 
         result = message_parser.perform
-
+        touch_history!( message_parser,  result )
+        result
     end
 
-
-    def xpath
-      "//TRAN_CODE"
+    def self.touch_history!( message,  result )
+Rails.logger.debug " message = #{message} result=#{result.inspect}"
+      action_history = ActionHistory.new
+      action_history.auction_id = message.task_auction.id
+      action_history.api_name = message.class.name
+      action_history.api_params = message.to_json
+      action_history.api_result = result.to_json
+      action_history.save!
     end
 
   end

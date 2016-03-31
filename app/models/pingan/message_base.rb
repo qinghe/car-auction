@@ -4,10 +4,10 @@ module Pingan
     class_attribute :api_path, :required_fields
     self.required_fields = []
 
-    attr_accessor :auction, :partnerAccount
+    attr_accessor :task_auction, :partnerAccount
 
     def initialize( auction )
-      self.auction = auction
+      self.task_auction = auction
       self.partnerAccount = Rails.configuration.x.pingan['partner_account']
     end
 
@@ -45,19 +45,19 @@ module Pingan
     #    "data":"{ "succeed":"false","message":"入参有为空的情况，请检查。" }
     #  }
     def touch_auction!( result )
-      auction.last_api_name = self.class.name
-      auction.last_api_succeed = result['data']['succeed']
-      auction.last_api_message = result['data']['message']
-      auction.save!
+      task_auction.last_api_name = self.class.name
+      task_auction.last_api_succeed = result['data']['succeed']
+      task_auction.last_api_message = result['data']['message']
+      task_auction.save!
     end
 
     def touch_history!( message,  result )
 #Rails.logger.debug " message = #{message} result=#{result.inspect}"
       action_history = ActionHistory.new
-      action_history.auction_id = message.auction.id
+      action_history.auction_id = message.task_auction.id
       action_history.api_name = message.class.api_path
       action_history.api_params = message.to_json
-      action_history.api_result = result.to_s
+      action_history.api_result = result.to_json
       action_history.save!
     end
 

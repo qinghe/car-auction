@@ -16,6 +16,7 @@
 
 @auction = @car.auction
 %>
+<% if @car.delegated? %>
 
   <div id="auction_feedback_dialog" title="拍卖结果">
     <%= form_for(@car, :url => feedback_auction_case_car_path(@car),:html=>{:id=>'auction_feedback_form'}, :remote=>true ) do |car_form| %>
@@ -88,4 +89,5 @@
             $( "#auction_feedback_dialog" ).dialog( "open" );
           });
       });
+  <%end %>
 <%end %>

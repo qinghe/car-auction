@@ -1,6 +1,6 @@
 module Pingan
   class EntrustedMessageParser < MessageParser
-    EntrustingEnum = Struct.new( :yes, :no, :inquire, :unknown)[ '1', '2', '3', '0']
+    EntrustingEnum = Struct.new( :yes, :no, :inquire_again, :unknown)[ '1', '2', '3', '0']
     #{
     #    "partnerAccount":"",
     #    "taskAuctionNo":"",

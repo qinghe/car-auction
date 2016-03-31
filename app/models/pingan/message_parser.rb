@@ -1,5 +1,6 @@
 module Pingan
   class MessageParser
+    class_attribute :api_path
 
     attr_accessor :data
 
@@ -40,7 +41,7 @@ module Pingan
     end
 
     def task_auction
-      @task_auction||=Auction.where( serial_no: task_auction_no ).first
+      @task_auction||=Auction.where( serial_no: task_auction_no ).last
     end
 
     def to_hash
@@ -53,10 +54,10 @@ module Pingan
 #    end
 
     def touch_history!( message,  result )
-Rails.logger.debug " message = #{message} result=#{result.inspect}"
+Rails.logger.debug " message = #{message} result=#{result.inspect}, #{ message.api_path}"
       action_history = ActionHistory.new
       action_history.auction_id = message.task_auction.id
-      action_history.api_name = message.class.name
+      action_history.api_name = message.api_path
       action_history.api_params = message.to_json
       action_history.api_result = result.to_json
       action_history.save!

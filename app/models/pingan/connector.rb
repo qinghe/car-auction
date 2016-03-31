@@ -32,7 +32,8 @@ module Pingan
         if user.access_token.present?
           token = OAuth2::AccessToken.from_hash(get_client, access_token: user.access_token, refresh_token: user.access_token, expires_at: user.token_expires_at )
           if  token.expired?
-            token = token.refresh!
+            token = generate_token
+            #token = token.refresh!
             user.access_token = token.token
             user.token_expires_at = Time.zone.at( token.expires_at )
             user.token_expires_in = token.expires_in
