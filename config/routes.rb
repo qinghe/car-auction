@@ -174,7 +174,7 @@ Inz::Application.routes.draw do
   #  end
   #end
 
-  get 'case/cars/list/:process_method', :to => 'case/cars#list', :as=>:case_car_list
+  get 'case/cars/list/:status', :to => 'case/cars#list', :as=>:list_case_cars_by_status
   get 'case/cars/search', :to => 'case/cars#search'
   get 'case/cars/show_pickup_car', :to => 'case/cars#show_pickup_car'
   get 'case', :to => 'case/cars#welcome'
@@ -199,6 +199,7 @@ Inz::Application.routes.draw do
         patch :new_auction
         patch :feedback_auction
         patch :confirm_auction
+        patch :quoted_price
         post :upload_doc
       end
     end

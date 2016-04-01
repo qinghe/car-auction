@@ -1,4 +1,4 @@
-<div class="center_title">事故车-<%= Car::CARPROCESS[@process_method.to_s] %>列表</div>
+<div class="center_title">事故车-<%= Car::CARPROCESS[@status.to_s] %>列表</div>
 <div id="car_list_search">
     <%= form_tag( "/case/cars/search" ) do  %>
         <% if current_user.administrator? or current_user.evaluator? %>
@@ -10,7 +10,7 @@
         <%= text_field_tag(:serial_no) %>
         <%= label_tag(:model_title, "车型：") %>
         <%= text_field_tag(:model_title) %>
-        <%= hidden_field_tag(:process_method, @process_method) %>
+        <%= hidden_field_tag(:status, @status) %>
         <%= submit_tag("搜索") %>
     <%end%>
 </div>
@@ -24,7 +24,7 @@
         <td class="table_title" > 发布机构</td>
         <td class="table_title" > 保险公司负责人</td>
         <td class="table_title" > 华宸负责人</td>
-        <% if @process_method == "2" %><td class="table_title" > 处理状态</td><%end%>
+        <% if @status == "2" %><td class="table_title" > 处理状态</td><%end%>
         <td class="table_title" > 发生时效</td>
         <td class="table_title" > 选项</td>
       </tr>
@@ -35,7 +35,7 @@
             <td> <%= car.publisher.company.name if car.publisher %></td>
             <td> <%= car.publisher.name  if car.publisher %></td>
             <td> <%= car.evaluator.name  if car.evaluator %></td>
-            <% if @process_method == "2" %><td> <%= car.status %></td><%end%>
+            <% if @status == "2" %><td> <%= car.status %></td><%end%>
             <td> <%= car.limitation %></td>
             <td> <%=link_to '详情', case_car_url(car) %>
               |

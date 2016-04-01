@@ -1,0 +1,56 @@
+<% @auction = @car.auction %>
+
+<% if @car.delegated? %>
+
+  <div id="quoted_price_again_dialog" title="申请二次报价">
+    <%= form_for(@car, :url => quoted_price_case_car_path(@car),:html=>{:id=>'quoted_price_again_form'}, :remote=>true ) do |car_form| %>
+      <table class='car_accident'>
+        <%= car_form.fields_for :auction, @auction do |auction_form| %>
+          <tr class="aution_info">
+            <td colspan="6" class="table_title">申请二次报价</td>
+          </tr>
+          <tr class="aution_info">
+            <td>车辆编号</td>
+            <td><%= @car.serial_no%></td>
+            <td>车辆名称</td>
+            <td><%= @car.model_title %></td>
+            <td>上次报价</td>
+            <td><%= @car.canzhi_jiazhi %></td>
+          </tr>
+
+          <tr class="aution_info">
+            <td>申请原因</td>
+            <td colspan="5"><%= auction_form.text_area :apply_reason, rows: 3, style: 'width: 100%;height:auto;' %></td>
+
+          </tr>
+
+
+      </table>
+    <% end %>
+  </div>
+
+  <%= javascript_tag do %>
+    $(function() {
+      $( "#quoted_price_again_dialog" ).dialog({
+        autoOpen: false,
+        width:800,
+        modal: true,
+        buttons: {
+          "保存": function() {
+             $( "#quoted_price_again_form" ).submit();
+          },
+          "取消": function() {
+            $( this ).dialog( "close" );
+          }
+        },
+        close: function() {
+        }
+      });
+    $( "#quoted_price_again_button" )
+        .click(function() {
+          $( "#quoted_price_again_dialog" ).dialog( "open" );
+        });
+    });
+  <%end %>
+
+<% end %>

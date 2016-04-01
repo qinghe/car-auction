@@ -167,7 +167,7 @@ class Admin::CarsController < Case::CarsController
 
   def abandon
     @car.update_attributes( permitted_resource_params )
-    @return_to_path = case_car_list_path(@car.status)
+    @return_to_path = list_case_car_by_status_path(@car.status)
     @car.abandon_on_auction!
     respond_to do |format|
       format.js { render "abandoned"}
@@ -176,7 +176,7 @@ class Admin::CarsController < Case::CarsController
 
   def abandon2
     @car.update_attributes(  permitted_resource_params )
-    @return_to_path = case_car_list_path(@car.status)
+    @return_to_path = list_case_car_by_status_path(@car.status)
     @car.abandon_on_pick!
     respond_to do |format|
       format.js { render "abandoned2"}
@@ -185,7 +185,7 @@ class Admin::CarsController < Case::CarsController
 
   def abandon3
     @car.update_attributes(  permitted_resource_params )
-    @return_to_path = case_car_list_path(@car.status)
+    @return_to_path = list_case_car_by_status_path(@car.status)
     @car.abandon_on_transfer!
     respond_to do |format|
       format.js { render "abandoned3"}

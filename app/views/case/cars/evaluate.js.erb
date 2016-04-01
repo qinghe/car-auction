@@ -1,4 +1,5 @@
 $( "#evaluate_dialog" ).dialog( "close" );
 
-$('#evaluated_info').replaceWith(<%== (render :partial=>"evaluated_info.html.erb").to_json%>);
-$('#pingan_api_result').replaceWith(<%== (render :partial=>"pingan_api_result.html.erb").to_json%>);
+//$('#evaluated_info').replaceWith(<%== (render :partial=>"evaluated_info.html.erb").to_json%>);
+//$('#pingan_api_result').replaceWith(<%== (render :partial=>"pingan_api_result.html.erb").to_json%>);
+window.location.href = <%=raw case_car_path.to_json%>;

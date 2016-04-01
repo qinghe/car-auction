@@ -26,9 +26,9 @@ class Car < ActiveRecord::Base
   #DISPLACEMENTS={'','1.2'=>12,'1.5'=>15,'1.6'=>16,'2.4'=>24} #排量
   VARIATORS={'MT'=>0,'AT'=>1,'A/MT'=>2, 'CVT'=>3}
 
-  CARPROCESS = {'0'=>"待评估车辆",'1'=>"待处理车辆",'2'=>"委托车辆",'3'=>"待提车辆",'4'=>"过户车辆",'5'=>"放弃委托拍卖",'6'=>"放弃提车",'7'=>"放弃过户"}
+  CARPROCESS = {'0'=>"待评估车辆",'1'=>"待处理车辆",'2'=>"委托车辆",'3'=>"待提车辆",'4'=>"过户车辆",'5'=>"放弃委托拍卖",'6'=>"放弃提车",'7'=>"放弃过户", '10'=>'拍卖车辆'}
 
-  enum status: { wait_for_evaluate: 0, evaluated: 1, delegated: 2, wait_for_pick: 3, transferred: 4, abandon_on_auction: 5, abandon_on_pick: 6, abandon_on_transfer: 7 }
+  enum status: { wait_for_evaluate: 0, evaluated: 1, delegated: 2, auctioning: 10, wait_for_pick: 3, transferred: 4, abandon_on_auction: 5, abandon_on_pick: 6, abandon_on_transfer: 7 }
 
   PAYMETHOD = {'0'=>"保险公司",'1'=>"车主"}
 

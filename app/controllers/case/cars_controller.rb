@@ -1,5 +1,5 @@
 class Case::CarsController < Case::ApplicationController
-  prepend_before_filter :get_data, :only=>[:edit, :show,:evaluate,:sendback,:new_auction,:feedback_auction, :confirm_auction, :abandon,:pickup, :abandon2, :abandon3, :transfer, :delete_car_file, :confirm_transfer]
+  prepend_before_filter :get_data, :only=>[:edit, :show,:evaluate,:sendback,:new_auction, :quoted_price, :feedback_auction, :confirm_auction, :abandon,:pickup, :abandon2, :abandon3, :transfer, :delete_car_file, :confirm_transfer]
 
   def welcome
     respond_to do |format|
@@ -10,8 +10,8 @@ class Case::CarsController < Case::ApplicationController
   # GET /cars
   # GET /cars.json
   def index
-    @process_method = params[:process_method].to_i
-    @cars = Car.list_by(@process_method, current_user).includes(:model).order('created_at DESC')
+    @status = params[:status].to_i
+    @cars = Car.list_by(@status, current_user).includes(:model).order('created_at DESC')
     respond_to do |format|
       format.html { render :list}
       format.json { render json: @cars }
@@ -101,6 +101,21 @@ class Case::CarsController < Case::ApplicationController
     end
   end
 
+  # 申请二次报价
+  def quoted_price
+    @car.update_attributes( permitted_params )
+
+    if @car.publisher_pingan_pusher?
+      Pingan::QuotedPriceAgainMessage.new( @car.auction ).post
+    end
+
+    respond_to do |format|
+      format.js {
+        render "auction_saved"
+      }
+    end
+  end
+
   def feedback_auction
     @car.update_attributes( permitted_params )
 
@@ -117,6 +132,7 @@ class Case::CarsController < Case::ApplicationController
 
   def confirm_auction
     @car.update_attributes( permitted_params )
+    @car.auctioning!
     respond_to do |format|
       format.js {
         render "auction_saved"
@@ -126,7 +142,7 @@ class Case::CarsController < Case::ApplicationController
 
   def abandon
     @car.update_attributes( permitted_params )
-    @return_to_path = case_car_list_path(@car.status)
+    @return_to_path = list_case_car_by_status_path(@car.status)
     @car.abandon_on_auction!
     respond_to do |format|
       format.js { render "abandoned"}
@@ -143,7 +159,7 @@ class Case::CarsController < Case::ApplicationController
   end
   def abandon2
     @car.update_attributes( permitted_params )
-    @return_to_path = case_car_list_path(@car.status)
+    @return_to_path = list_case_car_by_status_path(@car.status)
     @car.abandon_on_pick!
     respond_to do |format|
       format.js { render "abandoned2"}
@@ -152,7 +168,7 @@ class Case::CarsController < Case::ApplicationController
 
   def abandon3
     @car.update_attributes( permitted_params )
-    @return_to_path = case_car_list_path(@car.status)
+    @return_to_path = list_case_car_by_status_path(@car.status)
     @car.abandon_on_transfer!
     respond_to do |format|
       format.js { render "abandoned3"}
@@ -203,8 +219,8 @@ class Case::CarsController < Case::ApplicationController
   end
 
   def list
-    @process_method = params[:process_method].to_i
-    @cars = Car.list_by(@process_method, current_user).includes(:model).order('created_at DESC')
+    @status = params[:status].to_i
+    @cars = Car.list_by(@status, current_user).includes(:model).order('created_at DESC')
   end
 
   # GET /cars/1/edit
@@ -248,7 +264,7 @@ class Case::CarsController < Case::ApplicationController
     @car.destroy
 
     respond_to do |format|
-      format.html { redirect_to case_car_list_path(@car.status) }
+      format.html { redirect_to list_case_car_by_status_path(@car.status) }
       format.json { head :no_content }
     end
   end
