@@ -1,6 +1,6 @@
 {
     "partnerAccount":"",
-    "taskAuctionNo":"",
+    "taskAuctionNo":"taskAuctionNo",
     "transferResult":"1",
     "transferOpinion":""
 }

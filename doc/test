@@ -5,3 +5,5 @@ curl -H "Content-Type: application/json" -X POST  --data @spec/fixtures/pingan/b
 curl -H "Content-Type: application/json" -X POST  --data @spec/fixtures/pingan/entrust.json  http://localhost:3000/InsCarQuo/PingAn/receiveAuction
 
 curl -H "Content-Type: application/json" -X POST  --data @spec/fixtures/pingan/auction_result_check.json  http://localhost:3000/InsCarQuo/PingAn/receiveAuctionCheck
+
+curl -H "Content-Type: application/json" -X POST  --data @spec/fixtures/pingan/transfer_info_check.json  http://localhost:3000/InsCarQuo/PingAn/receiveTransferInfoCheck
