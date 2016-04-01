@@ -4,7 +4,7 @@ describe Pingan::BiddingInfoParser do
   let!( :auction ) { create( :auction, serial_no: serial_no  ) }
 
   let( :serial_no) { "test-#{Time.now.to_i}" }
-  let( :huachen) {  Pingan::Connector.client_name  }
+  let( :huachen) {  Rails.configuration.x.pingan['client_name']  }
   let( :json ){  File.read(File.expand_path('../../fixtures/pingan/bidding.json', __FILE__)) }
 
 
