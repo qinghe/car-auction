@@ -142,7 +142,7 @@ class Case::CarsController < Case::ApplicationController
 
   def abandon
     @car.update_attributes( permitted_params )
-    @return_to_path = list_case_car_by_status_path(@car.status)
+    @return_to_path = list_case_cars_by_status_path( Car.statuses[@car.status] )
     @car.abandon_on_auction!
     respond_to do |format|
       format.js { render "abandoned"}
@@ -159,7 +159,7 @@ class Case::CarsController < Case::ApplicationController
   end
   def abandon2
     @car.update_attributes( permitted_params )
-    @return_to_path = list_case_car_by_status_path(@car.status)
+    @return_to_path = list_case_cars_by_status_path( Car.statuses[@car.status] )
     @car.abandon_on_pick!
     respond_to do |format|
       format.js { render "abandoned2"}
@@ -168,7 +168,7 @@ class Case::CarsController < Case::ApplicationController
 
   def abandon3
     @car.update_attributes( permitted_params )
-    @return_to_path = list_case_car_by_status_path(@car.status)
+    @return_to_path = list_case_cars_by_status_path( Car.statuses[@car.status] )
     @car.abandon_on_transfer!
     respond_to do |format|
       format.js { render "abandoned3"}
@@ -264,7 +264,7 @@ class Case::CarsController < Case::ApplicationController
     @car.destroy
 
     respond_to do |format|
-      format.html { redirect_to list_case_car_by_status_path(@car.status) }
+      format.html { redirect_to list_case_cars_by_status_path( Car.statuses[@car.status]) }
       format.json { head :no_content }
     end
   end
