@@ -268,7 +268,7 @@ class Case::CarsController < Case::ApplicationController
   end
 
 
-  def raise_action_not_found
+  def raise_error
       raise ActionController::InvalidAuthenticityToken.new()
   end
 

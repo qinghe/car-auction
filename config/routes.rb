@@ -188,7 +188,7 @@ Inz::Application.routes.draw do
       delete :delete_file, :on => :collection #delete file have not assigned to car
       get :new_car_accident, :on => :collection
       get :welcome, :on => :collection
-      get :raise_action_not_found, :on => :collection
+      get :raise_error, :on => :collection
       member do
         patch :evaluate
         patch :abandon
