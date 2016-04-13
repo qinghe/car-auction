@@ -45,7 +45,9 @@ class ChangeForPingan < ActiveRecord::Migration
 
     add_column :cars, :gear_name, :string #cars.variator int
     add_column :cars, :survey_user, :string #cars.variator int
-    add_column :cars, :url, :string #car photoes, comma seperated.
+    #http://stackoverflow.com/questions/13506832/what-is-the-mysql-varchar-max-size
+    #max is 21845 for whole row
+    add_column :cars, :url, :string, length: 12000 #car photoes, comma seperated.
 
     add_column :accidents, :other_fee, :float, :default=>0
     rename_column :cars, :model_name, :model_title

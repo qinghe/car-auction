@@ -58,8 +58,8 @@ module Pingan
       self.startTime =  auction.start_at
       self.endTime =  auction.expired_at
       self.auctionType = auction.type_name
-      self.isPass =  auction.is_pass
-      self.passTimes =  auction.pass_times
+      self.isPass =  auction.is_pass || 'Y'
+      self.passTimes =  auction.pass_times || '0'
       self.commissionedTime = auction.commissioned_time
       self.transferComplete =  auction.transfer_complete
       self.transferRequestTime =  auction.transfer_request_time
