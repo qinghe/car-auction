@@ -56,12 +56,12 @@ Inz::Application.configure do
   # add smtp_settings as default options
   config.action_mailer.smtp_settings = {
     address:              'smtp.getstore.cn',
-    port:                 25,
+    port:                  25,
     user_name:            'notice@getstore.cn',
     password:              ENV['NOTICE_AT_GETSTORE'],
     authentication:       'login',
-    openssl_verify_mode: 'none',
-    enable_starttls_auto: false
+    openssl_verify_mode:  'none',
+    enable_starttls_auto:  false
   }
   config.middleware.use ExceptionNotification::Rack,
     :email => {
