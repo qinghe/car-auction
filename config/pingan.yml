@@ -13,6 +13,6 @@ test:
 production:
   client_id: 'P_DLHC_CLAIM'
   client_name:  '大连华宸'
-  client_secret:  'uFF3T6a4'
+  client_secret:  'acn385tr' #'uFF3T6a4' 
   partner_account: '610000010201'
   site: 'https://test-api.pingan.com.cn:20443'
