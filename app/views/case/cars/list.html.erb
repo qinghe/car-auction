@@ -1,6 +1,6 @@
 <div class="center_title">事故车-<%= Car::CARPROCESS[@status.to_s] %>列表</div>
 <div id="car_list_search">
-    <%= form_tag( "/case/cars/search" ) do  %>
+    <%= form_tag  case_cars_search_path, method: :get do  %>
         <% if current_user.administrator? or current_user.evaluator? %>
             <% insurance_companies_array = Company.insurance_companies.map { |company| [company.name, company.id] } %>
             <%= select_tag(:insurance_id, options_for_select([["全部保险公司",0]]+insurance_companies_array)) %>
@@ -8,8 +8,6 @@
 
         <%= label_tag(:serial_no, "流水号：") %>
         <%= text_field_tag(:serial_no) %>
-        <%= label_tag(:model_title, "车型：") %>
-        <%= text_field_tag(:model_title) %>
         <%= hidden_field_tag(:status, @status) %>
         <%= submit_tag("搜索") %>
     <%end%>

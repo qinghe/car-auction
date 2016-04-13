@@ -205,14 +205,11 @@ class Admin::CarsController < Case::CarsController
     model_title = params[:model_title]
 
     condition =""
-    if serial_no != ""
+    if serial_no.present?
       condition<< " and " unless condition.empty?
       condition<< "cars.serial_no='#{serial_no}'"
     end
-    if model_title != ""
-      condition<< " and " unless condition.empty?
-      condition<< "(car_models.name like '%#{model_title}%' or cars.model_title like '%#{model_title}%')"
-    end
+
     @cars = Car.includes(:publisher,:model).where(condition).all
     render 'admin/cars/index'
   end

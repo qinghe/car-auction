@@ -30,4 +30,18 @@ Inz::Application.configure do
   #config.assets.paths << 'public'
   config.eager_load = false
 
+  config.action_mailer.delivery_method = :sendmail
+  # Defaults to:
+  # config.action_mailer.sendmail_settings = {
+  #   :location => '/usr/sbin/sendmail',
+  #   :arguments => '-i -t'
+  # }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[DLHCException] ",
+      :exception_recipients => %w{exception@example.com}
+    }
 end

@@ -203,18 +203,16 @@ class Case::CarsController < Case::ApplicationController
     insurance_id = params[:insurance_id]
     serial_no = params[:serial_no]
     model_title = params[:model_title]
+    base_scope = Car.includes(:publisher,:model).where( publisher_id: current_user.id )
 
-    condition ="cars.publisher_id=#{current_user.id}"
     if insurance_id.to_i > 0
-      condition+=" and users.company_id=#{insurance_id}"
+      base_scope.where users: { company_id: insurance_id }
     end
-    if serial_no != ""
-      condition+=" and cars.serial_no='#{serial_no}'"
+    if serial_no.present?
+      base_scope.where serial_no: serial_no
     end
-    if model_title != ""
-      condition+=" and (car_models.name like '%#{model_title}%' or cars.model_title like '%#{model_title}%')"
-    end
-    @cars = Car.includes(:publisher,:model).where(condition).all
+
+    @cars = base_scope
     render 'case/cars/list'
   end
 
@@ -267,6 +265,11 @@ class Case::CarsController < Case::ApplicationController
       format.html { redirect_to list_case_cars_by_status_path( Car.statuses[@car.status]) }
       format.json { head :no_content }
     end
+  end
+
+
+  def raise_action_not_found
+      raise ActionController::InvalidAuthenticityToken.new()
   end
 
   private

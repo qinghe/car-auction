@@ -25,6 +25,7 @@ gem 'china_sms',   :path => './china_sms'
 gem 'oauth2'
 gem 'sass-rails', '>= 3.2'
 #gem 'bootstrap-sass', '~> 3.2.0'
+gem 'exception_notification'
 
 
 group :development do
