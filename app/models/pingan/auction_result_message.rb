@@ -3,7 +3,7 @@ module Pingan
     self.required_fields = [ :partnerAccount, :taskAuctionNo, :announcementStartTime,:announcementEndTime,
       :auctionLocation, :startTime, :endTime, :auctionType, :isPass, :passTimes,
       :commissionedTime, :transferComplete, :transferRequestTime, :transferRealTime,
-      :finalPrice, :bidTimes, :bidList ]
+      :finalPrice, :bidTimes, :isApplyInquire, :bidList ]
 
     #ANNOUNCEMENT_TIME    拍卖公示时间      auction.public_start_at
     #AUCTION_LOCATION     拍卖地点       N  auction.location
@@ -25,7 +25,7 @@ module Pingan
     attr_accessor :taskAuctionNo, :announcementStartTime,:announcementEndTime,
       :auctionLocation, :startTime, :endTime, :auctionType, :isPass, :passTimes,
       :commissionedTime, :transferComplete, :transferRequestTime, :transferRealTime,
-      :finalPrice, :bidTimes, :bidList
+      :finalPrice, :bidTimes, :isApplyInquire, :bidList
     #{
     #    "partnerAccount":"",
     #    "taskAuctionNo":"",
@@ -66,8 +66,9 @@ module Pingan
       self.transferRealTime =   auction.transfer_real_time
       self.finalPrice = auction.bidding_price
       self.bidTimes = auction.offers.count
+      self.isApplyInquire = false
       self.bidList = auction.offers.map{|offer|
-        { bidTime: offer.created_at, bidUser: offer.offerer.name, bidPrice: offer.price }
+        { bidTime: format_date_time(offer.created_at), bidUser: offer.offerer.name, bidPrice: offer.price }
       }
       super
     end

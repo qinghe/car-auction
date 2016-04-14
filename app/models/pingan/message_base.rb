@@ -31,9 +31,23 @@ module Pingan
 
 
     def to_hash
-      instance_values.symbolize_keys().slice( *self.required_fields )
+      instance_values.symbolize_keys().slice( *self.required_fields ).transform_values{|val|
+        case val
+        when Time
+          format_date_time( val )
+        when TrueClass,FalseClass
+          format_boolean( val )
+        else
+          val
+        end
+      }
+
+
     end
 
+    def format_boolean( val )
+      val ? 'Y' : 'N'
+    end
 
     def format_date_time( datetime )
       datetime.to_s(:db)

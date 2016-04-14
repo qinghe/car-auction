@@ -54,7 +54,7 @@
 
           <tr class="aution_info">
             <td>是否完成过户 </td>
-            <td><%= auction_form.select :transfer_complete, [['否',0],['是',1]], selected: 0 %></td>
+            <td><%= auction_form.select :transfer_complete, [['否','N'],['是','Y']], selected: 'N' %></td>
             <td>要求过户时间</td>
             <td><%= auction_form.date_select :transfer_request_time %></td>
             <td>实际过户时间</td>
