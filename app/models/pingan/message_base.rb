@@ -38,7 +38,7 @@ module Pingan
         when TrueClass,FalseClass
           format_boolean( val )
         else
-          val
+          val.to_s
         end
       }
 

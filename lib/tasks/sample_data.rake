@@ -11,7 +11,7 @@ namespace :lnhc do
 
   desc "Reset the base after changes in migration"
   task :load_sample => :environment do
-    Rake::Task['db:reset'].invoke
+    Rake::Task['db:migrate:reset'].invoke
     puts "start seed load"
     Rake::Task['db:seed'].invoke
     puts "start load sample"

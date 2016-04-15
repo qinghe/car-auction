@@ -7,7 +7,7 @@ include ReCaptcha::ViewHelper #wazne dla recaptcha
     t = (time_new_line)? '<br />' : ''
     date.strftime('%Y-%m-%d' + t + ' %H:%M')
   end
-  
+
   def escape_date(date = DateTime.now)
     date = date.strftime('%Y-%m-%d')
   end
@@ -25,33 +25,33 @@ include ReCaptcha::ViewHelper #wazne dla recaptcha
     status = 'open'
     status = 'opened' if model.opened?
     status = 'closed' if model.closed?
-    
+
     t("#{model.class.name.downcase}.statuses.#{status.to_s}")
   end
-	
+
 	#Metoda tlumaczy zawartosc kolumny w modelu
   def escape_column(model, column)
     t("#{model.class.name.downcase}.#{column}.#{model.send(column)}")
   end
-  
+
   #Metoda tlumaczy nazwe modelu
   def model_t(model = nil)
     translation = t("activerecord.models.#{model}")
-    return translation unless model.nil?    
+    return translation unless model.nil?
   end
-  
+
   #Metoda tlumaczy atrybut modelu
   def attribute_t(attribute = nil)
     translation = t("activerecord.attributes.#{attribute}")
     return translation unless attribute.nil?
   end
-  
+
   def attribute_value_t(model, column_name, column_type)
     if column_type == :boolean
       model.try(column_name).present? ? "有":"没有"
     end
   end
-    
+
   #konwetuje rozmiar pliku w bajtach
   def escape_file_size(size = 1)
   	case size
@@ -75,7 +75,7 @@ include ReCaptcha::ViewHelper #wazne dla recaptcha
     end
     options_for_select(options, model.status)
   end
-  
+
   #Metoda tworzy pola wyboru dla dostepnych rol
   def roles_for_select(model)
   	options = []
@@ -86,7 +86,7 @@ include ReCaptcha::ViewHelper #wazne dla recaptcha
   	end
   	options_for_select(options, model.send('id'))
   end
-  
+
   def flash_t(type=nil)
     params = request.parameters.clone
     params["controller"]["/"] = "." if params["controller"].include?("/")
@@ -94,7 +94,7 @@ include ReCaptcha::ViewHelper #wazne dla recaptcha
     text = "<div class=\"#{type}\">#{translation}</div>"
     return text unless type.nil?
   end
-    
+
   #Dodaje link w postaci buttona, domyslnie nazwa: test, url: '#'
   def button(name = 'test', url = '#')
   	content_tag(:button,
@@ -120,8 +120,18 @@ include ReCaptcha::ViewHelper #wazne dla recaptcha
     end
   end
   def car_image_tag(car, size=:thumb)
-    image = car.car_images.first
-    if image.present?
+    #get image from url for pingan
+    if car.url.present?
+      image = car.pingan_image_urls.first
+      if size==:thumb
+        image_tag(image, width: '90')
+      elsif size==:medium
+        image_tag(image, width: '480')
+      else
+        image_tag(image, class: 'watermark')
+      end
+    elsif car.car_images.present?
+      image = car.car_images.first
       if size==:thumb
         image_tag(image.uploaded.url(size), :alt=>image.name)
       else

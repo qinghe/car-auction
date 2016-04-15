@@ -30,24 +30,24 @@ class ChangeForPingan < ActiveRecord::Migration
 #estimateLoss BigDecimal 否 定损金额      accident.zuizhong_peifu_jine 最终赔付金额?
 #remark String 否 备注                   accident.cheliang_beizhu
   def change
-    add_column :cars, :gearbox_status, :string
-    add_column :cars, :engine_status, :string
+    add_column :cars, :gearbox_status, :string, length: 12
+    add_column :cars, :engine_status, :string, length: 12
 
-    add_column :cars, :car_belong_kind_name, :string
-    add_column :cars, :has_scuttle, :string
+    add_column :cars, :car_belong_kind_name, :string, length: 12
+    add_column :cars, :has_scuttle, :string, length: 12
 
-    add_column :cars, :robbery_car, :string
-    add_column :cars, :complete_formalities, :string
+    add_column :cars, :robbery_car, :string, length: 12
+    add_column :cars, :complete_formalities, :string, length: 12
 
-    add_column :cars, :second_accident, :string
-    add_column :cars, :second_hand, :string
-    add_column :cars, :is_loan, :string
+    add_column :cars, :second_accident, :string, length: 12
+    add_column :cars, :second_hand, :string, length: 12
+    add_column :cars, :is_loan, :string, length: 12
 
-    add_column :cars, :gear_name, :string #cars.variator int
-    add_column :cars, :survey_user, :string #cars.variator int
+    add_column :cars, :gear_name, :string, length: 12 #cars.variator int
+    add_column :cars, :survey_user, :string , length: 24#cars.variator int
     #http://stackoverflow.com/questions/13506832/what-is-the-mysql-varchar-max-size
     #max is 21845 for whole row
-    add_column :cars, :url, :string, length: 12000 #car photoes, comma seperated.
+    add_column :cars, :url, :text #car photoes, comma seperated.
 
     add_column :accidents, :other_fee, :float, :default=>0
     rename_column :cars, :model_name, :model_title

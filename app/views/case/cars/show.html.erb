@@ -83,7 +83,10 @@
   <tr>
     <td colspan="6">
       <div id="car_frame_image_list">
-          <%= render :partial=>'car_file', :collection=>@car.car_frame_images%>
+        <%= render :partial=>'car_file', :collection=>@car.car_frame_images%>
+        <% if @car.url.present? %>
+          <%= render :partial=>'car_file_from_pingan', :collection=>@car.pingan_image_urls%>
+        <% end %>
       </div>
     </td>
   </tr>

@@ -39,9 +39,9 @@ class CreateCars < ActiveRecord::Migration
       t.date :registered_at               #登记日期
       t.integer :variator, :default=>0    #变速器
       t.string :displacement, :length=>24 #排量
-      t.string :plate_number              #车牌号
-      t.string :engine_number             #引擎号
-      t.string :frame_number              #车架号
+      t.string :plate_number, length: 128              #车牌号
+      t.string :engine_number, length: 128             #引擎号
+      t.string :frame_number, length: 128              #车架号
       t.integer :publisher_id
       t.integer :evaluator_id
       t.integer :status,:default=>0
@@ -53,8 +53,8 @@ class CreateCars < ActiveRecord::Migration
       t.float :ershou_jiazhi,:default=>0 #二手车价值
       t.float :bidding_price,:default=>0 #中标价格
       t.float :final_compensate_price,:default=>0 #最终赔付金额
-      t.string :owner_name
-      t.string :owner_phone
+      t.string :owner_name, length: 128
+      t.string :owner_phone, length: 128
       t.string :pickup_contact_person
       t.string :pickup_contact_phone
       t.integer :pay_method #车款支付方式

@@ -88,5 +88,7 @@ class Car < ActiveRecord::Base
     end
   end
 
-
+  def pingan_image_urls
+    self.url.present? ? self.url.split(',') : []
+  end
 end
