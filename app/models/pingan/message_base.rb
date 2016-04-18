@@ -46,6 +46,8 @@ module Pingan
         val.transform_values{|subval|
           cast_to_pingan_value( subval )
         }
+      when Array
+        val.map{|subval| cast_to_pingan_value( subval ) }
       else
         val.to_s
       end
