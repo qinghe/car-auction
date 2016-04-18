@@ -30,7 +30,7 @@ module Pingan
     end
 
 
-    def to_hash( obj )
+    def to_hash(  )
       instance_values.symbolize_keys().slice( *self.required_fields ).transform_values{|val|
         cast_to_pingan_value val
       }
