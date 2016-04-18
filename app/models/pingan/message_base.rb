@@ -30,19 +30,25 @@ module Pingan
     end
 
 
-    def to_hash
+    def to_hash( obj )
       instance_values.symbolize_keys().slice( *self.required_fields ).transform_values{|val|
-        case val
-        when Time
-          format_date_time( val )
-        when TrueClass,FalseClass
-          format_boolean( val )
-        else
-          val.to_s
-        end
+        cast_to_pingan_value val
       }
+    end
 
-
+    def cast_to_pingan_value( val )
+      case val
+      when Time
+        format_date_time( val )
+      when TrueClass,FalseClass
+        format_boolean( val )
+      when Hash
+        val.transform_values{|val|
+          cast_to_valid_value( val )
+        }
+      else
+        val.to_s
+      end
     end
 
     def format_boolean( val )

@@ -21,7 +21,9 @@ car = @car
           <td>残值价值 </td>  <td colspan="5"><%= f.text_field :canzhi_jiazhi,:class=>'text' %> 元*  </td>
         </tr>
         <tr>
-          <td>备注</td> <td colspan="5"><%= f.text_area :remark, class: '', rows: 3, style: 'height:auto;width:100%;' %> </td>
+          <td>备注</td> <td colspan="5"><%= f.text_area :remark, class: '', rows: 3, style: 'height:auto;width:100%;' %>
+             <span> 给平安报价时，不能为空</span>
+          </td>
         </tr>
     </table>
     <% end %>
