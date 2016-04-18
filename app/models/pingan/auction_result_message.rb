@@ -25,7 +25,7 @@ module Pingan
     attr_accessor :taskAuctionNo, :announcementStartTime,:announcementEndTime,
       :auctionLocation, :startTime, :endTime, :auctionType, :isPass, :passTimes,
       :commissionedTime, :transferComplete, :transferRequestTime, :transferRealTime,
-      :finalPrice, :bidTimes, :isApplyInquire, :bidList
+      :finalPrice, :bidTimes, :isApplyInquire, :biddersList
     #{
     #    "partnerAccount":"",
     #    "taskAuctionNo":"",
@@ -43,7 +43,7 @@ module Pingan
     #    "transferRealTime":"",
     #    "finalPrice":"",
     #    "bidTimes":"",
-    #    "bidList":[
+    #    "biddersList":[
     #        {
     #            "bidUser":"",
     #            "bidPrice":""
@@ -67,7 +67,7 @@ module Pingan
       self.finalPrice = auction.bidding_price
       self.bidTimes = auction.offers.count
       self.isApplyInquire = false
-      self.bidList = auction.offers.map{|offer|
+      self.biddersList = auction.offers.map{|offer|
         { bidTime: format_date_time(offer.created_at), bidUser: offer.offerer.name, bidPrice: offer.price }
       }
       super
