@@ -44,7 +44,7 @@ module Pingan
         format_boolean( val )
       when Hash
         val.transform_values{|val|
-          cast_to_valid_value( val )
+          cast_to_pingan_value( val )
         }
       else
         val.to_s
