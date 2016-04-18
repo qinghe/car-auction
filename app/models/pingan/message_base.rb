@@ -43,8 +43,8 @@ module Pingan
       when TrueClass,FalseClass
         format_boolean( val )
       when Hash
-        val.transform_values{|val|
-          cast_to_pingan_value( val )
+        val.transform_values{|subval|
+          cast_to_pingan_value( subval )
         }
       else
         val.to_s
