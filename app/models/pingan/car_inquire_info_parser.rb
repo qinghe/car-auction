@@ -103,12 +103,16 @@ module Pingan
         expected_expired_at:  attrs['inquireEndDate'],
         }
       result = BoolMessageWrapper.new( false )
-      car = AccidentCar.new( car_params )
-      car.build_accident( accident_params )
-      car.build_auction( auction_params )
-
-      car.publisher = User.pingan_pusher
-
+      car = Car.where( serial_no: attrs['taskAuctionNo']  ).first
+      if car.blank?
+        car = AccidentCar.new( car_params )
+        car.build_accident( accident_params )
+        car.build_auction( auction_params )
+        car.publisher = User.pingan_pusher
+      else
+        car.attributes = car_params
+        car.auction.attributes = auction_params
+      end
       result.succeed = car.save
       touch_history!( self,  result )
 
