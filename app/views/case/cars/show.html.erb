@@ -215,6 +215,7 @@
       <% elsif car.delegated? %>
         <button id="confirm_auction_button">开始拍卖</button>
       <% elsif car.auctioning? %>
+        <button id="confirm_auction_button">修改拍卖</button>
         <button id="auction_feedback_button">拍卖反馈</button>
         <button id="pickup_car_button">提车确认</button>
       <% elsif car.wait_for_pick? %>
