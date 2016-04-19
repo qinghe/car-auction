@@ -1,4 +1,4 @@
-<% if @car.delegated? %>
+<% if @car.delegated? || @car.auctioning? %>
 <% car = @car
    dialog_container_id = "confirm_auction_dialog"
    dialog_form_id = "confirm_auction_form"
