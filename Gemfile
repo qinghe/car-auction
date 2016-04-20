@@ -1,6 +1,6 @@
 source 'https://ruby.taobao.org'
-ruby '2.1.5'
-gem 'rails', '~> 4.2.4'
+ruby '2.2.4'
+gem 'rails', '~> 4.2.5'
 
 gem 'sqlite3'
 gem 'mysql2', '~> 0.3.20'

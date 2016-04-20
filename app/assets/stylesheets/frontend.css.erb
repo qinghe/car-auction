@@ -1,10 +1,12 @@
 /*
+*= require blueprint/screen
 *= require jquery-ui/dialog
+*= require custom
 */
 
 body
 {
-   background: #FFF url(<%= asset_path 'v1/bg.gif' %>) no-repeat top center; 
+   background: #FFF url(<%= asset_path 'v1/bg.gif' %>) no-repeat top center;
 }
 ul, li {
     list-style: none outside none;
@@ -45,7 +47,7 @@ h1.page-title{
 
 #topNav ul li a {
     color: #FFF;
-    margin:0; 
+    margin:0;
     padding:5px 10px;
     display:block;
 }
@@ -59,16 +61,16 @@ h1.page-title{
   #topNav a:hover, #topNav a:focus, #topNav a:active
   { background:#eeeeee;
     color:#014c2e;
-  } 
+  }
 
-#login a.signup 
+#login a.signup
 {
     color: #fff;
 }
 header {
   /*  background: url(<%= asset_path('v1/topshadow.png')%>) no-repeat center 0; */
-    
-} 
+
+}
 /* main nav */
 
 #mainNav {
@@ -123,23 +125,23 @@ header {
 #intro span.red{ color:red; }
 
 .basic-search-options {
-    background: #BF1F30;  
-    padding:10px 15px 10px 30px;  
+    background: #BF1F30;
+    padding:10px 15px 10px 30px;
 }
 
 
 .basic-search-options .filter {
-   background: #BF1F30;    
+   background: #BF1F30;
    border: 0;
    float:left;
    margin-right: 15px;
    padding-right: 15px;
 }
 
-.basic-search-options .search-for { 
+.basic-search-options .search-for {
   border-right: 1px solid #FFFFFF;
 }
-.basic-search-options .btn { 
+.basic-search-options .btn {
   text-align:bottom;
 }
 .basic-search-options .btn input
@@ -154,7 +156,7 @@ header {
 }
 
 #slider{
-    
+
 }
 #slider ul{
     margin:0;
@@ -187,7 +189,7 @@ table.auction-list, table.car-list, table.car-detail{
   border-color:#DCDCD8;
   border-left: 1px solid #DCDCD8;
   border-right: 1px solid #DCDCD8;
-  border-bottom: 1px solid #DCDCD8;  
+  border-bottom: 1px solid #DCDCD8;
 }
 .carimage-list
 {
@@ -198,7 +200,7 @@ table.auction-list th, table.car-list th{
 }
 table.auction-list td, table.car-list td{
   background-color:#FFFFFF;
-  border-bottom: 1px solid #DCDCD8;  
+  border-bottom: 1px solid #DCDCD8;
 }
 /* auction detail */
 table.car-detail th{
@@ -206,14 +208,14 @@ table.car-detail th{
 
 .user_menu
 {
-  
+
 }
 .user_menu dt
 {
   background: none repeat scroll 0 0 #BF1F30;
   color:#FFFFFF;
   padding:5px 15px;
-  font-size: larger;  
+  font-size: larger;
 }
 dl.user_menu
 {
@@ -223,7 +225,7 @@ dl.user_menu dd
 {
   padding:10px 10px 6px 0;
   border-bottom: 1px dotted #58595B;
-  margin: 0 1.5em;  
+  margin: 0 1.5em;
 }
 dl.user_menu dd.last
 {
@@ -235,7 +237,7 @@ dl.user_menu dd a
 }
 div.user_info
 {  border-left: 1px solid #CBCBC6;
- min-height:620px; _height:620px; overflow: visible; 
+ min-height:620px; _height:620px; overflow: visible;
  padding:1px 52px; /*is required, eliminate inner margin*/
 }
 .blogpost
@@ -259,7 +261,7 @@ dl.blog_category-list dd
 {
   padding:10px 10px 6px 0;
   border-bottom: 1px dotted #58595B;
-  margin: 0 1.5em;  
+  margin: 0 1.5em;
 }
 dl.blog_category-list dd.last
 {
@@ -273,17 +275,17 @@ dl.blog_category-list dd a
 .blogpost-content{
   padding:10px;
   border-left: 1px solid #CBCBC6;
-  min-height:720px; _height:720px; overflow: visible; 
+  min-height:720px; _height:720px; overflow: visible;
 }
 
 .wrapper{
   border-left: 1px solid #CBCBC6;
   border-right: 1px solid #CBCBC6;
-  border-bottom: 1px solid #CBCBC6;  
+  border-bottom: 1px solid #CBCBC6;
 }
 
 .foot {
-    /*background: #FFF url(<%= asset_path 'v1/footbg.gif' %>) no-repeat top center;*/ 
+    /*background: #FFF url(<%= asset_path 'v1/footbg.gif' %>) no-repeat top center;*/
     /*background-image: url("/resource/images/footbg.gif");*/
     border: 1px solid #CCCCCC;
     height: 110px;
@@ -297,14 +299,14 @@ dl.blog_category-list dd a
     height: 100px;
     list-style-type: none;
     padding-left: 30px;
-    
+
 }
 .foot .inf1 {
     width: 110px;
     height: 100px;
     list-style-type: none;
     padding-left: 30px;
-    
+
 }
 .foot .inf h3, .inf1 h3 {
     /*background-image: url("/resource/images/ico.gif");*/

@@ -18,7 +18,9 @@ car = @car
           <td>二手车价值</td> <td colspan="5"><%= f.text_field :ershou_jiazhi,:class=>'text' %> 元*  </td>
         </tr>
         <tr>
-          <td>残值价值 </td>  <td colspan="5"><%= f.text_field :canzhi_jiazhi,:class=>'text' %> 元*  </td>
+          <td>残值价值 </td>  <td colspan="5"><%= f.text_field :canzhi_jiazhi,:class=>'text' %> 元*
+          <span> 报价金额必须为大于1000且是一百的整数倍 </span>
+          </td>
         </tr>
         <tr>
           <td>备注</td> <td colspan="5"><%= f.text_area :remark, class: '', rows: 3, style: 'height:auto;width:100%;' %>
