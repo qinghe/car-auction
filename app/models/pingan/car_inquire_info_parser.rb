@@ -84,7 +84,6 @@ module Pingan
         gear_name:  attrs['gear'],
         frame_number:  attrs['rackNo'],
         chengbao_jine:  attrs['insuredValue'],
-        frame_number:  attrs['rackNo'],
         shiji_jiazhi:  attrs['actualValue'],
         survey_user:  attrs['surveyUserId'],
         gusun_jine: attrs['estimateLoss'],

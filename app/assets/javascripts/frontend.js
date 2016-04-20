@@ -3,6 +3,8 @@
 //= require jquery_ujs
 //= require jquery.countdown
 //= require jquery.KinSlideshow
+//= require jquery.hoverIntent.minified
+//= require jquery.dcmegamenu
 //= require ajax
 
 // Javascript

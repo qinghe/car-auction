@@ -6,7 +6,6 @@
     <title><%= @title.present? ? (@title +' - ') : "" %> <%= @global_title %></title>
     <%= render 'layouts/stylesheets' %>
     <%= javascript_include_tag 'frontend' %>
-    <%= javascript_include_tag "jquery.hoverIntent.minified", "jquery.dcmegamenu" %>
     <%= csrf_meta_tag %>
     <%= yield :head %>
   </head>
@@ -27,7 +26,7 @@
     <div class="container" style="width: auto;">
       <div class="page_width">
         <header id="mainNav">
-  
+
           <div id="logo" class="">
           <%= link_to image_tag('logo.gif'), "/", :id => "logo" %>
           </div>
@@ -36,7 +35,7 @@
           </div>
         </header>
         <%= render :partial => "layouts/car_filters" %>
-  
+
         <% flash.keys.each do |key| %>
         <section class=""><div class="<%= key.to_s %>"><%= flash[key].force_encoding("UTF-8") %></div></section>
         <% end %>
@@ -52,7 +51,7 @@
           <%= render :partial=>"layouts/banner" %>
         </div>
       </div>
-      
+
       <div class="content" style="background-color: white;">
         <div class="page_width">
           <h1 class="page-title"><%= @title || yield(:title) %></h1>
@@ -63,7 +62,7 @@
 
       <%=render :partial => "layouts/top_menu/bottom_menu"%>
     </div>
-    
+
     <footer class="">
       <div class="page_width" style="text-align: center;">
 <ul><li>Copyright &copy;2011-2013 大连华宸价格评估有限公司 </li>
@@ -73,7 +72,7 @@
       </div>
       <%= debug(params) if Rails.env.development? %>
     </footer>
- <%=render :partial=>"layouts/loading" %>    
+ <%=render :partial=>"layouts/loading" %>
  <%=render :partial => "layouts/watermark"%>
   </body>
 </html>
