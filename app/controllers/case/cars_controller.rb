@@ -76,7 +76,7 @@ class Case::CarsController < Case::ApplicationController
         end
       end
     }
-      if @car_file.save
+      if @car_file.save!
         render :text=> {:files=> [@car_file.to_jq_upload]}.to_json, :status=> :created, :location=> @car_file.uploaded.url
       else
         render :text=> @car_file.errors, :status=> :unprocessable_entity
