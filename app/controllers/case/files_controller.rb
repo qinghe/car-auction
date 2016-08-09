@@ -1,5 +1,5 @@
 module Case
-  class FilesController < ApplicationController
+  class FilesController < BaseController
     before_filter :check_read_privileges, :except => [:index, :new, :create]
   	before_filter :check_edit_privileges, :except => [:index, :show]
 

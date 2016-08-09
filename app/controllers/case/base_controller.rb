@@ -1,5 +1,5 @@
-module Case
-  class ApplicationController < ::ApplicationController
+
+  class Case::BaseController < ApplicationController
     layout 'backend'
     #before_filter :get_project
     #before_filter :check_membership, :except =>[:accept, :reject]
@@ -50,4 +50,3 @@ module Case
       end
     end
   end
-end

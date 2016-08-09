@@ -1,5 +1,5 @@
 module Case
-  class UsersController < ApplicationController
+  class UsersController < BaseController
     def new
       @user = User.new
     end

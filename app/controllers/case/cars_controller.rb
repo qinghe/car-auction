@@ -1,5 +1,5 @@
 module Case
-  class CarsController < ApplicationController
+  class CarsController < BaseController
     prepend_before_filter :get_data, :only=>[:edit, :show,:evaluate,:sendback,:new_auction, :quoted_price, :feedback_auction, :confirm_auction, :abandon,:pickup, :abandon2, :abandon3, :transfer, :delete_car_file, :confirm_transfer]
 
     def welcome

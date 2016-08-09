@@ -1,5 +1,5 @@
 module Case
-  class CompaniesController < ApplicationController
+  class CompaniesController < BaseController
     def new
       @company = Company.new
     end

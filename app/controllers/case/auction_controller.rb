@@ -1,5 +1,5 @@
 module Case
-  class AuctionController < ApplicationController
+  class AuctionController < BaseController
 
 
   end

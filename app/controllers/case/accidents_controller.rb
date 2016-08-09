@@ -1,5 +1,5 @@
 module Case
-  class AccidentsController < ApplicationController
+  class AccidentsController < BaseController
     # GET /accidents
     # GET /accidents.json
     def index

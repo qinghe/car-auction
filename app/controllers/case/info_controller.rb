@@ -1,5 +1,5 @@
 module Case
-	class InfoController < ApplicationController
+	class InfoController < BaseController
 		before_filter :check_privileges, :only => :update
 
 	  def show
