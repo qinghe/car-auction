@@ -1,4 +1,3 @@
-#encoding: utf-8
 class CarsController < ApplicationController
   skip_before_filter :authenticate
 

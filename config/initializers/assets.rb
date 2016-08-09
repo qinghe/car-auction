@@ -2,4 +2,4 @@ Rails.application.config.assets.precompile += %w( frontend.css backend.css ie6ca
 
 Rails.application.config.assets.precompile += %w( watermark.js )
 
-Rails.application.config.assets.precompile += %w( blueprint/screen.css )
+Rails.application.config.assets.precompile += %w( blueprint/screen.css blueprint/print.css )

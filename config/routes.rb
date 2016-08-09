@@ -181,7 +181,7 @@ Inz::Application.routes.draw do
   get 'case/companies/list', :to => 'case/companies#list', :as=>:case_company_list
   get 'case/users/list', :to => 'case/users#list', :as=>:case_user_list
 
-  namespace "case" do
+  namespace :case do
     resources :cars do
       post :upload_file, :on => :collection #new car
       put :upload_file, :on => :collection  #edit car
