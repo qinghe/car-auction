@@ -1,4 +1,6 @@
-class Case::AuctionController < Case::ApplicationController
+module Case
+  class AuctionController < ApplicationController
 
 
+  end
 end
