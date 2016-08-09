@@ -13,7 +13,7 @@ class CarFile < ActiveRecord::Base
     :path => ":rails_root/public/system/:attachment/:id/:style/:filename"
 
   validates_attachment :uploaded, presence: true,
-    content_type: { content_type: "image/jpeg", content_type: "image/png"  },
+    content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
     size: { in: 0..10.megabytes }
 
   #before_post_process :skip_file_other_than_image # file other than images
