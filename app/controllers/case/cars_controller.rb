@@ -67,10 +67,11 @@ class Case::CarsController < Case::ApplicationController
   def upload_file
     @car_file = nil
     ['car_doc','car_image', 'car_frame_image', 'car_license_image'].each{|key|
-      if params.key?(key) and params[key].key?(:uploaded)
+      if params.key?(key) && params[key].key?(:uploaded)
         file_class = key.classify.safe_constantize
         if file_class
-          @car_file = file_class.new(params[key])
+          file_params = params.require( key ).permit!
+          @car_file = file_class.new(file_params )
           @car_file.user_id = current_user.id
         end
       end
