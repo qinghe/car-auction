@@ -1,9 +1,9 @@
 # encoding: utf-8
 class ApplicationController < ActionController::Base
-require 'will_paginate/array'
-  include ApplicationHelper
+  #require 'will_paginate/array'
+  #include ApplicationHelper
   include SessionsHelper
-  include ReCaptcha::AppHelper
+  #include ReCaptcha::AppHelper
   protect_from_forgery
 
   before_filter :authenticate

@@ -1,4 +1,4 @@
-<%= form_for(@car, :url => case_cars_path() ) do |f| %>
+<%= form_for(@car , url: add_case_cars_path ) do |f| %>
   <% if @car.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>

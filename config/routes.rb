@@ -4,10 +4,10 @@ Inz::Application.routes.draw do
   get 'search_car', :to => 'welcome#search_car', :as=>:search_car
   get 'blogposts/:id', :to => 'blog_categories#blogpostshow', :as=>:blogpost
   get 'static/:page', :to => 'blogposts#static', :as=>:static
-  post 'InsCarQuo/PingAn/:task', :to=> 'pingan#sink', :defaults => { :format => 'json' }
-  #post 'InsCarQuo/PingAn/sendHighestBiddingInfo', :to=> 'pingan#funk', :defaults => { :format => 'json' }
-  #post 'InsCarQuo/PingAn/receiveAuction', :to=> 'pingan#funk', :defaults => { :format => 'json' }
-  get  'InsCarQuo/PingAn/:task', :to=> 'pingan#test', :defaults => { :format => 'json' }
+  #post 'InsCarQuo/PingAn/:task', :to=> 'pingan#sink', :defaults => { :format => 'json' }
+  ##post 'InsCarQuo/PingAn/sendHighestBiddingInfo', :to=> 'pingan#funk', :defaults => { :format => 'json' }
+  ##post 'InsCarQuo/PingAn/receiveAuction', :to=> 'pingan#funk', :defaults => { :format => 'json' }
+  #get  'InsCarQuo/PingAn/:task', :to=> 'pingan#test', :defaults => { :format => 'json' }
 
   resources :cars, :only => [:index, :show] do
     get :get_models, :on => :collection
@@ -62,6 +62,7 @@ Inz::Application.routes.draw do
   		get :admin
   	end
   end
+
   resources :bonuspoints
   get '/signup',  :to => 'users#new'
   get '/signin',  :to => 'sessions#new'
@@ -72,7 +73,6 @@ Inz::Application.routes.draw do
 
   # PANEL
   namespace :panel do
-
     resources :auctions, :except => [:show] do
       resources :communications, :only => [:new, :create]
       get :offers, :on => :member # offers#index dla wlasnych ofert zarezerwowane
@@ -86,7 +86,6 @@ Inz::Application.routes.draw do
       #  end
       #end
     end
-
     resources :offers, :only => [:index] do
       post :to_reject, :on => :member
     end
@@ -97,7 +96,6 @@ Inz::Application.routes.draw do
       get :reply, :on => :member
       get :sent, :on => :collection
     end
-
     resources :projects, :only => :index
   end
 
@@ -137,58 +135,33 @@ Inz::Application.routes.draw do
       resources :comments, :only => [:index, :edit, :update]
     end
   end
-  get 'admin/cars/search', :to => 'admin/cars#search'
-  get 'admin/users/:id/points', :to => 'admin/users#points'
-  get 'admin/users/:id/editpoints', :to => 'admin/users#editpoints'
-  get 'admin/users/:id/status/:status/delete', :to => 'admin/users#delete'
-  get 'admin/blogposts', :to => 'admin/users#blogposts', :via => :get
-  get 'admin/blogposts/new', :to => 'admin/users#blogpostnew'
-  post 'admin/blogposts', :to => 'admin/users#blogpostnew2', :via => :post
-  get 'admin/blogposts/:id', :to => 'admin/users#blogpostok'
-  get 'admin/blogpost/:id', :to => 'admin/users#blogpostedit'
-  get 'admin/blogpost/:id/edit', :to => 'admin/users#blogpostedit2'
-  get 'admin/blogposts/delete/:blogpost', :to => 'admin/users#deleteblogpost'
-  get 'admin/blogcomments', :to => 'admin/users#blogcomments'
-  get 'admin/blogcomments/:id', :to => 'admin/users#blogcommentok'
-  get 'admin/blogcomments/delete/:blogcomment', :to => 'admin/users#deleteblogcomment'
-
-  #PROJECT
-  #scope :module => "project" do
-  #  resources :projects do
-  #    resource :info, :only => [:show, :update], :controller => "info"
-  #    resources :members, :only => [:index, :update, :destroy]
-  #    resources :files, :except => [:edit]
-  #    resources :invitations, :except => [:show, :update] do
-  #      get :accept, :on => :member
-  #      get :reject, :on => :member
-  #      get :cancel, :on => :member
-  #    end
-  #    resources :topics do
-  #    	resources :posts, :except => [:index, :show]
-  #    end
-  #    resources :tickets do
-  #      get :take, :on => :member
-  #      get :give, :on => :member
-  #      get :end, :on => :member
-  #    end
-  #  end
-  #end
-
-  get 'case/cars/list/:status', :to => 'case/cars#list', :as=>:list_case_cars_by_status
-  get 'case/cars/search', :to => 'case/cars#search'
-  get 'case/cars/show_pickup_car', :to => 'case/cars#show_pickup_car'
-  get 'case', :to => 'case/cars#welcome'
-  get 'case/companies/list', :to => 'case/companies#list', :as=>:case_company_list
-  get 'case/users/list', :to => 'case/users#list', :as=>:case_user_list
+  get '/admin/cars/search', :to => 'admin/cars#search'
+  get '/admin/users/:id/points', :to => 'admin/users#points'
+  get '/admin/users/:id/editpoints', :to => 'admin/users#editpoints'
+  get '/admin/users/:id/status/:status/delete', :to => 'admin/users#delete'
+  get '/admin/blogposts', :to => 'admin/users#blogposts', :via => :get
+  get '/admin/blogposts/new', :to => 'admin/users#blogpostnew'
+  post '/admin/blogposts', :to => 'admin/users#blogpostnew2', :via => :post
+  get '/admin/blogposts/:id', :to => 'admin/users#blogpostok'
+  get '/admin/blogpost/:id', :to => 'admin/users#blogpostedit'
+  get '/admin/blogpost/:id/edit', :to => 'admin/users#blogpostedit2'
+  get '/admin/blogposts/delete/:blogpost', :to => 'admin/users#deleteblogpost'
+  get '/admin/blogcomments', :to => 'admin/users#blogcomments'
+  get '/admin/blogcomments/:id', :to => 'admin/users#blogcommentok'
+  get '/admin/blogcomments/delete/:blogcomment', :to => 'admin/users#deleteblogcomment'
 
   namespace :case do
-    resources :cars do
-      post :upload_file, :on => :collection #new car
-      put :upload_file, :on => :collection  #edit car
-      delete :delete_file, :on => :collection #delete file have not assigned to car
-      get :new_car_accident, :on => :collection
-      get :welcome, :on => :collection
-      get :raise_error, :on => :collection
+    # for unkown reason Routing Error wrong constant name Case.carsController
+    # use add instead of create
+    resources :cars , except: [:new,:create] do
+      collection do
+        post :upload_file #new car
+        put :upload_file  #edit car
+        delete :delete_file #delete file have not assigned to car
+        get :new_car_accident
+        get :welcome
+        get :raise_error
+      end
       member do
         patch :evaluate
         patch :abandon
@@ -204,12 +177,22 @@ Inz::Application.routes.draw do
         post :upload_doc
       end
     end
-    resources :companies, :users
+    resources :companies do
+      get :list, on: :collection
+    end
+    resources :users do
+      get :list, on: :collection
+    end
   end
+  get '/case', :to => 'case/cars#welcome'
+  get '/case/cars/list/:status', :to => 'case/cars#list', :as=>:list_case_cars_by_status
+  get '/case/cars/search', :to => 'case/cars#search'
+  get '/case/cars/show_pickup_car', :to => 'case/cars#show_pickup_car'
+  post '/case/cars/create', :to => 'case/cars#create'
+  #get '/case/companies/list', :to => 'case/companies#list', :as=>:case_company_list
+  #get '/case/users/list', :to => 'case/users#list', :as=>:case_user_list
 
   resources :alerts, :only => [:create]
-
-
 
   root :to =>  "welcome#index"
 

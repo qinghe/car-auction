@@ -1,4 +1,4 @@
-class Panel::ProjectsController < Panel::ApplicationController
+class Panel::ProjectsController < Panel::BaseController
   
   def index
     title_t :index

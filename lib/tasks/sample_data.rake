@@ -1,5 +1,5 @@
 #encoding: utf-8
-require 'faker'
+require 'ffaker'
 I18n.locale = :en
 #wypelnianie bazy development danymi => rake db:populate
 

@@ -1,4 +1,4 @@
-class Admin::GroupsController < Admin::ApplicationController
+class Admin::GroupsController < Admin::BaseController
   before_filter :load_group, :only => [:update, :edit, :destroy]
   before_filter :new_group, :only => [:new, :create]
   before_filter :load_form_data, :only => [:new, :create, :edit, :update]

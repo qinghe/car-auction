@@ -241,6 +241,22 @@ module Case
           render :action => :new_car_accident
         end
     end
+    # for unkown reason Routing Error wrong constant name Case.carsController
+    # use add instead of create
+    # POST /cars
+    # POST /cars.json
+    def add
+      @car = AccidentCar.new( permitted_params )
+      @car.publisher_id = current_user.id
+      @car.evaluator_id = User.evaluator.id
+        if @car.save
+          flash_t :success
+          redirect_to case_car_url(@car)
+        else
+          title_t :new
+          render :action => :new_car_accident
+        end
+    end
 
     # PUT /cars/1
     # PUT /cars/1.json

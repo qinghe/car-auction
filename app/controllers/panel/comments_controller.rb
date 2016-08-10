@@ -1,4 +1,4 @@
-class Panel::CommentsController < Panel::ApplicationController
+class Panel::CommentsController < Panel::BaseController
   before_filter :comment_and_form_data, :only => [:edit, :update]
     
   def index	

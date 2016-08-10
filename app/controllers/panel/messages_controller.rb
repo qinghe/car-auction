@@ -1,4 +1,4 @@
-class Panel::MessagesController < Panel::ApplicationController
+class Panel::MessagesController < Panel::BaseController
 	before_filter :new_message, :only => [:new, :create]
   before_filter :set_path
 

@@ -1,4 +1,4 @@
-class Panel::OffersController < Panel::ApplicationController
+class Panel::OffersController < Panel::BaseController
 
   def index
     @status = params[:status] || :active

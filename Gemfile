@@ -1,29 +1,29 @@
 source 'https://ruby.taobao.org'
 ruby '2.2.4'
-gem 'rails', '~> 4.2.5'
+gem 'rails', '~> 4.1.16'
 
 gem 'sqlite3'
 gem 'mysql2', '~> 0.3.20'
 #gem 'carmen-rails'
-gem 'ruby-recaptcha'
-gem 'mail'
-gem "paperclip", "~> 4.2.4"
+#gem 'ruby-recaptcha'
+#gem 'mail'
+gem "paperclip" #, "~> 4.1.16"
 gem "will_paginate"
 
 gem "jquery-rails"
 gem 'jquery-ui-rails'
-gem "riddle"
+#gem "riddle"
 gem 'simple_form'
 gem "awesome_nested_set"
 gem "acts_as_list"
-gem "jquery-fileupload-rails"
+gem "jquery-fileupload-rails", "0.4.7"
 
 gem 'nokogiri'
 #gem 'tinymce-rails'
 #gem 'tinymce-rails-imageupload', '~> 3.5.6.3'
 gem 'china_sms',   :path => './china_sms'
 gem 'oauth2'
-gem 'sass-rails', '>= 3.2'
+#gem 'sass-rails', '>= 3.2'
 #gem 'bootstrap-sass', '~> 3.2.0'
 gem 'exception_notification'
 
@@ -31,11 +31,12 @@ gem 'exception_notification'
 group :development do
   #  gem 'thin'
   gem 'pry-rails'
-  gem 'faker'
+  gem 'byebug'
 end
 
 
 group :test do
+  gem 'ffaker'
   gem 'database_cleaner', '~> 1.3'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'rspec-rails', '~> 3.0'

@@ -39,9 +39,9 @@ Inz::Application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
-  config.middleware.use ExceptionNotification::Rack,
-    :email => {
-      :email_prefix => "[DLHCException] ",
-      :exception_recipients => %w{exception@example.com}
-    }
+  #config.middleware.use ExceptionNotification::Rack,
+  #  :email => {
+  #    :email_prefix => "[DLHCException] ",
+  #    :exception_recipients => %w{exception@example.com}
+  #  }
 end

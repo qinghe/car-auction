@@ -1,4 +1,4 @@
-class Panel::AuctionsController < Panel::ApplicationController
+class Panel::AuctionsController < Panel::BaseController
   before_filter :load_auction, :except => [:index, :new, :create, :user_form]
   before_filter :new_auction_and_form_data, :only => [:new, :create]
   skip_before_filter :authenticate, :only => [:user_form]

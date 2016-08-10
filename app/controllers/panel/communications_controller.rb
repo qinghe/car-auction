@@ -1,4 +1,4 @@
-class Panel::CommunicationsController < Panel::ApplicationController 
+class Panel::CommunicationsController < Panel::BaseController 
   before_filter :load_auction_and_form_data
   
   def new

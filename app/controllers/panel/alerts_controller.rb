@@ -1,5 +1,5 @@
 #TODO osobny modul do powiadomien ?
-class Panel::AlertsController < Panel::ApplicationController
+class Panel::AlertsController < Panel::BaseController
   before_filter :fetch_decision, :only => [:reject_offer]
 
   def index
