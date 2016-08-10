@@ -3,7 +3,7 @@
    @auction = @car.new_record? ? @car.build_auction : (@car.auction ?  @car.auction : @car.build_auction)
 %>
 
-<% form_url = @car.new_record? ? case_cars_create_path(@car) : case_car_path(@car) %>
+<% form_url = @car.new_record? ? case_cars_path(@car) : case_car_path(@car) %>
 
 <%= form_for(@car, :url => form_url ) do |car_form| %>
   <% if @car.errors.any? %>

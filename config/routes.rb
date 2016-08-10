@@ -153,7 +153,7 @@ Inz::Application.routes.draw do
   namespace :case do
     # for unkown reason Routing Error wrong constant name Case.carsController
     # use add instead of create
-    resources :cars , except: [:new,:create] do
+    resources :cars  do
       collection do
         post :upload_file #new car
         put :upload_file  #edit car
@@ -188,7 +188,6 @@ Inz::Application.routes.draw do
   get '/case/cars/list/:status', :to => 'case/cars#list', :as=>:list_case_cars_by_status
   get '/case/cars/search', :to => 'case/cars#search'
   get '/case/cars/show_pickup_car', :to => 'case/cars#show_pickup_car'
-  post '/case/cars/create', :to => 'case/cars#create'
   #get '/case/companies/list', :to => 'case/companies#list', :as=>:case_company_list
   #get '/case/users/list', :to => 'case/users#list', :as=>:case_user_list
 
