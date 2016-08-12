@@ -18,9 +18,9 @@
     <td class="thead" class="thead"><%= car_form.label :model_title,'配件名称' %> </td>
     <td><%= car_form.text_field :model_title,:class=>'span-3' %> </td>
     <td class="thead" class="thead" width="100px">适用车型 </td>
-    <td colspan="3"><%=raw car_model_select(@car)%></td>
-        
-    
+    <td colspan="3"> <%= car_form.text_field :model_title %> </td>
+
+
   </tr>
   <tr>
     <td class="thead" class="thead"><%= car_form.label :serial_no,'流水单号' %> </td>
@@ -43,11 +43,11 @@
   <tr>
     <td class="thead">   配件图片  </td>
       <td  colspan="5">
-        <div id="car_image_list">  
+        <div id="car_image_list">
           <%= render :partial=>'car_file', :collection=>@car.car_images%>
         </div>
         <div class="clear">
-          <%= render :partial=>"upload_file", :locals=>{:object=>@car.car_images.build, :field_name=>'uploaded'}%>  
+          <%= render :partial=>"upload_file", :locals=>{:object=>@car.car_images.build, :field_name=>'uploaded'}%>
         </div>
       </td>
   </tr>
@@ -57,5 +57,5 @@
     <td colspan="5"> <%= car_form.submit '确认提交' %> </td>
   </tr>
 </table>
- 
+
 <% end %>

@@ -66,10 +66,6 @@ class Car < ActiveRecord::Base
     self.model.present? ? self.model.full_name : model_title
   end
 
- # def fullname
- #   self.model.self_and_ancestors.collect{|m| m.name}.join('-')
- # end
-
   def variator_name
     VARIATORS.key(variator)
   end
