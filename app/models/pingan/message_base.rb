@@ -31,9 +31,10 @@ module Pingan
 
 
     def to_hash(  )
-      instance_values.symbolize_keys().slice( *self.required_fields ).transform_values{|val|
-        cast_to_pingan_value val
-      }
+      #instance_values.symbolize_keys().slice( *self.required_fields ).transform_values{|val|
+      #  cast_to_pingan_value val
+      #}
+      format_hash( instance_values.symbolize_keys().slice( *self.required_fields ) )
     end
 
     def cast_to_pingan_value( val )
@@ -43,15 +44,27 @@ module Pingan
       when TrueClass,FalseClass
         format_boolean( val )
       when Hash
-        val.transform_values{|subval|
-          cast_to_pingan_value( subval )
-        }
+        #val.transform_values{|subval|
+        #  cast_to_pingan_value( subval )
+        #}
+        format_hash( val )
       when Array
         val.map{|subval| cast_to_pingan_value( subval ) }
       else
         val.to_s
       end
     end
+
+    # rails 4.1 has no transform_values, add it for templorary
+    def format_hash( hash )
+      return {} if hash.empty?
+      result = Hash.new
+      hash.each do |key, value|
+        result[key] = cast_to_pingan_value( value )
+      end
+      result
+    end
+
 
     def format_boolean( val )
       val ? 'Y' : 'N'
