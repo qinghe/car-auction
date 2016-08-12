@@ -4,10 +4,10 @@ Inz::Application.routes.draw do
   get 'search_car', :to => 'welcome#search_car', :as=>:search_car
   get 'blogposts/:id', :to => 'blog_categories#blogpostshow', :as=>:blogpost
   get 'static/:page', :to => 'blogposts#static', :as=>:static
-  #post 'InsCarQuo/PingAn/:task', :to=> 'pingan#sink', :defaults => { :format => 'json' }
-  ##post 'InsCarQuo/PingAn/sendHighestBiddingInfo', :to=> 'pingan#funk', :defaults => { :format => 'json' }
-  ##post 'InsCarQuo/PingAn/receiveAuction', :to=> 'pingan#funk', :defaults => { :format => 'json' }
-  #get  'InsCarQuo/PingAn/:task', :to=> 'pingan#test', :defaults => { :format => 'json' }
+  post 'InsCarQuo/PingAn/:task', :to=> 'pingan#sink', :defaults => { :format => 'json' }
+  #post 'InsCarQuo/PingAn/sendHighestBiddingInfo', :to=> 'pingan#funk', :defaults => { :format => 'json' }
+  #post 'InsCarQuo/PingAn/receiveAuction', :to=> 'pingan#funk', :defaults => { :format => 'json' }
+  get  'InsCarQuo/PingAn/:task', :to=> 'pingan#test', :defaults => { :format => 'json' }
 
   resources :cars, :only => [:index, :show] do
     get :get_models, :on => :collection

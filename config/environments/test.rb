@@ -35,3 +35,5 @@ Inz::Application.configure do
 
   config.eager_load = false
 end
+
+ClientConfig.instance.client_name = "this is just test"

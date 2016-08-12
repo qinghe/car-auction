@@ -45,3 +45,5 @@ Inz::Application.configure do
   #    :exception_recipients => %w{exception@example.com}
   #  }
 end
+
+Pingan::ClientConfig.instance.ver = "0.1.0"

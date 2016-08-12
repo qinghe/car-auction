@@ -57,8 +57,13 @@ module Pingan
       end
 
       def get_client
-        OAuth2::Client.new( Rails.configuration.x.pingan['client_id'], Rails.configuration.x.pingan['client_secret'],
-          site: Rails.configuration.x.pingan['site'],
+        #OAuth2::Client.new( Rails.configuration.x.pingan['client_id'], Rails.configuration.x.pingan['client_secret'],
+        #  site: Rails.configuration.x.pingan['site'],
+        #  token_url: '/oauth/oauth2/access_token',
+        #  token_method: :get,
+        #)
+        OAuth2::Client.new( ClientConfig.instance.client_id, ClientConfig.instance.client_secret,
+          site: ClientConfig.instance.site, 
           token_url: '/oauth/oauth2/access_token',
           token_method: :get,
         )

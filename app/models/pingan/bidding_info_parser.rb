@@ -24,7 +24,7 @@ module Pingan
 
 
     def win_bid?
-      attributes['biddingUser'] ==  Rails.configuration.x.pingan['client_name']
+      attributes['biddingUser'] ==  ClientConfig.instance.client_name #Rails.configuration.x.pingan['client_name']
     end
   end
 end

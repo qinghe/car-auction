@@ -8,7 +8,7 @@ module Pingan
 
     def initialize( auction )
       self.task_auction = auction
-      self.partnerAccount = Rails.configuration.x.pingan['partner_account']
+      self.partnerAccount = ClientConfig.instance.partner_account #Rails.configuration.x.pingan['partner_account']
     end
 
     # return  result.
