@@ -206,9 +206,7 @@
       <% end %>
 
       <% if car.wait_for_evaluate?  %>
-        <% if current_user.evaluator? %>
-          <input id="evaluate_car_button" type="button" value="车辆评估"></input>
-        <% end %>
+        <input id="evaluate_car_button" type="button" value="车辆评估"></input>
       <% elsif car.evaluated? %>
         <button id="auction_car_button">委托拍卖</button>
         <button id="quoted_price_again_button">申请二次报价</button>
