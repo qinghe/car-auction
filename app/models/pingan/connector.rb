@@ -63,7 +63,7 @@ module Pingan
         #  token_method: :get,
         #)
         OAuth2::Client.new( ClientConfig.instance.client_id, ClientConfig.instance.client_secret,
-          site: ClientConfig.instance.site, 
+          site: ClientConfig.instance.site,
           token_url: '/oauth/oauth2/access_token',
           token_method: :get,
         )
@@ -84,7 +84,7 @@ module Pingan
         #}
         token = get_token
         path = message_wrapper.api_path + '?' + {access_token: token.token, request_id: message_wrapper.request_id}.to_param
-        response = token.post( path, params: message_wrapper.to_hash ,  headers: {'Accept' => 'application/json;charset=utf-8'})
+        response = token.post( path, body: message_wrapper.to_hash ,  headers: {'Accept' => 'application/json;charset=utf-8'})
 
       end
     end

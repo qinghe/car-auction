@@ -50,6 +50,13 @@ module Pingan
     #        }
     #    ]
     #}
+    # {"partnerAccount":"610000010201","taskAuctionNo":"2016081700077734",
+    #  "announcementStartTime":"2016-08-16 16:00:00","announcementEndTime":"2016-08-16 16:00:00","auctionLocation":"网络",
+    #  "startTime":"2016-08-17 09:50:00","endTime":"2016-08-17 09:53:33","auctionType":"2","isPass":"Y","passTimes":"0",
+    #  "commissionedTime":"2016-08-17 09:49:25","transferComplete":"N","transferRequestTime":"2016-08-16 16:00:00",
+    #  "transferRealTime":"2016-08-16 16:00:00","finalPrice":"14500","bidTimes":"2","isApplyInquire":"N",
+    #  "biddersList":[{"bidTime":"2016-08-17 09:52:40","bidUser":"华宸","bidPrice":"14100"},
+    #                 {"bidTime":"2016-08-17 09:53:27","bidUser":"曲美玲","bidPrice":"14500"}]}
     def initialize( auction )
       self.taskAuctionNo = auction.serial_no
       self.announcementStartTime = auction.public_start_at
