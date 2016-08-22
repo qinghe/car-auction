@@ -63,13 +63,12 @@ Inz::Application.configure do
     openssl_verify_mode:  'none',
     enable_starttls_auto:  false
   }
-  #config.middleware.use ExceptionNotification::Rack,
-  #  :email => {
-  #    :email_prefix => "[DlhcException] ",
-  #    :sender_address => %{"notice" <notice@getstore.cn>},
-  #    :exception_recipients => %w{admin@getstore.cn}
-  #  }
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[DlhcException] ",
+      :sender_address => %{"notice" <notice@getstore.cn>},
+      :exception_recipients => %w{admin@getstore.cn}
+    }
 
 end
 Paperclip.options[:command_path] = "/usr/local/bin/"
-ENV['OAUTH_DEBUG'] = 'true'
