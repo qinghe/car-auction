@@ -9,8 +9,8 @@ module Pingan
     attr_accessor :partnerAccount,:taskAuctionNo, :applyReason
 
     def initialize( auction )
-      taskAuctionNo = auction.serial_no
-      applyReason = auction.apply_reason
+      self.taskAuctionNo = auction.serial_no
+      self.applyReason = auction.apply_reason
       super
     end
 
