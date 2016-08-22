@@ -47,4 +47,3 @@ Inz::Application.configure do
 end
 
 Pingan::ClientConfig.instance.ver = "0.1.0"
-ENV['OAUTH_DEBUG'] = 'true'

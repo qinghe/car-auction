@@ -84,7 +84,7 @@ module Pingan
         #}
         token = get_token
         path = message_wrapper.api_path + '?' + {access_token: token.token, request_id: message_wrapper.request_id}.to_param
-        response = token.post( path, body: message_wrapper.to_json ,  headers: {'Accept' => 'application/json;charset=utf-8'})
+        response = token.post( path, body: message_wrapper.to_json ,  headers: {'Accept' => 'application/json;charset=utf-8', "Content-Type"=>"application/json"})
 
       end
     end
