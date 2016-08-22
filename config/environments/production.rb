@@ -72,3 +72,4 @@ Inz::Application.configure do
 
 end
 Paperclip.options[:command_path] = "/usr/local/bin/"
+ENV['OAUTH_DEBUG'] = 'true'
