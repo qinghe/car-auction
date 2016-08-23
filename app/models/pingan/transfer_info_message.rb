@@ -2,7 +2,7 @@ module Pingan
   class TransferInfoMessage < MessageBase
     self.api_path = '/open/appsvr/property/receiveAuctionTransfer'
 
-    self.required_fields = [ :partnerAccount, :taskAuctionNo, :isAuction, :transferBail, :isPayTransferBail, :isPayAuctionPrice, :transferTime, :transferOpinion].sort!
+    self.required_fields = [ :partnerAccount, :taskInquireNo, :isAuction, :transferBail, :isPayTransferBail, :isPayAuctionPrice, :transferTime, :transferOpinion].sort!
     #{
     #  "partnerAccount":"",
     #  "taskInquireNo":"",
@@ -18,6 +18,7 @@ module Pingan
 
     def initialize( auction )
       self.taskAuctionNo = auction.serial_no
+      self.taskInquireNo = auction.serial_no
       self.isAuction = auction.is_auction
       self.transferBail = auction.transfer_bail
       self.isPayTransferBail = auction.is_pay_transfer_bail
