@@ -17,7 +17,7 @@ module Pingan
     #:taskAuctionNo, :isAuction, :transferBail, :isPayTransferBail, :isPayAuctionPrice, :transferTime, :transferOpinion
 
     def initialize( auction )
-      self.taskAuctionNo = auction.serial_no
+      #self.taskAuctionNo = auction.serial_no
       self.taskInquireNo = auction.serial_no
       self.isAuction = auction.is_auction
       self.transferBail = auction.transfer_bail
