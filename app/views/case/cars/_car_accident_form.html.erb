@@ -31,7 +31,7 @@
     <td class="thead" class="thead"><%= car_form.label :variator,'手自/排量' %> </td>
     <td><%= car_form.select :variator,Car::VARIATORS.to_a %>/<%= car_form.text_field :displacement,:class=>'span-1'%> </td>
     <td class="thead"><%= car_form.label :registered_at,'初次登记日期' %> </td>
-    <td><%= car_form.date_select :registered_at %> </td>
+    <td><%= car_form.date_select :registered_at, :start_year =>2000, :end_year => Date.today.year %> </td>
   </tr>
   <tr style="">
     <td class="thead"><%= car_form.label :plate_number,'车牌号' %> </td>
