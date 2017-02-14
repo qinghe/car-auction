@@ -50,15 +50,15 @@ class Auction < ActiveRecord::Base
   validates_inclusion_of :status, :in => STATUSES.values
   #validates_inclusion_of :budget_id, :in => Budget.ids
 
-  scope :has_tags, lambda { |tags| {:conditions => ['id in (SELECT auction_id FROM auctions_tags WHERE tag_id in (?))', tags.join(',')]}}
-  scope :with_status, lambda { |status| where(:status => STATUSES[status.to_sym])}
-  scope :online, lambda { where(:status => STATUSES[:active])}
-  scope :public_auctions, lambda { where(:private => false)}
+  scope :has_tags, ->(tags) { where :conditions => ['id in (SELECT auction_id FROM auctions_tags WHERE tag_id in (?))', tags.join(',')] }
+  scope :with_status, ->(some_status) {  where(:status => STATUSES[some_status.to_sym])}
+  scope :online, -> { where(:status => STATUSES[:active])}
+  scope :public_auctions, -> { where(:private => false)}
 
-  scope :within_today, lambda { where(["(start_at > ?) and (expired_at < ?)", Date.current.to_time.beginning_of_day, Date.current.to_time.end_of_day])}
-  scope :closed, lambda { where(["expired_at > ? ",Time.now])}
-  scope :opened, lambda { where(["(start_at < ?) and (expired_at > ?)", Time.now, Time.now])}
-  scope :open, lambda { where(["start_at > ? ",Time.now]) }
+  scope :within_today, -> { where(["(start_at > ?) and (expired_at < ?)", Date.current.to_time.beginning_of_day, Date.current.to_time.end_of_day])}
+  scope :closed, -> { where(["expired_at > ? ",Time.now])}
+  scope :opened, -> { where(["(start_at < ?) and (expired_at > ?)", Time.now, Time.now])}
+  scope :open, -> { where(["start_at > ? ",Time.now]) }
 
 
   before_validation :init_auction_row, :on => :create
