@@ -4,7 +4,9 @@ class Auction < ActiveRecord::Base
   AuctionTypeEnum = Struct.new( :salesroom, :internet) ['1', '2']
   FeedbackEnum = Struct.new( :yes, :no) ['1', '2']
 
+  #enum status: {:active => 0, :finished => 1, :canceled => 2, :waiting_for_offer => 3}
   STATUSES = {:active => 0, :finished => 1, :canceled => 2, :waiting_for_offer => 3}
+
   MAX_EXPIRED_AFTER = 14
   ORDER_MODES = [
     ["po nazwie", "title DESC", 0],
@@ -51,8 +53,9 @@ class Auction < ActiveRecord::Base
   #validates_inclusion_of :budget_id, :in => Budget.ids
 
   scope :has_tags, ->(tags) { where :conditions => ['id in (SELECT auction_id FROM auctions_tags WHERE tag_id in (?))', tags.join(',')] }
-  scope :with_status, ->(some_status) {  where(:status => STATUSES[some_status.to_sym])}
-  scope :online, -> { where(:status => STATUSES[:active])}
+  scope :with_status, ->(some_status) {  where(:status =>  STATUSES[some_status.to_sym] )}
+
+  scope :active, -> { where(:status => STATUSES[:active])}
   scope :public_auctions, -> { where(:private => false)}
 
   scope :within_today, -> { where(["(start_at > ?) and (expired_at < ?)", Date.current.to_time.beginning_of_day, Date.current.to_time.end_of_day])}
@@ -71,15 +74,15 @@ class Auction < ActiveRecord::Base
   attr_accessor :expired_after
   #validates_inclusion_of :expired_after, :in => (1..MAX_EXPIRED_AFTER).to_a.collect{|d| d}, :on => :create
   def open?
-    (self.start_at.present?) and (status? :active) and ( self.start_at.future? )
+    (self.start_at.present?) && (status? :active) && ( self.start_at.future? )
   end
 
   def opened?
-    (self.start_at.present?) and (status? :active) and ( DateTime.now > self.start_at ) and  ( DateTime.now < self.expired_at )
+    (self.start_at.present?) && (status? :active) && ( DateTime.now > self.start_at ) &&  ( DateTime.now < self.expired_at )
   end
 
   def closed?
-    (self.start_at.present?) and ( DateTime.now > self.expired_at )
+    (self.start_at.present?) && ( DateTime.now > self.expired_at )
   end
 
   def close! #choose_win_offer
@@ -108,15 +111,28 @@ class Auction < ActiveRecord::Base
       self.starting_price
     end
   end
+
+  def active?
+    self.status == STATUSES[:active]
+  end
+
   #设置取消拍卖状态
   def cancel!
     self.status = STATUSES[:canceled]
     self.save
   end
 
+  def canceled?
+    self.status == STATUSES[:canceled]
+  end
+
   def finish!
     self.status = STATUSES[:finished]
     self.save
+  end
+
+  def finished?
+    self.status == STATUSES[:finished]
   end
 
   def waiting_for_offer!

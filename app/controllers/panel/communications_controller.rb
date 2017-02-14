@@ -1,6 +1,6 @@
-class Panel::CommunicationsController < Panel::BaseController 
+class Panel::CommunicationsController < Panel::BaseController
   before_filter :load_auction_and_form_data
-  
+
   def new
     title_t
   end
@@ -14,12 +14,12 @@ class Panel::CommunicationsController < Panel::BaseController
       render :new
     end
   end
-  
+
   private
-  
+
   def load_auction_and_form_data
     params[:communication] ||= Hash.new
-    @auction = current_user.auctions.online.find(params[:auction_id])
+    @auction = current_user.auctions.active.find(params[:auction_id])
     @communication = @auction.communications.new(params[:communication])
   end
 end

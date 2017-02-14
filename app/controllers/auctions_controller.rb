@@ -13,7 +13,7 @@ class AuctionsController < ApplicationController
     @auctions = Auction.public_auctions.with_status(:active).where("start_at>?",DateTime.now.beginning_of_day).includes(:car=>[:model,:car_images]).order("start_at").paginate(:page => params[:page], :per_page => 18)
     #@users = User.count
     @blogs = Blogpost.order("id DESC").limit(18).includes(:user)
-    #@projects = Project.where(:status => Project::STATUSES[:active]).count
+
   end
 
   # ajax for enable bidding, update auction form
@@ -22,7 +22,7 @@ class AuctionsController < ApplicationController
   end
 
   def close
-    if @auction.closed? and @auction.won_offer.blank?
+    if @auction.closed? && @auction.won_offer.blank?
       @auction.close!
     end
 

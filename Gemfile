@@ -27,6 +27,7 @@ gem 'oauth2'
 #gem 'bootstrap-sass', '~> 3.2.0'
 gem 'exception_notification'
 
+gem 'whenever', :require => false
 
 group :development do
   #  gem 'thin'
