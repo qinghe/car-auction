@@ -4,8 +4,8 @@ class CreateAccidents < ActiveRecord::Migration
     create_table :accidents do |t|
       t.integer :car_id
       t.integer :sunshi_leixing                  #损失类型
-      t.date :chuxian_riqi                       #出险日期  
-      t.integer :shifou_caijian
+      t.date :chuxian_riqi                       #出险日期
+      t.integer :shifou_caijian                  #是否拆檢
       t.integer :tingche_province_id,:default=>0 #停车地点
       t.integer :tingche_city_id,:default=>0
       t.string :tingche_more                     #停车more
@@ -20,7 +20,7 @@ class CreateAccidents < ActiveRecord::Migration
       t.string :chuxian_jingguo                 #出险经过
       t.float :zuizhong_peifu_jine,:default=>0  #最终赔付金额
       t.integer :chuli_fangshi,:default=>0 # 处理方式(委托拍卖，询问底价)
-      t.integer :guohu_shixiao,:default=>0 # n天 过户时效 
+      t.integer :guohu_shixiao,:default=>0 # n天 过户时效
       t.integer :dengji_zhengshu,:default=>0 #登记证书
       t.integer :xingche_zheng,:default=>0   #行车证
       t.integer :gouzhi_shui,:default=>0   #购置税

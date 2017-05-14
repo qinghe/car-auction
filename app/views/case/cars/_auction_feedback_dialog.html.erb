@@ -13,7 +13,7 @@
 #实际过户时间
 #拍卖成交价
 #出价次数
-
+#首款是否支付、首款支付时间  溢价金额 溢价是否支付 溢价支付时间 参拍人数 保全人员 保全时间 保全说明
 @auction = @car.auction
 %>
 <% if @car.auctioning? && @auction.closed? %>
@@ -40,7 +40,9 @@
             <td><%= @auction.start_at.to_s(:db) %></td>
             <td>拍卖结束时间</td>
             <td><%= @auction.expired_at.to_s(:db) %></td>
-            <td> </td><td> </td>
+            <td>是否流拍/流拍次数</td>
+            <td><%= @auction.pass_times %></td>
+
           </tr>
 
           <tr class="aution_info">
@@ -48,8 +50,7 @@
               <td><%= @auction.bidding_price %></td>
               <td>出价次数</td>
               <td><%= @auction.offers.count %></td>
-            <td>是否流拍/流拍次数</td>
-            <td><%= @auction.pass_times %></td>
+              <td>参拍人数 </td><td><%= @auction.offerers.count %> </td>
           </tr>
 
           <tr class="aution_info">
@@ -59,6 +60,32 @@
             <td><%= auction_form.date_select :transfer_request_time %></td>
             <td>实际过户时间</td>
             <td><%= auction_form.date_select :transfer_real_time %></td>
+          </tr>
+
+          <tr class="aution_info">
+            <td>首款是否支付 </td>
+            <td><%= auction_form.select :is_pay_first_price, [['否','N'],['是','Y']], selected: 'N' %></td>
+            <td>首款支付时间</td>
+            <td><%= auction_form.date_select :first_price_pay_date %></td>
+            <td>附件组ID</td>
+            <td><%= auction_form.text_field :document_group_id %></td>
+          </tr>
+          <tr class="aution_info">
+            <td>溢价是否支付 </td>
+            <td><%= auction_form.select :is_pay_premium, [['否','N'],['是','Y']], selected: 'N' %></td>
+            <td>溢价支付时间</td>
+            <td><%= auction_form.date_select :premium_pay_date %></td>
+            <td>溢价金额</td>
+            <td><%= auction_form.text_field :premium_price %></td>
+          </tr>
+
+          <tr class="aution_info">
+            <td>保全人员 </td>
+            <td><%= auction_form.text_field :preservation_user %></td>
+            <td>保全时间</td>
+            <td><%= auction_form.date_select :preservation_date %></td>
+            <td>保全说明</td>
+            <td><%= auction_form.text_area :preservation_desc %></td>
           </tr>
 
         <%end%>

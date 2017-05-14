@@ -1,5 +1,5 @@
 PATH
-  remote: ./china_sms
+  remote: china_sms
   specs:
     china_sms (0.0.3)
 
@@ -195,4 +195,4 @@ RUBY VERSION
    ruby 2.2.4p230
 
 BUNDLED WITH
-   1.13.5
+   1.14.6

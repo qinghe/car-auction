@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809000002) do
+ActiveRecord::Schema.define(version: 20170514055840) do
 
   create_table "accidents", force: true do |t|
     t.integer  "car_id"
@@ -132,6 +132,17 @@ ActiveRecord::Schema.define(version: 20160809000002) do
     t.string   "transfer_opinion",         limit: nil
     t.string   "channel_transfer_result",  limit: nil
     t.string   "channel_transfer_opinion", limit: nil
+    t.string   "pay_out_type",                         default: "",     null: false
+    t.boolean  "is_pay_first_price",                   default: false,  null: false
+    t.datetime "first_price_pay_date"
+    t.integer  "premium_price",                        default: 0,      null: false
+    t.boolean  "is_pay_premium",                       default: false,  null: false
+    t.datetime "premium_pay_date"
+    t.string   "preservation_user",                    default: "",     null: false
+    t.datetime "preservation_date"
+    t.string   "preservation_desc",                    default: "",     null: false
+    t.string   "document_group_id",                    default: "",     null: false
+    t.datetime "transfer_bail_pay_date"
   end
 
   add_index "auctions", ["rating"], name: "index_auctions_on_rating"

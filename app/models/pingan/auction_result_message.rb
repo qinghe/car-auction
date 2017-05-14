@@ -22,10 +22,28 @@ module Pingan
     #BID_USER             出价人           auction.won_offer_id
     #BID_ PRICE           出价             auction.won_offer_id
 
+    # 2017-5
+    # 增加“首款是否支付”、“首款支付时间” “溢价金额”、‘溢价是否支付’‘溢价支付时间’‘参拍人数’‘保全人员’‘保全时间’‘保全说明；
+
+    #isPayFirstPrice    String    否    首款是否支付
+    #firstPricePayDate    String    是    首款支付时间
+    #premiumPrice    String    否    溢价金额
+    #isPayPremium    String    否    溢价是否支付
+    #premiumPayDate    String    是    溢价支付时间
+    #competeNum    String    否    参拍人数
+    #preservationUser    String    否    保全人员
+    #preservationDate    String    否    保全时间
+    #preservationDesc    String    否    保全说明
+    #documentGroupId    String    否    附件组ID
+
+
+
     attr_accessor :taskAuctionNo, :announcementStartTime,:announcementEndTime,
       :auctionLocation, :startTime, :endTime, :auctionType, :isPass, :passTimes,
       :commissionedTime, :transferComplete, :transferRequestTime, :transferRealTime,
-      :finalPrice, :bidTimes, :isApplyInquire, :biddersList
+      :finalPrice, :bidTimes, :isApplyInquire, :biddersList,
+      :isPayFirstPrice, :firstPricePayDate, :premiumPrice, :isPayPremium, :premiumPayDate,
+      :competeNum, :preservationUser,:preservationDate,:preservationDesc, :documentGroupId
     #{
     #    "partnerAccount":"",
     #    "taskAuctionNo":"",
@@ -77,6 +95,18 @@ module Pingan
       self.biddersList = auction.offers.map{|offer|
         { bidTime: format_date_time(offer.created_at), bidUser: offer.offerer.name, bidPrice: offer.price }
       }
+
+      self.isPayFirstPrice = auction.is_pay_first_price
+      self.firstPricePayDate = auction.first_price_pay_date
+      self.premiumPrice = auction.premium_price
+      self.isPayPremium = auction.is_pay_premium
+      self.premiumPayDate = auction.premium_pay_date
+      self.competeNum = auction.offerers.count
+      self.preservationUser = auction.preservation_user
+      self.preservationDate = auction.preservation_date
+      self.preservationDesc = auction.preservation_desc
+      self.documentGroupId = auction.document_group_id
+
       super
     end
 

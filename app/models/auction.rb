@@ -20,6 +20,7 @@ class Auction < ActiveRecord::Base
   belongs_to :owner, :class_name => 'User'      #insurance company
   belongs_to :won_offer, :class_name => 'Offer'
   has_many :offers, :dependent => :destroy #bid
+  has_many :offerers, through: :offers
   has_many :communications, :dependent => :delete_all
   has_and_belongs_to_many :tags,
     :after_add => :tag_counter_up,
