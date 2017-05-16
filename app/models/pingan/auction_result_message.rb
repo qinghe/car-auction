@@ -3,7 +3,9 @@ module Pingan
     self.required_fields = [ :partnerAccount, :taskAuctionNo, :announcementStartTime,:announcementEndTime,
       :auctionLocation, :startTime, :endTime, :auctionType, :isPass, :passTimes,
       :commissionedTime, :transferComplete, :transferRequestTime, :transferRealTime,
-      :finalPrice, :bidTimes, :isApplyInquire , :biddersList]
+      :finalPrice, :bidTimes, :isApplyInquire , :biddersList,
+      :isPayFirstPrice, :firstPricePayDate, :premiumPrice, :isPayPremium, :premiumPayDate,
+      :competeNum, :preservationUser,:preservationDate,:preservationDesc, :documentGroupId]
 
     #ANNOUNCEMENT_TIME    拍卖公示时间      auction.public_start_at
     #AUCTION_LOCATION     拍卖地点       N  auction.location
