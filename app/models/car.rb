@@ -19,6 +19,7 @@ class Car < ActiveRecord::Base
   has_many :car_images,  :class_name =>'CarImage'
   has_many :car_docs,  :class_name =>'CarDoc'
   has_many :attachment_files, :class_name =>'CarFile'
+  has_many :bid_images, :class_name =>'CarAuctionImage'
 
   belongs_to :model, :class_name=>'CarModel'
   accepts_nested_attributes_for :accident, :auction

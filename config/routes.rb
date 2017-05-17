@@ -156,7 +156,7 @@ Inz::Application.routes.draw do
     resources :cars  do
       collection do
         post :upload_file #new car
-        put :upload_file  #edit car
+        patch :upload_file  #edit car
         delete :delete_file #delete file have not assigned to car
         get :new_car_accident
         get :welcome

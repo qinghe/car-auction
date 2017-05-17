@@ -1,0 +1,3 @@
+class CarAuctionImage < CarFile
+
+end

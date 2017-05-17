@@ -57,16 +57,16 @@
             <td>是否完成过户 </td>
             <td><%= auction_form.select :transfer_complete, [['否','N'],['是','Y']], selected: 'N' %></td>
             <td>要求过户时间</td>
-            <td><%= auction_form.date_select :transfer_request_time %></td>
+            <td><%= auction_form.text_field :transfer_request_time, class: 'datetimepicker'  %></td>
             <td>实际过户时间</td>
-            <td><%= auction_form.date_select :transfer_real_time %></td>
+            <td><%= auction_form.text_field :transfer_real_time, class: 'datetimepicker'  %></td>
           </tr>
 
           <tr class="aution_info">
             <td>首款是否支付 </td>
             <td><%= auction_form.select :is_pay_first_price, [['否','N'],['是','Y']], selected: 'N' %></td>
             <td>首款支付时间</td>
-            <td><%= auction_form.date_select :first_price_pay_date %></td>
+            <td><%= auction_form.text_field :first_price_pay_date, class: 'datetimepicker' %></td>
             <td>附件组ID</td>
             <td><%= auction_form.text_field :document_group_id %></td>
           </tr>
@@ -74,7 +74,7 @@
             <td>溢价是否支付 </td>
             <td><%= auction_form.select :is_pay_premium, [['否','N'],['是','Y']], selected: 'N' %></td>
             <td>溢价支付时间</td>
-            <td><%= auction_form.date_select :premium_pay_date %></td>
+            <td><%= auction_form.text_field :premium_pay_date, class: 'datetimepicker'  %></td>
             <td>溢价金额</td>
             <td><%= auction_form.text_field :premium_price %></td>
           </tr>
@@ -83,9 +83,20 @@
             <td>保全人员 </td>
             <td><%= auction_form.text_field :preservation_user %></td>
             <td>保全时间</td>
-            <td><%= auction_form.date_select :preservation_date %></td>
+            <td><%= auction_form.text_field :preservation_date, class: 'datetimepicker'  %></td>
             <td>保全说明</td>
             <td><%= auction_form.text_area :preservation_desc %></td>
+          </tr>
+          <tr class="aution_info">
+            <td> 拍卖结果反馈</td>
+            <td colspan="5">
+              <div id="car_auction_image_list">
+                <%= render :partial=>'car_file', :collection=>@car.bid_images%>
+              </div>
+              <div class="clear">
+                <%= render :partial=>"upload_file", :locals=>{:object=>@car.bid_images.build, :field_name=>'uploaded'}%>
+              </div>
+            </td>
           </tr>
 
         <%end%>

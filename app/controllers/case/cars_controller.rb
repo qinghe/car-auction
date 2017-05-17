@@ -67,7 +67,7 @@ module Case
 
     def upload_file
       @car_file = nil
-      ['car_doc','car_image', 'car_frame_image', 'car_license_image'].each{|key|
+      ['car_doc','car_image', 'car_frame_image', 'car_license_image', 'car_auction_image'].each{|key|
         if params.key?(key) && params[key].key?(:uploaded)
           file_class = key.classify.safe_constantize
           if file_class

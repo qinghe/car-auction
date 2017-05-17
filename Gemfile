@@ -29,6 +29,8 @@ gem 'exception_notification'
 
 gem 'whenever', :require => false
 
+gem "http"
+
 group :development do
   #  gem 'thin'
   gem 'pry-rails'

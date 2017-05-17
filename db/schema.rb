@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170514055840) do
+ActiveRecord::Schema.define(version: 20170517000002) do
 
   create_table "accidents", force: true do |t|
     t.integer  "car_id"
@@ -76,73 +76,81 @@ ActiveRecord::Schema.define(version: 20170514055840) do
   add_index "auction_ratings", ["user_id", "auction_id"], name: "index_auction_ratings_on_user_id_and_auction_id"
 
   create_table "auctions", force: true do |t|
-    t.boolean  "private",                              default: false,  null: false
-    t.boolean  "delta",                                default: false
-    t.integer  "status",                               default: 0,      null: false
-    t.integer  "budget_id",                            default: 0,      null: false
-    t.integer  "owner_id",                             default: 0,      null: false
+    t.boolean  "private",                                 default: false,  null: false
+    t.boolean  "delta",                                   default: false
+    t.integer  "status",                                  default: 0,      null: false
+    t.integer  "budget_id",                               default: 0,      null: false
+    t.integer  "owner_id",                                default: 0,      null: false
     t.integer  "won_offer_id"
-    t.string   "title",                    limit: nil, default: "",     null: false
-    t.text     "description",                          default: "",     null: false
-    t.boolean  "highlight",                            default: false
+    t.string   "title",                       limit: nil, default: "",     null: false
+    t.text     "description",                             default: "",     null: false
+    t.boolean  "highlight",                               default: false
     t.datetime "expired_at"
-    t.integer  "offers_count",                         default: 0
-    t.integer  "visits",                               default: 0,      null: false
+    t.integer  "offers_count",                            default: 0
+    t.integer  "visits",                                  default: 0,      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "rating",                               default: 0.0
-    t.integer  "auctioneer_id",                        default: 1
-    t.integer  "car_id",                               default: 0
+    t.float    "rating",                                  default: 0.0
+    t.integer  "auctioneer_id",                           default: 1
+    t.integer  "car_id",                                  default: 0
     t.datetime "expected_start_at"
     t.datetime "expected_expired_at"
     t.datetime "public_start_at"
     t.datetime "public_expired_at"
     t.datetime "start_at"
-    t.float    "starting_price",                       default: 0.0
-    t.float    "price_increment",                      default: 0.0
-    t.float    "reserve_price",                        default: 0.0
-    t.float    "deposit",                              default: 5000.0
-    t.integer  "system",                               default: 0
-    t.integer  "hall",                                 default: 0
-    t.string   "serial_no",                limit: nil
-    t.string   "location",                 limit: nil
-    t.string   "type_name",                limit: nil
-    t.string   "is_pass",                  limit: nil
-    t.string   "pass_times",               limit: nil
+    t.float    "starting_price",                          default: 0.0
+    t.float    "price_increment",                         default: 0.0
+    t.float    "reserve_price",                           default: 0.0
+    t.float    "deposit",                                 default: 5000.0
+    t.integer  "system",                                  default: 0
+    t.integer  "hall",                                    default: 0
+    t.string   "serial_no",                   limit: nil
+    t.string   "location",                    limit: nil
+    t.string   "type_name",                   limit: nil
+    t.string   "is_pass",                     limit: nil
+    t.string   "pass_times",                  limit: nil
     t.datetime "commissioned_time"
-    t.string   "transfer_complete",        limit: nil
+    t.string   "transfer_complete",           limit: nil
     t.datetime "transfer_request_time"
     t.datetime "transfer_real_time"
-    t.string   "remark",                   limit: nil
-    t.string   "last_api_name",            limit: nil
-    t.string   "last_api_succeed",         limit: nil
-    t.string   "last_api_message",         limit: nil
-    t.string   "inquire_amount",           limit: nil
-    t.string   "bidding_user",             limit: nil
-    t.string   "is_entrust",               limit: nil
-    t.string   "apply_reason",             limit: nil
-    t.string   "inquire_result",           limit: nil
-    t.string   "inquire_opinion",          limit: nil
-    t.string   "feedback_result",          limit: nil
-    t.string   "feedback_opinion",         limit: nil
-    t.boolean  "is_auction",                           default: false,  null: false
-    t.decimal  "transfer_bail",                        default: 0.0,    null: false
-    t.boolean  "is_pay_transfer_bail",                 default: false,  null: false
-    t.boolean  "is_pay_auction_price",                 default: false,  null: false
-    t.string   "transfer_opinion",         limit: nil
-    t.string   "channel_transfer_result",  limit: nil
-    t.string   "channel_transfer_opinion", limit: nil
-    t.string   "pay_out_type",                         default: "",     null: false
-    t.boolean  "is_pay_first_price",                   default: false,  null: false
+    t.string   "remark",                      limit: nil
+    t.string   "last_api_name",               limit: nil
+    t.string   "last_api_succeed",            limit: nil
+    t.string   "last_api_message",            limit: nil
+    t.string   "inquire_amount",              limit: nil
+    t.string   "bidding_user",                limit: nil
+    t.string   "is_entrust",                  limit: nil
+    t.string   "apply_reason",                limit: nil
+    t.string   "inquire_result",              limit: nil
+    t.string   "inquire_opinion",             limit: nil
+    t.string   "feedback_result",             limit: nil
+    t.string   "feedback_opinion",            limit: nil
+    t.boolean  "is_auction",                              default: false,  null: false
+    t.decimal  "transfer_bail",                           default: 0.0,    null: false
+    t.boolean  "is_pay_transfer_bail",                    default: false,  null: false
+    t.boolean  "is_pay_auction_price",                    default: false,  null: false
+    t.string   "transfer_opinion",            limit: nil
+    t.string   "channel_transfer_result",     limit: nil
+    t.string   "channel_transfer_opinion",    limit: nil
+    t.string   "pay_out_type",                            default: "",     null: false
+    t.boolean  "is_pay_first_price",                      default: false,  null: false
     t.datetime "first_price_pay_date"
-    t.integer  "premium_price",                        default: 0,      null: false
-    t.boolean  "is_pay_premium",                       default: false,  null: false
+    t.integer  "premium_price",                           default: 0,      null: false
+    t.boolean  "is_pay_premium",                          default: false,  null: false
     t.datetime "premium_pay_date"
-    t.string   "preservation_user",                    default: "",     null: false
+    t.string   "preservation_user",                       default: "",     null: false
     t.datetime "preservation_date"
-    t.string   "preservation_desc",                    default: "",     null: false
-    t.string   "document_group_id",                    default: "",     null: false
+    t.string   "preservation_desc",                       default: "",     null: false
+    t.string   "document_group_id",                       default: "",     null: false
     t.datetime "transfer_bail_pay_date"
+    t.string   "bids_image_file_name"
+    t.string   "bids_image_content_type"
+    t.integer  "bids_image_file_size"
+    t.datetime "bids_image_updated_at"
+    t.string   "transfer_image_file_name"
+    t.string   "transfer_image_content_type"
+    t.integer  "transfer_image_file_size"
+    t.datetime "transfer_image_updated_at"
   end
 
   add_index "auctions", ["rating"], name: "index_auctions_on_rating"

@@ -4,7 +4,7 @@
  object_name = object.class.name.underscore
 %>
 
-<%= file_field object_name, field_name, :id=>element_id, :data=>{:url=>upload_file_case_cars_path(),:method=>'post' }%>
+<%= file_field object_name, field_name, :id=>element_id, :data=>{:url=>upload_file_case_cars_path()},:method=>'put' %>
 <%= hidden_field object_name, :car_id, :value=>object.car_id.to_i%>
 <script id="t<%=element_id%>" type="text/x-tmpl">
 <div id="car_file_{%= o.id%}" class="image_container">

@@ -8,14 +8,6 @@ class Auction < ActiveRecord::Base
   STATUSES = {:active => 0, :finished => 1, :canceled => 2, :waiting_for_offer => 3}
 
   MAX_EXPIRED_AFTER = 14
-  ORDER_MODES = [
-    ["po nazwie", "title DESC", 0],
-    ["po statusie", "status ASC", 1],
-    ["po ID malejaco", "id DESC", 2],
-    ["po ID rosnaco", "id ASC", 3],
-    ["po OCENIE malejaco", "rating DESC", 4],
-    ["po OCENIE rosnaco", "rating ASC", 5]
-  ]
 
   belongs_to :owner, :class_name => 'User'      #insurance company
   belongs_to :won_offer, :class_name => 'Offer'
@@ -35,18 +27,22 @@ class Auction < ActiveRecord::Base
   belongs_to :auctioneer, :class_name => 'User' #huachen company
   belongs_to :car
   has_many :action_histories
-  #validates :price_increment, :numericality => {:greater_than => 0}
-  #validates :reserve_price, :numericality => {:greater_than => 0}
 
- # ThinkingSphinx::Index.define :auction, :with => :active_record do
- #   indexes :title
- #   indexes :description
- #   #indexes :budget_id
- #   indexes tags(:id), :as => :tags_ids
- #   has :expired_at
- #   where 'auctions.private = 0 AND auctions.expired_at > NOW()'
- #   #set_property :delta => true
- # end
+  has_attached_file :bids_image, :styles => { :thumb => "90x120>" },
+    :url => "/system/:attachment/:id/:style/:filename",
+    :path => ":rails_root/public/system/:attachment/:id/:style/:filename"
+
+  validates_attachment :bids_image,
+    content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
+    size: { in: 0..10.megabytes }
+
+  has_attached_file :transfer_image, :styles => { :thumb => "90x120>" },
+    :url => "/system/:attachment/:id/:style/:filename",
+    :path => ":rails_root/public/system/:attachment/:id/:style/:filename"
+
+  validates_attachment :transfer_image,
+  content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
+    size: { in: 0..10.megabytes }
 
   #validates :title, :presence => true, :length => { :within => 8..50}
   #validates :description, :presence => true
@@ -241,26 +237,6 @@ class Auction < ActiveRecord::Base
     self.offers.new params do |o|
       o.status = Offer::STATUSES[:active]
     end
-  end
-
-  #wyszukiwanie aukcji dla admina
-  def self.admin_search(query = "", selected_date = nil, status = Array.new, order = 0, page = 1)
-    criteria = self.includes(:owner)
-    criteria.order(ORDER_MODES[order][1])
-
-    unless query.empty?
-      criteria = criteria.where("auctions.title like ? OR auctions.id=?", "%#{query}%", query)
-    end
-
-    unless selected_date.nil?
-      criteria = criteria.where("DATE(auctions.created_at)=?", selected_date)
-    end
-
-    unless status.empty?
-      criteria = criteria.where(:status => status)
-    end
-
-    criteria.paginate(:per_page => 15, :page => page)
   end
 
   def update_offers params
