@@ -58,7 +58,7 @@ class PinganController < ApplicationController
       when 'receiveAuctionCheck'
         Pingan::AuctionResultCheckHandler.new( message )
       when 'receiveTransferInfoCheck'
-        Pingan::TransferInfoCheckParser.new( message )
+        Pingan::TransferInfoCheckParser.new( message )      
     end
 
       ActiveSupport::Notifications.instrument( 'pingan.event', { task: @task,  message_parser: message_parser, result: @result } ) do

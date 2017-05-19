@@ -122,7 +122,20 @@ module Case
       @car.update_attributes( permitted_params )
 
       if @car.publisher_pingan_pusher?
-        Pingan::AuctionResultMessage.new( @car.auction ).post
+        #{"ret"=>"0",
+        #  "msg"=>"",
+        #  "requestId"=>"claimGetTokenForIOBS1495161362",
+        #  "data"=>
+        #  {"token"=>
+        #    "8CJK29FVFY2IK9W0Y8IIdKWD06MI202F:eNPzVnm9-q4y5Il6Frbm-ucmRXI=:eyJzY29wZSI6Imljb3JlLXB0cy1vcGVuYXBpLWRtei1zdGctcHJpIiwiZGVhZGxpbmUiOjE0OTUxNjIyNjJ9",
+        #    "resultCode"=>"200",
+        #    "resultMessage"=>"成功"}}
+        result =  Pingan::ClaimGetTokenForIobsMessage.new.post
+        if result['ret'] == '0'
+          token = result['data']['token']
+          
+          Pingan::AuctionResultMessage.new( @car.auction ).post
+        end
       end
 
       respond_to do |format|

@@ -12,7 +12,7 @@ Pingan::AuctionResultMessage.api_path = '/open/appsvr/property/receiveAuctionRes
 # 9
 Pingan::TransferInfoMessage.api_path = '/open/appsvr/property/receiveAuctionTransfer'
 
-
+Pingan::ClaimGetTokenForIobsMessage.api_path = '/open/appsvr/property/claimGetTokenForIOBS'
 # income message handler
 #===============================================================================
 # 1

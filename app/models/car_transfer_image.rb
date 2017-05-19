@@ -1,0 +1,3 @@
+class CarTransferImage < CarFile
+
+end

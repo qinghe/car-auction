@@ -89,7 +89,8 @@ module Pingan
     def touch_history!( message,  result )
 #Rails.logger.debug " message = #{message} result=#{result.inspect}"
       action_history = ActionHistory.new
-      action_history.auction_id = message.task_auction.id
+      # for message ClaimGetTokenForIobsMessage task_auctionis nil.
+      action_history.auction_id = message.task_auction.try(:id)
       action_history.api_name = message.class.api_path
       action_history.api_params = message.to_json
       action_history.api_result = result.to_json

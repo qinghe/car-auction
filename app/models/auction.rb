@@ -28,22 +28,6 @@ class Auction < ActiveRecord::Base
   belongs_to :car
   has_many :action_histories
 
-  has_attached_file :bids_image, :styles => { :thumb => "90x120>" },
-    :url => "/system/:attachment/:id/:style/:filename",
-    :path => ":rails_root/public/system/:attachment/:id/:style/:filename"
-
-  validates_attachment :bids_image,
-    content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
-    size: { in: 0..10.megabytes }
-
-  has_attached_file :transfer_image, :styles => { :thumb => "90x120>" },
-    :url => "/system/:attachment/:id/:style/:filename",
-    :path => ":rails_root/public/system/:attachment/:id/:style/:filename"
-
-  validates_attachment :transfer_image,
-  content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
-    size: { in: 0..10.megabytes }
-
   #validates :title, :presence => true, :length => { :within => 8..50}
   #validates :description, :presence => true
   validates_inclusion_of :status, :in => STATUSES.values
