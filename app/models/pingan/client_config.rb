@@ -7,7 +7,7 @@ module Pingan
       attr_accessor :partner_account  # '610000010201'
       attr_accessor :site, :ver
       attr_accessor :bucket
-
+      attr_accessor :iobs_url
       #Buket值：
       #测试环境：      icore-pts-openapi-dmz-stg-pri
       #生产环境：      icore-pts-openapi-dmz-prd-pri
@@ -19,6 +19,7 @@ module Pingan
         self.client_secret = 'acn385tr'
         self.partner_account = '610000010201'
         self.site = 'https://test-api.pingan.com.cn:20443'
+        self.iobs_url = 'http://test1-iobs.pingan.com.cn'
         self.bucket = "icore-pts-openapi-dmz-stg-pri"
       end
   end

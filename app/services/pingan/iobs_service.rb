@@ -19,7 +19,7 @@ module Pingan
     #生产环境：  icore-pts-openapi-dmz-prd-pri
 
     def call
-      host=  ClientConfig.instance.site
+      host=  ClientConfig.instance.iobs_url
    		bucket = ClientConfig.instance.bucket
    		key= get_key
    		file_path = file.uploaded.path
@@ -30,10 +30,12 @@ module Pingan
   		begin
         response = HTTP.post(url, :form => {
           :token => token,
-          :avatar   => HTTP::FormData::File.new(file_path)
+          :file   => HTTP::FormData::File.new(file_path)
         })
         Rails.logger.debug "url=#{url},file_path=#{file_path},response=#{response.inspect} "
-        auction.update document_group_id: key
+        if response.code == 200
+          auction.update document_group_id: key
+        end
       rescue  => err
         Rails.logger.error "can not upload file caused by #{err.inspect}"
       end
