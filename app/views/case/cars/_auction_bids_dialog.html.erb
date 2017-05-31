@@ -1,0 +1,36 @@
+<% if @car.auctioning? && @auction.closed? %>
+
+  <div id="auction_bids_dialog" title="拍卖结果">
+    <table class='car_accident'>
+      <tr> <th> 出价人 </th> <th> 出价时间 </th><th> 出价 </th><th> 是否中标 </th> </tr>
+      <%@auction.offers.each{ |offer| %>
+        <tr> <td> <%= offer.offerer.name %> </td>
+          <td><%= offer.created_at.to_s :short %></td>
+          <td><%= offer.price.to_i %></td>
+          <td><%= offer == auction.won_offer ? '是' : '否' %></td>
+        </tr>
+      <% } %>
+    </table>
+  </div>
+
+<%= javascript_tag do %>
+      $(function() {
+        $( "#auction_bids_dialog" ).dialog({
+          autoOpen: false,
+          width:800,
+          modal: true,
+          buttons: {
+            "关闭": function() {
+              $( this ).dialog( "close" );
+            }
+          },
+          close: function() {
+          }
+        });
+      $( "#auction_bids_button" )
+          .click(function() {
+            $( "#auction_bids_dialog" ).dialog( "open" );
+          });
+      });
+  <%end %>
+<%end %>

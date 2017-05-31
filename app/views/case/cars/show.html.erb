@@ -216,6 +216,7 @@
         <button id="confirm_auction_button">修改拍卖</button>
         <button id="auction_feedback_button">拍卖反馈</button>
         <button id="pickup_car_button">提车确认</button>
+        <button id="auction_bids_button">出价记录</button>
       <% elsif car.wait_for_pick? %>
         <button id="confirm_transfer_button">过户确认</button>
       <% end %>
@@ -254,3 +255,4 @@
     <%= render :partial=>'abandon3_dialog'%>
     <%= render :partial=>'confirm_auction_dialog'%>
     <%= render :partial=>'confirm_transfer_dialog'%>
+    <%= render :partial=>'auction_bids_dialog'%>
