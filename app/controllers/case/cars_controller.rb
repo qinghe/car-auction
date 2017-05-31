@@ -133,7 +133,7 @@ module Case
         auction = @car.auction
 
 
-        if IobsService.upload_bids_image( auction )
+        if Pingan::IobsService.upload_bids_image( auction )
           Pingan::AuctionResultMessage.new( @car.auction ).post
         end
       end
@@ -196,7 +196,7 @@ module Case
       ActiveSupport::Notifications.instrument( 'dlhc.car.transferred', { car: @car} ) do
         @car.transferred!
         if @car.publisher_pingan_pusher?
-          if IobsService.upload_transfer_image( @car.auction )
+          if Pingan::IobsService.upload_transfer_image( @car.auction )
             Pingan::TransferInfoMessage.new( @car.auction ).post
           end
         end
