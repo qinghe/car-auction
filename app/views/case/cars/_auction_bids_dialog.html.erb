@@ -7,7 +7,7 @@
         <tr> <td> <%= offer.offerer.name %> </td>
           <td><%= offer.created_at.to_s :short %></td>
           <td><%= offer.price.to_i %></td>
-          <td><%= offer == auction.won_offer ? '是' : '否' %></td>
+          <td><%= offer == @auction.won_offer ? '是' : '否' %></td>
         </tr>
       <% } %>
     </table>
