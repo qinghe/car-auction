@@ -32,8 +32,23 @@
           </tr>
           <tr class="aution_info">
             <td>过户反馈意见 </td>
-            <td colspan="5"><%= auction_form.text_area :transfer_opinion, rows: 3, style: 'width: 100%;height:auto;' %></td>
+            <td colspan="5"><%= auction_form.text_area :transfer_opinion, rows: 3, style: 'width: 100%;height:auto;' %>
+            </td>
           </tr>
+
+
+          <tr class="aution_info">
+            <td> 过户附件</td>
+            <td colspan="5">
+              <div id="car_transfer_image_list">
+                <%= render :partial=>'car_file', :collection=>@car.transfer_images%>
+              </div>
+              <div class="clear">
+                <%= render :partial=>"upload_file", :locals=>{:object=>@car.transfer_images.build, :field_name=>'uploaded'}%>
+              </div>
+            </td>
+          </tr>
+
         <% end %>
       </table>
     <% end %>

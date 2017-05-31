@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170514055840) do
+ActiveRecord::Schema.define(version: 20170517000002) do
 
   create_table "accidents", force: true do |t|
     t.integer  "car_id"
@@ -76,34 +76,34 @@ ActiveRecord::Schema.define(version: 20170514055840) do
   add_index "auction_ratings", ["user_id", "auction_id"], name: "index_auction_ratings_on_user_id_and_auction_id"
 
   create_table "auctions", force: true do |t|
-    t.boolean  "private",                  default: false,  null: false
-    t.boolean  "delta",                    default: false
-    t.integer  "status",                   default: 0,      null: false
-    t.integer  "budget_id",                default: 0,      null: false
-    t.integer  "owner_id",                 default: 0,      null: false
+    t.boolean  "private",                    default: false,  null: false
+    t.boolean  "delta",                      default: false
+    t.integer  "status",                     default: 0,      null: false
+    t.integer  "budget_id",                  default: 0,      null: false
+    t.integer  "owner_id",                   default: 0,      null: false
     t.integer  "won_offer_id"
-    t.string   "title",                    default: "",     null: false
-    t.text     "description",              default: "",     null: false
-    t.boolean  "highlight",                default: false
+    t.string   "title",                      default: "",     null: false
+    t.text     "description",                default: "",     null: false
+    t.boolean  "highlight",                  default: false
     t.datetime "expired_at"
-    t.integer  "offers_count",             default: 0
-    t.integer  "visits",                   default: 0,      null: false
+    t.integer  "offers_count",               default: 0
+    t.integer  "visits",                     default: 0,      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "rating",                   default: 0.0
-    t.integer  "auctioneer_id",            default: 1
-    t.integer  "car_id",                   default: 0
+    t.float    "rating",                     default: 0.0
+    t.integer  "auctioneer_id",              default: 1
+    t.integer  "car_id",                     default: 0
     t.datetime "expected_start_at"
     t.datetime "expected_expired_at"
     t.datetime "public_start_at"
     t.datetime "public_expired_at"
     t.datetime "start_at"
-    t.float    "starting_price",           default: 0.0
-    t.float    "price_increment",          default: 0.0
-    t.float    "reserve_price",            default: 0.0
-    t.float    "deposit",                  default: 5000.0
-    t.integer  "system",                   default: 0
-    t.integer  "hall",                     default: 0
+    t.float    "starting_price",             default: 0.0
+    t.float    "price_increment",            default: 0.0
+    t.float    "reserve_price",              default: 0.0
+    t.float    "deposit",                    default: 5000.0
+    t.integer  "system",                     default: 0
+    t.integer  "hall",                       default: 0
     t.string   "serial_no"
     t.string   "location"
     t.string   "type_name"
@@ -125,24 +125,26 @@ ActiveRecord::Schema.define(version: 20170514055840) do
     t.string   "inquire_opinion"
     t.string   "feedback_result"
     t.string   "feedback_opinion"
-    t.boolean  "is_auction",               default: false,  null: false
-    t.decimal  "transfer_bail",            default: 0.0,    null: false
-    t.boolean  "is_pay_transfer_bail",     default: false,  null: false
-    t.boolean  "is_pay_auction_price",     default: false,  null: false
+    t.boolean  "is_auction",                 default: false,  null: false
+    t.decimal  "transfer_bail",              default: 0.0,    null: false
+    t.boolean  "is_pay_transfer_bail",       default: false,  null: false
+    t.boolean  "is_pay_auction_price",       default: false,  null: false
     t.string   "transfer_opinion"
     t.string   "channel_transfer_result"
     t.string   "channel_transfer_opinion"
-    t.string   "pay_out_type",             default: "",     null: false
-    t.boolean  "is_pay_first_price",       default: false,  null: false
+    t.string   "pay_out_type",               default: "",     null: false
+    t.boolean  "is_pay_first_price",         default: false,  null: false
     t.datetime "first_price_pay_date"
-    t.integer  "premium_price",            default: 0,      null: false
-    t.boolean  "is_pay_premium",           default: false,  null: false
+    t.integer  "premium_price",              default: 0,      null: false
+    t.boolean  "is_pay_premium",             default: false,  null: false
     t.datetime "premium_pay_date"
-    t.string   "preservation_user",        default: "",     null: false
+    t.string   "preservation_user",          default: "",     null: false
     t.datetime "preservation_date"
-    t.string   "preservation_desc",        default: "",     null: false
-    t.string   "document_group_id",        default: "",     null: false
+    t.string   "preservation_desc",          default: "",     null: false
+    t.string   "document_group_id",          default: "",     null: false
     t.datetime "transfer_bail_pay_date"
+    t.string   "iobs_token"
+    t.string   "transfer_document_group_id"
   end
 
   add_index "auctions", ["rating"], name: "index_auctions_on_rating"

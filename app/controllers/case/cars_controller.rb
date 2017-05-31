@@ -67,7 +67,7 @@ module Case
 
     def upload_file
       @car_file = nil
-      ['car_doc','car_image', 'car_frame_image', 'car_license_image', 'car_auction_image'].each{|key|
+      ['car_doc','car_image', 'car_frame_image', 'car_license_image', 'car_auction_image', 'car_transfer_image'].each{|key|
         if params.key?(key) && params[key].key?(:uploaded)
           file_class = key.classify.safe_constantize
           if file_class
@@ -130,10 +130,10 @@ module Case
         #    "8CJK29FVFY2IK9W0Y8IIdKWD06MI202F:eNPzVnm9-q4y5Il6Frbm-ucmRXI=:eyJzY29wZSI6Imljb3JlLXB0cy1vcGVuYXBpLWRtei1zdGctcHJpIiwiZGVhZGxpbmUiOjE0OTUxNjIyNjJ9",
         #    "resultCode"=>"200",
         #    "resultMessage"=>"成功"}}
-        result =  Pingan::ClaimGetTokenForIobsMessage.new.post
-        if result['ret'] == '0'
-          token = result['data']['token']
-          
+        auction = @car.auction
+
+
+        if IobsService.upload_bids_image( auction )
           Pingan::AuctionResultMessage.new( @car.auction ).post
         end
       end
@@ -196,7 +196,9 @@ module Case
       ActiveSupport::Notifications.instrument( 'dlhc.car.transferred', { car: @car} ) do
         @car.transferred!
         if @car.publisher_pingan_pusher?
-          Pingan::TransferInfoMessage.new( @car.auction ).post
+          if IobsService.upload_transfer_image( @car.auction )
+            Pingan::TransferInfoMessage.new( @car.auction ).post
+          end
         end
       end
 

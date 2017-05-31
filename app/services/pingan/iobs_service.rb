@@ -3,16 +3,34 @@ module Pingan
     attr_accessor :auction, :file
 
     def self.upload_bids_image( auction )
-      service = new( auction )
-
-      if auction.car.bid_images.present?
-        service.call
+      success = false
+      file =  auction.car.bid_images.first
+      if file.present?
+        service = new( auction, file )
+        key = service.call
+        if key.present?
+          success = auction.update document_group_id: key
+        end
       end
+      success
     end
 
-    def initialize( auction )
+    def self.upload_transfer_image( auction )
+      success = false
+      file =  auction.car.transfer_images.first
+      if file.present?
+        service = new( auction, file )
+        key = service.call
+        if key.present?
+          success = auction.update transfer_document_group_id: key
+        end
+      end
+      success
+    end
+
+    def initialize( auction,file )
       self.auction = auction
-      self.file = auction.car.bid_images.first
+      self.file =file
     end
     #Buket值：
     #测试环境：  icore-pts-openapi-dmz-stg-pri
@@ -39,6 +57,8 @@ module Pingan
       rescue  => err
         Rails.logger.error "can not upload file caused by #{err.inspect}"
       end
+
+      return key
     end
 
     def get_key

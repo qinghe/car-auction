@@ -68,7 +68,7 @@
             <td>首款支付时间</td>
             <td><%= auction_form.text_field :first_price_pay_date, class: 'datetimepicker' %></td>
             <td>附件组ID</td>
-            <td><%= auction_form.text_field :document_group_id %></td>
+            <td><%= auction_form.text_field :document_group_id, readonly:true %></td>
           </tr>
           <tr class="aution_info">
             <td>溢价是否支付 </td>
