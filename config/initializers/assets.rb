@@ -1,3 +1,5 @@
+Rails.application.config.assets.version = '1.0'
+
 Rails.application.config.assets.precompile += %w( frontend.css backend.css ie6case.css ie7.css ie6.css blueprint/ie.css )
 
 Rails.application.config.assets.precompile += %w( watermark.js )
