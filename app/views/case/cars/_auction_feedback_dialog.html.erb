@@ -64,7 +64,7 @@
 
           <tr class="aution_info">
             <td>首款是否支付 </td>
-            <td><%= auction_form.select :is_pay_first_price, [['否','N'],['是','Y']], selected: 'N' %></td>
+            <td><%= auction_form.select :is_pay_first_price, [['否',false],['是',true]] %></td>
             <td>首款支付时间</td>
             <td><%= auction_form.text_field :first_price_pay_date, class: 'datetimepicker', value: @auction.first_price_pay_date.to_s %></td>
             <td>附件组ID</td>
@@ -72,7 +72,7 @@
           </tr>
           <tr class="aution_info">
             <td>溢价是否支付 </td>
-            <td><%= auction_form.select :is_pay_premium, [['否','N'],['是','Y']], selected: 'N' %></td>
+            <td><%= auction_form.select :is_pay_premium, [['否',false],['是',true]]  %></td>
             <td>溢价支付时间</td>
             <td><%= auction_form.text_field :premium_pay_date, class: 'datetimepicker', value: @auction.premium_pay_date.to_s  %></td>
             <td>溢价金额</td>

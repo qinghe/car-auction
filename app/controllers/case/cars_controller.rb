@@ -119,6 +119,7 @@ module Case
     end
 
     def feedback_auction
+      Rails.logger.debug "permitted_params=#{permitted_params.inspect}"
       @car.update_attributes( permitted_params )
 
       if @car.publisher_pingan_pusher?
