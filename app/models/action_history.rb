@@ -64,7 +64,13 @@ class ActionHistory < ActiveRecord::Base
      when '/open/appsvr/property/receiveAuctionTransfer'
        "华宸过户信息推送#{formatted_result_succeed}，#{formatted_created_at}。"
      when '/InsCarQuo/PingAn/receiveTransferInfoCheck'
-       "平安过户反馈复核#{formatted_result_succeed}，#{formatted_created_at}。"
+       if  auction.channel_transfer_result == '1'
+         "平安过户反馈复核通过，复核意见#{auction.channel_transfer_opinion},#{formatted_created_at}。"
+       elsif auction.channel_transfer_result == '0'
+         "平安过户反馈复核退回，复核意见#{auction.channel_transfer_opinion},#{formatted_created_at}。"
+       else
+         "平安过户反馈复核未知，API#{formatted_result_succeed}，#{formatted_created_at}。"
+       end
      end
   end
 
