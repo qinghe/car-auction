@@ -201,9 +201,8 @@
     <td colspan="6">
       <%= button_to "  返回  ", {:action => "list", :status=> Car.statuses[car.status]}, :form_class => "buttonform",  :method=> :get %>
 
-      <% if @car.delegated? || @car.evaluated? %>
-            <%= button_to "  退回  ", sendback_case_car_path(), :form_class => "buttonform", :method=>:put  %>
-      <% end %>
+      <%= button_to "  退回  ", sendback_case_car_path(), :form_class => "buttonform", :method=>:put  %>
+
 
       <% if car.wait_for_evaluate?  %>
         <input id="evaluate_car_button" type="button" value="车辆评估"></input>

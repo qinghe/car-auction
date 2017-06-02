@@ -63,7 +63,7 @@ class ActionHistory < ActiveRecord::Base
   end
 
   def formatted_created_at
-    "推送时间 #{self.created_at.to_s(:db)}"
+    "推送时间 #{self.created_at}"
   end
 
   def formatted_result_succeed

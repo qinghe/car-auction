@@ -43,6 +43,8 @@ module Case
           @car.wait_for_evaluate!
         elsif @car.delegated?
            @car.evaluated!
+        elsif @car.transferred?
+          @car.wait_for_pick!
         end
         #@car.to_status!(@car.status-1)
       end
@@ -192,14 +194,15 @@ module Case
     end
 
     def confirm_transfer
-      @car.update_attributes( permitted_params )
+      if @car.update_attributes( permitted_params )
 
-      ActiveSupport::Notifications.instrument( 'dlhc.car.transferred', { car: @car} ) do
-        @car.transferred!
-        if @car.publisher_pingan_pusher?
-          if Pingan::IobsService.upload_transfer_image( @car.auction )
-            Pingan::TransferInfoMessage.new( @car.auction ).post
+        ActiveSupport::Notifications.instrument( 'dlhc.car.transferred', { car: @car} ) do
+          if @car.publisher_pingan_pusher?
+            if Pingan::IobsService.upload_transfer_image( @car.auction )
+              result = Pingan::TransferInfoMessage.new( @car.auction ).post
+            end
           end
+          @car.transferred!
         end
       end
 
