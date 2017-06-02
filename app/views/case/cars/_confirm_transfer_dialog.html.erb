@@ -28,7 +28,9 @@
             <td>拍卖款是否支付 </td>
             <td><%= auction_form.select :is_pay_auction_price, [['是',true], ['否',false]]  %></td>
             <td>过户时间</td>
-            <td colspan="3"><%= auction_form.date_select :transfer_real_time %></td>
+            <td ><%= auction_form.text_field :transfer_bail_pay_date, class:'datetimepicker'  %></td>
+            <td>过户保证金支付时间</td>
+            <td><%= auction_form.text_field :transfer_bail_pay_date, class:'datetimepicker'  %></td>
           </tr>
           <tr class="aution_info">
             <td>过户反馈意见 </td>
