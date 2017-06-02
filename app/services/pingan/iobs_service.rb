@@ -1,15 +1,15 @@
 module Pingan
   class IobsService
-    attr_accessor :auction, :file
+    attr_accessor :auction, :car_files
 
     def self.upload_bids_image( auction )
       success = false
-      file =  auction.car.bid_images.first
-      if file.present?
-        service = new( auction, file )
-        key = service.call
-        if key.present?
-          success = auction.update document_group_id: key
+      car_files =  auction.car.bid_images
+      if car_files.present?
+        service = new( auction, car_files )
+        keys = service.call
+        if keys.present?
+          success = auction.update document_group_id: keys.join(',')
         end
       end
       success
@@ -17,20 +17,20 @@ module Pingan
 
     def self.upload_transfer_image( auction )
       success = false
-      file =  auction.car.transfer_images.first
-      if file.present?
-        service = new( auction, file )
-        key = service.call
-        if key.present?
-          success = auction.update transfer_document_group_id: key
+      car_files =  auction.car.transfer_images
+      if car_files.present?
+        service = new( auction, car_files )
+        keys = service.call
+        if keys.present?
+          success = auction.update transfer_document_group_id: keys.join(',')
         end
       end
       success
     end
 
-    def initialize( auction,file )
+    def initialize( auction,car_files )
       self.auction = auction
-      self.file =file
+      self.car_files =car_files
     end
     #Buket值：
     #测试环境：  icore-pts-openapi-dmz-stg-pri
@@ -39,29 +39,33 @@ module Pingan
     def call
       host=  ClientConfig.instance.iobs_url
    		bucket = ClientConfig.instance.bucket
-   		key= get_key
-   		file_path = file.uploaded.path
 
-      url = host + "/upload/"+bucket + "/"+ key
+
    		token = get_token();
-
+      keys = []
   		begin
-        response = HTTP.post(url, :form => {
-          :token => token,
-          :file   => HTTP::FormData::File.new(file_path)
-        })
-        Rails.logger.debug "url=#{url},file_path=#{file_path},response=#{response.inspect} "
-        if response.code == 200
-          auction.update document_group_id: key
-        end
+        car_files.each{|file|
+          key= get_key(file)
+          url = host + "/upload/"+bucket + "/"+ key
+       		file_path = file.uploaded.path
+          response = HTTP.post(url, :form => {
+            :token => token,
+            :file   => HTTP::FormData::File.new(file_path)
+          })
+          Rails.logger.debug "url=#{url},file_path=#{file_path},response=#{response.inspect} "
+          if response.code == 200
+            keys << key
+          end
+        }
+
       rescue  => err
         Rails.logger.error "can not upload file caused by #{err.inspect}"
       end
 
-      return key
+      keys
     end
 
-    def get_key
+    def get_key( file )
       "#{ClientConfig.instance.client_id}-#{ DateTime.current.to_i}-#{file.id}"
     end
 
