@@ -33,7 +33,7 @@ module Pingan
       self.transferOpinion = auction.transfer_opinion
 
       self.transferBailPayDate = auction.transfer_bail_pay_date
-      self.documentGroupId = auction.document_group_id
+      self.documentGroupId = auction.transfer_document_group_id
       super
     end
 

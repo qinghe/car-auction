@@ -18,15 +18,15 @@
           </tr>
           <tr class="aution_info">
             <td>是否已拍卖 </td>
-            <td><%= auction_form.select :is_auction, [['是',1], ['否',0]], selected: 1 %></td>
+            <td><%= auction_form.select :is_auction, [['是',true], ['否',false]  %></td>
             <td>保证金是否支付</td>
-            <td><%= auction_form.select :is_pay_transfer_bail, [['是',1], ['否',0]], selected: 1 %></td>
+            <td><%= auction_form.select :is_pay_transfer_bail, [['是',true], ['否',false]]  %></td>
             <td>过户保证金</td>
             <td><%= auction_form.text_field :transfer_bail, class: 'span-3' %></td>
           </tr>
           <tr class="aution_info">
             <td>拍卖款是否支付 </td>
-            <td><%= auction_form.select :is_pay_auction_price, [['是',1], ['否',0]], selected: 1 %></td>
+            <td><%= auction_form.select :is_pay_auction_price, [['是',true], ['否',false]]  %></td>
             <td>过户时间</td>
             <td colspan="3"><%= auction_form.date_select :transfer_real_time %></td>
           </tr>
