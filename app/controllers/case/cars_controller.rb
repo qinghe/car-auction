@@ -43,6 +43,8 @@ module Case
           @car.wait_for_evaluate!
         elsif @car.delegated?
            @car.evaluated!
+        elsif @car.wait_for_pick?
+          @car.auctioning!
         elsif @car.transferred?
           @car.wait_for_pick!
         end
