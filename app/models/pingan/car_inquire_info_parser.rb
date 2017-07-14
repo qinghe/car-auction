@@ -1,7 +1,6 @@
 module Pingan
   class CarInquireInfoParser < MessageParser
-
-    #attr_accessor :taskAuctionNo, :modelName
+    attr_accessor :taskAuctionNo, :created_car
 
     def perform
       #taskAuctionNo String 否 拍卖编号           N   auction.no
@@ -62,11 +61,13 @@ module Pingan
       #    "inquireEndDate":"",
       #    "surveyUserId":"",
       #    "estimateLoss":"",
-      #    "url":"", # photo, comma seperated
+      #    "documentIdList":"['','','']",  #图片id组 Json数组
       #    "remark":""
       #}
 #Rails.logger.debug " attributes = #{attributes}"
       attrs = attributes
+      #平安与拍卖对接方案170706修改，添加 document_id_list，删除 url
+      document_id_list = attrs['documentIdList'].join(',')
       car_params = {
         serial_no: attrs['taskAuctionNo'],
         model_title: attrs['modelName'],
@@ -87,7 +88,7 @@ module Pingan
         shiji_jiazhi:  attrs['actualValue'],
         survey_user:  attrs['surveyUserId'],
         gusun_jine: attrs['estimateLoss'],
-        url: attrs['url']
+        document_id_list: document_id_list
         }
       accident_params = { tingche_more: attrs['location'],
         chuxian_riqi: attrs['reportDate'],
@@ -114,7 +115,8 @@ module Pingan
       end
       result.succeed = car.save
       touch_history!( self,  result )
-
+      #查询图片接口使用
+      self.created_car = car
       result
     end
 

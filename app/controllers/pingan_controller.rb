@@ -58,11 +58,21 @@ class PinganController < ApplicationController
       when 'receiveAuctionCheck'
         Pingan::AuctionResultCheckHandler.new( message )
       when 'receiveTransferInfoCheck'
-        Pingan::TransferInfoCheckParser.new( message )      
+        Pingan::TransferInfoCheckParser.new( message )
+
     end
 
       ActiveSupport::Notifications.instrument( 'pingan.event', { task: @task,  message_parser: message_parser, result: @result } ) do
         @result = message_parser.perform
+        if @result.succeed
+          if @task == 'sendCarInquireInfo'
+            auction = message_parser.created_car.auction
+            #取得图片信息
+            parsed_result = Pingan::InquireCarImageUrlMessage.new( auction ).post
+            Pingan::InquireCarImageUrlMessageHandler.new( auction, parsed_result ).perform
+
+          end
+        end
       end
 
     respond_to do |format|
