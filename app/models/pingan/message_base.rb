@@ -16,7 +16,7 @@ module Pingan
       response = Connector.post( self )
       result = response.parsed
       touch_history!( self, result )
-      Rails.logger.debug " response = #{response.inspect} result=#{result.inspect}"
+      #Rails.logger.debug " response = #{response.inspect} result=#{result.inspect}"
       #touch_auction!( result )
       result
     end

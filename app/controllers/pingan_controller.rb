@@ -67,7 +67,6 @@ class PinganController < ApplicationController
         if @result.succeed
           if @task == 'sendCarInquireInfo'
             auction = message_parser.created_car.auction
-Rails.logger.debug " prepare to handle image for auctjion #{auction.inspect}"            
             #取得图片信息
             if auction.car.document_id_list.present?
               parsed_result = Pingan::InquireCarImageUrlMessage.new( auction ).post

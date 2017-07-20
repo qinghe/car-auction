@@ -8,12 +8,13 @@ module Pingan
     #    "auctionPrice":"",
     #    "remark":""
     #}
-    self.required_fields = [ :partnerAccount, :taskAuctionNo, :documentIdList]
+    attr_accessor :taskInquireNo
+    self.required_fields = [ :partnerAccount, :taskInquireNo, :documentIdList]
 
     attr_accessor *required_fields
 
     def initialize( auction )
-      self.taskAuctionNo = auction.serial_no
+      self.taskInquireNo = auction.serial_no
       self.documentIdList = auction.car.document_id_list.split(',').to_s
       super
     end
