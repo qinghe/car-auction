@@ -61,7 +61,7 @@ module Pingan
       #    "inquireEndDate":"",
       #    "surveyUserId":"",
       #    "estimateLoss":"",
-      #    "documentIdList":"['','','']",  #图片id组 Json数组
+      #    "documentIdList":"[\"19003033639921\"]",  #string
       #    "remark":""
       #}
 #Rails.logger.debug " attributes = #{attributes}"
