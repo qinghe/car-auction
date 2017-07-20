@@ -1,5 +1,5 @@
 
-class AddAuctionImages < ActiveRecord::Migration
+class AddCarDocumentIds < ActiveRecord::Migration
 
   def change
 

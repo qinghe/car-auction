@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170517000002) do
+ActiveRecord::Schema.define(version: 20170715000002) do
 
   create_table "accidents", force: true do |t|
     t.integer  "car_id"
@@ -239,21 +239,21 @@ ActiveRecord::Schema.define(version: 20170517000002) do
     t.string   "model_title",             limit: nil
     t.string   "serial_no",               limit: nil
     t.date     "registered_at"
-    t.integer  "variator",                            default: 0
+    t.integer  "variator",                             default: 0
     t.string   "displacement",            limit: nil
     t.string   "plate_number",            limit: nil
     t.string   "engine_number",           limit: nil
     t.string   "frame_number",            limit: nil
     t.integer  "publisher_id"
     t.integer  "evaluator_id"
-    t.integer  "status",                              default: 0
-    t.float    "chengbao_jine",                       default: 0.0
-    t.float    "gusun_jine",                          default: 0.0
-    t.float    "shiji_jiazhi",                        default: 0.0
-    t.float    "canzhi_jiazhi",                       default: 0.0
-    t.float    "ershou_jiazhi",                       default: 0.0
-    t.float    "bidding_price",                       default: 0.0
-    t.float    "final_compensate_price",              default: 0.0
+    t.integer  "status",                               default: 0
+    t.float    "chengbao_jine",                        default: 0.0
+    t.float    "gusun_jine",                           default: 0.0
+    t.float    "shiji_jiazhi",                         default: 0.0
+    t.float    "canzhi_jiazhi",                        default: 0.0
+    t.float    "ershou_jiazhi",                        default: 0.0
+    t.float    "bidding_price",                        default: 0.0
+    t.float    "final_compensate_price",               default: 0.0
     t.string   "owner_name",              limit: nil
     t.string   "owner_phone",             limit: nil
     t.string   "pickup_contact_person",   limit: nil
@@ -281,6 +281,7 @@ ActiveRecord::Schema.define(version: 20170517000002) do
     t.string   "survey_user",             limit: nil
     t.string   "url",                     limit: nil
     t.string   "remark",                  limit: nil
+    t.string   "document_id_list",        limit: 1024
   end
 
   create_table "comment_keywords", force: true do |t|
