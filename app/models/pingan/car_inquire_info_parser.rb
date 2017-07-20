@@ -67,7 +67,8 @@ module Pingan
 #Rails.logger.debug " attributes = #{attributes}"
       attrs = attributes
       #平安与拍卖对接方案170706修改，添加 document_id_list，删除 url
-      document_id_list = attrs['documentIdList'].join(',')
+      document_id_list = JSON.parse(attrs['documentIdList'])
+      document_id_list = document_id_list.present? ? document_id_list.join(',') : ''
       car_params = {
         serial_no: attrs['taskAuctionNo'],
         model_title: attrs['modelName'],
