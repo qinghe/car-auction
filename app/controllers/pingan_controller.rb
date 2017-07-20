@@ -68,8 +68,10 @@ class PinganController < ApplicationController
           if @task == 'sendCarInquireInfo'
             auction = message_parser.created_car.auction
             #取得图片信息
-            parsed_result = Pingan::InquireCarImageUrlMessage.new( auction ).post
-            Pingan::InquireCarImageUrlMessageHandler.new( auction, parsed_result ).perform
+            if auction.car.document_id_list.present?
+              parsed_result = Pingan::InquireCarImageUrlMessage.new( auction ).post
+              Pingan::InquireCarImageUrlMessageHandler.new( auction, parsed_result ).perform
+            end
 
           end
         end
