@@ -306,6 +306,17 @@ module Case
       end
     end
 
+    def inquire_image
+      @car = Car.find(params[:id])
+
+      if @car.document_id_list.present?
+        @auction = @car.auction
+        parsed_result = Pingan::InquireCarImageUrlMessage.new( @auction ).post
+        Pingan::InquireCarImageUrlMessageHandler.new( @auction, parsed_result ).perform
+      end
+      
+      redirect_to list_case_cars_by_status_path( Car.statuses[@car.status])
+    end
 
     def raise_error
         raise ActionController::InvalidAuthenticityToken.new()

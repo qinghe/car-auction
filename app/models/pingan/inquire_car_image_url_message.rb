@@ -14,7 +14,7 @@ module Pingan
 
     def initialize( auction )
       self.taskAuctionNo = auction.serial_no
-      self.documentIdList = auction.car.document_id_list.split(',')
+      self.documentIdList = auction.car.document_id_list.split(',').to_s
       super
     end
 

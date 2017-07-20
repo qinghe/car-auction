@@ -206,6 +206,10 @@
 
       <% if car.wait_for_evaluate?  %>
         <input id="evaluate_car_button" type="button" value="车辆评估"></input>
+        <% if car.publisher.pingan_pusher? %>
+        <%= button_to "更新车辆图片", inquire_image_case_car_path(), :form_class => "buttonform", remote:true, method: :put  %>
+        <% end %>
+
       <% elsif car.evaluated? %>
         <button id="auction_car_button">委托拍卖</button>
         <button id="quoted_price_again_button">申请二次报价</button>

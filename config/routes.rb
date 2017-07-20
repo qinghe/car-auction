@@ -163,6 +163,7 @@ Inz::Application.routes.draw do
         get :raise_error
       end
       member do
+        put :inquire_image
         patch :evaluate
         patch :abandon
         match :sendback, via: [:put, :patch]
